@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+}
+
+:root {
+  /* fonts */
+  --font-optima: Optima;
+  --font-avenir: Avenir;
+
+  /* font sizes */
+  --font-size-4xl: 23px;
+  --font-size-8xl: 27px;
+
+  /* Colors */
+  --color-whitesmoke: #f2f2f2;
+  --color-black: #000;
+  --color-brown: #8a1538;
+  --color-white: #fff;
+  --color-dimgray-100: #747474;
+  --color-dimgray-200: #595959;
+  --color-gainsboro: #d9d9d9;
+  --color-gray-100: #868686;
+  --color-orange: #ffb81c;
+  --color-darkgray: #a7a7a7;
+
+  /* border radiuses */
+  --br-6xl: 25px;
+  --br-8xs: 5px;
+}
