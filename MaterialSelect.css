@@ -1,0 +1,89 @@
+.materialSetting {
+    width: 35%;
+    height: 40em;
+    outline: black;
+    margin: auto;
+    margin-top: 10em;
+
+    outline-width: 0.1em;
+    outline-style: solid;
+}
+
+.labelBar {
+    height: 7%;
+    background-color: #00573F;
+    display: flex;
+    align-items: center;
+}
+
+.MLabeltext {
+    padding-left: 5%;
+    color: white;
+}
+
+.MaterialSelect {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-inline: 8px;
+    height: 21%;
+}
+
+.mat {
+    height:100%;
+    width: 100%;
+}
+
+.MaterialBox {
+    width: 20%;
+    height: 70%;
+    background-color: white;
+    border-width: 0px;
+}
+
+.kNs {
+    height: 13%;
+    display:flex;
+    align-items: center;
+}
+
+.BoxButton{
+    height: 3.1em;
+    width: 4em;
+    margin-left: 5%;
+    border-radius: 10px;
+    border-width: 0.1px;
+    background-color: #B6B6B6;
+}
+
+.propertyRadio {
+    margin-left: 5%;
+    background-color: #B6B6B6;
+}
+
+.Mtext {
+    padding-left: 15px;
+    font-size: 1.3em;
+}
+
+.ModulusBox {
+    margin-top: 1.5%;
+    display: flex;
+    align-items: center;
+}
+
+.RadioButton {
+    height: 1.3em;
+    width: 1.3em;
+    border-radius: 50%;
+    border-width: 0.1px;
+    background-color: #B6B6B6;
+}
+
+.pad {
+    margin-left: 5%;
+    width: 3.3em;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
