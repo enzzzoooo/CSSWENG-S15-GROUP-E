@@ -43,7 +43,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: var(--color-brown);
+  background-color: var(--color-maroon);
   width: 417.59px;
   height: 35px;
 }
@@ -390,13 +390,13 @@
 .lesson-layout-item {
   position: absolute;
   top: 803px;
-  left: 259px;
+  left: 321px;
   width: 30px;
   height: 69px;
 }
 .lesson-layout-item {
   top: 478px;
-  left: 1247px;
+  left: 1309px;
 }
 .lesson-layout {
   width: 100%;
