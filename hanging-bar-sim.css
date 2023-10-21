@@ -1,0 +1,23 @@
+#canvasContainer {
+    width: 822px;
+    height: 534px;
+    border: 1px solid #000000;
+    position: relative;
+    top: 244px;
+    left: calc(100vw * 65 / 1440);
+}
+
+#changeDrawing {
+    position: absolute;
+    top: 840px;
+    left: calc(50% - 77px);
+}
+
+#materialSelect {
+    position: absolute;
+    top: 244px;
+    left: calc(100vw * 918 / 1440);
+    width: 457px;
+    height: 535px;
+    border: 1px solid #000000;
+}
