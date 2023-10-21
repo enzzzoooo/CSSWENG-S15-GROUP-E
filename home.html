@@ -16,6 +16,18 @@
     />
   </head>
   <body>
+    <header>
+      <img
+        class="hamburger-button"
+        alt="menu"
+        src="./public/image-20230917-225739150-1@2x.png"
+        id="hamburgerButton"
+      />
+      <div class="analysis-of-axial">
+        Analysis of Axial Deformations in a Structure
+      </div>
+    </header>
+    <div class="lessons">Lessons</div>
     <div class="lesson-layout">
       <div class="introduction" id="sandboxContainerIntro">
         <div class="rectangle-parent">
@@ -108,24 +120,12 @@
             <div class="introduction1">Sample Problem 3</div>
           </div>
         </div>
-      </div>
-      <header class="top-bar">
-        <div class="top-bar-child"></div>
-        <img
-          class="image-2023-09-17-225739150-1-icon"
-          alt=""
-          src="./public/image-20230917-225739150-1@2x.png"
-          id="image202309172257391501Icon"
-        />
-      </header>
-      <div class="lessons">Lessons</div>
-      <div class="analysis-of-axial">
-        Analysis of Axial Deformations in a Structure
-      </div>
-      <img class="lesson-layout-child" alt="" src="./public/group-182.svg" />
-
-      <img class="lesson-layout-item" alt="" src="./public/group-181.svg" />
+      </div>    
+      
     </div>
+
+
+
 
     <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
       <div class="menu-dropdown">
@@ -141,6 +141,7 @@
     </div>
 
     <script>
+
       var popupsimulation = document.getElementById("popupsimulation");
       if (popupsimulation) {
         popupsimulation.addEventListener("click", function (e) {
@@ -183,11 +184,11 @@
         });
       }
       
-      var image202309172257391501Icon = document.getElementById(
-        "image202309172257391501Icon"
+      var hamburgerButton = document.getElementById(
+        "hamburgerButton"
       );
-      if (image202309172257391501Icon) {
-        image202309172257391501Icon.addEventListener("click", function () {
+      if (hamburgerButton) {
+        hamburgerButton.addEventListener("click", function () {
           var popup = document.getElementById("menuDropdownContainer");
           if (!popup) return;
           var popupStyle = popup.style;
