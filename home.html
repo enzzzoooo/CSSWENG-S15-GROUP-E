@@ -187,34 +187,7 @@
             window.location.href = "./sampleproblemthree.html";
         });
       }
-      
-      var hamburgerButton = document.getElementById(
-        "hamburgerButton"
-      );
-      if (hamburgerButton) {
-        hamburgerButton.addEventListener("click", function () {
-          var popup = document.getElementById("menuDropdownContainer");
-          if (!popup) return;
-          var popupStyle = popup.style;
-          if (popupStyle) {
-            popupStyle.display = "flex";
-            popupStyle.zIndex = 100;
-            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
-            popupStyle.alignItems = "flex-start";
-            popupStyle.justifyContent = "flex-end";
-          }
-          popup.setAttribute("closable", "");
-      
-          var onClick =
-            popup.onClick ||
-            function (e) {
-              if (e.target === popup && popup.hasAttribute("closable")) {
-                popupStyle.display = "none";
-              }
-            };
-          popup.addEventListener("click", onClick);
-        });
-      }
       </script>
+      <script src="js/hamburger-menu-modal.js"></script>
   </body>
 </html>
