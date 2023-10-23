@@ -344,11 +344,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: var(--color-brown);
+  background-color: var(--color-maroon);
   width: 100%;
   height: 78px;
 }
-.image-2023-09-17-225739150-1-icon {
+.hamburger-button{
   position: absolute;
   top: 25.24px;
   left: 30px;
@@ -399,8 +399,6 @@
   left: 1247px;
 }
 .lesson-layout {
-  position: relative;
-  background-color: var(--color-whitesmoke);
   width: 100%;
   height: 1024px;
   text-align: center;
