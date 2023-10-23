@@ -23,7 +23,7 @@ function internalHanging(lengthRope, upwardRope, distanceRope, downward, upward,
 
     // Get total of downward forces
     for (i = 0; i < downward.length; i++){
-        downwardForces += distancesDown[i] * downward[i]
+        downwardForces += (distancesDown[i]) * downward[i]
     }
 
     // Get total of upward forces
@@ -54,9 +54,9 @@ let canvasOrigin = {
 }
 
 let settings = {
-    ropeHeight: 3000,
-    ropeDistance: 4000,
-    yellowBarWidth: 6000,
+    ropeHeight: 2500,
+    ropeDistance: 4750,
+    yellowBarWidth: 7000,
     greyRopeModulus: 200
 }
 
@@ -72,7 +72,7 @@ let wall = {
 // yellowBar
 let yellowBar = {
     x: 230 - canvasOrigin.x,
-    y: 500 - canvasOrigin.y,
+    y: 525 - canvasOrigin.y,
     change: 0,
     animation: false,
     width: settings.yellowBarWidth / 20,
@@ -84,10 +84,10 @@ let yellowBar = {
 // greyBar
 let greyBar = {
     x: 230 - canvasOrigin.x,
-    y: yellowBar.y - 3000/20,
+    y: yellowBar.y - settings.ropeHeight/20,
     change: 0,
     animation: false,
-    width: 4000 / 20,
+    width: settings.ropeDistance / 20,
     height: 50,
     color: '#747474',
     angle: 28.42
@@ -96,6 +96,7 @@ let greyBar = {
 let t = 0;
 
 let forces = []
+let displayData = false;
 
 function preload() {
     font = loadFont('.\\public\\Avenir LT Std 55 Roman.otf');
@@ -113,11 +114,18 @@ function setup() {
     let reset = document.getElementById('reset-drawing');
     reset.addEventListener('click', resetDrawing);
 
-    forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 37*1.5), 'coral']
+    let toggle = document.getElementById('toggle');
+    toggle.addEventListener("change", function () {
+        displayData = !displayData;
+    });
+
+    forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 39*2), 'coral']
 
     textFont(font);
     textSize(20);
 }
+
+let deformationGrey = 0;
 
 function changeDrawing() {
 
@@ -125,7 +133,7 @@ function changeDrawing() {
     downwardDistances = []
 
     forces.forEach(force => {
-        downward.push((force[1].y/1.5))
+        downward.push(parseFloat((force[1].y/2).toFixed(1)))
         downwardDistances.push((force[0].x - yellowBar.x)*20)
     });
     console.log(downward)
@@ -133,14 +141,10 @@ function changeDrawing() {
 
 
     ropeLength = pythagorean(settings.ropeHeight, settings.ropeDistance)
-    deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, cylinderCrossArea(greyBar.height/2), settings.greyRopeModulus);
-    yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey * 20;
-    console.log(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []))
-    console.log(settings.yellowBarWidth)
     console.log(ropeLength)
-    console.log(settings.ropeHeight)
-    console.log(settings.ropeDistance)
+    deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, cylinderCrossArea(greyBar.height/2), settings.greyRopeModulus);
     console.log(deformationGrey)
+    yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey * 20;
     console.log(yellowBar.change)
     yellowBar.animation = true;
 
@@ -156,6 +160,7 @@ function resetDrawing() {
     greyBar.change = 0;
     greyBar.animation = false;
 
+    deformationGrey = 0;
     t = 0;
 
 }
@@ -169,6 +174,78 @@ function mouseReleased() {
     forces.forEach(force => {
         force[3] = false;
     });
+}
+
+function curlyBracket(length){
+    mid = length/2
+    mid += 20
+    noFill();
+    bezier(0, 0, 20, 0, 0, length/2, 20, length/2)
+    bezier(20, length/2, 0, length/2, 20, length, 0, length)
+}
+
+function showData(){
+    // Yellow Bar
+    push()
+    strokeWeight(0)
+    fill('black')
+    textAlign(CENTER)
+    angular = atan2(yellowBar.y+(yellowBar.change*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
+    translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change*easing(t)))
+    rotate(angular);
+    text((yellowBar.width*20).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
+    strokeWeight(1.5)
+    translate(0, 0)
+    rotate(90)
+    curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change*easing(t))))
+
+    // Grey Bar
+    resetMatrix()
+
+    strokeWeight(0)
+    fill('black')
+    textAlign(CENTER)
+
+    angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - greyBar.y, (greyBar.x+greyBar.width) - greyBar.x);
+    translate(greyBar.x, greyBar.y)
+    rotate(angular);
+    text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t))))/2, -40);
+    strokeWeight(1.5)
+    rotate(-90)
+    translate(12, 0)
+    curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
+
+    // Height of rope
+    resetMatrix()
+
+    strokeWeight(0)
+    fill('white')
+    stroke('white')
+    textAlign(CENTER)
+    translate(yellowBar.x, yellowBar.y)
+    text((settings.ropeHeight).toFixed(2) + 'mm', -90, -(settings.ropeHeight/20/2) + 5);
+    strokeWeight(1.5)
+    rotate(-180)
+    translate(15, 0)
+    curlyBracket(settings.ropeHeight/20)
+
+    // Distance of rope
+    resetMatrix()
+
+    strokeWeight(0)
+    fill('black')
+    stroke('black')
+    textAlign(CENTER)
+    translate(yellowBar.x, yellowBar.y)
+    angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
+    rotate(angular);
+    text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
+    strokeWeight(1.5)
+    rotate(-90)
+    translate(0, 0)
+    curlyBracket(dist(yellowBar.x, yellowBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
+
+    pop()
 }
 
 function draw() {
@@ -198,34 +275,36 @@ function draw() {
     stroke(greyBar.color);
     strokeWeight(greyBar.height/3);
     if(greyBar.animation && t < 1){
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y-yellowBar.height/3/2)+(greyBar.change*easing(t)))
+        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change*easing(t)))
     } else {
         stroke(greyBar.color + '80');
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y-yellowBar.height/3/2))
+        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y))
         stroke(greyBar.color)
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y-yellowBar.height/3/2)+greyBar.change)
+        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change)
     }
 
     strokeWeight(1);
     stroke('#000000');
     fill('#FFFFFF');
     circle(yellowBar.x, yellowBar.y, 30)
-    circle(greyBar.x, greyBar.y, 30)
+    circle(greyBar.x, greyBar.y, 25)
     if(greyBar.animation && t < 1){
-        circle(greyBar.x+greyBar.width, (yellowBar.y-yellowBar.height/3/2)+greyBar.change*easing(t), 30)
+        circle(greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change*easing(t), 25)
     } else {
         stroke('#000000' + '80');
         fill('#FFFFFF' + '80');
-        circle(greyBar.x+greyBar.width, (yellowBar.y-yellowBar.height/3/2), 30)
+        circle(greyBar.x+greyBar.width, (yellowBar.y), 25)
         stroke('#000000');
         fill('#FFFFFF');
-        circle(greyBar.x+greyBar.width, (yellowBar.y-yellowBar.height/3/2)+greyBar.change, 30)
+        circle(greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change, 25)
     }
+    resetMatrix()
 
     if(!yellowBar.animation){
 
         forces.forEach(force => {
             drawArrow(force[0], force[1], force[2])
+
         });
 
         forces.forEach(force => {
@@ -238,23 +317,38 @@ function draw() {
                 }
             }
 
+            if(displayData || force[3]){
+            strokeWeight(0);
+            fill(0, 0, 0, 250);
+            text((force[1].y/2).toFixed(1), force[0].x + 10, (force[0].y*2 + force[1].y)/2);
+            }
+
             if (force[3]){
                 strokeWeight(0);
                 fill(255, 255, 200, 250);
                     circle(force[0].x, force[0].y + force[1].y + 15, 10);
                 force[1] = createVector(0, -(force[0].y - mouseY + 15))
-                fill(0, 0, 0, 255)
-                text(((-(force[0].y - mouseY + 15))/1.5).toFixed(2), mouseX + 20, mouseY);
             }
         });
     }
 
+    // After animation
     if(greyBar.animation && t >= 1){
+        resetMatrix()
         strokeWeight(0)
         fill('black')
-        text((yellowBar.change/20).toFixed(2) + 'mm', yellowBar.x + (settings.yellowBarWidth / 20), (yellowBar.y + yellowBar.change / 2));
+        translate(yellowBar.x + yellowBar.width, yellowBar.y)
+        text((yellowBar.change/20).toFixed(2) + 'mm', 25, yellowBar.change/2 + 5);
+        strokeWeight(1.5)
+        curlyBracket(yellowBar.change)
     }
 
+    resetMatrix()
+
+    if(displayData){
+        showData()
+    }
+    resetMatrix()
 
 
 
