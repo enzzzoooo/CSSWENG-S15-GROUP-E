@@ -1,4 +1,4 @@
-#canvasContainer {
+#canvas-container {
     width: 822px;
     height: 534px;
     border: 1px solid #000000;
@@ -7,11 +7,17 @@
     left: calc(100vw * 65 / 1440);
 }
 
-#changeDrawing {
+#button-container {
     position: absolute;
+    width: 410px;
+    height: 100px;
     top: 840px;
-    left: calc(50% - 77px);
+    left: calc(50% - 205px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
+
 
 #materialSelect {
     position: absolute;
