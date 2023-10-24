@@ -99,7 +99,7 @@ let forces = []
 let displayData = false;
 
 function preload() {
-    font = loadFont('.\\public\\Avenir LT Std 55 Roman.otf');
+    font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
 }
 
 function setup() {
