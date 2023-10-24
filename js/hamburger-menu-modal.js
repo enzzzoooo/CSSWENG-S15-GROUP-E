@@ -1,6 +1,9 @@
 const hamburgerButton = document.getElementById('hamburgerButton');
 const menuDropdownContainer = document.getElementById('menuDropdownContainer');
 
+const simulationButton = document.getElementById('popupsimulation');
+const lesseonsButton = document.getElementById('popuplessons');
+
 // Show the menu dropdown container when the hamburger button is clicked
 hamburgerButton.addEventListener('click', () => {
   menuDropdownContainer.style.display = "flex";
@@ -16,4 +19,14 @@ hamburgerButton.addEventListener('click', () => {
     }
   };
   menuDropdownContainer.addEventListener('click', onClick);
+});
+
+// Event handler for "Simulation"
+simulationButton.addEventListener('click', () => {
+  window.location.href = "hanging-bar-sim.html";
+});
+
+// Event handler for "Lessons"
+lesseonsButton.addEventListener('click', () => {
+  window.location.href = "home.html"; // should change to lessons
 });
