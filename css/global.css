@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Avenir';
+  src: url('../fonts/Avenir\ LT\ Std\ 55\ Roman.otf');
+}
+
+@font-face {
+  font-family: 'Optima';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Optima'), url('../fonts/OPTIMA.woff') format('woff');
+}
+
 body {
   margin: 0;
   line-height: normal;
@@ -24,6 +36,7 @@ header {
   justify-content: center;
   font-size: 48px;
   color: var(--color-black);
+  font-family: var(--font-optima);
 }
 
 .popup-overlay {
@@ -35,8 +48,8 @@ header {
 
 :root {
   /* fonts */
-  --font-optima: Optima;
-  --font-avenir: Avenir;
+  --font-optima: 'Optima';
+  --font-avenir: 'Avenir';
 
   /* font sizes */
   --font-size-4xl: 23px;
