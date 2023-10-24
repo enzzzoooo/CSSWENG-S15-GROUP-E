@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="./hanging-bar-sim.css"/>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 
 </head>
 <body>
@@ -29,60 +28,21 @@
 
   <div class="page-title">Simulation</div>
 
-  <div id="canvasContainer"></div>
+  <div id="canvas-container"></div>
 
-  <div id="materialSelect">
-    <div class="labelBar">
-      <div class="MLabeltext">Material</div>
-    </div>
-    <div class="MaterialSelect">
-        <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 1.png"></button>
-        <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 2.png"></button>
-        <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 3.png"></button>
-        <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 5.png"></button>
-        <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 6.png"></button>
-    </div>
-    
-    <div class="labelBar">
-      <div class="MLabeltext">Object Position</div>
-    </div>
-    <div class="ObjectPosition">
-
-      <div class="ObjPosCol">
-        <div class="boxLabel">
-          <input type="text" name="xPos" id="xPos" class="BoxButton"></button>
-          <div class="Mtext">X</div>
-        </div>
-        <div class="boxLabel">
-          <input type="text" name="width" id="width" class="BoxButton"></button>
-          <div class="Mtext">Width</div>
-        </div>
-      </div>
-
-      <div class="ObjPosCol">
-        <div class="boxLabel">
-          <input type="text" name="yPos" id="yPos" class="BoxButton"></button>
-          <div class="Mtext">Y</div>
-        </div>
-        <div class="boxLabel">
-          <input type="text" name="height" id="height" class="BoxButton"></button>
-          <div class="Mtext">Height</div>
-        </div>
-      </div>
-
-    </div>
-    <div class="labelBar">
-      <div class="MLabeltext">Object Physics</div>
-    </div>
-    <div class="boxLabel pt1">
-      <input type="text" class="BoxButton"></button>
-      <div class="Mtext">Young's Modulus</div>
-    </div>
-    <img class="help" src="imgs/help.png">
+  <div id="button-container">
+    <img src="imgs/reset-button.png" id="reset-drawing" alt="Reset">
+    <img src="imgs/play-button.png" id="change-drawing" alt="Play">
+    <img src="imgs/show-data-button.png" id="toggle" alt="Toggle Data">
   </div>
 
 
-  <img src="imgs/play-button.png" id="changeDrawing" alt="Play">
+
+  <div id="materialSelect">
+
+  </div>
+
+
 
   <!-- Menu Modal -->
   <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
@@ -100,10 +60,5 @@
 
   <script src="js/hamburger-menu-modal.js"></script>
   <script src="js/hanging-bar-sim-script.js"></script>
-    <div id="canvas-container"></div>
-    <button id="change-drawing" style >
-        <img src="imgs/play_button.svg" alt="Play Button">
-    </button>
-    <script src="./hanging-bar-sim-script.js"></script>
 </body>
 </html>
