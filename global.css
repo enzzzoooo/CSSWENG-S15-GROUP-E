@@ -13,6 +13,18 @@ header {
   height: 78px;
 }
 
+.page-title{
+  position: absolute;
+  top: 97px;
+  left: calc(50% - 443px);
+  width: 886px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--color-black);
+}
 
 .popup-overlay {
   display: flex;
