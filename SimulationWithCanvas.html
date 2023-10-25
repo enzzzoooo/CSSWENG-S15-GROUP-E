@@ -82,6 +82,9 @@
         <label id="toggle1" for="toggle">
         <input type="checkbox" id="toggle" name="toggle">  Toggle Data
         </label>
+        <label id="force" for="force">
+        <input type="checkbox" id="force" name="force">  Force Data
+        </label>
       </div>
       <img
         class="image-2023-09-17-225739150-1-icon"
@@ -123,21 +126,21 @@
           window.location.href = "./Simulation.html";
         });
       }
-      
+
       var popuplessons = document.getElementById("popuplessons");
       if (popuplessons) {
         popuplessons.addEventListener("click", function (e) {
           // Please sync "Lesson Layout" to the project
         });
       }
-      
+
       var helpIcon = document.getElementById("helpIcon");
       if (helpIcon) {
         helpIcon.addEventListener("click", function (e) {
           // Please sync "Credits" to the project
         });
       }
-      
+
       var image202309172257391501Icon = document.getElementById(
         "image202309172257391501Icon"
       );
@@ -154,7 +157,7 @@
             popupStyle.justifyContent = "center";
           }
           popup.setAttribute("closable", "");
-      
+
           var onClick =
             popup.onClick ||
             function (e) {
@@ -165,7 +168,7 @@
           popup.addEventListener("click", onClick);
         });
       }
-      
+
       var image202309172257391501Icon1 = document.getElementById(
         "image202309172257391501Icon1"
       );
@@ -182,7 +185,7 @@
             popupStyle.justifyContent = "flex-end";
           }
           popup.setAttribute("closable", "");
-      
+
           var onClick =
             popup.onClick ||
             function (e) {
@@ -193,7 +196,7 @@
           popup.addEventListener("click", onClick);
         });
       }
-      
+
       </script>
     <script src="./SimulationWithCanvas.js"></script>
   </body>

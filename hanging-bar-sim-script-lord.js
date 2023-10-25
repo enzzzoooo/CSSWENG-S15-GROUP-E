@@ -619,9 +619,4 @@ function draw() {
     }
     pop()
 
-
-
-
-    // greyBar
-
 }
