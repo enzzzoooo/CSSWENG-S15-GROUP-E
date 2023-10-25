@@ -131,6 +131,18 @@ function setup() {
         displayForce = !displayForce;
     });
 
+
+    let changeWood = document.getElementById('changeMatToWood');
+    changeWood.addEventListener('click', changeMaterialToWood);
+    let changeMetal = document.getElementById('changeMatToMetal');
+    changeMetal.addEventListener('click', changeMaterialToMetal);
+    let changeLog = document.getElementById('changeMatToLog');
+    changeLog.addEventListener('click', changeMaterialToLog);
+    let changeSteel = document.getElementById('changeMatToSteel');
+    changeSteel.addEventListener('click', changeMaterialToSteel);
+    let changeRuby = document.getElementById('changeMatToRuby');
+    changeRuby.addEventListener('click', changeMaterialToRuby);
+
     forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 39*2), 'coral']
 
     textFont(font);
@@ -204,6 +216,67 @@ function mouseReleased() {
     distanceChange = false;
     barChange = false;
     lengthChange = false;
+}
+
+
+function changeMaterialToWood(){
+    resetDrawing();
+    if(greyBar.color != '#B48777' && settings.greyRopeModulus != 100){
+        greyBar.color = '#B48777';
+        settings.greyRopeModulus = 100;
+    }
+    else{
+        greyBar.color = '#747474';
+        settings.greyRopeModulus = 200;
+    }
+}
+
+function changeMaterialToMetal(){
+    resetDrawing();
+    if(greyBar.color != '#CCC9C9' && settings.greyRopeModulus != 300){
+        greyBar.color = '#CCC9C9';
+        settings.greyRopeModulus = 300;
+    }
+    else{
+        greyBar.color = '#747474';
+        settings.greyRopeModulus = 200;
+    }
+}
+
+function changeMaterialToLog(){
+    resetDrawing();
+    if(greyBar.color != '#724D3F' && settings.greyRopeModulus != 400){
+        greyBar.color = '#724D3F';
+        settings.greyRopeModulus = 400;
+    }
+    else{
+        greyBar.color = '#747474';
+        settings.greyRopeModulus = 200;
+    }
+}
+
+function changeMaterialToSteel(){
+    resetDrawing();
+    if(greyBar.color != '#000000' && settings.greyRopeModulus != 500){
+        greyBar.color = '#000000';
+        settings.greyRopeModulus = 500;
+    }
+    else{
+        greyBar.color = '#747474';
+        settings.greyRopeModulus = 200;
+    }
+}
+
+function changeMaterialToRuby(){
+    resetDrawing();
+    if(greyBar.color != '#FD0606' && settings.greyRopeModulus != 600){
+        greyBar.color = '#FD0606';
+        settings.greyRopeModulus = 600;
+    }
+    else{
+        greyBar.color = '#747474';
+        settings.greyRopeModulus = 200;
+    }
 }
 
 function curlyBracket(length){
