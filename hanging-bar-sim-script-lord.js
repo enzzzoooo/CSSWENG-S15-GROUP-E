@@ -54,9 +54,9 @@ let canvasOrigin = {
 }
 
 let settings = {
-    ropeHeight: 2500,
-    ropeDistance: 4750,
-    yellowBarWidth: 7000,
+    ropeHeight: 3000,
+    ropeDistance: 4000,
+    yellowBarWidth: 6000,
     greyRopeModulus: 200
 }
 
@@ -96,7 +96,13 @@ let greyBar = {
 let t = 0;
 
 let forces = []
+let active = false;
 let displayData = false;
+let displayForce = false;
+let heightChange = false;
+let distanceChange = false;
+let barChange = false;
+let lengthChange = false;
 
 function preload() {
     font = loadFont('.\\public\\Avenir LT Std 55 Roman.otf');
@@ -117,6 +123,12 @@ function setup() {
     let toggle = document.getElementById('toggle');
     toggle.addEventListener("change", function () {
         displayData = !displayData;
+    });
+
+
+    let forceButton = document.getElementById('force');
+    forceButton.addEventListener("change", function () {
+        displayForce = !displayForce;
     });
 
     forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 39*2), 'coral']
@@ -170,10 +182,28 @@ function easing(x) {
     return 1 - Math.pow(1 - x, 3);
 }
 
+function updateForces(){
+    forces.forEach(force => {
+        if(force[0].y != yellowBar.y){
+            force[0].y = yellowBar.y;
+        }
+        if(force[0].x > yellowBar.x + yellowBar.width){
+            force[0].x = yellowBar.x + yellowBar.width
+        }
+    });
+
+}
+
 function mouseReleased() {
     forces.forEach(force => {
         force[3] = false;
+        force[4] = false;
     });
+    active = false;
+    heightChange = false;
+    distanceChange = false;
+    barChange = false;
+    lengthChange = false;
 }
 
 function curlyBracket(length){
@@ -182,70 +212,6 @@ function curlyBracket(length){
     noFill();
     bezier(0, 0, 20, 0, 0, length/2, 20, length/2)
     bezier(20, length/2, 0, length/2, 20, length, 0, length)
-}
-
-function showData(){
-    // Yellow Bar
-    push()
-    strokeWeight(0)
-    fill('black')
-    textAlign(CENTER)
-    angular = atan2(yellowBar.y+(yellowBar.change*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
-    translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change*easing(t)))
-    rotate(angular);
-    text((yellowBar.width*20).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
-    strokeWeight(1.5)
-    translate(0, 0)
-    rotate(90)
-    curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change*easing(t))))
-
-    // Grey Bar
-    resetMatrix()
-
-    strokeWeight(0)
-    fill('black')
-    textAlign(CENTER)
-
-    angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - greyBar.y, (greyBar.x+greyBar.width) - greyBar.x);
-    translate(greyBar.x, greyBar.y)
-    rotate(angular);
-    text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t))))/2, -40);
-    strokeWeight(1.5)
-    rotate(-90)
-    translate(12, 0)
-    curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
-
-    // Height of rope
-    resetMatrix()
-
-    strokeWeight(0)
-    fill('white')
-    stroke('white')
-    textAlign(CENTER)
-    translate(yellowBar.x, yellowBar.y)
-    text((settings.ropeHeight).toFixed(2) + 'mm', -90, -(settings.ropeHeight/20/2) + 5);
-    strokeWeight(1.5)
-    rotate(-180)
-    translate(15, 0)
-    curlyBracket(settings.ropeHeight/20)
-
-    // Distance of rope
-    resetMatrix()
-
-    strokeWeight(0)
-    fill('black')
-    stroke('black')
-    textAlign(CENTER)
-    translate(yellowBar.x, yellowBar.y)
-    angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
-    rotate(angular);
-    text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
-    strokeWeight(1.5)
-    rotate(-90)
-    translate(0, 0)
-    curlyBracket(dist(yellowBar.x, yellowBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
-
-    pop()
 }
 
 function draw() {
@@ -300,6 +266,8 @@ function draw() {
     }
     resetMatrix()
 
+
+    // Force values
     if(!yellowBar.animation){
 
         forces.forEach(force => {
@@ -312,25 +280,186 @@ function draw() {
                 strokeWeight(0)
                 fill(255, 255, 200, 175);
                 circle(force[0].x, force[0].y + force[1].y + 15, 10);
-                if(mouseIsPressed){
+                if(mouseIsPressed & !active){
                     force[3] = true;
+                    active = true;
                 }
             }
 
-            if(displayData || force[3]){
-            strokeWeight(0);
-            fill(0, 0, 0, 250);
-            text((force[1].y/2).toFixed(1), force[0].x + 10, (force[0].y*2 + force[1].y)/2);
+            if(mouseX > force[0].x - 7.5 && mouseX < force[0].x + 7.5 &&
+                mouseY > force[0].y + 10 && mouseY < force[0].y + force[1].y){
+                drawArrow(force[0], force[1], 'tomato');
+                strokeWeight(0)
+                fill(255, 255, 200, 175);
+                if(mouseIsPressed & !active){
+                    force[4] = true;
+                    active = true;
+                }
+            }
+            if(force[4]){
+                drawArrow(force[0], force[1], 'orangered');
+                if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
+                    force[0].x = mouseX
+                } else if (mouseX > yellowBar.x + yellowBar.width){
+                    force[0].x = yellowBar.x + yellowBar.width
+                } else if (mouseX < yellowBar.x){
+                    force[0].x = yellowBar.x
+                }
+            }
+
+            push()
+            if(displayForce || force[4]){
+                // Distance of rope
+                resetMatrix()
+                strokeWeight(0)
+                fill('black')
+                stroke('black')
+                textAlign(CENTER)
+                translate(yellowBar.x, yellowBar.y)
+                angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
+                rotate(angular);
+                text((dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y)*20).toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
+                strokeWeight(1.5)
+                rotate(-90)
+                translate(0, 0)
+                curlyBracket(dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))
+
+                resetMatrix()
+            }
+            pop()
+
+            if(displayData || force[3] || displayForce){
+                strokeWeight(0);
+                fill(0, 0, 0, 250);
+                text((force[1].y/2).toFixed(1), force[0].x + 10, (force[0].y*2 + force[1].y)/2);
             }
 
             if (force[3]){
                 strokeWeight(0);
                 fill(255, 255, 200, 250);
                     circle(force[0].x, force[0].y + force[1].y + 15, 10);
-                force[1] = createVector(0, -(force[0].y - mouseY + 15))
+                if(mouseY > yellowBar.y + 15){
+                    force[1] = createVector(0, -(force[0].y - mouseY + 15))
+                } if(mouseY < yellowBar.y + 15){
+                    force[1] = createVector(0, 0)
+                }
             }
         });
     }
+    resetMatrix();
+
+    // Change values
+    if(!yellowBar.animation){
+        // Rope Height
+        if(dist(mouseX, mouseY, greyBar.x, greyBar.y) < 15){
+            strokeWeight(0)
+            fill(255, 255, 150, 180);
+            circle(greyBar.x, greyBar.y, 24);
+            if(mouseIsPressed && !active){
+                heightChange = true
+                active = true
+            }
+        }
+        if(heightChange){
+            strokeWeight(0);
+            fill(255, 200, 90, 255);
+            circle(greyBar.x, greyBar.y, 24);
+            if(mouseY < yellowBar.y){
+                greyBar.y = mouseY;
+                settings.ropeHeight = dist(yellowBar.x, mouseY, yellowBar.x, yellowBar.y) * 20;
+            } else if(mouseY > yellowBar.y){
+                greyBar.y = yellowBar.y;
+                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+            }
+        }
+
+
+        // Rope Distance
+        if(dist(mouseX, mouseY, greyBar.x + greyBar.width, yellowBar.y) < 15){
+            strokeWeight(0)
+            fill(255, 255, 150, 180);
+            circle(greyBar.x + greyBar.width, yellowBar.y, 24);
+            if(mouseIsPressed && !active){
+                distanceChange = true
+                active = true
+            }
+        }
+        if(distanceChange){
+            strokeWeight(0);
+            fill(255, 200, 90, 255);
+            circle(greyBar.x + greyBar.width, yellowBar.y, 24);
+            if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
+                greyBar.width = mouseX - yellowBar.x;
+                settings.ropeDistance = dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+            } else if(mouseX < yellowBar.x){
+                greyBar.width = 0;
+                settings.ropeDistance = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+            } else if(mouseX > yellowBar.x + yellowBar.width){
+                greyBar.width = yellowBar.width;
+                settings.ropeDistance = dist(yellowBar.x + yellowBar.width, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+            }
+        }
+
+
+        // Yellow Bar Change
+        if(dist(mouseX, mouseY, yellowBar.x, yellowBar.y) < 20){
+            strokeWeight(0)
+            fill(255, 255, 150, 180);
+            circle(yellowBar.x, yellowBar.y, 29);
+            if(mouseIsPressed && !active){
+                barChange = true
+                active = true
+            }
+        }
+        if(barChange){
+            strokeWeight(0);
+            fill(255, 200, 90, 255);
+            circle(yellowBar.x, yellowBar.y, 29);
+            if(mouseY > greyBar.y && mouseY < 350){
+                yellowBar.y = mouseY;
+                settings.ropeHeight = dist(yellowBar.x, mouseY, greyBar.x, greyBar.y) * 20;
+                updateForces();
+            } else if(mouseY < greyBar.y){
+                yellowBar.y = greyBar.y;
+                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, greyBar.x, greyBar.y) * 20;
+                updateForces();
+            } if(mouseY > 350){
+                yellowBar.y = 350;
+                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, greyBar.x, greyBar.y) * 20;
+                updateForces();
+            }
+        }
+
+        // Bar Length
+        if(dist(mouseX, mouseY, yellowBar.x + yellowBar.width, yellowBar.y) < 10){
+            strokeWeight(0)
+            fill(255, 255, 150, 180);
+            circle(yellowBar.x + yellowBar.width, yellowBar.y, 15);
+            if(mouseIsPressed && !active){
+                lengthChange = true
+                active = true
+            }
+        }
+        if(lengthChange){
+            strokeWeight(0);
+            fill(255, 200, 90, 255);
+            circle(yellowBar.x + yellowBar.width, yellowBar.y, 15);
+            if(mouseX > greyBar.x + greyBar.width){
+                yellowBar.width = mouseX - yellowBar.x;
+                settings.yellowBarWidth = dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+                updateForces();
+            } else if(mouseX < greyBar.x + greyBar.width){
+                yellowBar.width = greyBar.width;
+                settings.yellowBarWidth = dist(greyBar.x + greyBar.width, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+                updateForces();
+            }
+        }
+
+
+
+    }
+
+
 
     // After animation
     if(greyBar.animation && t >= 1){
@@ -343,12 +472,79 @@ function draw() {
         curlyBracket(yellowBar.change)
     }
 
-    resetMatrix()
+    push()
 
-    if(displayData){
-        showData()
+    if(displayData || lengthChange){
+        //Yellow Bar
+        resetMatrix()
+        strokeWeight(0)
+        fill('black')
+        textAlign(CENTER)
+        angular = atan2(yellowBar.y+(yellowBar.change*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
+        translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change*easing(t)))
+        rotate(angular);
+        text((yellowBar.width*20).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
+        strokeWeight(1.5)
+        translate(0, 0)
+        rotate(90)
+        curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change*easing(t))))
+        resetMatrix()
     }
-    resetMatrix()
+    if(displayData || barChange || heightChange || distanceChange){
+        // Grey Bar
+        resetMatrix()
+
+        strokeWeight(0)
+        fill('black')
+        textAlign(CENTER)
+
+        angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - greyBar.y, (greyBar.x+greyBar.width) - greyBar.x);
+        translate(greyBar.x, greyBar.y)
+        rotate(angular);
+        text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t))))/2, -40);
+        strokeWeight(1.5)
+        rotate(-90)
+        translate(12, 0)
+        curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
+        resetMatrix()
+    }
+
+    if(displayData || heightChange || barChange){
+        // Height of rope
+        strokeWeight(0)
+        fill('white')
+        stroke('white')
+        textAlign(CENTER)
+        translate(yellowBar.x, yellowBar.y)
+        text((settings.ropeHeight).toFixed(2) + 'mm', -90, -(settings.ropeHeight/20/2) + 5);
+        strokeWeight(1.5)
+        rotate(-180)
+        translate(15, 0)
+        curlyBracket(settings.ropeHeight/20)
+
+
+        resetMatrix()
+    }
+
+    if(displayData || distanceChange){
+        // Distance of rope
+        resetMatrix()
+        strokeWeight(0)
+        fill('black')
+        stroke('black')
+        textAlign(CENTER)
+        translate(yellowBar.x, yellowBar.y)
+        angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
+        rotate(angular);
+        text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
+        strokeWeight(1.5)
+        rotate(-90)
+        translate(0, 0)
+        curlyBracket(dist(yellowBar.x, yellowBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
+
+        resetMatrix()
+    }
+    pop()
 
 
 
