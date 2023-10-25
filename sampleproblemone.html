@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./global.css"/>
   <link rel="stylesheet" href="./home.css"/>
+  <link rel="stylesheet" href="./lesson.css"/>
+  <script src="js/lesson.js" defer></script>
   <title>Sample Problem 1</title>
 </head>
 <body>
@@ -19,6 +21,39 @@
       Analysis of Axial Deformations in a Structure
     </div>
   </header>
+  <div class="lessonTitle">Compound Bar</div>
+  <div class="lessonBox">
+    <div class="lessonImgBox">
+      <div class="labelBar"><div class="labelBarText">Sample</div></div>
+      <img class="lessonImg" src="">
+    </div>
+    <div class="lessonTxt">
+      First, let us consider a simple system of two steel bars AB and
+BC (E = 200 GPa) that are connected to each other in series.
+End A is fixed while end C is free to move. When the 10-kN
+force at B is applied, how will the system respond? By how
+much will end C move?
+    </div>
+  </div>
+
+  <div class="slider">
+    <img class="slideButton l" src="imgs/left.png"><span class="slideNum">1</span><img class="slideButton r" src="imgs/right.png">
+  </div>
+
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="home">Home</button>
+      <button class="simulation" id="popupsimulation">Simulation</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <button class="resources">Resources</button>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+      <div class="line-div"></div>
+    </div>
+  </div>
+  
+  <script src="js/hamburger-menu-modal.js"></script>
   <script src="js/hanging-bar-sim-script.js"></script>
 </body>
 </html>
