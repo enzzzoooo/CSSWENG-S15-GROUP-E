@@ -1,4 +1,11 @@
+// Showing value onto labels
+const yellowBarWidth = document.getElementById('yellowBarWidth');
+const yellowBarHeight = document.getElementById('yellowBarHeight');
+const youngsModulus = document.getElementById('youngsModulus');
 
+// Showing results
+const deflectionResult = document.getElementById('deflectionResult');
+const forceResult = document.getElementById('force');
 
 function deformation(load, length, crossArea, elasticity) {
     return (load * length) / (crossArea * elasticity)
@@ -143,7 +150,7 @@ function changeDrawing() {
     ropeLength = pythagorean(settings.ropeHeight, settings.ropeDistance)
     console.log(ropeLength)
     deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, cylinderCrossArea(greyBar.height/2), settings.greyRopeModulus);
-    console.log(deformationGrey)
+    console.log("Deformation: " + deformationGrey)
     yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey * 20;
     console.log(yellowBar.change)
     yellowBar.animation = true;
@@ -355,4 +362,30 @@ function draw() {
 
     // greyBar
 
+    
+
+    // This part is for updating the values seen in the materialSelect
+
+    yellowBarWidth.value = (yellowBar.width*20).toFixed(0);
+    yellowBarHeight.value = (yellowBar.height).toFixed(0);
+    youngsModulus.value = settings.greyRopeModulus;
 }
+
+
+const exitButton = document.getElementById('exit-button');
+exitButton.addEventListener('click', () => {
+    window.location.href = 'sampleproblemthree.html';
+});
+
+youngsModulus.addEventListener('change', () => {
+    settings.greyRopeModulus = parseFloat(youngsModulus.value);
+})
+
+forceResult.addEventListener('change', () => {
+    forces[0][1].y = parseFloat(forceResult.value*2);
+})
+
+
+
+
+

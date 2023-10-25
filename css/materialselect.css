@@ -1,10 +1,3 @@
-body {
-    display:flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding-top: 10em;
-}
-
 .materialSetting {
     width: 35%;
     min-width: 18em;
@@ -17,13 +10,16 @@ body {
 }
 
 .labelBar {
-    height: 7%;
+    justify-content: left;;
+    height: 42px;
     background-color: #00573F;
     display: flex;
     align-items: center;
 }
 
 .MLabeltext {
+    font-size: 23px;
+    font-family: var(--font-avenir);
     padding-left: 5%;
     color: white;
 }
@@ -71,6 +67,7 @@ body {
 }
 
 .Mtext {
+    font-family: var(--font-avenir);
     padding-left: 15px;
     font-size: 1.3em;
     min-width: 5em;

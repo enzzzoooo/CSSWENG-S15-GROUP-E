@@ -1,14 +1,59 @@
+.hamburger-button {
+    position: absolute;
+    left: 40px;
+    width: 34.67px;
+    height: 26px;
+}
+
+.header-title{
+    line-height: 130%;
+    font-family: var(--font-optima);
+    font-size: 34px;
+    color: var(--color-whitesmoke);
+}
+
+.main-container {
+    margin: 19px auto 0 auto;
+    display: flex;
+    justify-content: center; /* horizontally center the div */
+    align-items: center; /* vertically center the div */
+}
+
 #canvas-container {
     width: 822px;
     height: 534px;
     border: 1px solid #000000;
-    position: relative;
+    margin: 0 19px 0 0;
     top: 244px;
     left: calc(100vw * 65 / 1440);
 }
 
+#materialSelect {
+    background-color: #D4D4D4;
+    outline: black;
+    position:relative;
+    outline-width: 0.1em;
+    outline-style: solid;
+    width: 457px;
+    height: 535px;
+    border: 1px solid #000000;
+}
+
+.MaterialBox {
+    width: 62px;
+    height: 62px;
+    padding: 0 0 0 0;
+    background-color: #D4D4D4;
+    margin: 0 16px 0 0;
+}
+
+.mat {
+    width: 62px;
+    height: 62px;
+}
+
 #button-container {
-    position: absolute;
+    margin: 62px auto 0 auto;
     width: 410px;
     height: 100px;
     top: 840px;
@@ -17,12 +62,91 @@
     justify-content: space-around;
     align-items: center;
 }
-
-#materialSelect {
-    position: absolute;
-    top: 244px;
-    left: calc(100vw * 918 / 1440);
-    width: 457px;
-    height: 535px;
-    border: 1px solid #000000;
+    
+#reset-drawing:hover,
+#change-drawing:hover,
+#exit-button:hover {
+    filter: brightness(80%);
+    cursor: pointer;
 }
+
+#toggle {
+    position: absolute;
+    bottom: 0;
+}
+.toggle-label {
+    position: absolute;
+    bottom: 0;
+    left: 22px;
+    font-family: var(--font-avenir);
+}
+
+.home,
+.lessons1,
+.resources,
+.simulation {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: var(--font-size-8xl);
+  letter-spacing: 0.01em;
+  line-height: 130%;
+  font-family: var(--font-avenir);
+  color: var(--color-black);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  width: 423px;
+  height: 65px;
+}
+.lessons1,
+.resources,
+.simulation {
+  top: 65px;
+}
+.lessons1,
+.resources {
+  top: 130px;
+}
+.resources {
+  top: 195px;
+}
+.line-div,
+.menu-dropdown-child,
+.menu-dropdown-inner,
+.menu-dropdown-item {
+  position: absolute;
+  top: 64.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 473px;
+  height: 1px;
+}
+.line-div,
+.menu-dropdown-inner,
+.menu-dropdown-item {
+  top: 129.5px;
+}
+.line-div,
+.menu-dropdown-inner {
+  top: 194.5px;
+}
+.line-div {
+  top: 259.5px;
+}
+.menu-dropdown {
+  position: relative;
+  background-color: var(--color-white);
+  width: 472px;
+  height: 946px;
+  overflow: hidden;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+

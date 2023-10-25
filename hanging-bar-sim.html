@@ -4,16 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Simulation</title>
-  <link rel="stylesheet" href="./global.css"/>
-  <link rel="stylesheet" href="./home.css"/>
-  
-  <link rel="stylesheet" href="./hanging-bar-sim.css"/>
+
+  <!-- css files -->
+  <link rel="stylesheet" href="./css/joseph-global.css"/>
+  <link rel="stylesheet" href="./css/materialselect.css"/>
+  <link rel="stylesheet" href="./css/hanging-bar-sim.css"/>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-
 </head>
 <body>
-  <!-- Position of most of these element are absolute so possibly change later on -->
   <header>
     <img
       class="hamburger-button"
@@ -21,27 +20,85 @@
       src="./imgs/image-20230917-225739150-1@2x.png"
       id="hamburgerButton"
     />
-    <div class="analysis-of-axial">
+    <div class="header-title">
       Analysis of Axial Deformations in a Structure
     </div>
   </header>
 
   <div class="page-title">Simulation</div>
 
-  <div id="canvas-container"></div>
+  <div class="main-container"> 
+    <div id="canvas-container"></div>
+
+    <div id="materialSelect">
+
+      <div class="labelBar">
+        <div class="MLabeltext">Material</div>
+      </div>
+      <div class="MaterialSelect">
+          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 1.png"></button>
+          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 2.png"></button>
+          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 3.png"></button>
+          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 5.png"></button>
+          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 6.png"></button>
+      </div>
+      
+      <div class="labelBar">
+        <div class="MLabeltext">Object Position</div>
+      </div>
+      <div class="ObjectPosition">
+
+        <div class="ObjPosCol">
+          <div class="boxLabel">
+            <button class="BoxButton"></button>
+            <div class="Mtext">X</div>
+          </div>
+          <div class="boxLabel">
+            <input class="BoxButton" id="yellowBarWidth" type="text" placeholder="0">
+            <div class="Mtext" id="yellowBarWidth">Width</div>
+          </div>
+        </div>
+
+        <div class="ObjPosCol">
+          <div class="boxLabel">
+            <button class="BoxButton"></button>
+            <div class="Mtext">Y</div>
+          </div>
+          <div class="boxLabel">
+            <input class="BoxButton" id="yellowBarHeight" type="text" placeholder="0">
+            <div class="Mtext" id="">Height</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="labelBar">
+        <div class="MLabeltext">Object Physics</div>
+      </div>
+      <div class="boxLabel pt1">
+        <input class="BoxButton" id="youngsModulus" type="text" placeholder="0">
+        <div class="Mtext">Young's Modulus</div>
+      </div>
+      <div class="boxLabel pt1">
+        <input class="BoxButton" id="force" type="text" placeholder="0">
+        <div class="Mtext">Force</div>
+      </div>
+
+
+      
+      <input type="checkbox" id="toggle" name="toggle"><span class="toggle-label">Toggle Data</span>
+
+      <img class="help" src="imgs/help.png">
+
+
+    </div>
+
+  </div>
 
   <div id="button-container">
-    <img src="imgs/reset-button.png" id="reset-drawing" alt="Reset">
-    <img src="imgs/play-button.png" id="change-drawing" alt="Play">
-    <img src="imgs/show-data-button.png" id="toggle" alt="Toggle Data">
+    <img src="./imgs/reset-button.png" id="reset-drawing" alt="Reset">
+    <img src="./imgs/play-button.png" id="change-drawing" alt="Play">
+    <img src="./imgs/exit-button.png" id="exit-button" alt="Exit">
   </div>
-
-
-
-  <div id="materialSelect">
-
-  </div>
-
 
 
   <!-- Menu Modal -->
