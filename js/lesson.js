@@ -3,10 +3,139 @@ const rightButton = document.querySelector('.r');
 const leftButton = document.querySelector('.l');
 const slideImg = document.querySelector('.lessonImg');
 const slideTxt = document.querySelector('.lessonTxt');
-const slideNumTxt = document.querySelector('.slideNum')
+const slideNumTxt = document.querySelector('.slideNum');
+const slideImg2 = document.querySelector('.lessonImg2');
+const slideTxt2 = document.querySelector('.lessonTxt2');
+const hangingBar = [`Next, let us consider a rigid bar ABC that is hinged at A and
+supported by a deformable cable at B (E = 200 GPa). When the
+5-kN downward force is applied at end C, what will be the
+deflection of end C?`,
+`Following the same procedure in the previous discussion, let us
+draw first the free-body diagram of the rigid bar. Summing
+moments about point A,
+𝑃𝐵 = 10 kN, T
+3
+The axial deformation of the cable can be computed as
+𝛿𝐵 =
+𝑃𝐿
+𝐴𝐸 =
+(10 kN)(2000 mm)
+(20 mm2)(200 GPa)
+𝛿𝐵 = 5 mm (elongation)`,
+`Therefore, when the 10-kN force is applied to the system, the
+cable will elongate by 5 mm. This means that bar ABC must
+move to “accommodate” this elongation. Take note that bar
+ABC is rigid; it cannot bend. But it is not fixed, so it can rotate
+about the hinge at A.`,
+`To analyze the rotation of bar ABC, we construct a “deformation
+diagram”. The deformation diagram is a superposition of the
+initial and final positions of the bar, indicating the deflection of
+the points in the bar. From this diagram, we will be able to
+relate the deformations and deflections. `,
+`As you can see, the deformation diagram forms two similar
+right triangles (ABB’ and ACC’). Thus, we can relate the
+deflections
+𝑑
+𝐵 and
+𝑑
+𝐶, which are side lengths of the triangles. 𝑑𝐵2 = 𝑑𝐶4`,
+`You should realize that the vertical deflection of
+B is equal to
+the deformation of the cable, 𝑑𝐵 =
+𝛿𝐵
+=
+5 mm
+Using the similar triangle relation, the deflection of
+C is
+𝑑
+𝐶
+=
+2
+𝑑
+𝐵
+= 10 mm
+(pop up explanation for small angle approximation and why the
+horizontal deflection of B/C is negligible
+)`,
+`If the cable is oriented at some angle with respect to the bar,
+how will the analysis change?`,
+`First, let us recompute the force in the cable. Considering the
+free
+-body diagram of ABC and summing moments about point
+A, the force in the cable is 2𝑃𝐵 sin 30°
+=
+4
+(
+5 kN
+)
+𝑃𝐵
+= 20 kN
+The corresponding axial deformation is (pop up explanation for
+length
+)
+𝛿𝐵
+=
+(20 kN
+)
+(
+2000 mm
+cos 30°
+)
+(20
+m
+m
+2
+)
+(200 GPa
+)
+𝛿𝐵
+=
+20
+√
+3
+3
+mm
+(elongation
+)`,
+`Next, we draw again the deformation diagram of rigid bar ABC.
+This time, the vertical deflection of B is not simply equal to the
+deformation of the cable, since the deformation should occur
+along the direction of the cable (not vertically).`,
+`To relate
+𝑑
+𝐵 and
+𝛿𝐵, we create another right triangle as shown,
+where
+sin 30°
+=
+𝛿𝐵𝑑𝐵
+Therefore,
+𝑑𝐵 =
+40√3
+3
+mm`,
+`Similar to the previous discussion, the vertical deflections 𝑑𝐵
+and 𝑑𝐶 can be related using similar triangle relations.
+𝑑𝐵
+2
+=
+𝑑𝐶
+4
+So,
+𝑑𝐶 =
+80√3
+3
+mm`,
+`To further understand this example, you may modify the system
+by moving the point of application of the load or changing
+the inclination of the cable. You may also change the
+properties of the cable (length, cross-sectional area, and
+material).
+If you have understood well the discussion, test your
+knowledge by answering the quiz`
+]
 
-const compoundBar = [
-`First, let us consider a simple system of two steel bars AB and
+const compoundBar = [ `First, let us consider a simple system of two steel bars AB and
 BC (E = 200 GPa) that are connected to each other in series.
 End A is fixed while end C is free to move. When the 10-kN
 force at B is applied, how will the system respond? By how
@@ -53,18 +182,26 @@ To further understand this example, you may modify the system
 by moving the point of application of the load or adding a
 second load. You may also change the properties of the bars
 (length, cross-sectional area, and material).
-Alternatively, you may proceed to the next discussion.`
-]
+Alternatively, you may proceed to the next discussion.`]
+const lessons = new Map();
+
+lessons.set("Hanging Bar", hangingBar);
+lessons.set("Compound Bar", compoundBar);
 
 rightButton.addEventListener('click', () => {
     let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
-    if (slideNum <= compoundBar.length) {
+    let lessonTitle = document.querySelector('.lessonTitle').innerHTML;
+    let lessonMap = lessons.get(lessonTitle);
+    
+    if (slideNum <= lessonMap.length) {
       slideNumTxt.innerHTML = slideNum;
       changeSlide (slideNum)
       leftButton.style.opacity = 1;
     }
+
     if (slideNum == compoundBar.length)
       rightButton.style.opacity = .5;
+    
   });
 
   leftButton.addEventListener('click', () => {
@@ -76,14 +213,14 @@ rightButton.addEventListener('click', () => {
     }
     if (slideNum == 1)
       leftButton.style.opacity = .5;
+
     });
 
 
   function changeSlide (number) {
-    
-
-
+    let lessonTitle = document.querySelector('.lessonTitle').innerHTML;
+    let lessonMap = lessons.get(lessonTitle);
     number--;
-    slideImg.src = `compoundBar_${number}`
-    slideTxt.innerHTML = compoundBar[number];
+    slideImg.src = `${lessonTitle}_${number}`
+    slideTxt.innerHTML = lessonMap[number]; 
   }
