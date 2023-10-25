@@ -406,3 +406,9 @@
 #toggle1{
   left:300px;
 }
+
+#force1{
+  position:absolute;
+  top: 825px;
+  left:475px;
+}
