@@ -25,13 +25,12 @@ body {
 
 .labelBar {
     height: 8%;
-    background-color: #8A1538;
+    background-color: var(--color-maroon);
     display: flex;
     align-items: center;
 }
 
 .labelBarText {
-    
     padding-left: 3%;
     color: white;
 }
