@@ -28,5 +28,5 @@ simulationButton.addEventListener('click', () => {
 
 // Event handler for "Lessons"
 lesseonsButton.addEventListener('click', () => {
-  window.location.href = "lessons.html"; // should change to lessons
+  window.location.href = "lesson-picker.html"; // should change to lessons
 });
