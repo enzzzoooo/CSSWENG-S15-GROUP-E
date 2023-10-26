@@ -36,11 +36,11 @@
         <div class="MLabeltext">Material</div>
       </div>
       <div class="MaterialSelect">
-          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 1.png"></button>
-          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 2.png"></button>
-          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 3.png"></button>
-          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 5.png"></button>
-          <button class="MaterialBox"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 6.png"></button>
+          <button class="MaterialBox" id="changeMatToWood"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 1.png"></button>
+          <button class="MaterialBox" id="changeMatToMetal"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 2.png"></button>
+          <button class="MaterialBox" id="changeMatToRuby"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 3.png"></button>
+          <button class="MaterialBox" id="changeMatToLog"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 5.png"></button>
+          <button class="MaterialBox" id="changeMatToSteel"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 6.png"></button>
       </div>
       
       <div class="labelBar">
@@ -79,13 +79,15 @@
         <div class="Mtext">Young's Modulus</div>
       </div>
       <div class="boxLabel pt1">
-        <input class="BoxButton" id="force" type="text" placeholder="0">
+        <input class="BoxButton" id="aa" type="text" placeholder="0">
         <div class="Mtext">Force</div>
       </div>
 
 
-      
-      <input type="checkbox" id="toggle" name="toggle"><span class="toggle-label">Toggle Data</span>
+      <div class="toggle-buttons">
+        <input type="checkbox" id="toggle" name="toggle"><span class="toggle-label">Toggle Data</span>
+        <input type="checkbox" id="force" name="force"> <span class="toggle-label">Force Data</span> 
+      </div> 
 
       <img class="help" src="imgs/help.png">
 
