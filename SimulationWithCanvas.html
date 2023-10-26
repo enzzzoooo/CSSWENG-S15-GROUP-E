@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./SimulationWithCanvas.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Avenir:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Optima:wght@400&display=swap"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <div class="simulation1">
+      <div class="material-setting-selection">
+        <div class="material-setting-selection-child"></div>
+        <div class="material">
+          <div class="material-child"></div>
+          <div class="simulation-details">Material</div>
+        </div>
+        <div class="deets">
+          <div class="material-child"></div>
+          <div class="simulation-details">Simulation details</div>
+          <div class="force">
+            <div class="kns">kNs</div>
+            <div class="force-child"></div>
+          </div>
+        </div>
+        <div class="properties">
+          <div class="material-child"></div>
+          <div class="properties1">Properties</div>
+          <div class="youngs-modulus">Young’s modulus</div>
+          <div class="fixed">Fixed</div>
+          <div class="rigid">Rigid</div>
+          <div class="properties-item"></div>
+          <div class="properties-inner"></div>
+          <div class="rectangle-div"></div>
+        </div>
+        <div class="material-change">
+          <button id="changeMatToWood"></button>
+          <button id="changeMatToMetal"></button>
+          <button id="changeMatToLog"></button>
+          <button id="changeMatToSteel"></button>
+          <button id="changeMatToRuby"></button>
+        </div>
+        <img
+          class="help-icon"
+          alt=""
+          src="./public/help@2x.png"
+          id="helpIcon"
+        />
+      </div>
+      <div class="sandbox">
+
+        <div class="sandbox-label">
+          <div class="sandbox-label-child"></div>
+          <div class="sandbox1">Sandbox</div>
+        </div>
+        <div class="top-bar">
+          <div class="top-bar-child"></div>
+          <img
+            class="image-2023-09-17-225739150-1-icon"
+            alt=""
+            src="./public/image-20230917-225739150-1@2x.png"
+            id="image202309172257391501Icon"
+          />
+        </div>
+        <div id="canvas-container"></div>
+        <button id="reset-drawing" style >
+            Reset Button
+        </button>
+        <label id="toggle1" for="toggle">
+        <input type="checkbox" id="toggle" name="toggle">  Toggle Data
+        </label>
+        <label id="force1" for="force">
+        <input type="checkbox" id="force" name="force">  Force Data
+        </label>
+      </div>
+      <img
+        class="image-2023-09-17-225739150-1-icon"
+        alt=""
+        src="./public/image-20230917-225739150-1@2x.png"
+        id="image202309172257391501Icon1"
+      />
+
+      <div class="play" id="playContainer">
+        <div class="play-child" id="rectangle14"></div>
+        <img
+          class="image-2023-09-17-225648779-1-icon"
+          alt=""
+          src="./public/image-20230917-225648779-1@2x.png"
+        />
+      </div>
+      <div class="simulation2">Simulation</div>
+      <div class="analysis-of-axial">
+        Analysis of Axial Deformations in a Structure
+      </div>
+    </div>
+
+    <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+      <div class="menu-dropdown">
+        <button class="home">Home</button>
+        <button class="simulation" id="popupsimulation">Simulation</button>
+        <button class="lessons" id="popuplessons">Lessons</button>
+        <button class="resources">Resources</button>
+        <div class="menu-dropdown-child"></div>
+        <div class="menu-dropdown-item"></div>
+        <div class="menu-dropdown-inner"></div>
+        <div class="line-div"></div>
+      </div>
+    </div>
+    <script>
+      var popupsimulation = document.getElementById("popupsimulation");
+      if (popupsimulation) {
+        popupsimulation.addEventListener("click", function (e) {
+          window.location.href = "./Simulation.html";
+        });
+      }
+
+      var popuplessons = document.getElementById("popuplessons");
+      if (popuplessons) {
+        popuplessons.addEventListener("click", function (e) {
+          // Please sync "Lesson Layout" to the project
+        });
+      }
+
+      var helpIcon = document.getElementById("helpIcon");
+      if (helpIcon) {
+        helpIcon.addEventListener("click", function (e) {
+          // Please sync "Credits" to the project
+        });
+      }
+
+      var image202309172257391501Icon = document.getElementById(
+        "image202309172257391501Icon"
+      );
+      if (image202309172257391501Icon) {
+        image202309172257391501Icon.addEventListener("click", function () {
+          var popup = document.getElementById("menuDropdownContainer");
+          if (!popup) return;
+          var popupStyle = popup.style;
+          if (popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+
+          var onClick =
+            popup.onClick ||
+            function (e) {
+              if (e.target === popup && popup.hasAttribute("closable")) {
+                popupStyle.display = "none";
+              }
+            };
+          popup.addEventListener("click", onClick);
+        });
+      }
+
+      var image202309172257391501Icon1 = document.getElementById(
+        "image202309172257391501Icon1"
+      );
+      if (image202309172257391501Icon1) {
+        image202309172257391501Icon1.addEventListener("click", function () {
+          var popup = document.getElementById("menuDropdownContainer");
+          if (!popup) return;
+          var popupStyle = popup.style;
+          if (popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popupStyle.alignItems = "flex-start";
+            popupStyle.justifyContent = "flex-end";
+          }
+          popup.setAttribute("closable", "");
+
+          var onClick =
+            popup.onClick ||
+            function (e) {
+              if (e.target === popup && popup.hasAttribute("closable")) {
+                popupStyle.display = "none";
+              }
+            };
+          popup.addEventListener("click", onClick);
+        });
+      }
+
+      </script>
+    <script src="./SimulationWithCanvas.js"></script>
+  </body>
+</html>

@@ -67,8 +67,11 @@ header {
   --color-gray-100: #868686;
   --color-orange: #ffb81c;
   --color-darkgray: #a7a7a7;
+  --color-silver: #b6b6b6;
 
   /* border radiuses */
   --br-6xl: 25px;
   --br-8xs: 5px;
+  --br-31xl: 50px;
+  --br-3xs: 10px;
 }

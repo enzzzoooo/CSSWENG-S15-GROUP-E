@@ -105,7 +105,7 @@ let barChange = false;
 let lengthChange = false;
 
 function preload() {
-    font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
+    font = loadFont('.\\public\\Avenir LT Std 55 Roman.otf');
 }
 
 function setup() {
@@ -114,7 +114,7 @@ function setup() {
     angleMode(DEGREES);
 
 
-    let button = document.getElementById('change-drawing');
+    let button = document.getElementById('playContainer');
     button.addEventListener('click', changeDrawing);
 
     let reset = document.getElementById('reset-drawing');
