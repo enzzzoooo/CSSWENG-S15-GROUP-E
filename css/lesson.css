@@ -14,6 +14,7 @@ body {
     margin-inline: 3.5em;
     height: 50vh;
     display: flex;
+    font-family: var(--font-avenir);
 }
 
 .lessonImgBox {
@@ -30,6 +31,7 @@ body {
 }
 
 .labelBarText {
+    
     padding-left: 3%;
     color: white;
 }

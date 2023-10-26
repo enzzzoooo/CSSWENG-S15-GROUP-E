@@ -190,7 +190,7 @@ lessons.set("Compound Bar", compoundBar);
 
 rightButton.addEventListener('click', () => {
     let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
-    let lessonTitle = document.querySelector('.lessonTitle').innerHTML;
+    let lessonTitle = document.querySelector('.page-title').innerHTML;
     let lessonMap = lessons.get(lessonTitle);
     
     if (slideNum <= lessonMap.length) {
@@ -218,7 +218,7 @@ rightButton.addEventListener('click', () => {
 
 
   function changeSlide (number) {
-    let lessonTitle = document.querySelector('.lessonTitle').innerHTML;
+    let lessonTitle = document.querySelector('.page-title').innerHTML;
     let lessonMap = lessons.get(lessonTitle);
     number--;
     slideImg.src = `${lessonTitle}_${number}`
