@@ -51,6 +51,10 @@ body {
     justify-content: space-around;
 }
 
+.slideButton:hover {
+    cursor: pointer;
+}
+
 .l {
     opacity: .5;
 }
