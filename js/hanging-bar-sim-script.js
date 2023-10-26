@@ -2,6 +2,7 @@
 let yellowBarWidth;
 let youngsModulus;
 let arrowForce;
+let crossArea;
 let pivotPoint;
 let arrowPoint;
 
@@ -108,6 +109,7 @@ let heightChange = false;
 let distanceChange = false;
 let barChange = false;
 let lengthChange = false;
+let inputOfCrossArea =false;
 
 function preload() {
     font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
@@ -158,8 +160,17 @@ function setup() {
     yellowBarWidth = select('#yellowBarWidth');
     youngsModulus = select('#youngsModulus');
     arrowForce = select('#arrowForce');
+    crossArea = select('#crossArea');
     pivotPoint = select('#pivotPoint');
     arrowPoint = select('#arrowPoint');
+    
+    crossArea.input(function () {
+        if (crossArea.value() != 0) {
+            inputOfCrossArea = true;
+        } else {
+            inputOfCrossArea = false;
+        }
+    });        
 
     yellowBarWidth.input(function () {
         settings.yellowBarWidth = yellowBarWidth.value();
@@ -197,7 +208,13 @@ function changeDrawing() {
 
     ropeLength = pythagorean(settings.ropeHeight, settings.ropeDistance)
     console.log(ropeLength)
-    deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, cylinderCrossArea(greyBar.height/2), settings.greyRopeModulus);
+    if (inputOfCrossArea == true) {
+        deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, crossArea.value(), settings.greyRopeModulus);
+    } else {
+        deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, cylinderCrossArea(greyBar.height/2), settings.greyRopeModulus);
+    }
+    console.log("Cross Area: " + crossArea.value())
+    console.log("Cross Area: " + cylinderCrossArea(greyBar.height/2))
     console.log(deformationGrey)
     yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey * 20;
     console.log(yellowBar.change)
@@ -650,17 +667,21 @@ function draw() {
     }
     pop()
 
+
+    // // Hover feature Test
+    // if (mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width && mouseY > yellowBar.y && mouseY < yellowBar.y + yellowBar.height) 
+
+
+
     // For interacting with elements outside the canvas
     yellowBarWidth.value(settings.yellowBarWidth);
     youngsModulus.value(settings.greyRopeModulus);
     arrowForce.value(forces[0][1].y / 2);
     arrowPoint.value(forces[0][0].x * 20 - 3300);
-
-
-
-    // For Exit button
-    const exitButton = document.getElementById('exit-button');
-    exitButton.addEventListener('click', () => {
-        window.location.href = "../index.html";
-    });
 }
+
+// For Exit button
+const exitButton = document.getElementById('exit-button');
+exitButton.addEventListener('click', () => {
+    window.location.href = "../index.html";
+});
