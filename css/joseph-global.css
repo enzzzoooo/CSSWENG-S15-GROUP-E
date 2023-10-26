@@ -25,6 +25,24 @@ header {
     height: 78px;
 }
 
+.hamburger-button {
+    position: absolute;
+    left: 40px;
+    width: 34.67px;
+    height: 26px;
+}
+
+.hamburger-button:hover {
+    cursor: pointer;
+}
+
+.header-title {
+    line-height: 130%;
+    font-family: var(--font-optima);
+    font-size: 34px;
+    color: var(--color-whitesmoke);
+}
+
 .page-title{
     margin: 19px auto 0 auto;
     width: 886px;
@@ -37,11 +55,15 @@ header {
     font-family: var(--font-optima);
 }
 
+
 .popup-overlay {
     display: flex;
     flex-direction: column;
     position: fixed;
-    inset: 0;
+    padding: 78px 0 100% 0;
+    top: 0px;
+    left: 0;
+    right: 0;
 }
 
 :root {

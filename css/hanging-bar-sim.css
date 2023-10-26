@@ -1,9 +1,4 @@
-.hamburger-button {
-    position: absolute;
-    left: 40px;
-    width: 34.67px;
-    height: 26px;
-}
+
 
 .header-title{
     line-height: 130%;
@@ -70,14 +65,13 @@
     cursor: pointer;
 }
 
-#toggle {
-    position: absolute;
-    bottom: 0;
+.toggle-buttons {
+  display: flex;
+  position: absolute;
+  bottom: 0;
 }
+
 .toggle-label {
-    position: absolute;
-    bottom: 0;
-    left: 22px;
     font-family: var(--font-avenir);
 }
 
