@@ -404,7 +404,7 @@ function draw() {
             if(displayData || force[3] || displayForce){
                 strokeWeight(0);
                 fill(0, 0, 0, 250);
-                text((force[1].y/2).toFixed(1), force[0].x + 10, (force[0].y*2 + force[1].y)/2);
+                text((force[1].y/2).toFixed(1) + " kN", force[0].x + 15, (force[0].y*2 + force[1].y)/2);
             }
 
             if (force[3]){
