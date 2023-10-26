@@ -1,4 +1,9 @@
-
+// For interacting with the elements outside of the canvas
+let yellowBarWidth;
+let youngsModulus;
+let arrowForce;
+let pivotPoint;
+let arrowPoint;
 
 function deformation(load, length, crossArea, elasticity) {
     return (load * length) / (crossArea * elasticity)
@@ -144,9 +149,35 @@ function setup() {
     changeRuby.addEventListener('click', changeMaterialToRuby);
 
     forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 39*2), 'coral']
+    console.log("x: " + forces[0][0].x, "y: " + forces[0][0].y)
 
     textFont(font);
     textSize(20);
+
+    // For interacting with elements outside the canvas
+    yellowBarWidth = select('#yellowBarWidth');
+    youngsModulus = select('#youngsModulus');
+    arrowForce = select('#arrowForce');
+    pivotPoint = select('#pivotPoint');
+    arrowPoint = select('#arrowPoint');
+
+    yellowBarWidth.input(function () {
+        settings.yellowBarWidth = yellowBarWidth.value();
+        yellowBar.width = settings.yellowBarWidth;
+        updateForces();
+    });
+    
+    youngsModulus.input(function () {
+        settings.greyRopeModulus = youngsModulus.value();
+    });
+
+    arrowForce.input(function() {
+        forces[0][1].y = arrowForce.value() * 2;
+    })
+
+    arrowPoint.input(function() {
+        forces[0][0].x = arrowPoint.value() * 20 - 3300;
+    })
 }
 
 let deformationGrey = 0;
@@ -619,4 +650,17 @@ function draw() {
     }
     pop()
 
+    // For interacting with elements outside the canvas
+    yellowBarWidth.value(settings.yellowBarWidth);
+    youngsModulus.value(settings.greyRopeModulus);
+    arrowForce.value(forces[0][1].y / 2);
+    arrowPoint.value(forces[0][0].x * 20 - 3300);
+
+
+
+    // For Exit button
+    const exitButton = document.getElementById('exit-button');
+    exitButton.addEventListener('click', () => {
+        window.location.href = "../index.html";
+    });
 }
