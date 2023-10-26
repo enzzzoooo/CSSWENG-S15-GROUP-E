@@ -1,3 +1,5 @@
+/* Last Edit: 10/26 6PM */
+
 @font-face {
   font-family: 'Avenir';
   src: url('../fonts/Avenir\ LT\ Std\ 55\ Roman.otf');
@@ -17,18 +19,34 @@ body {
 }
 
 header {
+  display: flex;
   background-color: var(--color-maroon);
-  position: absolute;
-  top: 0;
-  left: 0;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 78px;
 }
 
-.page-title{
+.hamburger-button {
   position: absolute;
-  top: 97px;
-  left: calc(50% - 443px);
+  left: 40px;
+  width: 34.67px;
+  height: 26px;
+}
+
+.hamburger-button:hover {
+  cursor: pointer;
+}
+
+.header-title {
+  line-height: 130%;
+  font-family: var(--font-optima);
+  font-size: 34px;
+  color: var(--color-whitesmoke);
+}
+
+.page-title{
+  margin: 19px auto 0 auto;
   width: 886px;
   height: 128px;
   display: flex;
@@ -37,13 +55,6 @@ header {
   font-size: 48px;
   color: var(--color-black);
   font-family: var(--font-optima);
-}
-
-.popup-overlay {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  inset: 0;
 }
 
 :root {
@@ -67,11 +78,8 @@ header {
   --color-gray-100: #868686;
   --color-orange: #ffb81c;
   --color-darkgray: #a7a7a7;
-  --color-silver: #b6b6b6;
 
   /* border radiuses */
   --br-6xl: 25px;
   --br-8xs: 5px;
-  --br-31xl: 50px;
-  --br-3xs: 10px;
 }
