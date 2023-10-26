@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/joseph-global.css"/>
-  <link rel="stylesheet" href="./css/home.css"/>
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
   <title>Introduction</title>
 </head>
 <body>
@@ -21,7 +21,18 @@
   </header>
 
   
-
-  <script src="js/hanging-bar-sim-script.js"></script>
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="home">Home</button>
+      <button class="simulation" id="popupsimulation">Simulation</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <button class="resources">Resources</button>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+      <div class="line-div"></div>
+    </div>
+  </div>
+  <script src="js/hamburger-menu-modal.js"></script>
 </body>
 </html>
