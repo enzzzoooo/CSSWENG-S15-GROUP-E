@@ -55,17 +55,6 @@ header {
     font-family: var(--font-optima);
 }
 
-
-.popup-overlay {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    padding: 78px 0 100% 0;
-    top: 0px;
-    left: 0;
-    right: 0;
-}
-
 :root {
     /* fonts */
     --font-optima: 'Optima';

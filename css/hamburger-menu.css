@@ -1,0 +1,87 @@
+/* Lifted from Kenwins lessons.css */
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 78px 0 100% 0;
+  top: 0px;
+  left: 0;
+  right: 0;
+}
+
+.home,
+.lessons1,
+.resources,
+.simulation {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: var(--font-size-8xl);
+  letter-spacing: 0.01em;
+  line-height: 130%;
+  font-family: var(--font-avenir);
+  color: var(--color-black);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  width: 423px;
+  height: 65px;
+}
+
+.lessons1,
+.resources,
+.simulation {
+  top: 65px;
+}
+
+.lessons1,
+.resources {
+  top: 130px;
+}
+
+.resources {
+  top: 195px;
+}
+
+.line-div,
+.menu-dropdown-child,
+.menu-dropdown-inner,
+.menu-dropdown-item {
+  position: absolute;
+  top: 64.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 473px;
+  height: 1px;
+}
+
+.line-div,
+.menu-dropdown-inner,
+.menu-dropdown-item {
+  top: 129.5px;
+}
+
+.line-div,
+.menu-dropdown-inner {
+  top: 194.5px;
+}
+
+.line-div {
+  top: 259.5px;
+}
+
+.menu-dropdown {
+  position: relative;
+  background-color: var(--color-white);
+  width: 472px;
+  height: 946px;
+  overflow: hidden;
+  max-width: 90%;
+  max-height: 90%;
+}
