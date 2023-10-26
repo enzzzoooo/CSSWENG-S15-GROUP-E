@@ -348,14 +348,6 @@
   width: 100%;
   height: 78px;
 }
-.hamburger-button{
-  position: absolute;
-  top: 25.24px;
-  left: 30px;
-  width: 26px;
-  height: 26px;
-  object-fit: cover;
-}
 .top-bar {
   position: absolute;
   top: 0;
@@ -402,6 +394,7 @@
   width: 100%;
   height: 1024px;
   text-align: center;
+  margin: 0 auto 0 auto;
   font-size: var(--font-size-4xl);
   color: var(--color-white);
   font-family: var(--font-avenir);
