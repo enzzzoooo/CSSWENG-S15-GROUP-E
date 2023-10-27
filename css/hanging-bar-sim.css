@@ -50,8 +50,9 @@
 .variables {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
-  margin: 0 10px 0 10px;
+  margin: 0 22.8438px 0 22.8438px;
 }
 
 #button-container {

@@ -3,7 +3,8 @@ let yellowBarWidth;
 let youngsModulus;
 let arrowForce;
 let crossArea;
-let pivotPoint;
+let pivotPointWall;
+let pivotPointBar;
 let arrowPoint;
 
 function deformation(load, length, crossArea, elasticity) {
@@ -156,39 +157,85 @@ function setup() {
     textFont(font);
     textSize(20);
 
+
     // For interacting with elements outside the canvas
     yellowBarWidth = select('#yellowBarWidth');
     youngsModulus = select('#youngsModulus');
     arrowForce = select('#arrowForce');
     crossArea = select('#crossArea');
-    pivotPoint = select('#pivotPoint');
+    pivotPointWall = select('#pivotPointWall');
+    pivotPointBar = select('#pivotPointBar');
     arrowPoint = select('#arrowPoint');
     
+    
+    pivotPointWall.input(function() {
+
+        let temp = -(pivotPointWall.value()/20 - yellowBar.y);
+        if(temp < yellowBar.y){
+            greyBar.y = temp
+            settings.ropeHeight = parseFloat(pivotPointWall.value());
+        } else {
+            greyBar.y = yellowBar.y;
+        }
+
+        // Debugging
+        // console.log("pivotPointWall: " + pivotPointWall.value());
+        // console.log("settings.ropeHeight: " + settings.ropeHeight);
+        // console.log("temp: " + temp);
+        // console.log("greyBar.y: " + greyBar.y);
+        // console.log("yellowBar.y: " + yellowBar.y);
+    });
+
+    pivotPointBar.input(function() {
+        let temp = pivotPointBar.value()/20 + yellowBar.x - greyBar.x;
+
+        if(temp + greyBar.x > yellowBar.x){
+            greyBar.width = temp
+            settings.ropeDistance = parseFloat(pivotPointBar.value());
+        } else {
+            greyBar.width = yellowBar.x;
+        }
+        
+        // Debugging
+        // console.log("pivotPointBar: " + pivotPointBar.value());
+        // console.log("settings.ropeDistance: " + settings.ropeDistance);
+        // console.log("temp: " + temp);
+        // console.log("greyBar.width + greyBar.x: " + greyBar.width + greyBar.x);
+        // console.log("yellowBar.x: " + yellowBar.x);
+    });
+
+    yellowBarWidth.input(function () {
+        // Debugging
+        // console.log("yellowbarwidth: " + yellowBarWidth.value());
+        // console.log("settings.yellowBarWidth: " + settings.yellowBarWidth);
+        // console.log("yellowBar.width: " + yellowBar.width);
+        settings.yellowBarWidth = yellowBarWidth.value();
+        yellowBar.width = settings.yellowBarWidth / 20;
+        updateForces();
+    });
+
+    arrowPoint.input(function() {     
+        forces[0][0].x = arrowPoint.value()/20 + yellowBar.x;
+    });
+
     crossArea.input(function () {
         if (crossArea.value() != 0) {
             inputOfCrossArea = true;
         } else {
             inputOfCrossArea = false;
         }
-    });        
+    });    
 
-    yellowBarWidth.input(function () {
-        settings.yellowBarWidth = yellowBarWidth.value();
-        yellowBar.width = settings.yellowBarWidth;
-        updateForces();
-    });
-    
     youngsModulus.input(function () {
         settings.greyRopeModulus = youngsModulus.value();
     });
 
     arrowForce.input(function() {
         forces[0][1].y = arrowForce.value() * 2;
-    })
+    });
 
-    arrowPoint.input(function() {
-        forces[0][0].x = arrowPoint.value() * 20 - 3300;
-    })
+
+    
 }
 
 let deformationGrey = 0;
@@ -674,10 +721,17 @@ function draw() {
 
 
     // For interacting with elements outside the canvas
+    pivotPointWall.value(settings.ropeHeight);
+    pivotPointBar.value(settings.ropeDistance);
     yellowBarWidth.value(settings.yellowBarWidth);
+    arrowPoint.value(forces[0][0].x * 20 - 3300);
+
+    if(inputOfCrossArea == false){
+        crossArea.value(squareCrossArea(greyBar.height/2));
+    }
     youngsModulus.value(settings.greyRopeModulus);
     arrowForce.value(forces[0][1].y / 2);
-    arrowPoint.value(forces[0][0].x * 20 - 3300);
+    
 }
 
 // For Exit button
