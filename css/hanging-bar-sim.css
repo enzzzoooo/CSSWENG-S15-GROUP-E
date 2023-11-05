@@ -63,6 +63,10 @@ canvas {
     border: 0px solid #000000;
 }
 
+.tab-link:hover {
+    cursor: pointer;
+}
+
 .tab-link.active{
     background-color: var(--color-forestgreen);
 }

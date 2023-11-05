@@ -36,9 +36,10 @@
 
     <div id="materialSelect">
       <div id="tabSelect">
-        <button class="tab-link active"><img id="objectImg" src="imgs/objectSelect-icon.png"></button>
-        <button class="tab-link"><img id="snapImg" src="imgs/snapSelect-icon.png"></button>
+        <button class="tab-link active" onclick="openTabs(event, 'objectSelect')"><img id="objectImg" src="imgs/objectSelect-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'snapSelect')"><img id="snapImg" src="imgs/snapSelect-icon.png"></button>
       </div>
+
       <div id="objectSelect" class="tab">
         <div class="label-bar">Type</div>
         <div class="material-change-container">
@@ -82,81 +83,14 @@
             <div class="attribute-label">Force</div>
           </div>
         </div>
-
       </div>
-    <div></div>
+
+      <div id="snapSelect" class="tab">
+        
+        
+      </div>
 
     </div>
-    <!-- <div id="materialSelect">
-
-      <div class="labelBar">
-        <div class="MLabeltext">Material</div>
-      </div>
-      <div class="MaterialSelect">
-          <button class="MaterialBox" id="changeMatToWood"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 1.png"></button>
-          <button class="MaterialBox" id="changeMatToMetal"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 2.png"></button>
-          <button class="MaterialBox" id="changeMatToRuby"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 3.png"></button>
-          <button class="MaterialBox" id="changeMatToLog"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 5.png"></button>
-          <button class="MaterialBox" id="changeMatToSteel"><img class="mat" src="imgs\aditya-joshi-wG923J9naFQ-unsplash 6.png"></button>
-      </div>
-      
-      <div class="labelBar">
-        <div class="MLabeltext">Object Position</div>
-      </div>
-      <div class="ObjectPosition">
-
-        <div class="ObjPosCol">
-          <div class="boxLabel">
-            <input class="BoxButton" id="givenAngle" type="text" placeholder="0">
-            <div class="Mtext">Angle (Degrees)</div>
-          </div>
-          <div class="boxLabel">
-            <input class="BoxButton" id="yellowBarWidth" type="text" placeholder="0">
-            <div class="Mtext" id="yellowBarWidth">Width</div>
-          </div>
-        </div>
-
-        <div class="ObjPosCol">
-          <div class="boxLabel">
-            <input class="BoxButton" id="pivotPointBar" type="text" placeholder="0">
-            <div class="Mtext">Pivot Point Bar</div>
-          </div>
-          <div class="boxLabel">
-            <input class="BoxButton" id="arrowPoint" type="text" placeholder="0">
-            <div class="Mtext" id="">Force Point</div>
-          </div>
-        </div>
-
-      </div>
-      <div class="labelBar">
-        <div class="MLabeltext">Object Physics</div>
-      </div>
-      <div class="variables">
-        <div class="boxLabel pt1">
-          <input class="BoxButton" id="crossArea" type="text" placeholder="0">
-          <div class="Mtext">CS Area</div>
-        </div>
-        <div class="boxLabel pt1">
-          <input class="BoxButton" id="youngsModulus" type="text" placeholder="0">
-          <div class="Mtext">Young's Modulus</div>
-        </div>
-        <div class="boxLabel pt1">
-          <input class="BoxButton" id="arrowForce" type="text" placeholder="0">
-          <div class="Mtext">Force</div>
-        </div>
-      </div>
-
-
-      <div class="toggle-buttons">
-        <input type="checkbox" id="toggle" name="toggle"><span class="toggle-label">Toggle Data</span>
-        <input type="checkbox" id="force" name="force"> <span class="toggle-label">Force Data</span> 
-      </div> 
-
-      <img class="help" src="imgs/help.png">
-
-
-    </div> -->
-
   </div>
 
   <div id="button-container">
