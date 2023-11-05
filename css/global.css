@@ -23,7 +23,7 @@ header {
   background-color: var(--color-maroon);
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 78px;
 }
 
@@ -71,6 +71,7 @@ header {
   --color-black: #000;
   --color-maroon: #8a1538;
   --color-forestgreen: #00573F;
+  --color-lightforestgreen: #2B907E;
   --color-white: #fff;
   --color-dimgray-100: #747474;
   --color-dimgray-200: #595959;

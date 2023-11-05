@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Simulation</title>
 
   <!-- css files -->
   <link rel="stylesheet" href="./css/global.css"/>
   <link rel="stylesheet" href="./css/hamburger-menu.css"/>
-  <link rel="stylesheet" href="./css/materialselect.css"/>
   <link rel="stylesheet" href="./css/hanging-bar-sim.css"/>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
@@ -32,6 +31,59 @@
     <div id="canvas-container"></div>
 
     <div id="materialSelect">
+      <div id="tabSelect">
+        <button class="tab-link active"><img id="objectImg" src="imgs/objectSelect-icon.png"></button>
+        <button class="tab-link"><img id="snapImg" src="imgs/snapSelect-icon.png"></button>
+      </div>
+      <div id="objectSelect" class="tab">
+        <div class="label-bar">Type</div>
+        <div class="material-change-container">
+          <img class="material" src="imgs/wood.png" id="changeMatToWood" alt="Wood">
+          <img class="material" src="imgs/steel.png" id="changeMatToSteel" alt="Steel">
+          <img class="material" src="imgs/plastic.png" id="changeMatToRuby" alt="Plastic"> <!-- Should be Plastic -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToLog" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material" src="imgs/aluminum.png" id="changeMatToMetal" alt="Aluminum"> <!-- Should be Aluminum -->
+        </div>
+        <div class="label-bar">Object Position</div>
+        <div class="object-position-container">
+          <div class="attribute">
+            <input class="attribute-input" id="givenAngle" type="text" placeholder="0">
+            <div class="attribute-label">Angle (Degrees)</div>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="yellowBarWidth" type="text" placeholder="0">
+            <div class="attribute-label">Yellow Bar Width</div>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="pivotPointBar" type="text" placeholder="0">
+            <div class="attribute-label">Pivot Point Bar</div>
+          </div> 
+          <div class="attribute">
+            <input class="attribute-input" id="arrowPoint" type="text" placeholder="0">
+            <div class="attribute-label">Force Point</div>
+          </div> 
+        </div>
+        <div class="label-bar">Object Physics</div>
+        <div class="object-physics-container">
+          <div class="attribute">
+            <input class="attribute-input" id="crossArea" type="text" placeholder="0">
+            <div class="attribute-label">CS Area</div>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="youngsModulus" type="text" placeholder="0">
+            <div class="attribute-label">Young's Modulus</div>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="arrowForce" type="text" placeholder="0">
+            <div class="attribute-label">Force</div>
+          </div>
+        </div>
+
+      </div>
+    <div></div>
+
+    </div>
+    <!-- <div id="materialSelect">
 
       <div class="labelBar">
         <div class="MLabeltext">Material</div>
@@ -51,8 +103,8 @@
 
         <div class="ObjPosCol">
           <div class="boxLabel">
-            <input class="BoxButton" id="pivotPointWall" type="text" placeholder="0">
-            <div class="Mtext">Pivot Point Wall</div>
+            <input class="BoxButton" id="givenAngle" type="text" placeholder="0">
+            <div class="Mtext">Angle (Degrees)</div>
           </div>
           <div class="boxLabel">
             <input class="BoxButton" id="yellowBarWidth" type="text" placeholder="0">
@@ -99,7 +151,7 @@
       <img class="help" src="imgs/help.png">
 
 
-    </div>
+    </div> -->
 
   </div>
 

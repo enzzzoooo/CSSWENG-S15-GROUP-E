@@ -4,6 +4,7 @@ let youngsModulus;
 let arrowForce;
 let crossArea;
 let pivotPointWall;
+let givenAngle;
 let pivotPointBar;
 let arrowPoint;
 
@@ -23,6 +24,23 @@ function pythagorean(a, b) {
     return Math.sqrt(a * a + b * b)
 }
 
+function deflectionAtPoint(load, length, crossArea, elasticity, angle) {
+    let radians = toRadians(angle);
+    console.log("b: " + length);
+    console.log("P: " + load);
+    console.log("E: " + elasticity);
+    console.log("A: " + crossArea);
+    console.log("angle: " + angle);
+    return (load * length) / (crossArea*elasticity * Math.pow(Math.sin(radians),2) * Math.cos(radians));
+}
+
+function toRadians(angle) {
+    return angle * (Math.PI / 180);
+}
+
+function toDegrees(angle) {
+    return angle * (180 / Math.PI);
+}
 
 function internalHanging(lengthRope, upwardRope, distanceRope, downward, upward, distancesDown, distancesUp) {
     downwardForces = 0;
@@ -163,28 +181,46 @@ function setup() {
     youngsModulus = select('#youngsModulus');
     arrowForce = select('#arrowForce');
     crossArea = select('#crossArea');
-    pivotPointWall = select('#pivotPointWall');
+    
+    // pivotPointWall = select('#pivotPointWall');
+
+    givenAngle = select('#givenAngle');
+
     pivotPointBar = select('#pivotPointBar');
     arrowPoint = select('#arrowPoint');
     
-    
-    pivotPointWall.input(function() {
+    givenAngle.input(function () {
+        pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
+        
 
-        let temp = -(pivotPointWall.value()/20 - yellowBar.y);
-        if(temp < yellowBar.y){
+
+        let temp = -(pivotPointWall/20 - yellowBar.y);
+        if (temp < yellowBar.y){
             greyBar.y = temp
-            settings.ropeHeight = parseFloat(pivotPointWall.value());
+            settings.ropeHeight = parseFloat(pivotPointWall);
         } else {
             greyBar.y = yellowBar.y;
         }
-
-        // Debugging
-        // console.log("pivotPointWall: " + pivotPointWall.value());
-        // console.log("settings.ropeHeight: " + settings.ropeHeight);
-        // console.log("temp: " + temp);
-        // console.log("greyBar.y: " + greyBar.y);
-        // console.log("yellowBar.y: " + yellowBar.y);
     });
+
+
+    // pivotPointWall.input(function() {
+
+    //     let temp = -(pivotPointWall.value()/20 - yellowBar.y);
+    //     if(temp < yellowBar.y){
+    //         greyBar.y = temp
+    //         settings.ropeHeight = parseFloat(pivotPointWall.value());
+    //     } else {
+    //         greyBar.y = yellowBar.y;
+    //     }
+
+    //     // Debugging
+    //     // console.log("pivotPointWall: " + pivotPointWall.value());
+    //     // console.log("settings.ropeHeight: " + settings.ropeHeight);
+    //     // console.log("temp: " + temp);
+    //     // console.log("greyBar.y: " + greyBar.y);
+    //     // console.log("yellowBar.y: " + yellowBar.y);
+    // });
 
     pivotPointBar.input(function() {
         let temp = pivotPointBar.value()/20 + yellowBar.x - greyBar.x;
@@ -270,6 +306,14 @@ function changeDrawing() {
     greyBar.change = (yellowBar.change*greyBar.width/yellowBar.width)
     greyBar.animation = true;
 
+    deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value())
+ 
+
+    alert(
+        "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
+        "Deformation Grey: " + deformationGrey + "\n" + 
+        "Deflection at pointB: " + deflectionB
+        );
 }
 
 function resetDrawing() {
@@ -721,7 +765,7 @@ function draw() {
 
 
     // For interacting with elements outside the canvas
-    pivotPointWall.value(settings.ropeHeight);
+    givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
     pivotPointBar.value(settings.ropeDistance);
     yellowBarWidth.value(settings.yellowBarWidth);
     arrowPoint.value(forces[0][0].x * 20 - 3300);
