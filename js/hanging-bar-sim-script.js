@@ -147,14 +147,26 @@ function setup() {
     reset.addEventListener('click', resetDrawing);
 
     let toggle = document.getElementById('toggle');
-    toggle.addEventListener("change", function () {
+    toggle.addEventListener("click", function () {
         displayData = !displayData;
+        let toggleImg = document.getElementById('toggleImg');
+        if (toggleImg.src.includes('toggle-data-show')) {
+            toggleImg.src = 'imgs/toggle-data-hide.png';
+        } else {
+            toggleImg.src = 'imgs/toggle-data-show.png';
+        }
     });
 
 
     let forceButton = document.getElementById('force');
-    forceButton.addEventListener("change", function () {
+    forceButton.addEventListener("click", function () {
         displayForce = !displayForce;
+        let forceImg = document.getElementById('forceImg');
+        if (forceImg.src.includes('force-data-show')) {
+            forceImg.src = 'imgs/force-data-hide.png';
+        } else {
+            forceImg.src = 'imgs/force-data-show.png';
+        }
     });
 
 

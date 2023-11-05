@@ -24,13 +24,15 @@
 }
 
 #canvas-container {
+    position: relative;
     width: 822px;
     height: 534px;
-    border: 1px solid #000000;
     border-radius: 10px;
     margin: 0 19px 0 0;
-    top: 244px;
-    left: calc(100vw * 65 / 1440);
+}
+
+canvas {
+    border-radius: 10px;
 }
 
 #materialSelect {
@@ -143,26 +145,31 @@
     flex-wrap: wrap
 }
 
-.MaterialBox {
+#toggle,
+#force {
+    position: absolute;
     width: 62px;
     height: 62px;
-    padding: 0 0 0 0;
-    background-color: #D4D4D4;
-    margin: 0 16px 0 0;
+    left: 746px;
+    background-color: #b1b1b1;
+    border-radius: 30px;
+    border: none;
 }
 
-.mat {
-    width: 62px;
-    height: 62px;
+#toggle:hover,
+#force:hover {
+    background-color: #767676;
+    cursor: pointer;
 }
 
-.variables {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  margin: 0 22.8438px 0 22.8438px;
+#toggle {
+    top: 54px;
 }
+
+#force {
+    top: 134px;
+}
+
 
 #button-container {
     margin: 62px auto 0 auto;
@@ -195,21 +202,4 @@
 
 
 
-#canvas-container {
-    width: 822px;
-    height: 534px;
-    border: 1px solid #000000;
-    margin: 0 19px 0 0;
-    top: 244px;
-    left: calc(100vw * 65 / 1440);
-  
-}
 
-/* add this rule to zoom in and out */
-#canvas-container.zoom-in {
-    transform: scale(1.5); /* set the scale to zoom in */
-}
-
-#canvas-container.zoom-out {
-    transform: scale(0.5); /* set the scale to zoom out */
-}
