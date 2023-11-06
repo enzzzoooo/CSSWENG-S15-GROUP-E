@@ -91,6 +91,11 @@ canvas {
     margin: 6px 26px 5px 27px;
 }
 
+#resultsImg {
+    width: 30px;
+    height: 19.5px;
+    margin: 15px 29px 14.5px 30px;
+}
 
 .label-bar {
     justify-content: left;
@@ -103,6 +108,8 @@ canvas {
     font-family: var(--font-avenir);
     color: var(--color-white);
 }
+
+/* For the Object Tab */
 
 .material-change-container {
     width: 100%;
@@ -168,6 +175,21 @@ canvas {
     flex-wrap: wrap
 }
 
+/* For the Snap Tab */
+
+.interval-container {
+    margin: 7px 181px 0 89px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.interval-container.active {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+/* For the Results Tab */
+
 .results-wrapper {
     display: flex;
     margin: 9px 24px 0 19px;
@@ -194,6 +216,7 @@ canvas {
     margin: 0 0 0 13px;
 }
 
+/* Buttons inside the canvas */
 
 #toggle,
 #force {
@@ -220,6 +243,8 @@ canvas {
     top: 134px;
 }
 
+/* Buttons outside canvas */
+
 #button-container {
     margin: 62px auto 0 auto;
     width: 410px;
@@ -238,6 +263,8 @@ canvas {
     cursor: pointer;
 }
 
+
+/* idk what */
 .toggle-buttons {
   display: flex;
   position: absolute;

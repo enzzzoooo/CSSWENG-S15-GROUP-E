@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./css/global.css"/>
   <link rel="stylesheet" href="./css/hamburger-menu.css"/>
   <link rel="stylesheet" href="./css/hanging-bar-sim.css"/>
+  <link rel="stylesheet" href="./css/toggle-button.css"/>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
@@ -88,10 +89,17 @@
 
       <div id="snapTab" class="tab">
         <div class="label-bar">Snap</div>
-        <div class="attribute">
-          <input>
-          <div class="attribute-label">Enable Snap</div>
+        <div class="snap-wrapper">
+          <input type="checkbox" name="checkbox" id="snapToggle">
+          <label for="snapToggle" class="switch"></label>
+          <div class="snap-toggle-label">Enable Snap</div>
         </div> 
+        <div class="interval-container" id="intervalContainer">
+          <div class="attribute">
+            <input class="attribute-input" id="snapInterval" type="text" placeholder="0">
+            <label class="attribute-label" for="snapInterval">Snap Interval</label>
+          </div>
+        </div>
       </div>
 
       <div id="resultsTab" class="tab">

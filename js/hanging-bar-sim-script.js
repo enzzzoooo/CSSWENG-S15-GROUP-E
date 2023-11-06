@@ -156,6 +156,8 @@ function setup() {
         } else {
             toggleImg.src = 'imgs/toggle-data-show.png';
         }
+        console.log((greyBar.x + yellowBar.x + yellowBar.width) / 2)
+        console.log((greyBar.y + yellowBar.y) / 2 + 20)
     });
 
 
@@ -737,6 +739,15 @@ function draw() {
         translate(12, 0)
         curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
         resetMatrix()
+
+        // Added by Joseph
+        // Display angle between the two bars [SHOWING ANGULAR DATA][want to make curve but dk how...]
+        strokeWeight(0)
+        fill('black')
+        textAlign(CENTER)
+        let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
+        text(`Angle: ${angle.toFixed(2)}°`, (greyBar.x + yellowBar.x + yellowBar.width) / 2, (greyBar.y + yellowBar.y) / 2 + 20);
+        
     }
 
     if(displayData || heightChange || barChange){
@@ -802,6 +813,7 @@ exitButton.addEventListener('click', () => {
     window.location.href = "../index.html";
 });
 
+// Joseph
 // For Switching materials in the materialSelect
 const materialElements = document.querySelectorAll('.material');
 materialElements.forEach((element) => {
@@ -821,6 +833,7 @@ materialElements.forEach((element) => {
     });
 });
 
+// Joseph
 // For Switching the materialSelect tabs
 function openTabs(evt, tabName) {
     let i, tabContent, tabLinks;
@@ -837,3 +850,14 @@ function openTabs(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.classList.add("active");
   }
+
+// For disabling snap when off
+const snapCheckbox = document.getElementById('snapToggle');
+const intervalContainer = document.getElementById('intervalContainer');
+snapCheckbox.addEventListener('click', () => {
+    if (snapCheckbox.checked) {
+        intervalContainer.classList.add('active');
+    } else {
+        intervalContainer.classList.remove('active');
+    }
+});
