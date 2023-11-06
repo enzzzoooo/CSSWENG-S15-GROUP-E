@@ -24,6 +24,7 @@ function pythagorean(a, b) {
     return Math.sqrt(a * a + b * b)
 }
 
+// Added by Joseph
 function deflectionAtPoint(load, length, crossArea, elasticity, angle) {
     let radians = toRadians(angle);
     console.log("b: " + length);
@@ -303,6 +304,7 @@ function changeDrawing() {
 
     ropeLength = pythagorean(settings.ropeHeight, settings.ropeDistance)
     console.log(ropeLength)
+    // Changed by Joseph
     if (inputOfCrossArea == true) {
         deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, crossArea.value(), settings.greyRopeModulus);
     } else {
@@ -320,7 +322,11 @@ function changeDrawing() {
 
     deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value())
  
-
+    // Displaying Results
+    document.getElementById('forceCable').textContent = internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []).toFixed(4);
+    document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4);
+    document.getElementById('deflectionAtPointB').textContent = deflectionB.toFixed(4);
+    
     alert(
         "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
         "Deformation Grey: " + deformationGrey + "\n" + 
@@ -775,7 +781,7 @@ function draw() {
     // if (mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width && mouseY > yellowBar.y && mouseY < yellowBar.y + yellowBar.height) 
 
 
-
+    // Added by Joseph
     // For interacting with elements outside the canvas
     givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
     pivotPointBar.value(settings.ropeDistance);
@@ -796,7 +802,24 @@ exitButton.addEventListener('click', () => {
     window.location.href = "../index.html";
 });
 
-
+// For Switching materials in the materialSelect
+const materialElements = document.querySelectorAll('.material');
+materialElements.forEach((element) => {
+    element.addEventListener('click', () => {
+        let active;
+        if (element.classList.contains('active')) {
+            active = true;
+        }
+        materialElements.forEach((el) => {
+            el.classList.remove('active');
+        });
+        if (active == true) {
+            element.classList.remove('active');
+        } else {
+            element.classList.add('active');
+        }
+    });
+});
 
 // For Switching the materialSelect tabs
 function openTabs(evt, tabName) {

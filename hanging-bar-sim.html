@@ -36,11 +36,12 @@
 
     <div id="materialSelect">
       <div id="tabSelect">
-        <button class="tab-link active" onclick="openTabs(event, 'objectSelect')"><img id="objectImg" src="imgs/objectSelect-icon.png"></button>
-        <button class="tab-link" onclick="openTabs(event, 'snapSelect')"><img id="snapImg" src="imgs/snapSelect-icon.png"></button>
+        <button class="tab-link active" onclick="openTabs(event, 'objectTab')"><img id="objectImg" src="imgs/objectTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'snapTab')"><img id="snapImg" src="imgs/snapTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'resultsTab')"><img id="resultsImg" src="imgs/resultsTab-icon.png"></button>
       </div>
 
-      <div id="objectSelect" class="tab">
+      <div id="objectTab" class="tab">
         <div class="label-bar">Type</div>
         <div class="material-change-container">
           <img class="material" src="imgs/wood.png" id="changeMatToWood" alt="Wood">
@@ -53,41 +54,62 @@
         <div class="object-position-container">
           <div class="attribute">
             <input class="attribute-input" id="givenAngle" type="text" placeholder="0">
-            <div class="attribute-label">Angle (Degrees)</div>
+            <label class="attribute-label" for="givenAngle">Angle (Degrees)</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="yellowBarWidth" type="text" placeholder="0">
-            <div class="attribute-label">Yellow Bar Width</div>
+            <label class="attribute-label" for="yellowBarWidth">Yellow Bar Width</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="pivotPointBar" type="text" placeholder="0">
-            <div class="attribute-label">Pivot Point Bar</div>
+            <label class="attribute-label" for="pivotPointBar">Pivot Point Bar<label>
           </div> 
           <div class="attribute">
             <input class="attribute-input" id="arrowPoint" type="text" placeholder="0">
-            <div class="attribute-label">Force Point</div>
+            <label class="attribute-label" for="arrowPoint">Force Point</label>
           </div> 
         </div>
         <div class="label-bar">Object Physics</div>
         <div class="object-physics-container">
           <div class="attribute">
             <input class="attribute-input" id="crossArea" type="text" placeholder="0">
-            <div class="attribute-label">CS Area</div>
+            <label class="attribute-label" for="crossArea">CS Area</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="youngsModulus" type="text" placeholder="0">
-            <div class="attribute-label">Young's Modulus</div>
+            <label class="attribute-label" for="youngsModulus">Young's Modulus</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="arrowForce" type="text" placeholder="0">
-            <div class="attribute-label">Force</div>
+            <label class="attribute-label" for="arrowForce">Force</label>
           </div>
         </div>
       </div>
 
-      <div id="snapSelect" class="tab">
-        
-        
+      <div id="snapTab" class="tab">
+        <div class="label-bar">Snap</div>
+        <div class="attribute">
+          <input>
+          <div class="attribute-label">Enable Snap</div>
+        </div> 
+      </div>
+
+      <div id="resultsTab" class="tab">
+        <div class="label-bar">Results</div>
+        <div class="results-container">
+          <div class="results-wrapper">
+            <div class="result-output" id="forceCable"></div>
+            <div class="result-output-label">Force in the cable</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deformationCable"></div>
+            <div class="result-output-label">Deformation of the cable</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionAtPointB"></div>
+            <div class="result-output-label">Deflection of Pivot Point Bar</div>
+          </div>
+        </div>
       </div>
 
     </div>

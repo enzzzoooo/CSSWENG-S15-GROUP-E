@@ -71,6 +71,14 @@ canvas {
     background-color: var(--color-forestgreen);
 }
 
+.tab {
+    display: none;
+}
+
+#objectTab {
+    display: block;
+}
+
 #objectImg {
     width: 48px;
     height: 48px;
@@ -107,6 +115,16 @@ canvas {
 .material {
     width: 62px;
     height: 62px;
+    filter: brightness(50%);
+}
+
+.material:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+}
+
+.material.active {
+    filter: brightness(100%);
 }
 
 .object-position-container {
@@ -132,22 +150,50 @@ canvas {
     border: none;
     border-radius: 10px;
     margin: 0 12px 0 0;
+    text-align: center;
 }
 
 .attribute-label {
     font-family: var(--font-avenir);
-    font-size: 23px;
+    font-size: 20px;
     color: var(--color-black);
 }
 
 .object-physics-container {
     height: 116px;
     display: flex;
-    align-items: center;
+    margin: 15px 0 0 0;
     justify-content: space-evenly;
     align-content: stretch;
     flex-wrap: wrap
 }
+
+.results-wrapper {
+    display: flex;
+    margin: 9px 24px 0 19px;
+    align-items: center;
+}
+
+.result-output {
+    width: 146px;
+    height: 40px;
+    background-color: #B6B6B6;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-avenir);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-output-label {
+    font-family: var(--font-avenir);
+    font-size: 20px;
+    color: var(--color-black);
+    margin: 0 0 0 13px;
+}
+
 
 #toggle,
 #force {
@@ -173,7 +219,6 @@ canvas {
 #force {
     top: 134px;
 }
-
 
 #button-container {
     margin: 62px auto 0 auto;
