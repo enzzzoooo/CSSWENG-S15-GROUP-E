@@ -57,3 +57,12 @@ body {
 .l {
     opacity: .5;
 }
+
+/* For Text Animation */
+.lessonTxt {
+    transition: opacity 0.5s ease-in-out;
+}
+  
+.lessonTxt.hide {
+    opacity: 0;
+}
