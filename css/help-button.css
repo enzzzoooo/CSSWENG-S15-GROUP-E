@@ -1,0 +1,14 @@
+#helpText {
+  display: none;
+  position: absolute;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+  width: 222px;
+  height: 222px;
+  top: 485px;
+  left: 447.5px;
+}
+
+#helpText.show {
+  display: block;
+}
