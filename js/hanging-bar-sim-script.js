@@ -800,10 +800,11 @@ function draw() {
     arrowPoint.value(forces[0][0].x * 20 - 3300);
 
     if(inputOfCrossArea == false){
-        crossArea.value(squareCrossArea(greyBar.height/2));
+        crossArea.value(cylinderCrossArea(greyBar.height/2).toFixed(2));
     }
     youngsModulus.value(settings.greyRopeModulus);
     arrowForce.value(forces[0][1].y / 2);
+    
     
 }
 
