@@ -77,3 +77,31 @@ body {
 .lessonImgBox.hide {
     opacity: 0;
 }
+.m-1 {
+    margin-bottom: 0;
+}
+
+.halfTMargin mjx-container[jax="CHTML"][display="true"]{
+    margin-top: 0em;
+}
+
+.halfBMargin mjx-container[jax="CHTML"][display="true"]{
+    margin-bottom: 0.5em;
+}
+
+.pad {
+    padding-left: 1em;
+}
+
+.m05 {
+    margin-block: 1vw;
+}
+
+.actionText {
+    color: black;
+  text-decoration: none !important;
+}
+
+a:link {
+    text-decoration: none!important;
+}
