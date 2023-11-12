@@ -1,5 +1,6 @@
 body {
     min-width: 60em;
+    font-family: var(--font-avenir);
 }
 
 .lessonTitle {
@@ -15,11 +16,12 @@ body {
     height: 50vh;
     display: flex;
     font-family: var(--font-avenir);
+    justify-content: space-evenly;
 }
 
 .lessonImgBox {
-    width: 55%;
-    height: 100%;
+    width: 822px;
+    height: 534px;
     background-color: aliceblue;
 }
 
@@ -38,7 +40,7 @@ body {
 .lessonTxt {
     margin-left: 3%;
     width: 42%;
-    font-size: var(--font-size-4xl);
+    font-size: 28px;
 }
 
 .slider {
@@ -64,5 +66,14 @@ body {
 }
   
 .lessonTxt.hide {
+    opacity: 0;
+}
+
+/* For Image Animation */
+.lessonImgBox {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.lessonImgBox.hide {
     opacity: 0;
 }

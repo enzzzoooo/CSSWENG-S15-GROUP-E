@@ -1,6 +1,7 @@
 
 const rightButton = document.querySelector('.r');
 const leftButton = document.querySelector('.l');
+const slideImgBox = document.querySelector('.lessonImgBox');
 const slideImg = document.querySelector('.lessonImg');
 const slideTxt = document.querySelector('.lessonTxt');
 const slideNumTxt = document.querySelector('.slideNum');
@@ -14,9 +15,9 @@ const hangingBar = [
   `Following the same procedure in the previous discussion, let us
   draw first the free-body diagram of the rigid bar. Summing
   moments about point A,
-  𝑃𝐵 = 10 kN, T
-  3
-  The axial deformation of the cable can be computed as
+  𝑃𝐵 = 10 kN, T`,
+  
+  `The axial deformation of the cable can be computed as
   𝛿𝐵 =
   𝑃𝐿
   𝐴𝐸 =
@@ -178,8 +179,8 @@ AB, 𝛿𝐴𝐵,
 `In this lecture, the product of our analysis is equations that
 relate the deflection of a particular point in the system to the
 axial deformations of the members of the system. We will apply
-techniques from geometry in writing such equations.
-To further understand this example, you may modify the system
+techniques from geometry in writing such equations.`,
+`To further understand this example, you may modify the system
 by moving the point of application of the load or adding a
 second load. You may also change the properties of the bars
 (length, cross-sectional area, and material).
@@ -200,9 +201,10 @@ rightButton.addEventListener('click', () => {
       leftButton.style.opacity = 1;
     }
 
-    if (slideNum == compoundBar.length)
+    if (slideNum == hangingBar.length && lessonTitle == "Hanging Bar") 
       rightButton.style.opacity = .5;
-    
+    else if (slideNum == compoundBar.length && lessonTitle == "Compound Bar")
+      rightButton.style.opacity = .5;
   });
 
   leftButton.addEventListener('click', () => {
@@ -222,12 +224,20 @@ rightButton.addEventListener('click', () => {
     let lessonTitle = document.querySelector('.page-title').innerHTML;
     let lessonMap = lessons.get(lessonTitle);
     number--;
-    slideImg.src = `${lessonTitle}_${number}`
+    lessonTitle = lessonTitle.toLowerCase().replace(/\s+/g, '-');
+    slideImg.src = `./imgs/${lessonTitle}-lesson/${number+1}.png`
+
     
     // For animation
     slideTxt.classList.add('hide');
     setTimeout(function() {
       slideTxt.innerHTML = lessonMap[number]; 
       slideTxt.classList.remove('hide');
+      
     }, 500) // adjust this depending on css transition duration
   }
+
+// Hanging Bar specific
+if (document.querySelector('.page-title').innerHTML == "Hanging Bar" && slideNumTxt.innerHTML == 4) {
+
+}
