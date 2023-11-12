@@ -23,6 +23,7 @@ body {
     width: 822px;
     height: 534px;
     background-color: aliceblue;
+    position: relative;
 }
 
 .labelBar {
@@ -76,4 +77,24 @@ body {
 
 .lessonImgBox.hide {
     opacity: 0;
+}
+
+/* Inside Canvas Arrows */
+
+#imageLeft {
+    position: absolute;
+    width: 27.35px;
+    height: 30px;
+    top: 302px;
+    left: 20px;
+    display: none;  
+}
+
+#imageRight {
+    position: absolute;
+    width: 27.35px;
+    height: 30px;
+    top: 277px;
+    left: 775px;
+    display: none;
 }

@@ -235,9 +235,30 @@ rightButton.addEventListener('click', () => {
       slideTxt.classList.remove('hide');
       
     }, 500) // adjust this depending on css transition duration
+
+    showCanvasArrows();
   }
 
-// Hanging Bar specific
-if (document.querySelector('.page-title').innerHTML == "Hanging Bar" && slideNumTxt.innerHTML == 4) {
 
+// Hanging Bar specific
+function showCanvasArrows () {
+  const leftArrow = document.querySelector('#imageLeft');
+  const rightArrow = document.querySelector('#imageRight');  
+  if (document.querySelector('.page-title').innerHTML == "Hanging Bar" && slideNumTxt.innerHTML == 4) {
+    rightArrow.style.display = 'block';
+    leftArrow.addEventListener('click', () => {
+      slideImg.src = `./imgs/hanging-bar-lesson/4.png`
+      leftArrow.style.display = 'none';
+      rightArrow.style.display = 'block';
+    });
+
+    rightArrow.addEventListener('click', () => {
+      slideImg.src = `./imgs/hanging-bar-lesson/4_2.png`
+      rightArrow.style.display = 'none';
+      leftArrow.style.display = 'block';
+    });
+  } else {
+    leftArrow.style.display = 'none';
+    rightArrow.style.display = 'none';
+  }
 }
