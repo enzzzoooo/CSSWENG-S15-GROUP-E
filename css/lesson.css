@@ -40,6 +40,7 @@ body {
 }
 
 .lessonTxt-container {
+    min-width: 18.75em;
     margin-left: 3%;
     width: 42%;
     font-size: 25px;
@@ -48,13 +49,12 @@ body {
 }
 
 .lessonTxt {
-
 }
 
 .slider {
     width: 10em;
     margin-inline: auto;
-    margin-top: 10em;
+    margin-top: 5em;
     display: flex;
     align-items: center;
     justify-content: space-around;

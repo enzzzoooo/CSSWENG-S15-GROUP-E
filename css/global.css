@@ -57,6 +57,10 @@ header {
   font-family: var(--font-optima);
 }
 
+.lezzon.page-title{
+  margin: 19px auto 30px auto;
+}
+
 :root {
   /* fonts */
   --font-optima: 'Optima';
