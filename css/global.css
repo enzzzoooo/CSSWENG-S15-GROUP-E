@@ -84,3 +84,9 @@ header {
   --br-6xl: 25px;
   --br-8xs: 5px;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
