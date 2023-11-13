@@ -26,14 +26,14 @@ function pythagorean(a, b) {
 }
 
 // Added by Joseph
-function deflectionAtPoint(load, length, crossArea, elasticity, angle) {
+function deflectionAtPoint(load, length, crossArea, elasticity, angle, ropeDistance, calcDistance) {
     let radians = toRadians(angle);
     console.log("b: " + length);
     console.log("P: " + load);
     console.log("E: " + elasticity);
     console.log("A: " + crossArea);
     console.log("angle: " + angle);
-    return (load * length) / (crossArea*elasticity * Math.pow(Math.sin(radians),2) * Math.cos(radians));
+    return (load * length) / (ropeDistance * crossArea * elasticity * Math.pow(Math.sin(radians),2) * Math.cos(radians)) * calcDistance;
 }
 
 function toRadians(angle) {
@@ -275,14 +275,14 @@ function setup() {
         // console.log("yellowbarwidth: " + yellowBarWidth.value());
         // console.log("settings.yellowBarWidth: " + settings.yellowBarWidth);
         // console.log("yellowBar.width: " + yellowBar.width);
-        settings.yellowBarWidth = yellowBarWidth.value();
+        settings.yellowBarWidth = parseFloat(yellowBarWidth.value());
         yellowBar.width = settings.yellowBarWidth / 20;
         updateForces();
     });
 
     arrowPoint.input(function() {
-        forces[0][0].x = arrowPoint.value()/20 + yellowBar.x;
-        settings.angleDistance = arrowPoint.value();
+        forces[0][0].x = parseFloat(arrowPoint.value())/20 + yellowBar.x;
+        settings.angleDistance = parseFloat(arrowPoint.value());
     });
 
     crossArea.input(function () {
@@ -294,11 +294,15 @@ function setup() {
     });
 
     youngsModulus.input(function () {
-        settings.greyRopeModulus = youngsModulus.value();
+        settings.greyRopeModulus = parseFloat(youngsModulus.value());
     });
 
     arrowForce.input(function() {
-        forces[0][1].y = arrowForce.value() * 2;
+        if(arrowForce.value() > 0){
+            forces[0][1].y = parseFloat(arrowForce.value()) * 2;
+        } else {
+            forces[0][1].y = 0;
+        }
     });
 
 
@@ -323,33 +327,37 @@ function changeDrawing() {
     ropeLength = pythagorean(settings.ropeHeight, settings.ropeDistance)
     console.log(ropeLength)
     // Changed by Joseph
-    if (inputOfCrossArea == true) {
-        deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, crossArea.value(), settings.greyRopeModulus);
-    } else {
-        deformationGrey = deformation(internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []), ropeLength, cylinderCrossArea(greyBar.height/2), settings.greyRopeModulus);
-    }
+    ropeForce = internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, [])
+    deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), settings.greyRopeModulus);
     console.log("Cross Area: " + crossArea.value())
-    console.log("Cross Area: " + cylinderCrossArea(greyBar.height/2))
     console.log(deformationGrey)
-    yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey * 20;
+    yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey;
     console.log(yellowBar.change)
     yellowBar.animation = true;
 
     greyBar.change = (yellowBar.change*greyBar.width/yellowBar.width)
     greyBar.animation = true;
 
-    deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value())
-
+    deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value(), settings.ropeDistance, settings.ropeDistance)
+    deflectionForce = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value(), settings.ropeDistance, settings.angleDistance)
     // Displaying Results
-    document.getElementById('forceCable').textContent = internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []).toFixed(4);
+    document.getElementById('forceCable').textContent = ropeForce.toFixed(4);
     document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4);
     document.getElementById('deflectionAtPointB').textContent = deflectionB.toFixed(4);
+    document.getElementById('deflectionAtPointEnd').textContent = (yellowBar.change).toFixed(4);
+    document.getElementById('deflectionAtPointForce').textContent = deflectionForce.toFixed(4);
 
-    alert(
-        "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
-        "Deformation Grey: " + deformationGrey + "\n" +
-        "Deflection at pointB: " + deflectionB
-        );
+    warning = false;
+
+    if (!warning){
+        alert(
+            "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
+            "Deformation Grey: " + deformationGrey + "\n" +
+            "Deflection at pivot point: " + deflectionB + "\n" +
+            "Deflection at end of bar: " + (yellowBar.change) + "\n" +
+            "Deflection at force point: " + deflectionForce
+            );
+    }
 }
 
 function resetDrawing() {
@@ -376,7 +384,7 @@ function updateForces(){
         }
         if(force[0].x > yellowBar.x + yellowBar.width){
             force[0].x = yellowBar.x + yellowBar.width
-            settings.angleDistance = Math.round(force[0].x - 165 * 20 / settings.snapValue) * settings.snapValue
+            settings.angleDistance = settings.yellowBarWidth
         }
     });
 
@@ -728,7 +736,7 @@ function draw() {
         strokeWeight(0)
         fill('black')
         translate(yellowBar.x + yellowBar.width, yellowBar.y)
-        text((yellowBar.change/20).toFixed(2) + 'mm', 25, yellowBar.change/2 + 5);
+        text((yellowBar.change).toFixed(2) + 'mm', 25, yellowBar.change/2 + 5);
         strokeWeight(1.5)
         curlyBracket(yellowBar.change)
     }
@@ -775,7 +783,7 @@ function draw() {
         fill('black')
         textAlign(CENTER)
         let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
-        text(`Angle: ${angle.toFixed(2)}°`, yellowBar.x + greyBar.width, (greyBar.y + yellowBar.y) / 2 + 20);
+        text(`Angle: ${angle.toFixed(2)}°`, yellowBar.x + greyBar.width, yellowBar.y - 50);
         strokeWeight(2)
         fill(255, 0, 0, 0);
         arc(greyBar.x + greyBar.width, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
