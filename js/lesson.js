@@ -65,16 +65,26 @@ function showCanvasArrows () {
   const rightArrow = document.querySelector('#imageRight');  
   if (document.querySelector('.page-title').innerHTML == "Hanging Bar" && slideNumTxt.innerHTML == 4) {
     rightArrow.style.display = 'block';
+    leftArrow.style.display = 'block';
+    rightArrow.style.cursor = "pointer";
+    leftArrow.style.cursor = "default";
+    rightArrow.style.opacity = 1;
+    leftArrow.style.opacity = 0;
+    
     leftArrow.addEventListener('click', () => {
       slideImg.src = `./imgs/hanging-bar-lesson/4.png`
-      leftArrow.style.display = 'none';
-      rightArrow.style.display = 'block';
+      leftArrow.style.opacity = 0;
+      leftArrow.style.cursor = "default";
+      rightArrow.style.opacity = 1;
+      rightArrow.style.cursor = "pointer";
     });
 
     rightArrow.addEventListener('click', () => {
       slideImg.src = `./imgs/hanging-bar-lesson/4_2.png`
-      rightArrow.style.display = 'none';
-      leftArrow.style.display = 'block';
+      rightArrow.style.opacity = 0;
+      rightArrow.style.cursor = "default";
+      leftArrow.style.opacity = 1;
+      leftArrow.style.cursor = "pointer";
     });
   } else {
     leftArrow.style.display = 'none';
