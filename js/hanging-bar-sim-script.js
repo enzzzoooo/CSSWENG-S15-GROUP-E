@@ -7,6 +7,7 @@ let pivotPointWall;
 let givenAngle;
 let pivotPointBar;
 let arrowPoint;
+let snapInput;
 
 function deformation(load, length, crossArea, elasticity) {
     return (load * length) / (crossArea * elasticity)
@@ -83,7 +84,9 @@ let settings = {
     ropeHeight: 3000,
     ropeDistance: 4000,
     yellowBarWidth: 6000,
-    greyRopeModulus: 200
+    greyRopeModulus: 200,
+    snapValue: 50,
+    angleDistance: 6000
 }
 
 // wall
@@ -196,17 +199,19 @@ function setup() {
     youngsModulus = select('#youngsModulus');
     arrowForce = select('#arrowForce');
     crossArea = select('#crossArea');
-    
+
     // pivotPointWall = select('#pivotPointWall');
 
     givenAngle = select('#givenAngle');
 
     pivotPointBar = select('#pivotPointBar');
     arrowPoint = select('#arrowPoint');
-    
+
+    snapInput = select('#snapInterval');
+
     givenAngle.input(function () {
         pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
-        
+
 
 
         let temp = -(pivotPointWall/20 - yellowBar.y);
@@ -215,6 +220,16 @@ function setup() {
             settings.ropeHeight = parseFloat(pivotPointWall);
         } else {
             greyBar.y = yellowBar.y;
+        }
+    });
+
+    snapInput.input(function () {
+        console.log("snapInput: " + snapInput.value());
+        settings.snapValue = snapInput.value();
+        console.log("settings.snapValue: " + settings.snapValue);
+
+        if(settings.snapValue == 0) {
+            settings.snapValue = 1;
         }
     });
 
@@ -246,7 +261,7 @@ function setup() {
         } else {
             greyBar.width = yellowBar.x;
         }
-        
+
         // Debugging
         // console.log("pivotPointBar: " + pivotPointBar.value());
         // console.log("settings.ropeDistance: " + settings.ropeDistance);
@@ -265,8 +280,9 @@ function setup() {
         updateForces();
     });
 
-    arrowPoint.input(function() {     
+    arrowPoint.input(function() {
         forces[0][0].x = arrowPoint.value()/20 + yellowBar.x;
+        settings.angleDistance = arrowPoint.value();
     });
 
     crossArea.input(function () {
@@ -275,7 +291,7 @@ function setup() {
         } else {
             inputOfCrossArea = false;
         }
-    });    
+    });
 
     youngsModulus.input(function () {
         settings.greyRopeModulus = youngsModulus.value();
@@ -286,7 +302,7 @@ function setup() {
     });
 
 
-    
+
 }
 
 let deformationGrey = 0;
@@ -298,7 +314,7 @@ function changeDrawing() {
 
     forces.forEach(force => {
         downward.push(parseFloat((force[1].y/2).toFixed(1)))
-        downwardDistances.push((force[0].x - yellowBar.x)*20)
+        downwardDistances.push(settings.angleDistance)
     });
     console.log(downward)
     console.log(downwardDistances)
@@ -323,15 +339,15 @@ function changeDrawing() {
     greyBar.animation = true;
 
     deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value())
- 
+
     // Displaying Results
     document.getElementById('forceCable').textContent = internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []).toFixed(4);
     document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4);
     document.getElementById('deflectionAtPointB').textContent = deflectionB.toFixed(4);
-    
+
     alert(
         "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
-        "Deformation Grey: " + deformationGrey + "\n" + 
+        "Deformation Grey: " + deformationGrey + "\n" +
         "Deflection at pointB: " + deflectionB
         );
 }
@@ -360,6 +376,7 @@ function updateForces(){
         }
         if(force[0].x > yellowBar.x + yellowBar.width){
             force[0].x = yellowBar.x + yellowBar.width
+            settings.angleDistance = Math.round(force[0].x - 165 * 20 / settings.snapValue) * settings.snapValue
         }
     });
 
@@ -508,10 +525,10 @@ function draw() {
         });
 
         forces.forEach(force => {
-            if(dist(mouseX, mouseY, force[0].x, force[0].y + force[1].y + 15) < 5){
+            if(dist(mouseX, mouseY, force[0].x, force[0].y + force[1].y + 15) < 10){
                 strokeWeight(0)
                 fill(255, 255, 200, 175);
-                circle(force[0].x, force[0].y + force[1].y + 15, 10);
+                circle(force[0].x, force[0].y + force[1].y + 15, 25);
                 if(mouseIsPressed & !active){
                     force[3] = true;
                     active = true;
@@ -519,7 +536,7 @@ function draw() {
             }
 
             if(mouseX > force[0].x - 7.5 && mouseX < force[0].x + 7.5 &&
-                mouseY > force[0].y + 10 && mouseY < force[0].y + force[1].y){
+                mouseY > force[0].y + 10 && mouseY < force[0].y + force[1].y - 10){
                 drawArrow(force[0], force[1], 'tomato');
                 strokeWeight(0)
                 fill(255, 255, 200, 175);
@@ -531,11 +548,14 @@ function draw() {
             if(force[4]){
                 drawArrow(force[0], force[1], 'orangered');
                 if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
-                    force[0].x = mouseX
+                    force[0].x = mouseX;
+                    settings.angleDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
                 } else if (mouseX > yellowBar.x + yellowBar.width){
                     force[0].x = yellowBar.x + yellowBar.width
+                    settings.angleDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
                 } else if (mouseX < yellowBar.x){
                     force[0].x = yellowBar.x
+                    settings.angleDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
                 }
             }
 
@@ -550,7 +570,7 @@ function draw() {
                 translate(yellowBar.x, yellowBar.y)
                 angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
                 rotate(angular);
-                text((dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y)*20).toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
+                text(settings.angleDistance.toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
                 strokeWeight(1.5)
                 rotate(-90)
                 translate(0, 0)
@@ -569,7 +589,7 @@ function draw() {
             if (force[3]){
                 strokeWeight(0);
                 fill(255, 255, 200, 250);
-                    circle(force[0].x, force[0].y + force[1].y + 15, 10);
+                    circle(force[0].x, force[0].y + force[1].y + 15, 25);
                 if(mouseY > yellowBar.y + 15){
                     force[1] = createVector(0, -(force[0].y - mouseY + 15))
                 } if(mouseY < yellowBar.y + 15){
@@ -598,10 +618,13 @@ function draw() {
             circle(greyBar.x, greyBar.y, 24);
             if(mouseY < yellowBar.y){
                 greyBar.y = mouseY;
-                settings.ropeHeight = dist(yellowBar.x, mouseY, yellowBar.x, yellowBar.y) * 20;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, mouseY, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             } else if(mouseY > yellowBar.y){
                 greyBar.y = yellowBar.y;
                 settings.ropeHeight = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+            } if(mouseY < 15) {
+                greyBar.y = 15;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, greyBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             }
         }
 
@@ -622,13 +645,13 @@ function draw() {
             circle(greyBar.x + greyBar.width, yellowBar.y, 24);
             if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
                 greyBar.width = mouseX - yellowBar.x;
-                settings.ropeDistance = dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+                settings.ropeDistance = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             } else if(mouseX < yellowBar.x){
                 greyBar.width = 0;
                 settings.ropeDistance = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
             } else if(mouseX > yellowBar.x + yellowBar.width){
                 greyBar.width = yellowBar.width;
-                settings.ropeDistance = dist(yellowBar.x + yellowBar.width, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+                settings.ropeDistance = settings.yellowBarWidth
             }
         }
 
@@ -649,7 +672,7 @@ function draw() {
             circle(yellowBar.x, yellowBar.y, 29);
             if(mouseY > greyBar.y && mouseY < 350){
                 yellowBar.y = mouseY;
-                settings.ropeHeight = dist(yellowBar.x, mouseY, greyBar.x, greyBar.y) * 20;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, mouseY, greyBar.x, greyBar.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
             } else if(mouseY < greyBar.y){
                 yellowBar.y = greyBar.y;
@@ -657,7 +680,7 @@ function draw() {
                 updateForces();
             } if(mouseY > 350){
                 yellowBar.y = 350;
-                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, greyBar.x, greyBar.y) * 20;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, greyBar.x, greyBar.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
             }
         }
@@ -676,15 +699,21 @@ function draw() {
             strokeWeight(0);
             fill(255, 200, 90, 255);
             circle(yellowBar.x + yellowBar.width, yellowBar.y, 15);
-            if(mouseX > greyBar.x + greyBar.width){
+            if(Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue > 10000){
+                yellowBar.width = (10000 / 20);
+                settings.yellowBarWidth = 10000;
+            }
+            else if(mouseX > greyBar.x + greyBar.width){
                 yellowBar.width = mouseX - yellowBar.x;
-                settings.yellowBarWidth = dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+                settings.yellowBarWidth = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
             } else if(mouseX < greyBar.x + greyBar.width){
                 yellowBar.width = greyBar.width;
-                settings.yellowBarWidth = dist(greyBar.x + greyBar.width, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
+                settings.yellowBarWidth = settings.ropeDistance
                 updateForces();
             }
+
+
         }
 
 
@@ -715,7 +744,7 @@ function draw() {
         angular = atan2(yellowBar.y+(yellowBar.change*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
         translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change*easing(t)))
         rotate(angular);
-        text((yellowBar.width*20).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
+        text((settings.yellowBarWidth).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
         strokeWeight(1.5)
         translate(0, 0)
         rotate(90)
@@ -746,8 +775,11 @@ function draw() {
         fill('black')
         textAlign(CENTER)
         let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
-        text(`Angle: ${angle.toFixed(2)}°`, (greyBar.x + yellowBar.x + yellowBar.width) / 2, (greyBar.y + yellowBar.y) / 2 + 20);
-        
+        text(`Angle: ${angle.toFixed(2)}°`, yellowBar.x + greyBar.width, (greyBar.y + yellowBar.y) / 2 + 20);
+        strokeWeight(2)
+        fill(255, 0, 0, 0);
+        arc(greyBar.x + greyBar.width, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
+        fill('black')
     }
 
     if(displayData || heightChange || barChange){
@@ -789,7 +821,7 @@ function draw() {
 
 
     // // Hover feature Test
-    // if (mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width && mouseY > yellowBar.y && mouseY < yellowBar.y + yellowBar.height) 
+    // if (mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width && mouseY > yellowBar.y && mouseY < yellowBar.y + yellowBar.height)
 
 
     // Added by Joseph
@@ -797,15 +829,16 @@ function draw() {
     givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
     pivotPointBar.value(settings.ropeDistance);
     yellowBarWidth.value(settings.yellowBarWidth);
-    arrowPoint.value(forces[0][0].x * 20 - 3300);
+    arrowPoint.value(settings.angleDistance);
 
     if(inputOfCrossArea == false){
         crossArea.value(cylinderCrossArea(greyBar.height/2).toFixed(2));
     }
     youngsModulus.value(settings.greyRopeModulus);
     arrowForce.value(forces[0][1].y / 2);
-    
-    
+    snapInput.value(settings.snapValue);
+
+
 }
 
 // For Exit button
@@ -859,6 +892,7 @@ snapCheckbox.addEventListener('click', () => {
     if (snapCheckbox.checked) {
         intervalContainer.classList.add('active');
     } else {
+        settings.snapValue = 1;
         intervalContainer.classList.remove('active');
     }
 });

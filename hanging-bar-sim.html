@@ -27,12 +27,12 @@
     </div>
   </header>
 
-  <div class="page-title">Simulation</div>  
+  <div class="page-title">Simulation</div>
 
-  <div class="main-container"> 
+  <div class="main-container">
     <div id="canvas-container">
-      <button id="toggle"><img id="toggleImg" src="imgs/toggle-data-show.png"></button>
-      <button id="force"><img id="forceImg" src="imgs/force-data-show.png"></button>
+      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-show.png"></button>
+      <button id="force"><img id="forceImg" src="./imgs/force-data-show.png"></button>
 
     </div>
 
@@ -65,11 +65,11 @@
           <div class="attribute">
             <input class="attribute-input" id="pivotPointBar" type="text" placeholder="0">
             <label class="attribute-label" for="pivotPointBar">Pivot Point Bar<label>
-          </div> 
+          </div>
           <div class="attribute">
             <input class="attribute-input" id="arrowPoint" type="text" placeholder="0">
             <label class="attribute-label" for="arrowPoint">Force Point</label>
-          </div> 
+          </div>
         </div>
         <div class="label-bar">Object Physics</div>
         <div class="object-physics-container">
@@ -91,11 +91,11 @@
       <div id="snapTab" class="tab">
         <div class="label-bar">Snap</div>
         <div class="snap-wrapper">
-          <input type="checkbox" name="checkbox" id="snapToggle">
+          <input type="checkbox" name="checkbox" id="snapToggle" checked>
           <label for="snapToggle" class="switch"></label>
           <div class="snap-toggle-label">Enable Snap</div>
-        </div> 
-        <div class="interval-container" id="intervalContainer">
+        </div>
+        <div class="interval-container active" id="intervalContainer">
           <div class="attribute">
             <input class="attribute-input" id="snapInterval" type="text" placeholder="0">
             <label class="attribute-label" for="snapInterval">Snap Interval</label>
@@ -148,8 +148,8 @@
     </div>
   </div>
 
-  <script src="js/hamburger-menu-modal.js"></script>
-  <script src="js/hanging-bar-sim-script.js"></script>
-  <script src="js/help-button.js"></script>
+  <script src="./js/hamburger-menu-modal.js"></script>
+  <script src="./js/hanging-bar-sim-script.js"></script>
+  <script src="./js/help-button.js"></script>
 </body>
 </html>
