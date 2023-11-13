@@ -180,8 +180,8 @@ by moving the point of application of the load or adding a
 second load. You may also change the properties of the bars
 (length, cross-sectional area, and material).
 <div class="flex-center m05">
-  <a class="flex-center" href="lesson-picker.html">
-    <img src="imgs/tryNow.png"><strong class="actionText pad">Try it now!</strong></a>
+  <a class="flex-center" href="./extending-bar-sim.html">
+    <img src="imgs/tryNow.png" id="simButton"><strong class="actionText pad">Try it now!</strong></a>
 </div>
 Alternatively, you may proceed to the next discussion.
 <div class="flex-center m05">
