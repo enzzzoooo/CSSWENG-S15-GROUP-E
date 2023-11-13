@@ -46,7 +46,7 @@ header {
 }
 
 .page-title{
-  margin: 19px auto 0 auto;
+  margin: 19px auto 75px auto;
   width: 886px;
   height: 128px;
   display: flex;
@@ -55,6 +55,10 @@ header {
   font-size: 48px;
   color: var(--color-black);
   font-family: var(--font-optima);
+}
+
+.lezzon.page-title{
+  margin: 19px auto 30px auto;
 }
 
 :root {
