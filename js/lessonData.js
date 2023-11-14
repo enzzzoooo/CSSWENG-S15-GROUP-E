@@ -61,7 +61,7 @@ const hangingBar = [
     properties of the cable (length, cross-sectional area, and
     material).
     <div class="flex-center m05">
-      <a class="flex-center" href="lesson-picker.html">
+      <a class="flex-center" href="hanging-bar-sim.html">
         <img src="imgs/tryNow.png"><strong class="actionText pad">Try it now!</strong></a>
     </div>
     If you have understood well the discussion, test your
@@ -115,7 +115,7 @@ const hangingBar = [
   second load. You may also change the properties of the bars
   (length, cross-sectional area, and material).
   <div class="flex-center m05">
-    <a class="flex-center" href="lesson-picker.html">
+    <a class="flex-center" href="extending-bar-sim.html">
       <img src="imgs/tryNow.png"><strong class="actionText pad">Try it now!</strong></a>
   </div>
   Alternatively, you may proceed to the next discussion.
