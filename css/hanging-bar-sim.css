@@ -229,7 +229,8 @@ canvas {
 /* Buttons inside the canvas */
 
 #toggle,
-#force {
+#force,
+#add {
     position: absolute;
     width: 62px;
     height: 62px;
@@ -240,7 +241,8 @@ canvas {
 }
 
 #toggle:hover,
-#force:hover {
+#force:hover,
+#add:hover {
     background-color: #767676;
     cursor: pointer;
 }
@@ -251,6 +253,10 @@ canvas {
 
 #force {
     top: 134px;
+}
+
+#add {
+    top: 214px;
 }
 
 /* Buttons outside canvas */
@@ -265,7 +271,7 @@ canvas {
     justify-content: space-around;
     align-items: center;
 }
-    
+
 #reset-drawing:hover,
 #change-drawing:hover,
 #exit-button:hover {
