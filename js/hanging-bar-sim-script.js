@@ -353,9 +353,16 @@ function changeDrawing() {
     console.log(atan2(yellowBar.change, settings.yellowBarWidth) > 5);
 
     if (atan2(yellowBar.change, settings.yellowBarWidth) > 5){
-        alert(
-            "Too much deflection. Since the angle generated from the force is greater than 5°, this simulation does not have accurate values. Take the results with that in mind."
-        )
+        const popupText = document.getElementById('popup-text');
+        popupText.textContent = "Too much deflection. Since the angle generated from the force is greater than 5°, this simulation does not have accurate values. Take the results with that in mind.";
+
+        const popup = document.getElementById('sim-error-popup-wrapper');
+        popup.style.display = 'flex';
+
+        const exitButton = document.getElementById('close-error-popup');
+        exitButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
     }
 
     alert(

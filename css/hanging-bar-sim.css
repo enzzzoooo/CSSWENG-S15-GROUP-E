@@ -191,6 +191,8 @@ canvas {
 /* For the Results Tab */
 
 .results-wrapper {
+    width: 419px;
+    height: 40px;
     display: flex;
     margin: 9px 24px 0 19px;
     align-items: center;
@@ -210,10 +212,11 @@ canvas {
 }
 
 .result-output-label {
+    width: 258.08px;
     font-family: var(--font-avenir);
     font-size: 20px;
     color: var(--color-black);
-    margin: 0 0 0 13px;
+    margin: 0 0 0 13.6px;
 }
 
 /* Help button inside the material select */
@@ -291,7 +294,67 @@ canvas {
     font-family: var(--font-avenir);
 }
 
+/* Error Popup */
 
 
 
+#sim-error-popup-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-avenir);
+}
+
+#sim-error-popup {
+    width: 465px;
+    height: 265px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+#popup-title-wrapper{
+    position: relative;
+    width: 100%;
+    height: 57px;
+    background-color: var(--color-maroon);
+    border-radius: 10px 10px 0 0 ;
+    font-size: 33px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#close-error-popup {
+    position: absolute;
+    top: 13px;
+    left: 414px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+#popup-text-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 208px;
+}
+
+#popup-text {
+    width: 411px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: #000000;
+    text-align: center;
+}
 
