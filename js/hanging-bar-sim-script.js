@@ -341,23 +341,30 @@ function changeDrawing() {
     deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value(), settings.ropeDistance, settings.ropeDistance)
     deflectionForce = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value(), settings.ropeDistance, settings.angleDistance)
     // Displaying Results
-    document.getElementById('forceCable').textContent = ropeForce.toFixed(4);
-    document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4);
-    document.getElementById('deflectionAtPointB').textContent = deflectionB.toFixed(4);
-    document.getElementById('deflectionAtPointEnd').textContent = (yellowBar.change).toFixed(4);
-    document.getElementById('deflectionAtPointForce').textContent = deflectionForce.toFixed(4);
+    document.getElementById('forceCable').textContent = ropeForce.toFixed(4) + 'kN';
+    document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4) + 'mm';
+    document.getElementById('deflectionAtPointB').textContent = deflectionB.toFixed(4) + 'mm';
+    document.getElementById('deflectionAtPointEnd').textContent = (yellowBar.change).toFixed(4) + 'mm';
+    document.getElementById('deflectionAtPointForce').textContent = deflectionForce.toFixed(4) + 'mm';
+    document.getElementById('angleBar').textContent = atan2(yellowBar.change, settings.yellowBarWidth).toFixed(2) + '°';
 
     warning = false;
+    console.log(atan2(yellowBar.change, settings.yellowBarWidth));
+    console.log(atan2(yellowBar.change, settings.yellowBarWidth) > 5);
 
-    if (!warning){
+    if (atan2(yellowBar.change, settings.yellowBarWidth) > 5){
         alert(
-            "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
-            "Deformation Grey: " + deformationGrey + "\n" +
-            "Deflection at pivot point: " + deflectionB + "\n" +
-            "Deflection at end of bar: " + (yellowBar.change) + "\n" +
-            "Deflection at force point: " + deflectionForce
-            );
+            "Too much deflection. Since the angle generated from the force is greater than 5°, this simulation does not have accurate values. Take the results with that in mind."
+        )
     }
+
+    alert(
+        "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
+        "Deformation Grey: " + deformationGrey + "\n" +
+        "Deflection at pivot point: " + deflectionB + "\n" +
+        "Deflection at end of bar: " + (yellowBar.change) + "\n" +
+        "Deflection at force point: " + deflectionForce
+        );
 }
 
 function resetDrawing() {
@@ -487,23 +494,23 @@ function draw() {
     strokeWeight(yellowBar.height/3);
     if(yellowBar.animation && t < 1){
         t += 0.035
-        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change*easing(t)))
+        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/10*easing(t)))
     } else {
         stroke(yellowBar.color + '80');
         line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y)
         stroke(yellowBar.color);
-        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+yellowBar.change)
+        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/10))
     }
 
     stroke(greyBar.color);
     strokeWeight(greyBar.height/3);
     if(greyBar.animation && t < 1){
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change*easing(t)))
+        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change/10*easing(t)))
     } else {
         stroke(greyBar.color + '80');
         line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y))
         stroke(greyBar.color)
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change)
+        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change/10))
     }
 
     strokeWeight(1);
@@ -512,14 +519,14 @@ function draw() {
     circle(yellowBar.x, yellowBar.y, 30)
     circle(greyBar.x, greyBar.y, 25)
     if(greyBar.animation && t < 1){
-        circle(greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change*easing(t), 25)
+        circle(greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change/10*easing(t), 25)
     } else {
         stroke('#000000' + '80');
         fill('#FFFFFF' + '80');
         circle(greyBar.x+greyBar.width, (yellowBar.y), 25)
         stroke('#000000');
         fill('#FFFFFF');
-        circle(greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change, 25)
+        circle(greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change/10), 25)
     }
     resetMatrix()
 
@@ -576,7 +583,7 @@ function draw() {
                 stroke('black')
                 textAlign(CENTER)
                 translate(yellowBar.x, yellowBar.y)
-                angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
+                angular = atan2(((yellowBar.y)+((greyBar.change/10)*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
                 rotate(angular);
                 text(settings.angleDistance.toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
                 strokeWeight(1.5)
@@ -736,9 +743,9 @@ function draw() {
         strokeWeight(0)
         fill('black')
         translate(yellowBar.x + yellowBar.width, yellowBar.y)
-        text((yellowBar.change).toFixed(2) + 'mm', 25, yellowBar.change/2 + 5);
+        text((yellowBar.change).toFixed(2) + 'mm', 25, yellowBar.change/10/2 + 5);
         strokeWeight(1.5)
-        curlyBracket(yellowBar.change)
+        curlyBracket(yellowBar.change/10)
     }
 
     push()
@@ -749,14 +756,14 @@ function draw() {
         strokeWeight(0)
         fill('black')
         textAlign(CENTER)
-        angular = atan2(yellowBar.y+(yellowBar.change*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
-        translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change*easing(t)))
+        angular = atan2(yellowBar.y+(yellowBar.change/10*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
+        translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change/10*easing(t)))
         rotate(angular);
         text((settings.yellowBarWidth).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
         strokeWeight(1.5)
         translate(0, 0)
         rotate(90)
-        curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change*easing(t))))
+        curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change/10*easing(t))))
         resetMatrix()
     }
     if(displayData || barChange || heightChange || distanceChange){
@@ -767,14 +774,14 @@ function draw() {
         fill('black')
         textAlign(CENTER)
 
-        angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - greyBar.y, (greyBar.x+greyBar.width) - greyBar.x);
+        angular = atan2(((yellowBar.y)+(greyBar.change/10*easing(t))) - greyBar.y, (greyBar.x+greyBar.width) - greyBar.x);
         translate(greyBar.x, greyBar.y)
         rotate(angular);
-        text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t))))/2, -40);
+        text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change/10*easing(t))))/2, -40);
         strokeWeight(1.5)
         rotate(-90)
         translate(12, 0)
-        curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
+        curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change/10*easing(t)))))
         resetMatrix()
 
         // Added by Joseph
@@ -815,13 +822,13 @@ function draw() {
         stroke('black')
         textAlign(CENTER)
         translate(yellowBar.x, yellowBar.y)
-        angular = atan2(((yellowBar.y)+(greyBar.change*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
+        angular = atan2(((yellowBar.y)+(greyBar.change/10*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
         rotate(angular);
         text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
-        curlyBracket(dist(yellowBar.x, yellowBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change*easing(t)))))
+        curlyBracket(dist(yellowBar.x, yellowBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change/10*easing(t)))))
 
         resetMatrix()
     }
