@@ -124,3 +124,16 @@ const hangingBar = [
       <img src="imgs/learnMore.png"><strong class="actionText pad">Learn more!</strong></a>
   </div>
   `]
+
+  const introduction = [`In the previous lesson, we have determined the relationship between stress and strain. Under linear
+  elastic behavior, materials follow Hooke’s law, which in its simplest form is written as σ = Eε. Based
+  on Hooke’s law, we have derived an equation that relates the deformation and the normal force in an
+  axially loaded bar. When such bars in a particular structure deform axially, this results to a change in
+  the positions of both rigid and deformable members in that structure. In this lesson, we will be
+  analyzing how the axial deformations relate to the deflections of certain points in a structure,
+  applying geometric principles.`,`
+  At the <strong>end</strong> of this lesson, <strong>you</strong> should be able to: <br>
+1. Differentiate deformation and deflection; <br>
+2. Draw deformation diagrams; and <br>
+3. Write geometric equations that relate the axial deformations of members to the deflections of
+a particular point in a structure.`]
