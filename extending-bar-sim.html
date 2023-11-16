@@ -54,37 +54,42 @@
         </div>
         <div class="label-bar">Object Position</div>
         <div class="object-position-container">
-          <div class="attribute">
-            <input class="attribute-input" id="givenAngle" type="text" placeholder="0">
-            <label class="attribute-label" for="givenAngle">Angle (Degrees)</label>
-          </div>
+
           <div class="attribute">
             <input class="attribute-input" id="bigBarWidth" type="text" placeholder="0">
             <label class="attribute-label" for="bigBarWidth">First Bar Width</label>
           </div>
-
-          <div class="attribute">
-            <input class="attribute-input" id="arrowPoint" type="text" placeholder="0">
-            <label class="attribute-label" for="arrowPoint">Force Point</label>
-          </div>
           <div class="attribute">
             <input class="attribute-input" id="smallBarWidth" type="text" placeholder="0">
-            <label class="attribute-label" for="smallBarWidth">Second Bar Width<label>
+            <label class="attribute-label" for="smallBarWidth"> Second Bar Width</label>
+          </div>
+
+          <div class="attribute">
+            <input class="attribute-input" id="forcePoint1" type="text" placeholder="0">
+            <label class="attribute-label" for="forcePoint1">1st Force Point</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="forcePoint2" type="text" placeholder="0">
+            <label class="attribute-label" for="forcePoint2">2nd Force Point<label>
           </div>
         </div>
         <div class="label-bar">Object Physics</div>
         <div class="object-physics-container">
           <div class="attribute">
-            <input class="attribute-input" id="crossArea" type="text" placeholder="0">
-            <label class="attribute-label" for="crossArea">CS Area</label>
+            <input class="attribute-input" id="crossArea1" type="text" placeholder="0">
+            <label class="attribute-label" for="crossArea1">CS Area Bar 1</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="youngsModulus" type="text" placeholder="0">
-            <label class="attribute-label" for="youngsModulus">Young's Modulus</label>
+            <input class="attribute-input" id="crossArea2" type="text" placeholder="0">
+            <label class="attribute-label" for="crossArea2">CS Area Bar 2</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="arrowForce" type="text" placeholder="0">
-            <label class="attribute-label" for="arrowForce">Force</label>
+            <input class="attribute-input" id="forceMagni1" type="text" placeholder="0">
+            <label class="attribute-label" for="forceMagni1">1st Force</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="forceMagni2" type="text" placeholder="0">
+            <label class="attribute-label" for="forceMagni2">2nd Force (if there is)</label>
           </div>
         </div>
       </div>
@@ -108,8 +113,20 @@
         <div class="label-bar">Results</div>
         <div class="results-container">
           <div class="results-wrapper">
-            <div class="result-output" id="forceCable"></div>
-            <div class="result-output-label">Force in the Cable</div>
+            <div class="result-output" id="deformationFirst"></div>
+            <div class="result-output-label">Deformation of First Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deformationSecond"></div>
+            <div class="result-output-label">Deformation of Second Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionFirst"></div>
+            <div class="result-output-label">Deflection at End of First Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionSecond"></div>
+            <div class="result-output-label">Deflection at End of Second Bar</div>
           </div>
         </div>
       </div>
