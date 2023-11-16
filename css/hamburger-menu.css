@@ -80,7 +80,7 @@
   position: relative;
   background-color: var(--color-white);
   width: 472px;
-  height: 946px;
+  height: 100vh;
   overflow: hidden;
   max-width: 90%;
   max-height: 90%;
