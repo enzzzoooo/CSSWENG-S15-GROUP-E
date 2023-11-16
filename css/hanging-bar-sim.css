@@ -10,18 +10,9 @@
     display: flex;
     justify-content: center; /* horizontally center the div */
     align-items: center; /* vertically center the div */
-    overflow: clip;
-    transform-origin: top left; /* set the origin of the transformation */
-    transform: scale(1); /* set the initial scale */
+    min-width: 1080px;
 }
 
-.main-container.zoom-in {
-    transform: scale(1.5); /* set the scale to zoom in */
-}
-
-.main-container.zoom-out {
-    transform: scale(0.5); /* set the scale to zoom out */
-}
 
 #canvas-container {
     position: relative;
@@ -29,6 +20,8 @@
     height: 534px;
     border-radius: 10px;
     margin: 0 19px 0 0;
+    min-width: 841px;
+    min-height: 534px;
 }
 
 canvas {
@@ -42,6 +35,8 @@ canvas {
     height: 535px;
     border: 0px solid #000000;
     border-radius: 10px;
+    min-width: 457px;
+    min-height: 535px;
 }
 
 #tabSelect {
@@ -194,7 +189,7 @@ canvas {
     width: 419px;
     height: 40px;
     display: flex;
-    margin: 9px 24px 0 19px;
+    margin: 20px 24px 0 19px;
     align-items: center;
 }
 
@@ -234,6 +229,9 @@ canvas {
 #toggle,
 #force,
 #add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     width: 62px;
     height: 62px;
