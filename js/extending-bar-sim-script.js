@@ -162,11 +162,11 @@ function setup() {
             removeForce()
         }
         // ADD IMAGE for + and dotted +
-        let forceImg = document.getElementById('forceImg');
-        if (forceImg.src.includes('force-data-show')) {
-            forceImg.src = 'imgs/force-data-hide.png';
+        let addImg = document.getElementById('addImg');
+        if (addImg.src.includes('force-add-show')) {
+            addImg.src = 'imgs/force-add-hide.png';
         } else {
-            forceImg.src = 'imgs/force-data-show.png';
+            addImg.src = 'imgs/force-add-show.png';
         }
     });
 
