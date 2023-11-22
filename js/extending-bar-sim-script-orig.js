@@ -1,19 +1,6 @@
 // For interacting with the elements outside of the canvas
-// objectTab1
 let bigBarWidth;
-let bigBarForcePoint;
-let bigBarCrossArea;
-let bigBarModulus;
-let bigBarForceValue;
-
-// objectTab2
 let smallBarWidth;
-let smallBarForcePoint;
-let smallBarCrossArea;
-let smallBarModulus;
-let smallBarForceValue;
-
-// old variables
 let youngsModulus;
 let forcePoint1;
 let forcePoint2
@@ -183,155 +170,214 @@ function setup() {
         }
     });
 
-    // objectTab1
 
-    let changeWood1 = document.getElementById('changeMatToWood1');
-    changeWood1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#B48777' && settings.bigBarModulus != 100){
-            bigBar.color = '#B48777';
-            settings.bigBarModulus = 100;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeMetal1 = document.getElementById('changeMatToMetal1');
-    changeMetal1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#CCC9C9' && settings.bigBarModulus != 300){
-            bigBar.color = '#CCC9C9';
-            settings.bigBarModulus = 300;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeLog1 = document.getElementById('changeMatToLog1');
-    changeLog1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#724D3F' && settings.bigBarModulus != 400){
-            bigBar.color = '#724D3F';
-            settings.bigBarModulus = 400;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeSteel1 = document.getElementById('changeMatToSteel1');
-    changeSteel1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#000000' && settings.bigBarModulus != 500){
-            bigBar.color = '#000000';
-            settings.bigBarModulus = 500;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeRuby1 = document.getElementById('changeMatToRuby1');
-    changeRuby1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#FD0606' && settings.bigBarModulus != 600){
-            bigBar.color = '#FD0606';
-            settings.bigBarModulus = 600;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
+    let changeWood = document.getElementById('changeMatToWood');
+    changeWood.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
 
-    // objectTab2
+        var buttonRect = changeWood.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
 
-    let changeWood2 = document.getElementById('changeMatToWood2');
-    changeWood2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 100){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 100;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-    let changeMetal2 = document.getElementById('changeMatToMetal2');
-    changeMetal2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#CCC9C9' && settings.smallBarModulus != 300){
-            smallBar.color = '#CCC9C9';
-            settings.smallBarModulus = 300;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-    let changeLog2 = document.getElementById('changeMatToLog2');
-    changeLog2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 400){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 400;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#B48777' && settings.bigBarModulus != 100){
+                bigBar.color = '#B48777';
+                settings.bigBarModulus = 100;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#B48777' && settings.smallBarModulus != 100){
+                smallBar.color = '#B48777';
+                settings.smallBarModulus = 100;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
         }
     });
-    let changeSteel2 = document.getElementById('changeMatToSteel2');
-    changeSteel2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#000000' && settings.smallBarModulus != 500){
-            smallBar.color = '#000000';
-            settings.smallBarModulus = 500;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
+    let changeMetal = document.getElementById('changeMatToMetal');
+    changeMetal.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeMetal.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#CCC9C9' && settings.bigBarModulus != 300){
+                bigBar.color = '#CCC9C9';
+                settings.bigBarModulus = 300;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#CCC9C9' && settings.smallBarModulus != 300){
+                smallBar.color = '#CCC9C9';
+                settings.smallBarModulus = 300;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
         }
     });
-    let changeRuby2 = document.getElementById('changeMatToRuby2');
-    changeRuby2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#FD0606' && settings.smallBarModulus != 600){
-            smallBar.color = '#FD0606';
-            settings.smallBarModulus = 600;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
+    let changeLog = document.getElementById('changeMatToLog');
+    changeLog.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeLog.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#724D3F' && settings.bigBarModulus != 400){
+                bigBar.color = '#724D3F';
+                settings.bigBarModulus = 400;
+            }
+            else{
+                bigBar.color = '#747474';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#B48777' && settings.smallBarModulus != 400){
+                smallBar.color = '#B48777';
+                settings.smallBarModulus = 400;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
         }
     });
-    
+    let changeSteel = document.getElementById('changeMatToSteel');
+    changeSteel.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeSteel.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#000000' && settings.bigBarModulus != 500){
+                bigBar.color = '#000000';
+                settings.bigBarModulus = 500;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#000000' && settings.smallBarModulus != 500){
+                smallBar.color = '#000000';
+                settings.smallBarModulus = 500;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
+        }
+    });
+    let changeRuby = document.getElementById('changeMatToRuby');
+    changeRuby.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeRuby.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#FD0606' && settings.bigBarModulus != 600){
+                bigBar.color = '#FD0606';
+                settings.bigBarModulus = 600;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#FD0606' && settings.smallBarModulus != 600){
+                smallBar.color = '#FD0606';
+                settings.smallBarModulus = 600;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
+        }
+    });
 
     forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 3, 0), 'coral']
     console.log("x: " + forces[0][0].x, "y: " + forces[0][0].y)
-    
+
     textFont(font);
     textSize(20);
-
     snapInput = select('#snapInterval');
-
-    // objectTab1
     bigBarWidth = select('#bigBarWidth');
-    bigBarForcePoint = select('#bigBarForcePoint');
-    bigBarCrossArea = select('#bigBarCrossArea');
-    bigBarModulus = select('#bigBarModulus');
-    bigBarForceValue = select('#bigBarForceValue');
-
-    // objectTab2
     smallBarWidth = select('#smallBarWidth');
-    smallBarForcePoint = select('#smallBarForcePoint');
-    smallBarCrossArea = select('#smallBarCrossArea');
-    smallBarModulus = select('#smallBarModulus');
-    smallBarForceValue = select('#smallBarForceValue');
+    forcePoint1 = select('#forcePoint1');
+    forcePoint2 = select('#forcePoint2');
+    forceMagni1 = select('#forceMagni1');
+    forceMagni2 = select('#forceMagni2');
+    crossArea1 = select('#crossArea1');
+    crossArea2 = select('#crossArea2');
 
+
+
+    /*
+    // For interacting with elements outside the canvas
+
+    youngsModulus = select('#youngsModulus');
+    forceMagni = select('#forceMagni');
+    crossArea = select('#crossArea');
+
+    // pivotPointWall = select('#pivotPointWall');
+
+    givenAngle = select('#givenAngle');
+
+
+    arrowPoint = select('#arrowPoint');
+    */
 
     snapInput.input(function () {
         console.log("snapInput: " + snapInput.value());
@@ -343,62 +389,161 @@ function setup() {
         }
     });
 
-    // objectTab1
     bigBarWidth.input(function () {
+        // Debugging
+        // console.log("bigBarwidth: " + bigBarWidth.value());
+        // console.log("settings.bigBarWidth: " + settings.bigBarWidth);
+        // console.log("bigBar.width: " + bigBar.width);
         settings.bigBarWidth = parseFloat(bigBarWidth.value());
         bigBar.width = settings.bigBarWidth / 20;
         updateForces();
     });
 
-    bigBarForcePoint.input(function () {
-        forces[0][0].x = parseFloat(bigBarForcePoint.value())/20;
-    });
-
-    bigBarCrossArea.input(function () {
-        settings.bigBarHeight = parseInt(bigBarCrossArea.value());
-    });
-
-    bigBarModulus.input(function () {
-        settings.bigBarModulus = parseFloat(bigBarModulus.value());
-    });
-
-    bigBarForceValue.input(function () {
-        forces[0][1].x = parseFloat(bigBarForceValue.value()) * 3;
-    });
-
-    // objectTab2
     smallBarWidth.input(function() {
+
         settings.smallBarWidth = parseFloat(pivotPointBar.value());
         smallBar.width = settings.smallBarWidth / 20;
         updateForces();
+
+
+        // Debugging
+        // console.log("pivotPointBar: " + pivotPointBar.value());
+        // console.log("settings.ropeDistance: " + settings.ropeDistance);
+        // console.log("temp: " + temp);
+        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
+        // console.log("bigBar.x: " + bigBar.x);
     });
-    
-    smallBarForcePoint.input(function() {
-        if(addedForce){
-            smallBarForcePoint.removeAttribute('readonly');
-            forces[1][0].x = parseFloat(smallBarForcePoint.value())/20 + bigBar.x + bigBar.width;
-            settings.force2Distance = parseFloat(smallBarForcePoint.value());
+
+    forcePoint1.input(function() {
+
+        forces[0][0].x = parseFloat(forcePoint.value())/20 + bigBar.x;
+        settings.force1Distance = parseFloat(forcePoint.value());
+        updateForces();
+        // Debugging
+        // console.log("pivotPointBar: " + pivotPointBar.value());
+        // console.log("settings.ropeDistance: " + settings.ropeDistance);
+        // console.log("temp: " + temp);
+        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
+        // console.log("bigBar.x: " + bigBar.x);
+    });
+
+    forcePoint2.input(function() {
+
+        if(forces.length > 1){
+            forces[1][0].x = parseFloat(forcePoint.value())/20 + bigBar.x;
+            settings.force2Distance = parseFloat(forcePoint.value());
+            updateForces();
+        }
+
+
+        // Debugging
+        // console.log("pivotPointBar: " + pivotPointBar.value());
+        // console.log("settings.ropeDistance: " + settings.ropeDistance);
+        // console.log("temp: " + temp);
+        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
+        // console.log("bigBar.x: " + bigBar.x);
+    });
+
+    forceMagni1.input(function() {
+        if(forceMagni1.value() > 0){
+            forces[0][1].x = parseFloat(forceMagni1.value()) * 3;
         } else {
-            smallBarForcePoint.attribute('readonly', '');
+            forces[0][1].x = 0;
         }
     });
 
-    smallBarCrossArea.input(function () {
-        settings.smallBarHeight = parseInt(smallBarCrossArea.value());
-    });
-
-    smallBarModulus.input(function () {
-        settings.smallBarModulus = parseFloat(smallBarModulus.value());
-    });
-
-    smallBarForceValue.input(function () {
-        if(addedForce) {
-            smallBarForceValue.removeAttribute('readonly');
-            forces[1][1].x = parseFloat(smallBarForceValue.value()) * 3;
+    forceMagni2.input(function() {
+        if(forces.length > 0){
+            if(forceMagni2.value() > 0){
+                forces[1][1].x = parseFloat(forceMagni2.value()) * 3;
+            } else {
+                forces[1][1].x = 0;
+            }
         } else {
-            smallBarForceValue.attribute('readonly', '');
+            forceMagni2.value(0)
+        }
+    })
+
+
+    crossArea1.input(function() {
+        settings.bigBarHeight = crossArea1.input();
+    });
+
+    crossArea2.input(function() {
+        settings.smallBarHeight = crossArea2.input();
+    })
+
+
+
+    /*
+
+
+    givenAngle.input(function () {
+        pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
+
+
+
+        let temp = -(pivotPointWall/20 - bigBar.y);
+        if (temp < bigBar.y){
+            smallBar.y = temp
+            settings.ropeHeight = parseFloat(pivotPointWall);
+        } else {
+            smallBar.y = bigBar.y;
         }
     });
+
+
+
+
+    // pivotPointWall.input(function() {
+
+    //     let temp = -(pivotPointWall.value()/20 - bigBar.y);
+    //     if(temp < bigBar.y){
+    //         smallBar.y = temp
+    //         settings.ropeHeight = parseFloat(pivotPointWall.value());
+    //     } else {
+    //         smallBar.y = bigBar.y;
+    //     }
+
+    //     // Debugging
+    //     // console.log("pivotPointWall: " + pivotPointWall.value());
+    //     // console.log("settings.ropeHeight: " + settings.ropeHeight);
+    //     // console.log("temp: " + temp);
+    //     // console.log("smallBar.y: " + smallBar.y);
+    //     // console.log("bigBar.y: " + bigBar.y);
+    // });
+
+
+
+
+    arrowPoint.input(function() {
+        forces[0][0].x = parseFloat(arrowPoint.value())/20 + bigBar.x;
+        settings.angleDistance = parseFloat(arrowPoint.value());
+    });
+
+    crossArea.input(function () {
+        if (crossArea.value() != 0) {
+            inputOfCrossArea = true;
+        } else {
+            inputOfCrossArea = false;
+        }
+    });
+
+    youngsModulus.input(function () {
+        settings.greyRopeModulus = parseFloat(youngsModulus.value());
+    });
+
+    forceMagni.input(function() {
+        if(forceMagni.value() > 0){
+            forces[0][1].y = parseFloat(forceMagni.value()) * 2;
+        } else {
+            forces[0][1].y = 0;
+        }
+    });
+    */
+
+
+
 }
 
 let deformationGrey = 0;
@@ -520,12 +665,14 @@ function easing(x) {
 function addForce() {
     forces[1] = [createVector(bigBar.x + bigBar.width + smallBar.width, bigBar.y),  createVector(15 * 3, 0), 'crimson']
     settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
+    forceMagni2.value(15)
     console.log("x: " + forces[1][0].x, "y: " + forces[1][0].y)
 }
 
 function removeForce() {
     forces.splice(1, 1)
     settings.force2Distance = 0;
+    forceMagni2.value(0)
 }
 
 function updateForces(){
@@ -923,27 +1070,35 @@ function draw() {
     // // Hover feature Test
     // if (mouseX > bigBar.x && mouseX < bigBar.x + bigBar.width && mouseY > bigBar.y && mouseY < bigBar.y + bigBar.height)
 
-    // objectTab1
+    snapInput.value(settings.snapValue);
     bigBarWidth.value(settings.bigBarWidth);
-    bigBarForcePoint.value(settings.force1Distance);
-    bigBarCrossArea.value(settings.bigBarHeight);
-    bigBarModulus.value(settings.bigBarModulus);
-    bigBarForceValue.value(forces[0][1].x / 3);
-
-    // objectTab2
     smallBarWidth.value(settings.smallBarWidth);
-    if (addedForce) {
-        smallBarForcePoint.value(settings.force2Distance);
+    crossArea1.value(settings.bigBarHeight);
+    crossArea2.value(settings.smallBarHeight);
+    forcePoint1.value(settings.force1Distance);
+    forcePoint2.value(settings.force2Distance);
+    forceMagni1.value(forces[0][1].x / 3);
+    if(forces.length > 1) {
+        forceMagni1.value(forces[0][1].x / 3);
     } else {
-        smallBarForcePoint.value(0);
+        forceMagni2.value(0)
     }
-    smallBarCrossArea.value(settings.smallBarHeight);
-    smallBarModulus.value(settings.smallBarModulus);
-    if (addedForce) {
-        smallBarForceValue.value(forces[1][1].x / 3);
-    } else {
-        smallBarForceValue.value(0);
-    }
+    // Added by Joseph
+    // For interacting with elements outside the canvas
+        /*
+        givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
+
+
+        arrowPoint.value(settings.angleDistance);
+
+        if(inputOfCrossArea == false){
+            crossArea.value(cylinderCrossArea(smallBar.height/2).toFixed(2));
+        }
+        youngsModulus.value(settings.greyRopeModulus);
+        forceMagni.value(forces[0][1].y / 2);
+
+        */
+
 }
 
 // For Exit button
@@ -955,48 +1110,19 @@ exitButton.addEventListener('click', () => {
 // Joseph
 // For Switching materials in the materialSelect
 const materialElements = document.querySelectorAll('.material');
-const materialElements2 = document.querySelectorAll('.material2');
-
 materialElements.forEach((element) => {
     element.addEventListener('click', () => {
         let active;
         if (element.classList.contains('active')) {
             active = true;
         }
-        // Check if element is in objectTab1
-        if (element.closest('#objectTab1')) {
-            materialElements.forEach((el) => {
-                if (el.closest('#objectTab1')) {
-                    el.classList.remove('active');
-                }
-            });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
-            }
-        }
-    });
-});
-
-materialElements2.forEach((element) => {
-    element.addEventListener('click', () => {
-        let active;
-        if (element.classList.contains('active')) {
-            active = true;
-        }
-        // Check if element is in objectTab2
-        if (element.closest('#objectTab2')) {
-            materialElements2.forEach((el) => {
-                if (el.closest('#objectTab2')) {
-                    el.classList.remove('active');
-                }
-            });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
-            }
+        materialElements.forEach((el) => {
+            el.classList.remove('active');
+        });
+        if (active == true) {
+            element.classList.remove('active');
+        } else {
+            element.classList.add('active');
         }
     });
 });

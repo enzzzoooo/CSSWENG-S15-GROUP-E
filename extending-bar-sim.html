@@ -8,7 +8,7 @@
   <!-- css files -->
   <link rel="stylesheet" href="./css/global.css"/>
   <link rel="stylesheet" href="./css/hamburger-menu.css"/>
-  <link rel="stylesheet" href="./css/hanging-bar-sim.css"/>
+  <link rel="stylesheet" href="./css/extending-bar-sim.css"/>
   <link rel="stylesheet" href="./css/toggle-button.css"/>
   <link rel="stylesheet" href="./css/help-button.css"/>
 
@@ -38,58 +38,83 @@
 
     <div id="materialSelect">
       <div id="tabSelect">
-        <button class="tab-link active" onclick="openTabs(event, 'objectTab')"><img id="objectImg" src="imgs/objectTab-icon.png"></button>
+        <button class="tab-link active" onclick="openTabs(event, 'objectTab1')"><img id="objectImg" src="imgs/objectTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'objectTab2')"><img id="objectImg" src="imgs/objectTab2-icon.png"></button>
         <button class="tab-link" onclick="openTabs(event, 'snapTab')"><img id="snapImg" src="imgs/snapTab-icon.png"></button>
         <button class="tab-link" onclick="openTabs(event, 'resultsTab')"><img id="resultsImg" src="imgs/resultsTab-icon.png"></button>
       </div>
 
-      <div id="objectTab" class="tab">
+      <div id="objectTab1" class="tab">
         <div class="label-bar">Type</div>
         <div class="material-change-container">
-          <img class="material" src="imgs/wood.png" id="changeMatToWood" alt="Wood">
-          <img class="material" src="imgs/steel.png" id="changeMatToSteel" alt="Steel">
-          <img class="material" src="imgs/plastic.png" id="changeMatToRuby" alt="Plastic"> <!-- Should be Plastic -->
-          <img class="material" src="imgs/bronze.png" id="changeMatToLog" alt="Bronze"> <!-- Should be Bronze -->
-          <img class="material" src="imgs/aluminum.png" id="changeMatToMetal" alt="Aluminum"> <!-- Should be Aluminum -->
+          <img class="material" src="imgs/wood.png" id="changeMatToWood1" alt="Wood">
+          <img class="material" src="imgs/steel.png" id="changeMatToSteel1" alt="Steel">
+          <img class="material" src="imgs/plastic.png" id="changeMatToRuby1" alt="Plastic"> <!-- Should be Plastic -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToLog1" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material" src="imgs/aluminum.png" id="changeMatToMetal1" alt="Aluminum"> <!-- Should be Aluminum -->
         </div>
         <div class="label-bar">Object Position</div>
         <div class="object-position-container">
 
           <div class="attribute">
             <input class="attribute-input" id="bigBarWidth" type="text" placeholder="0">
-            <label class="attribute-label" for="bigBarWidth">First Bar Width</label>
+            <label class="attribute-label" for="bigBarWidth">Length</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="smallBarWidth" type="text" placeholder="0">
-            <label class="attribute-label" for="smallBarWidth"> Second Bar Width</label>
-          </div>
-
-          <div class="attribute">
-            <input class="attribute-input" id="forcePoint1" type="text" placeholder="0">
-            <label class="attribute-label" for="forcePoint1">1st Force Point</label>
-          </div>
-          <div class="attribute">
-            <input class="attribute-input" id="forcePoint2" type="text" placeholder="0">
-            <label class="attribute-label" for="forcePoint2">2nd Force Point<label>
+            <input class="attribute-input" id="bigBarForcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarForcePoint">Force Point</label>
           </div>
         </div>
         <div class="label-bar">Object Physics</div>
         <div class="object-physics-container">
           <div class="attribute">
-            <input class="attribute-input" id="crossArea1" type="text" placeholder="0">
-            <label class="attribute-label" for="crossArea1">CS Area Bar 1</label>
+            <input class="attribute-input" id="bigBarCrossArea" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarCrossArea">CS Area</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="crossArea2" type="text" placeholder="0">
-            <label class="attribute-label" for="crossArea2">CS Area Bar 2</label>
+            <input class="attribute-input" id="bigBarModulus" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarModulus">Young's Modulus</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="forceMagni1" type="text" placeholder="0">
-            <label class="attribute-label" for="forceMagni1">1st Force</label>
+            <input class="attribute-input" id="bigBarForceValue" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarForceValue">Force</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="objectTab2" class="tab">
+        <div class="label-bar">Type</div>
+        <div class="material-change-container">
+          <img class="material2" src="imgs/wood.png" id="changeMatToWood2" alt="Wood">
+          <img class="material2" src="imgs/steel.png" id="changeMatToSteel2" alt="Steel">
+          <img class="material2" src="imgs/plastic.png" id="changeMatToRuby2" alt="Plastic"> <!-- Should be Plastic -->
+          <img class="material2" src="imgs/bronze.png" id="changeMatToLog2" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material2" src="imgs/aluminum.png" id="changeMatToMetal2" alt="Aluminum"> <!-- Should be Aluminum -->
+        </div>
+        <div class="label-bar">Object Position</div>
+        <div class="object-position-container">
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarWidth" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarWidth">Length</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="forceMagni2" type="text" placeholder="0">
-            <label class="attribute-label" for="forceMagni2">2nd Force (if there is)</label>
+            <input class="attribute-input" id="smallBarForcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarForcePoint">Force Point</label>
+          </div>
+        </div>
+        <div class="label-bar">Object Physics</div>
+        <div class="object-physics-container">
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarCrossArea" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarCrossArea">CS Area</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarModulus" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarModulus">Young's Modulus</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarForceValue" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarForceValue">Force</label>
           </div>
         </div>
       </div>
