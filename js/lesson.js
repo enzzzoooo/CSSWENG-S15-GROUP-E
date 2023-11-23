@@ -10,7 +10,7 @@ const slideTxt2 = document.querySelector('.lessonTxt2');
 const lessons = new Map();
 lessons.set("Hanging Bar", hangingBar);
 lessons.set("Compound Bar", compoundBar);
-lessons.set("Introduction and lesson objectives", introduction);
+
 
 rightButton.addEventListener('click', () => {
     let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
