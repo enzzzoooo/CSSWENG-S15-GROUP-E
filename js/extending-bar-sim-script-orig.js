@@ -1,28 +1,13 @@
 // For interacting with the elements outside of the canvas
-// objectTab1
 let bigBarWidth;
-let bigBarForcePoint;
-let bigBarCrossArea;
-let bigBarModulus;
-let bigBarForceValue;
-
-// objectTab2
 let smallBarWidth;
-let smallBarForcePoint;
-let smallBarCrossArea;
-let smallBarModulus;
-let smallBarForceValue;
-
-// old variables
 let youngsModulus;
 let forcePoint1;
 let forcePoint2
 let forceMagni1;
 let forceMagni2
 let crossArea1;
-let crossArea2;
-
-
+let crossArea2
 
 let snapInput;
 
@@ -50,28 +35,17 @@ function toDegrees(angle) {
     return angle * (180 / Math.PI);
 }
 
-function drawStrokedLine(x1, y1, x2, y2, lineHeight, strokecolor){
-    push();
-    stroke(strokecolor)
-    strokeWeight(lineHeight + 1)
-    line(x1 - 0.5, y1, x2 + 0.5, y2)
-    pop();
-}
 
 function drawArrow(base, vec, myColor) {
     push();
     stroke(myColor);
-    strokeWeight(12);
+    strokeWeight(15);
     fill(myColor);
     translate(base.x, base.y);
-    if(vec.x >= 0){
-        line(0, 0, vec.x - 15, vec.y);
-    } else {
-        line(0, 0, vec.x + 15, vec.y)
-    }
+    line(0, 0, vec.x, vec.y);
     rotate(vec.heading());
-    let arrowSize = 5;
-    translate(vec.mag() - arrowSize - 15, 0);
+    let arrowSize = 15;
+    translate(vec.mag() - arrowSize, 0);
     triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
     pop();
 }
@@ -90,11 +64,7 @@ let settings = {
     bigBarModulus: 200,
     smallBarModulus: 200,
     force1Distance: 1000,
-    force2Distance: 0,
-    force1Magni: 10,
-    force2Magni: 0,
-    crossArea1: 200,
-    crossArea2: 100
+    force2Distance: 0
 }
 
 // wall
@@ -142,8 +112,6 @@ let distanceChange = false;
 let barChange = false;
 let lengthChange = false;
 let inputOfCrossArea =false;
-let force1Move = false;
-let force2Move = false;
 
 function preload() {
     font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
@@ -202,154 +170,214 @@ function setup() {
         }
     });
 
-    // objectTab1
 
-    let changeWood1 = document.getElementById('changeMatToWood1');
-    changeWood1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#B48777' && settings.bigBarModulus != 100){
-            bigBar.color = '#B48777';
-            settings.bigBarModulus = 100;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeMetal1 = document.getElementById('changeMatToMetal1');
-    changeMetal1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#CCC9C9' && settings.bigBarModulus != 300){
-            bigBar.color = '#CCC9C9';
-            settings.bigBarModulus = 300;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeLog1 = document.getElementById('changeMatToLog1');
-    changeLog1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#724D3F' && settings.bigBarModulus != 400){
-            bigBar.color = '#724D3F';
-            settings.bigBarModulus = 400;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
-    });
-    let changeSteel1 = document.getElementById('changeMatToSteel1');
-    changeSteel1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#000000' && settings.bigBarModulus != 500){
-            bigBar.color = '#000000';
-            settings.bigBarModulus = 500;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
+    let changeWood = document.getElementById('changeMatToWood');
+    changeWood.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeWood.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#B48777' && settings.bigBarModulus != 100){
+                bigBar.color = '#B48777';
+                settings.bigBarModulus = 100;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#B48777' && settings.smallBarModulus != 100){
+                smallBar.color = '#B48777';
+                settings.smallBarModulus = 100;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
         }
     });
-    let changeRuby1 = document.getElementById('changeMatToRuby1');
-    changeRuby1.addEventListener('click', function(event) {
-        resetDrawing();
-        if(bigBar.color != '#FD0606' && settings.bigBarModulus != 600){
-            bigBar.color = '#FD0606';
-            settings.bigBarModulus = 600;
+    let changeMetal = document.getElementById('changeMatToMetal');
+    changeMetal.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeMetal.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#CCC9C9' && settings.bigBarModulus != 300){
+                bigBar.color = '#CCC9C9';
+                settings.bigBarModulus = 300;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#CCC9C9' && settings.smallBarModulus != 300){
+                smallBar.color = '#CCC9C9';
+                settings.smallBarModulus = 300;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
         }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
+    });
+    let changeLog = document.getElementById('changeMatToLog');
+    changeLog.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeLog.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#724D3F' && settings.bigBarModulus != 400){
+                bigBar.color = '#724D3F';
+                settings.bigBarModulus = 400;
+            }
+            else{
+                bigBar.color = '#747474';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#B48777' && settings.smallBarModulus != 400){
+                smallBar.color = '#B48777';
+                settings.smallBarModulus = 400;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
+        }
+    });
+    let changeSteel = document.getElementById('changeMatToSteel');
+    changeSteel.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeSteel.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#000000' && settings.bigBarModulus != 500){
+                bigBar.color = '#000000';
+                settings.bigBarModulus = 500;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#000000' && settings.smallBarModulus != 500){
+                smallBar.color = '#000000';
+                settings.smallBarModulus = 500;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
+        }
+    });
+    let changeRuby = document.getElementById('changeMatToRuby');
+    changeRuby.addEventListener('click', function(event) {
+        // Calculate the relative position of the mouse click
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var buttonRect = changeRuby.getBoundingClientRect();
+        var relativeX = mouseX - buttonRect.left;
+        var relativeY = mouseY - buttonRect.top;
+
+        console.log('Relative position:', relativeX, relativeY);
+        var buttonLength = buttonRect.right - buttonRect.left;
+        var buttonHalf = buttonLength/2
+        if (relativeX <= buttonHalf){
+            resetDrawing();
+            if(bigBar.color != '#FD0606' && settings.bigBarModulus != 600){
+                bigBar.color = '#FD0606';
+                settings.bigBarModulus = 600;
+            }
+            else{
+                bigBar.color = '#FFB81C';
+                settings.bigBarModulus = 200;
+            }
+        } else {
+            resetDrawing();
+            if(smallBar.color != '#FD0606' && settings.smallBarModulus != 600){
+                smallBar.color = '#FD0606';
+                settings.smallBarModulus = 600;
+            }
+            else{
+                smallBar.color = '#747474';
+                settings.smallBarModulus = 200;
+            }
         }
     });
 
-    // objectTab2
-
-    let changeWood2 = document.getElementById('changeMatToWood2');
-    changeWood2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 100){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 100;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-    let changeMetal2 = document.getElementById('changeMatToMetal2');
-    changeMetal2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#CCC9C9' && settings.smallBarModulus != 300){
-            smallBar.color = '#CCC9C9';
-            settings.smallBarModulus = 300;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-    let changeLog2 = document.getElementById('changeMatToLog2');
-    changeLog2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 400){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 400;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-    let changeSteel2 = document.getElementById('changeMatToSteel2');
-    changeSteel2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#000000' && settings.smallBarModulus != 500){
-            smallBar.color = '#000000';
-            settings.smallBarModulus = 500;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-    let changeRuby2 = document.getElementById('changeMatToRuby2');
-    changeRuby2.addEventListener('click', function(event) {
-        resetDrawing();
-        if(smallBar.color != '#FD0606' && settings.smallBarModulus != 600){
-            smallBar.color = '#FD0606';
-            settings.smallBarModulus = 600;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
-    });
-
-    forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), 'coral']
+    forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 3, 0), 'coral']
     console.log("x: " + forces[0][0].x, "y: " + forces[0][0].y)
 
     textFont(font);
     textSize(20);
-
     snapInput = select('#snapInterval');
-
-    // objectTab1
     bigBarWidth = select('#bigBarWidth');
-    bigBarForcePoint = select('#bigBarForcePoint');
-    bigBarCrossArea = select('#bigBarCrossArea');
-    bigBarModulus = select('#bigBarModulus');
-    bigBarForceValue = select('#bigBarForceValue');
-
-    // objectTab2
     smallBarWidth = select('#smallBarWidth');
-    smallBarForcePoint = select('#smallBarForcePoint');
-    smallBarCrossArea = select('#smallBarCrossArea');
-    smallBarModulus = select('#smallBarModulus');
-    smallBarForceValue = select('#smallBarForceValue');
+    forcePoint1 = select('#forcePoint1');
+    forcePoint2 = select('#forcePoint2');
+    forceMagni1 = select('#forceMagni1');
+    forceMagni2 = select('#forceMagni2');
+    crossArea1 = select('#crossArea1');
+    crossArea2 = select('#crossArea2');
 
+
+
+    /*
+    // For interacting with elements outside the canvas
+
+    youngsModulus = select('#youngsModulus');
+    forceMagni = select('#forceMagni');
+    crossArea = select('#crossArea');
+
+    // pivotPointWall = select('#pivotPointWall');
+
+    givenAngle = select('#givenAngle');
+
+
+    arrowPoint = select('#arrowPoint');
+    */
 
     snapInput.input(function () {
         console.log("snapInput: " + snapInput.value());
@@ -361,8 +389,11 @@ function setup() {
         }
     });
 
-    // objectTab1
     bigBarWidth.input(function () {
+        // Debugging
+        // console.log("bigBarwidth: " + bigBarWidth.value());
+        // console.log("settings.bigBarWidth: " + settings.bigBarWidth);
+        // console.log("bigBar.width: " + bigBar.width);
         settings.bigBarWidth = parseFloat(bigBarWidth.value());
         bigBar.width = settings.bigBarWidth / 20;
         updateForces();
@@ -385,8 +416,8 @@ function setup() {
 
     forcePoint1.input(function() {
 
-        forces[0][0].x = parseFloat(forcePoint1.value())/20 + bigBar.x;
-        settings.force1Distance = parseFloat(forcePoint1.value());
+        forces[0][0].x = parseFloat(forcePoint.value())/20 + bigBar.x;
+        settings.force1Distance = parseFloat(forcePoint.value());
         updateForces();
         // Debugging
         // console.log("pivotPointBar: " + pivotPointBar.value());
@@ -399,8 +430,8 @@ function setup() {
     forcePoint2.input(function() {
 
         if(forces.length > 1){
-            forces[1][0].x = parseFloat(forcePoint2.value())/20 + bigBar.x;
-            settings.force2Distance = parseFloat(forcePoint2.value());
+            forces[1][0].x = parseFloat(forcePoint.value())/20 + bigBar.x;
+            settings.force2Distance = parseFloat(forcePoint.value());
             updateForces();
         }
 
@@ -415,33 +446,21 @@ function setup() {
 
     forceMagni1.input(function() {
         if(forceMagni1.value() > 0){
-            forces[0][1].x = parseFloat(forceMagni1.value()) * 5;
-            if (forces[0][1].x >= 150){
-                forces[0][1].x = 150;
-            } else if (forces[0][1].x <= -150){
-                forces[0][1].x = -150;
-            }
-            settings.force1Magni = parseFloat(forceMagni1.value())
+            forces[0][1].x = parseFloat(forceMagni1.value()) * 3;
         } else {
-            forces[0][1].x = 5;
-            settings.force1Magni = 5
+            forces[0][1].x = 0;
         }
     });
 
     forceMagni2.input(function() {
         if(forces.length > 0){
-            if(forceMagni2.value() != 0){
-                forces[1][1].x = parseFloat(forceMagni2.value()) * 5;
-                if (forces[1][1].x >= 150){
-                    forces[1][1].x = 150;
-                } else if (forces[1][1].x <= -150){
-                    forces[1][1].x = -150;
-                }
-                settings.force2Magni = parseFloat(forceMagni2.value())
+            if(forceMagni2.value() > 0){
+                forces[1][1].x = parseFloat(forceMagni2.value()) * 3;
             } else {
-                forces[1][1].x = 5;
-                settings.force2Magni = 5
+                forces[1][1].x = 0;
             }
+        } else {
+            forceMagni2.value(0)
         }
     })
 
@@ -469,29 +488,62 @@ function setup() {
             smallBar.y = temp
             settings.ropeHeight = parseFloat(pivotPointWall);
         } else {
-            smallBarForcePoint.attribute('readonly', '');
+            smallBar.y = bigBar.y;
         }
     });
 
-    smallBarCrossArea.input(function () {
-        settings.smallBarHeight = parseInt(smallBarCrossArea.value());
+
+
+
+    // pivotPointWall.input(function() {
+
+    //     let temp = -(pivotPointWall.value()/20 - bigBar.y);
+    //     if(temp < bigBar.y){
+    //         smallBar.y = temp
+    //         settings.ropeHeight = parseFloat(pivotPointWall.value());
+    //     } else {
+    //         smallBar.y = bigBar.y;
+    //     }
+
+    //     // Debugging
+    //     // console.log("pivotPointWall: " + pivotPointWall.value());
+    //     // console.log("settings.ropeHeight: " + settings.ropeHeight);
+    //     // console.log("temp: " + temp);
+    //     // console.log("smallBar.y: " + smallBar.y);
+    //     // console.log("bigBar.y: " + bigBar.y);
+    // });
+
+
+
+
+    arrowPoint.input(function() {
+        forces[0][0].x = parseFloat(arrowPoint.value())/20 + bigBar.x;
+        settings.angleDistance = parseFloat(arrowPoint.value());
     });
 
-    smallBarModulus.input(function () {
-        settings.smallBarModulus = parseFloat(smallBarModulus.value());
-    });
-
-    smallBarForceValue.input(function () {
-        if(addedForce) {
-            smallBarForceValue.removeAttribute('readonly');
-            forces[1][1].x = parseFloat(smallBarForceValue.value()) * 3;
+    crossArea.input(function () {
+        if (crossArea.value() != 0) {
+            inputOfCrossArea = true;
         } else {
-            smallBarForceValue.attribute('readonly', '');
+            inputOfCrossArea = false;
+        }
+    });
+
+    youngsModulus.input(function () {
+        settings.greyRopeModulus = parseFloat(youngsModulus.value());
+    });
+
+    forceMagni.input(function() {
+        if(forceMagni.value() > 0){
+            forces[0][1].y = parseFloat(forceMagni.value()) * 2;
+        } else {
+            forces[0][1].y = 0;
         }
     });
     */
-    forcePoint2.attribute('disabled', 'true');
-    forceMagni2.attribute('disabled', 'true');
+
+
+
 }
 
 let deformationGrey = 0;
@@ -500,18 +552,18 @@ function changeDrawing() {
     var bigForces = []
     var smallForces = []
     if(settings.force1Distance <= settings.bigBarWidth) {
-        bigForces.push([settings.force1Magni, settings.force1Distance])
+        bigForces.push([(Math.round((forces[0][1].x/3) / 0.5) * 0.5) , settings.force1Distance])
     } else {
-        bigForces.push([settings.force1Magni, settings.force1Distance])
-        smallForces.push([settings.force1Magni, settings.force1Distance])
+        bigForces.push([(Math.round((forces[0][1].x/3) / 0.5) * 0.5) , settings.force1Distance])
+        smallForces.push([(Math.round((forces[0][1].x/3) / 0.5) * 0.5) , settings.force1Distance])
     }
 
     if(forces.length > 1) {
         if(settings.force2Distance <= settings.bigBarWidth) {
-            bigForces.push([settings.force1Magni, settings.force2Distance])
+            bigForces.push([(Math.round((forces[1][1].x/3) / 0.5) * 0.5) , settings.force2Distance])
         } else {
-            bigForces.push([settings.force1Magni, settings.force2Distance])
-            smallForces.push([settings.force1Magni, settings.force2Distance])
+            bigForces.push([(Math.round((forces[1][1].x/3) / 0.5) * 0.5) , settings.force2Distance])
+            smallForces.push([(Math.round((forces[1][1].x/3) / 0.5) * 0.5) , settings.force2Distance])
         }
     }
 
@@ -611,23 +663,16 @@ function easing(x) {
 }
 
 function addForce() {
-    forcePoint2.removeAttribute('disabled');
-    forceMagni2.removeAttribute('disabled');
-
-    forces[1] = [createVector(bigBar.x + bigBar.width + smallBar.width, bigBar.y),  createVector(15 * 5, 0), 'crimson']
+    forces[1] = [createVector(bigBar.x + bigBar.width + smallBar.width, bigBar.y),  createVector(15 * 3, 0), 'crimson']
     settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
+    forceMagni2.value(15)
     console.log("x: " + forces[1][0].x, "y: " + forces[1][0].y)
 }
 
 function removeForce() {
     forces.splice(1, 1)
     settings.force2Distance = 0;
-    settings.force2Magni = 0;
-    forcePoint2.value(0)
     forceMagni2.value(0)
-
-    forcePoint2.attribute('disabled', 'true');
-    forceMagni2.attribute('disabled', 'true');
 }
 
 function updateForces(){
@@ -659,8 +704,6 @@ function mouseReleased() {
     distanceChange = false;
     barChange = false;
     lengthChange = false;
-    force1Move = false;
-    force2Move = false;
 }
 
 
@@ -759,176 +802,143 @@ function draw() {
     strokeWeight(bigBar.height/3);
     if(bigBar.animation && t < 1){
         t += 0.035
-        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2*easing(t)), bigBar.y, bigBar.height/3, 'black');
         line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2*easing(t)), bigBar.y)
     } else {
-        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2), bigBar.y, bigBar.height/3, 'black');
         line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2), bigBar.y)
     }
 
     stroke(smallBar.color);
     strokeWeight(smallBar.height/3);
     if(smallBar.animation && t < 1){
-        drawStrokedLine(bigBar.x + bigBar.width + (bigBar.change/2*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change/2*easing(t)) + (smallBar.change/2*easing(t)), (bigBar.y), smallBar.height/3, 'black');
         line(bigBar.x + bigBar.width + (bigBar.change/2*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change/2*easing(t)) + (smallBar.change/2*easing(t)), (bigBar.y))
     } else {
-        drawStrokedLine(bigBar.x + bigBar.width + bigBar.change/2, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change/2) + (smallBar.change/2), bigBar.y, smallBar.height/3, 'black');
         line(bigBar.x + bigBar.width + bigBar.change/2, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change/2) + (smallBar.change/2), bigBar.y)
     }
 
     resetMatrix()
 
+
     // Force values
+    if(!bigBar.animation){
 
+        forces.forEach(force => {
+            drawArrow(force[0], force[1], force[2])
 
-    forces.forEach(force => {
-        drawArrow(force[0], force[1], force[2])
+        });
 
-    });
-
-    forces.forEach((force,index) => {
-        if (force[1].x >= 0){
-            if(dist(mouseX, mouseY, force[0].x + force[1].x, force[0].y) < 9){
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                circle(force[0].x + force[1].x, force[0].y, 20);
-                if(mouseIsPressed & !active){
-                    force[3] = true;
-                    active = true;
+        forces.forEach((force,index) => {
+            if (force[1].x >= 0){
+                if(dist(mouseX, mouseY, force[0].x + force[1].x + 15, force[0].y) < 9){
+                    strokeWeight(0)
+                    fill(255, 255, 200, 175);
+                    circle(force[0].x + force[1].x + 15, force[0].y, 20);
+                    if(mouseIsPressed & !active){
+                        force[3] = true;
+                        active = true;
+                    }
+                }
+            } else {
+                if(dist(mouseX, mouseY, force[0].x + force[1].x - 15, force[0].y) < 9){
+                    strokeWeight(0)
+                    fill(255, 255, 200, 175);
+                    circle(force[0].x + force[1].x - 15, force[0].y, 20);
+                    if(mouseIsPressed & !active){
+                        force[3] = true;
+                        active = true;
+                    }
                 }
             }
-        } else {
-            if(dist(mouseX, mouseY, force[0].x + force[1].x, force[0].y) < 9){
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                circle(force[0].x + force[1].x, force[0].y, 20);
-                if(mouseIsPressed & !active){
-                    force[3] = true;
-                    active = true;
+            if (force[1].x >= 0){
+                if(mouseY > force[0].y - 7.5 && mouseY < force[0].y + 7.5 &&
+                    mouseX > force[0].x + 10 && mouseX < force[0].x + force[1].x - 10){
+                    drawArrow(force[0], force[1], 'tomato');
+                    strokeWeight(0)
+                    fill(255, 255, 200, 175);
+                    if(mouseIsPressed & !active){
+                        force[4] = true;
+                        active = true;
+                    }
                 }
             }
-        }
-        if (force[1].x >= 0){
-            if(mouseY > force[0].y - 7.5 && mouseY < force[0].y + 7.5 &&
-                mouseX > force[0].x + 10 && mouseX < force[0].x + force[1].x - 10){
-                drawArrow(force[0], force[1], 'tomato');
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                if(mouseIsPressed & !active){
-                    force[4] = true;
-                    active = true;
+            if(force[4]){
+                drawArrow(force[0], force[1], 'orangered');
+                if(mouseX > bigBar.x && mouseX < bigBar.x + bigBar.width + smallBar.width){
+                    force[0].x = mouseX;
+                } else if (mouseX > bigBar.x + bigBar.width + smallBar.width){
+                    force[0].x = bigBar.x + bigBar.width + smallBar.width
+                } else if (mouseX < bigBar.x){
+                    force[0].x = bigBar.x
+                }
+
+                console.log(index);
+
+                if (index == 0){
+                    settings.force1Distance = Math.round((force[0].x - 170) * 20 / settings.snapValue) * settings.snapValue
+                } else {
+                    settings.force2Distance = Math.round((force[0].x - 170) * 20 / settings.snapValue) * settings.snapValue
                 }
             }
-        } else {
-            if(mouseY > force[0].y - 7.5 && mouseY < force[0].y + 7.5 &&
-                mouseX < force[0].x + 10 && mouseX > force[0].x + force[1].x - 10){
-                drawArrow(force[0], force[1], 'tomato');
+
+            push()
+            if(displayForce || force[4]){
+                // Distance of rope
+                resetMatrix()
                 strokeWeight(0)
-                fill(255, 255, 200, 175);
-                if(mouseIsPressed & !active){
-                    force[4] = true;
-                    active = true;
+                fill('black')
+                stroke('black')
+                textAlign(CENTER)
+                translate(bigBar.x, bigBar.y)
+                angular = atan2(((bigBar.y)+((smallBar.change/2)*easing(t))) - bigBar.y, (bigBar.x + bigBar.width+smallBar.width) - bigBar.x);
+                rotate(angular);
+                if(index == 0){
+                    text(settings.force1Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -25);
+                } else if (!displayForce) {
+                    text(settings.force2Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -25);
+                } else {
+                    text(settings.force2Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -65);
+                }
+
+                strokeWeight(1.5)
+                rotate(-90)
+                translate(0, 0)
+                if (displayForce && index == 1){
+                    translate(40, 0)
+                    curlyBracket(dist(bigBar.x, bigBar.y, force[0].x, force[0].y))
+                    translate(0,0);
+                } else{
+                    curlyBracket(dist(bigBar.x, bigBar.y, force[0].x, force[0].y))
+                }
+
+                resetMatrix()
+            }
+            pop()
+
+            if(displayData || force[3] || displayForce){
+                strokeWeight(0);
+                fill(0, 0, 0, 250);
+                text((Math.round((force[1].x/3) / 0.5) * 0.5).toFixed(1) + " kN", force[0].x + (force[1].x/3/2), (force[0].y + 35));
+            }
+
+            if (force[3]){
+                strokeWeight(0);
+                fill(255, 255, 200, 250);
+                if(force[1].x >= 0){
+                    circle(force[0].x + force[1].x + 15, force[0].y, 25);
+                } else {
+                    circle(force[0].x + force[1].x - 15, force[0].y, 25);
+                }
+                if(mouseX <= force[0].x){
+                    force[1] = createVector(-(force[0].x - mouseX - 15), 0)
+                } else {
+                    force[1] = createVector((mouseX - 15) - force[0].x, 0)
                 }
             }
-        }
-        if(force[4]){
-            drawArrow(force[0], force[1], 'orangered');
-            if(mouseX > bigBar.x && mouseX < bigBar.x + bigBar.width + smallBar.width){
-                force[0].x = mouseX;
-            } else if (mouseX > bigBar.x + bigBar.width + smallBar.width){
-                force[0].x = bigBar.x + bigBar.width + smallBar.width
-            } else if (mouseX < bigBar.x){
-                force[0].x = bigBar.x
-            }
-
-
-
-            if (index == 0){
-                settings.force1Distance = Math.round((force[0].x - 170) * 20 / settings.snapValue) * settings.snapValue
-            } else {
-                settings.force2Distance = Math.round((force[0].x - 170) * 20 / settings.snapValue) * settings.snapValue
-            }
-        }
-
-        push()
-        if(displayForce || force[4]){
-            // Distance of rope
-            resetMatrix()
-            strokeWeight(0)
-            fill('black')
-            stroke('black')
-            textAlign(CENTER)
-            translate(bigBar.x, bigBar.y)
-            angular = atan2(((bigBar.y)+((smallBar.change/2)*easing(t))) - bigBar.y, (bigBar.x + bigBar.width+smallBar.width) - bigBar.x);
-            rotate(angular);
-            if(index == 0){
-                text(settings.force1Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -25);
-            } else if (!displayForce) {
-                text(settings.force2Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -25);
-            } else {
-                text(settings.force2Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -65);
-            }
-
-            strokeWeight(1.5)
-            rotate(-90)
-            translate(0, 0)
-            if (displayForce && index == 1){
-                translate(40, 0)
-                curlyBracket(dist(bigBar.x, bigBar.y, force[0].x, force[0].y))
-                translate(0,0);
-            } else{
-                curlyBracket(dist(bigBar.x, bigBar.y, force[0].x, force[0].y))
-            }
-
-            resetMatrix()
-        }
-        pop()
-
-        if(displayData || force[3] || displayForce){
-            strokeWeight(0);
-            fill(0, 0, 0, 250);
-            if(index == 0){
-                text(settings.force1Magni + " kN", force[0].x + (force[1].x/5), (force[0].y + 35));
-            } else {
-                text(settings.force2Magni + " kN", force[0].x + (force[1].x/5), (force[0].y + 35));
-            }
-        }
-
-        if (force[3]){
-            strokeWeight(0);
-            fill(255, 255, 200, 250);
-            var forceMagni = 0;
-
-            circle(mouseX, mouseY, 25);
-            if(mouseX <= force[0].x){
-                force[1] = createVector(-(force[0].x - mouseX), 0)
-                forceMagni = (Math.round(((-(force[0].x - mouseX)) / 5 ) / 0.5) * 0.5).toFixed(1)
-            } else {
-                force[1] = createVector((mouseX) - force[0].x, 0)
-                forceMagni = (Math.round(((mouseX) - force[0].x) / 5 / 0.5) * 0.5).toFixed(1)
-            }
-
-            if(force[1].x >= 150) {
-                force[1].x = 150;
-            } else if (force[1] <= 150) {
-                force[1].x = -150;
-            }
-
-            if (index == 0){
-                settings.force1Magni = forceMagni
-            } else {
-                settings.force2Magni = forceMagni
-            }
-        }
-    });
-
+        });
+    }
     resetMatrix();
-
-
 
     // Change values
     if(!bigBar.animation){
-
 
 
         // Rope Distance
@@ -939,18 +949,6 @@ function draw() {
             if(mouseIsPressed && !active){
                 distanceChange = true
                 active = true
-
-                console.log(settings.force2Distance)
-                console.log(settings.bigBarWidth)
-                console.log(settings.smallBarWidth)
-
-                if(settings.force1Distance == settings.bigBarWidth + settings.smallBarWidth){
-                    force1Move = true;
-                } else if (settings.force2Distance == settings.bigBarWidth + settings.smallBarWidth){
-                    force2Move = true;
-                }
-
-
             }
         }
         if(distanceChange){
@@ -967,19 +965,6 @@ function draw() {
                 smallBar.width = 600 - bigBar.x - bigBar.width;
                 settings.smallBarWidth = Math.round(dist(bigBar.x + bigBar.width, smallBar.y, bigBar.x + bigBar.width + smallBar.width, smallBar.y) * 20 / settings.snapValue) * settings.snapValue;
             }
-
-
-            if(force1Move){
-                console.log("success")
-                forces[0][0].x = bigBar.x + bigBar.width + smallBar.width
-                settings.force1Distance = settings.bigBarWidth + settings.smallBarWidth
-            }
-            if(force2Move){
-                console.log("success")
-                forces[1][0].x = bigBar.x + bigBar.width + smallBar.width
-                settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
-            }
-
             updateForces()
         }
 
@@ -992,21 +977,12 @@ function draw() {
             if(mouseIsPressed && !active){
                 lengthChange = true
                 active = true
-
-                if(settings.force1Distance == settings.bigBarWidth){
-                    force1Move = true;
-                } else if (settings.force2Distance == settings.bigBarWidth){
-                    force2Move = true;
-                }
             }
         }
         if(lengthChange){
             strokeWeight(0);
             fill(255, 200, 90, 255);
             circle(bigBar.x + bigBar.width, bigBar.y, 15);
-
-
-
             if(mouseX > 550){
                 bigBar.width = 550 - bigBar.x;
                 settings.bigBarWidth = Math.round(dist(bigBar.x, bigBar.y, bigBar.x + bigBar.width, bigBar.y) * 20 / settings.snapValue) * settings.snapValue;
@@ -1019,17 +995,6 @@ function draw() {
                 console.log()
                 settings.bigBarWidth = Math.round(dist(bigBar.x, bigBar.y, bigBar.x + bigBar.width, bigBar.y) * 20 / settings.snapValue) * settings.snapValue;
             }
-
-            if(force1Move){
-                forces[0][0].x = bigBar.x + bigBar.width
-                settings.force1Distance = settings.bigBarWidth
-            }
-            if(force2Move){
-                forces[1][0].x = bigBar.x + bigBar.width
-                settings.force2Distance = settings.bigBarWidth
-            }
-
-
             updateForces()
 
         }
@@ -1105,28 +1070,19 @@ function draw() {
     // // Hover feature Test
     // if (mouseX > bigBar.x && mouseX < bigBar.x + bigBar.width && mouseY > bigBar.y && mouseY < bigBar.y + bigBar.height)
 
-    // objectTab1
+    snapInput.value(settings.snapValue);
     bigBarWidth.value(settings.bigBarWidth);
-    bigBarForcePoint.value(settings.force1Distance);
-    bigBarCrossArea.value(settings.bigBarHeight);
-    bigBarModulus.value(settings.bigBarModulus);
-    bigBarForceValue.value(forces[0][1].x / 3);
-
-    // objectTab2
     smallBarWidth.value(settings.smallBarWidth);
     crossArea1.value(settings.bigBarHeight);
     crossArea2.value(settings.smallBarHeight);
     forcePoint1.value(settings.force1Distance);
     forcePoint2.value(settings.force2Distance);
-    forceMagni1.value(Math.round(forces[0][1].x / 5 / 0.5) * 0.5);
+    forceMagni1.value(forces[0][1].x / 3);
     if(forces.length > 1) {
-        forceMagni1.value(Math.round(forces[0][1].x / 5 / 0.5) * 0.5);
+        forceMagni1.value(forces[0][1].x / 3);
     } else {
         forceMagni2.value(0)
     }
-
-
-
     // Added by Joseph
     // For interacting with elements outside the canvas
         /*
@@ -1154,48 +1110,19 @@ exitButton.addEventListener('click', () => {
 // Joseph
 // For Switching materials in the materialSelect
 const materialElements = document.querySelectorAll('.material');
-const materialElements2 = document.querySelectorAll('.material2');
-
 materialElements.forEach((element) => {
     element.addEventListener('click', () => {
         let active;
         if (element.classList.contains('active')) {
             active = true;
         }
-        // Check if element is in objectTab1
-        if (element.closest('#objectTab1')) {
-            materialElements.forEach((el) => {
-                if (el.closest('#objectTab1')) {
-                    el.classList.remove('active');
-                }
-            });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
-            }
-        }
-    });
-});
-
-materialElements2.forEach((element) => {
-    element.addEventListener('click', () => {
-        let active;
-        if (element.classList.contains('active')) {
-            active = true;
-        }
-        // Check if element is in objectTab2
-        if (element.closest('#objectTab2')) {
-            materialElements2.forEach((el) => {
-                if (el.closest('#objectTab2')) {
-                    el.classList.remove('active');
-                }
-            });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
-            }
+        materialElements.forEach((el) => {
+            el.classList.remove('active');
+        });
+        if (active == true) {
+            element.classList.remove('active');
+        } else {
+            element.classList.add('active');
         }
     });
 });
