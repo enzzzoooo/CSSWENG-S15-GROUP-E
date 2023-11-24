@@ -14,13 +14,6 @@ let smallBarModulus;
 let smallBarForceValue;
 
 // old variables
-let youngsModulus;
-let forcePoint1;
-let forcePoint2
-let forceMagni1;
-let forceMagni2
-let crossArea1;
-let crossArea2;
 
 
 
@@ -58,10 +51,10 @@ function drawStrokedLine(x1, y1, x2, y2, lineHeight, strokecolor){
     pop();
 }
 
-function drawArrow(base, vec, myColor) {
+function drawArrow(base, vec, myColor, size) {
     push();
     stroke(myColor);
-    strokeWeight(12);
+    strokeWeight(size);
     fill(myColor);
     translate(base.x, base.y);
     if(vec.x >= 0){
@@ -70,7 +63,7 @@ function drawArrow(base, vec, myColor) {
         line(0, 0, vec.x + 15, vec.y)
     }
     rotate(vec.heading());
-    let arrowSize = 5;
+    let arrowSize = 12/5;
     translate(vec.mag() - arrowSize - 15, 0);
     triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
     pop();
@@ -89,10 +82,12 @@ let settings = {
     smallBarHeight: 100,
     bigBarModulus: 200,
     smallBarModulus: 200,
+    bigBarLimit: 0,
+    smallBarLimit: 0,
     force1Distance: 1000,
     force2Distance: 0,
-    force1Magni: 10,
-    force2Magni: 0,
+    force1Value: 10.0,
+    force2Value: 0,
     crossArea1: 200,
     crossArea2: 100
 }
@@ -114,7 +109,7 @@ let bigBar = {
     animation: false,
     width: settings.bigBarWidth / 20,
     height: 200,
-    color: '#FFB81C',
+    color: '#bbdbf0',
     angle: 0
 }
 
@@ -126,7 +121,7 @@ let smallBar = {
     animation: false,
     width: settings.smallBarWidth / 20,
     height: 100,
-    color: '#747474',
+    color: '#CCC9C9',
     angle: 0
 }
 
@@ -144,6 +139,8 @@ let lengthChange = false;
 let inputOfCrossArea =false;
 let force1Move = false;
 let force2Move = false;
+let force1MoveToo = false;
+let force2MoveToo = false;
 
 function preload() {
     font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
@@ -207,62 +204,32 @@ function setup() {
     let changeWood1 = document.getElementById('changeMatToWood1');
     changeWood1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#B48777' && settings.bigBarModulus != 100){
-            bigBar.color = '#B48777';
-            settings.bigBarModulus = 100;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#B48777';
+        settings.bigBarModulus = 25;
     });
     let changeMetal1 = document.getElementById('changeMatToMetal1');
     changeMetal1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#CCC9C9' && settings.bigBarModulus != 300){
-            bigBar.color = '#CCC9C9';
-            settings.bigBarModulus = 300;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#CCC9C9';
+        settings.bigBarModulus = 75;
     });
     let changeLog1 = document.getElementById('changeMatToLog1');
     changeLog1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#724D3F' && settings.bigBarModulus != 400){
-            bigBar.color = '#724D3F';
-            settings.bigBarModulus = 400;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#724D3F';
+        settings.bigBarModulus = 100
     });
     let changeSteel1 = document.getElementById('changeMatToSteel1');
     changeSteel1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#000000' && settings.bigBarModulus != 500){
-            bigBar.color = '#000000';
-            settings.bigBarModulus = 500;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#bbdbf0';
+        settings.bigBarModulus = 200;
     });
     let changeRuby1 = document.getElementById('changeMatToRuby1');
     changeRuby1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#FD0606' && settings.bigBarModulus != 600){
-            bigBar.color = '#FD0606';
-            settings.bigBarModulus = 600;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#FD0606';
+        settings.bigBarModulus = 50;
     });
 
     // objectTab2
@@ -270,62 +237,32 @@ function setup() {
     let changeWood2 = document.getElementById('changeMatToWood2');
     changeWood2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 100){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 100;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#B48777';
+        settings.smallBarModulus = 25;
     });
     let changeMetal2 = document.getElementById('changeMatToMetal2');
     changeMetal2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#CCC9C9' && settings.smallBarModulus != 300){
-            smallBar.color = '#CCC9C9';
-            settings.smallBarModulus = 300;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#CCC9C9';
+        settings.smallBarModulus = 75;
     });
     let changeLog2 = document.getElementById('changeMatToLog2');
     changeLog2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 400){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 400;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#B48777';
+        settings.smallBarModulus = 100;
     });
     let changeSteel2 = document.getElementById('changeMatToSteel2');
     changeSteel2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#000000' && settings.smallBarModulus != 500){
-            smallBar.color = '#000000';
-            settings.smallBarModulus = 500;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#bbdbf0';
+        settings.smallBarModulus = 200;
     });
     let changeRuby2 = document.getElementById('changeMatToRuby2');
     changeRuby2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#FD0606' && settings.smallBarModulus != 600){
-            smallBar.color = '#FD0606';
-            settings.smallBarModulus = 600;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#FD0606';
+        settings.smallBarModulus = 50;
     });
 
     forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), 'coral']
@@ -338,16 +275,16 @@ function setup() {
 
     // objectTab1
     bigBarWidth = select('#bigBarWidth');
-    bigBarForcePoint = select('#bigBarForcePoint');
     bigBarCrossArea = select('#bigBarCrossArea');
     bigBarModulus = select('#bigBarModulus');
+    bigBarForcePoint = select('#bigBarForcePoint');
     bigBarForceValue = select('#bigBarForceValue');
 
     // objectTab2
     smallBarWidth = select('#smallBarWidth');
-    smallBarForcePoint = select('#smallBarForcePoint');
     smallBarCrossArea = select('#smallBarCrossArea');
     smallBarModulus = select('#smallBarModulus');
+    smallBarForcePoint = select('#smallBarForcePoint');
     smallBarForceValue = select('#smallBarForceValue');
 
 
@@ -369,105 +306,58 @@ function setup() {
     });
 
     smallBarWidth.input(function() {
-
         settings.smallBarWidth = parseFloat(pivotPointBar.value());
         smallBar.width = settings.smallBarWidth / 20;
         updateForces();
-
-
-        // Debugging
-        // console.log("pivotPointBar: " + pivotPointBar.value());
-        // console.log("settings.ropeDistance: " + settings.ropeDistance);
-        // console.log("temp: " + temp);
-        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
-        // console.log("bigBar.x: " + bigBar.x);
     });
 
-    forcePoint1.input(function() {
 
-        forces[0][0].x = parseFloat(forcePoint1.value())/20 + bigBar.x;
-        settings.force1Distance = parseFloat(forcePoint1.value());
+    // objectTab1
+    bigBarWidth.input(function () {
+        settings.bigBarWidth = parseFloat(bigBarWidth.value());
+        bigBar.width = settings.bigBarWidth / 20;
         updateForces();
-        // Debugging
-        // console.log("pivotPointBar: " + pivotPointBar.value());
-        // console.log("settings.ropeDistance: " + settings.ropeDistance);
-        // console.log("temp: " + temp);
-        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
-        // console.log("bigBar.x: " + bigBar.x);
     });
 
-    forcePoint2.input(function() {
+    bigBarForcePoint.input(function () {
+        forces[0][0].x = parseFloat(bigBarForcePoint.value())/20 + bigBar.x;
+        settings.force1Distance = parseFloat(bigBarForcePoint.value());
+        updateForces();
+    });
 
-        if(forces.length > 1){
-            forces[1][0].x = parseFloat(forcePoint2.value())/20 + bigBar.x;
-            settings.force2Distance = parseFloat(forcePoint2.value());
+    bigBarCrossArea.input(function () {
+        settings.bigBarHeight = parseInt(bigBarCrossArea.value());
+    });
+
+    bigBarModulus.input(function () {
+        settings.bigBarModulus = parseFloat(bigBarModulus.value());
+    });
+
+    bigBarForceValue.input(function () {
+        forces[0][1].x = parseFloat(bigBarForceValue.value()) * 5;
+        if (forces[0][1].x >= 150){
+            forces[0][1].x = 150;
+        } else if (forces[0][1].x <= -150){
+            forces[0][1].x = -150;
+        }
+        settings.force1Value = parseFloat(bigBarForceValue.value())
+    });
+
+    // objectTab2
+    smallBarWidth.input(function() {
+        settings.smallBarWidth = parseFloat(pivotPointBar.value());
+        smallBar.width = settings.smallBarWidth / 20;
+        updateForces();
+    });
+
+    smallBarForcePoint.input(function() {
+        if(addedForce){
+            smallBarForcePoint.removeAttribute('readonly');
+
+
+            forces[1][0].x = parseFloat(smallBarForcePoint.value())/20 + bigBar.x;
+            settings.force2Distance = parseFloat(smallBarForcePoint.value());
             updateForces();
-        }
-
-
-        // Debugging
-        // console.log("pivotPointBar: " + pivotPointBar.value());
-        // console.log("settings.ropeDistance: " + settings.ropeDistance);
-        // console.log("temp: " + temp);
-        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
-        // console.log("bigBar.x: " + bigBar.x);
-    });
-
-    forceMagni1.input(function() {
-        if(forceMagni1.value() > 0){
-            forces[0][1].x = parseFloat(forceMagni1.value()) * 5;
-            if (forces[0][1].x >= 150){
-                forces[0][1].x = 150;
-            } else if (forces[0][1].x <= -150){
-                forces[0][1].x = -150;
-            }
-            settings.force1Magni = parseFloat(forceMagni1.value())
-        } else {
-            forces[0][1].x = 5;
-            settings.force1Magni = 5
-        }
-    });
-
-    forceMagni2.input(function() {
-        if(forces.length > 0){
-            if(forceMagni2.value() != 0){
-                forces[1][1].x = parseFloat(forceMagni2.value()) * 5;
-                if (forces[1][1].x >= 150){
-                    forces[1][1].x = 150;
-                } else if (forces[1][1].x <= -150){
-                    forces[1][1].x = -150;
-                }
-                settings.force2Magni = parseFloat(forceMagni2.value())
-            } else {
-                forces[1][1].x = 5;
-                settings.force2Magni = 5
-            }
-        }
-    })
-
-
-    crossArea1.input(function() {
-        settings.bigBarHeight = crossArea1.input();
-    });
-
-    crossArea2.input(function() {
-        settings.smallBarHeight = crossArea2.input();
-    })
-
-
-
-    /*
-
-
-    givenAngle.input(function () {
-        pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
-
-
-
-        let temp = -(pivotPointWall/20 - bigBar.y);
-        if (temp < bigBar.y){
-            smallBar.y = temp
-            settings.ropeHeight = parseFloat(pivotPointWall);
         } else {
             smallBarForcePoint.attribute('readonly', '');
         }
@@ -482,16 +372,24 @@ function setup() {
     });
 
     smallBarForceValue.input(function () {
+
+
         if(addedForce) {
             smallBarForceValue.removeAttribute('readonly');
-            forces[1][1].x = parseFloat(smallBarForceValue.value()) * 3;
+            forces[1][1].x = parseFloat(smallBarForceValue.value()) * 5;
+            if (forces[1][1].x >= 150){
+                forces[1][1].x = 150;
+            } else if (forces[1][1].x <= -150){
+                forces[1][1].x = -150;
+            }
+            settings.force2Value = parseFloat(smallBarForceValue.value())
         } else {
             smallBarForceValue.attribute('readonly', '');
         }
     });
-    */
-    forcePoint2.attribute('disabled', 'true');
-    forceMagni2.attribute('disabled', 'true');
+
+    // Setup Material
+
 }
 
 let deformationGrey = 0;
@@ -500,32 +398,36 @@ function changeDrawing() {
     var bigForces = []
     var smallForces = []
     if(settings.force1Distance <= settings.bigBarWidth) {
-        bigForces.push([settings.force1Magni, settings.force1Distance])
+        bigForces.push([settings.force1Value, settings.force1Distance])
     } else {
-        bigForces.push([settings.force1Magni, settings.force1Distance])
-        smallForces.push([settings.force1Magni, settings.force1Distance])
+        bigForces.push([settings.force1Value, settings.force1Distance])
+        smallForces.push([settings.force1Value, settings.force1Distance])
     }
 
     if(forces.length > 1) {
         if(settings.force2Distance <= settings.bigBarWidth) {
-            bigForces.push([settings.force1Magni, settings.force2Distance])
+            bigForces.push([settings.force1Value, settings.force2Distance])
         } else {
-            bigForces.push([settings.force1Magni, settings.force2Distance])
-            smallForces.push([settings.force1Magni, settings.force2Distance])
+            bigForces.push([settings.force1Value, settings.force2Distance])
+            smallForces.push([settings.force1Value, settings.force2Distance])
         }
     }
 
     var bigLoadLength = 0;
     var smallLoadLength = 0;
+    var bigLoad = 0;
+    var smallLoad = 0;
 
     bigForces.forEach(bigforce => {
         bigLoadLength += bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]);
+        bigLoad += bigforce[0];
         console.log("Added bigLoadLength = " + bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]));
     });
     console.log("Total bigLoadLength = " + bigLoadLength);
 
     smallForces.forEach(smallforce => {
         smallLoadLength += smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth);
+        smallLoad += smallforce[0];
         console.log("Added smallLoadLength = " + smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth));
     });
     console.log("Total smallLoadLength = " + smallLoadLength);
@@ -542,6 +444,8 @@ function changeDrawing() {
 
     bigBar.change = bigDeformation;
     smallBar.change = smallDeformation;
+
+
 
     if(bigDeformation < 0){
         document.getElementById('deformationFirst').textContent = -(bigDeformation).toFixed(4) + 'mm' + " (contraction)";
@@ -574,6 +478,11 @@ function changeDrawing() {
     } else {
         document.getElementById('deflectionSecond').textContent = "0.0000mm";
     }
+
+    bigMaterialAxial = bigLoad * 1000 / settings.bigBarHeight
+    smallMaterialAxial = smallLoad * 1000 / settings.smallBarHeight
+    console.log("bigMaterialAxial = " + bigMaterialAxial);
+    console.log("smallMaterialAxial = " + smallMaterialAxial);
 
     if (atan2(bigBar.change, settings.bigBarWidth) > 5){
         alert(
@@ -611,23 +520,18 @@ function easing(x) {
 }
 
 function addForce() {
-    forcePoint2.removeAttribute('disabled');
-    forceMagni2.removeAttribute('disabled');
-
     forces[1] = [createVector(bigBar.x + bigBar.width + smallBar.width, bigBar.y),  createVector(15 * 5, 0), 'crimson']
     settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
+    settings.force2Value = 15.0;
     console.log("x: " + forces[1][0].x, "y: " + forces[1][0].y)
 }
 
 function removeForce() {
     forces.splice(1, 1)
     settings.force2Distance = 0;
-    settings.force2Magni = 0;
-    forcePoint2.value(0)
-    forceMagni2.value(0)
-
-    forcePoint2.attribute('disabled', 'true');
-    forceMagni2.attribute('disabled', 'true');
+    settings.force2Value = 0;
+    smallBarForcePoint.value(0)
+    smallBarForceValue.value(0)
 }
 
 function updateForces(){
@@ -661,78 +565,8 @@ function mouseReleased() {
     lengthChange = false;
     force1Move = false;
     force2Move = false;
-}
-
-
-function changeMaterialToWood(x, y){
-    resetDrawing();
-    if(smallBar.color != '#B48777' && settings.greyRopeModulus != 100){
-        smallBar.color = '#B48777';
-        settings.greyRopeModulus = 100;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-
-    // Get the element's position relative to the document
-    var elementRect = clickableElement.getBoundingClientRect();
-    var elementX = elementRect.left;
-    var elementY = elementRect.top;
-
-    // Calculate the mouse position relative to the element
-    var relativeX = x - elementX;
-    var relativeY = y - elementY;
-
-    console.log('Mouse clicked at:', relativeX, relativeY);
-}
-
-function changeMaterialToMetal(){
-    resetDrawing();
-    if(smallBar.color != '#CCC9C9' && settings.greyRopeModulus != 300){
-        smallBar.color = '#CCC9C9';
-        settings.greyRopeModulus = 300;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToLog(){
-    resetDrawing();
-    if(smallBar.color != '#724D3F' && settings.greyRopeModulus != 400){
-        smallBar.color = '#724D3F';
-        settings.greyRopeModulus = 400;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToSteel(){
-    resetDrawing();
-    if(smallBar.color != '#000000' && settings.greyRopeModulus != 500){
-        smallBar.color = '#000000';
-        settings.greyRopeModulus = 500;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToRuby(){
-    resetDrawing();
-    if(smallBar.color != '#FD0606' && settings.greyRopeModulus != 600){
-        smallBar.color = '#FD0606';
-        settings.greyRopeModulus = 600;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
+    force1MoveToo = false;
+    force2MoveToo = false;
 }
 
 function curlyBracket(length){
@@ -759,62 +593,67 @@ function draw() {
     strokeWeight(bigBar.height/3);
     if(bigBar.animation && t < 1){
         t += 0.035
-        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2*easing(t)), bigBar.y, bigBar.height/3, 'black');
-        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2*easing(t)), bigBar.y)
+        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change*easing(t)), bigBar.y, bigBar.height/3, 'black');
+        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change*easing(t)), bigBar.y)
     } else {
-        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2), bigBar.y, bigBar.height/3, 'black');
-        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2), bigBar.y)
+        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change), bigBar.y, bigBar.height/3, 'black');
+        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change), bigBar.y)
     }
 
     stroke(smallBar.color);
     strokeWeight(smallBar.height/3);
     if(smallBar.animation && t < 1){
-        drawStrokedLine(bigBar.x + bigBar.width + (bigBar.change/2*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change/2*easing(t)) + (smallBar.change/2*easing(t)), (bigBar.y), smallBar.height/3, 'black');
-        line(bigBar.x + bigBar.width + (bigBar.change/2*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change/2*easing(t)) + (smallBar.change/2*easing(t)), (bigBar.y))
+        drawStrokedLine(bigBar.x + bigBar.width + (bigBar.change*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change*easing(t)) + (smallBar.change*easing(t)), (bigBar.y), smallBar.height/3, 'black');
+        line(bigBar.x + bigBar.width + (bigBar.change*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change*easing(t)) + (smallBar.change*easing(t)), (bigBar.y))
     } else {
-        drawStrokedLine(bigBar.x + bigBar.width + bigBar.change/2, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change/2) + (smallBar.change/2), bigBar.y, smallBar.height/3, 'black');
-        line(bigBar.x + bigBar.width + bigBar.change/2, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change/2) + (smallBar.change/2), bigBar.y)
+        drawStrokedLine(bigBar.x + bigBar.width + bigBar.change, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change) + (smallBar.change), bigBar.y, smallBar.height/3, 'black');
+        line(bigBar.x + bigBar.width + bigBar.change, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change) + (smallBar.change), bigBar.y)
     }
 
     resetMatrix()
+
+    if(bigBar.animation) {
+        drawingContext.setLineDash([6, 6]);
+        stroke(0);
+        strokeWeight(2);
+        noFill();
+        rectMode(CENTER);
+        rect((bigBar.x + (bigBar.width/2)), bigBar.y, bigBar.width, bigBar.height/3)
+        rect((bigBar.x + bigBar.width + (smallBar.width/2)), bigBar.y, smallBar.width, smallBar.height/3)
+        drawingContext.setLineDash([]);
+        resetMatrix()
+        rectMode(CORNER)
+    }
 
     // Force values
 
 
     forces.forEach(force => {
-        drawArrow(force[0], force[1], force[2])
+        drawArrow(force[0], force[1], force[2], 12)
 
     });
 
     forces.forEach((force,index) => {
-        if (force[1].x >= 0){
-            if(dist(mouseX, mouseY, force[0].x + force[1].x, force[0].y) < 9){
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                circle(force[0].x + force[1].x, force[0].y, 20);
-                if(mouseIsPressed & !active){
-                    force[3] = true;
-                    active = true;
-                }
-            }
-        } else {
-            if(dist(mouseX, mouseY, force[0].x + force[1].x, force[0].y) < 9){
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                circle(force[0].x + force[1].x, force[0].y, 20);
-                if(mouseIsPressed & !active){
-                    force[3] = true;
-                    active = true;
-                }
+
+        if(dist(mouseX, mouseY, force[0].x + force[1].x, force[0].y) < 9){
+            strokeWeight(0)
+            fill(255, 255, 200, 175);
+            circle(force[0].x + force[1].x, force[0].y, 20);
+            if(mouseIsPressed & !active){
+                resetDrawing()
+                force[3] = true;
+                active = true;
             }
         }
+
         if (force[1].x >= 0){
             if(mouseY > force[0].y - 7.5 && mouseY < force[0].y + 7.5 &&
                 mouseX > force[0].x + 10 && mouseX < force[0].x + force[1].x - 10){
-                drawArrow(force[0], force[1], 'tomato');
+                drawArrow(force[0], force[1], 'tomato', 12);
                 strokeWeight(0)
                 fill(255, 255, 200, 175);
                 if(mouseIsPressed & !active){
+                    resetDrawing()
                     force[4] = true;
                     active = true;
                 }
@@ -822,17 +661,19 @@ function draw() {
         } else {
             if(mouseY > force[0].y - 7.5 && mouseY < force[0].y + 7.5 &&
                 mouseX < force[0].x + 10 && mouseX > force[0].x + force[1].x - 10){
-                drawArrow(force[0], force[1], 'tomato');
+                drawArrow(force[0], force[1], 'tomato', 12);
                 strokeWeight(0)
                 fill(255, 255, 200, 175);
                 if(mouseIsPressed & !active){
+                    resetDrawing()
                     force[4] = true;
                     active = true;
+
                 }
             }
         }
         if(force[4]){
-            drawArrow(force[0], force[1], 'orangered');
+            drawArrow(force[0], force[1], 'orangered', 12);
             if(mouseX > bigBar.x && mouseX < bigBar.x + bigBar.width + smallBar.width){
                 force[0].x = mouseX;
             } else if (mouseX > bigBar.x + bigBar.width + smallBar.width){
@@ -859,7 +700,7 @@ function draw() {
             stroke('black')
             textAlign(CENTER)
             translate(bigBar.x, bigBar.y)
-            angular = atan2(((bigBar.y)+((smallBar.change/2)*easing(t))) - bigBar.y, (bigBar.x + bigBar.width+smallBar.width) - bigBar.x);
+            angular = atan2(((bigBar.y)+((smallBar.change)*easing(t))) - bigBar.y, (bigBar.x + bigBar.width+smallBar.width) - bigBar.x);
             rotate(angular);
             if(index == 0){
                 text(settings.force1Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -25);
@@ -888,24 +729,24 @@ function draw() {
             strokeWeight(0);
             fill(0, 0, 0, 250);
             if(index == 0){
-                text(settings.force1Magni + " kN", force[0].x + (force[1].x/5), (force[0].y + 35));
+                text(settings.force1Value + " kN", force[0].x + (force[1].x/5), (force[0].y + 35));
             } else {
-                text(settings.force2Magni + " kN", force[0].x + (force[1].x/5), (force[0].y + 35));
+                text(settings.force2Value + " kN", force[0].x + (force[1].x/5), (force[0].y + 35));
             }
         }
 
         if (force[3]){
             strokeWeight(0);
             fill(255, 255, 200, 250);
-            var forceMagni = 0;
+            var forceValue = 0;
 
             circle(mouseX, mouseY, 25);
             if(mouseX <= force[0].x){
                 force[1] = createVector(-(force[0].x - mouseX), 0)
-                forceMagni = (Math.round(((-(force[0].x - mouseX)) / 5 ) / 0.5) * 0.5).toFixed(1)
+                forceValue = (Math.round(((-(force[0].x - mouseX)) / 5 ) / 0.5) * 0.5).toFixed(1)
             } else {
                 force[1] = createVector((mouseX) - force[0].x, 0)
-                forceMagni = (Math.round(((mouseX) - force[0].x) / 5 / 0.5) * 0.5).toFixed(1)
+                forceValue = (Math.round(((mouseX) - force[0].x) / 5 / 0.5) * 0.5).toFixed(1)
             }
 
             if(force[1].x >= 150) {
@@ -915,9 +756,9 @@ function draw() {
             }
 
             if (index == 0){
-                settings.force1Magni = forceMagni
+                settings.force1Value = forceValue
             } else {
-                settings.force2Magni = forceMagni
+                settings.force2Value = forceValue
             }
         }
     });
@@ -940,17 +781,11 @@ function draw() {
                 distanceChange = true
                 active = true
 
-                console.log(settings.force2Distance)
-                console.log(settings.bigBarWidth)
-                console.log(settings.smallBarWidth)
-
                 if(settings.force1Distance == settings.bigBarWidth + settings.smallBarWidth){
                     force1Move = true;
                 } else if (settings.force2Distance == settings.bigBarWidth + settings.smallBarWidth){
                     force2Move = true;
                 }
-
-
             }
         }
         if(distanceChange){
@@ -970,12 +805,10 @@ function draw() {
 
 
             if(force1Move){
-                console.log("success")
                 forces[0][0].x = bigBar.x + bigBar.width + smallBar.width
                 settings.force1Distance = settings.bigBarWidth + settings.smallBarWidth
             }
             if(force2Move){
-                console.log("success")
                 forces[1][0].x = bigBar.x + bigBar.width + smallBar.width
                 settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
             }
@@ -997,6 +830,12 @@ function draw() {
                     force1Move = true;
                 } else if (settings.force2Distance == settings.bigBarWidth){
                     force2Move = true;
+                }
+
+                if(settings.force1Distance == settings.smallBarWidth + settings.bigBarWidth){
+                    force1MoveToo = true;
+                } else if(settings.force2Distance == settings.smallBarWidth + settings.bigBarWidth){
+                    force2MoveToo = true;
                 }
             }
         }
@@ -1028,6 +867,14 @@ function draw() {
                 forces[1][0].x = bigBar.x + bigBar.width
                 settings.force2Distance = settings.bigBarWidth
             }
+            if(force1MoveToo){
+                forces[0][0].x = bigBar.x + bigBar.width + smallBar.width
+                settings.force1Distance = settings.bigBarWidth + settings.smallBarWidth
+            }
+            if(force2MoveToo){
+                forces[1][0].x = bigBar.x + bigBar.width + smallBar.width
+                settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
+            }
 
 
             updateForces()
@@ -1045,22 +892,32 @@ function draw() {
         resetMatrix()
         strokeWeight(0)
         fill('black')
-        translate(bigBar.x + bigBar.width + bigBar.change/2, bigBar.y)
-        text((bigBar.change).toFixed(2) + 'mm', -20, 120);
+        translate(bigBar.x + bigBar.width, bigBar.y)
+        text((bigBar.change).toFixed(2) + 'mm', -20, -80);
         rotate(90)
         strokeWeight(1.5)
-        translate(80, 0);
-        curlyBracket(bigBar.change/2)
+        rotate(-90)
+        translate(0, -80)
+        if(bigBar.change >= 0){
+            drawArrow(createVector(0, 15), createVector(Math.max(25, bigBar.change + 10), 0), 'black', 5)
+        } else {
+            drawArrow(createVector(0, 15), createVector(Math.min(-25, bigBar.change + 10), 0), 'black', 5)
+        }
 
         resetMatrix()
         strokeWeight(0)
         fill('black')
-        translate(bigBar.x + bigBar.width + bigBar.change/2 + smallBar.width + smallBar.change/2, bigBar.y)
-        text((smallBar.change).toFixed(2) + 'mm', -20, 120);
+        translate(bigBar.x + bigBar.width + smallBar.width, bigBar.y)
+        text((bigBar.change + smallBar.change).toFixed(2) + 'mm', -20, -60);
         rotate(90)
         strokeWeight(1.5)
-        translate(80, 0);
-        curlyBracket(smallBar.change/2)
+        rotate(-90)
+        translate(0, -60)
+        if(bigBar.change + smallBar.change >= 0){
+            drawArrow(createVector(0, 15), createVector(Math.max(25, bigBar.change + smallBar.change + 10), 0), 'black', 5)
+        } else {
+            drawArrow(createVector(0, 15), createVector(Math.min(-25, bigBar.change + smallBar.change + 10), 0), 'black', 5)
+        }
     }
 
     push()
@@ -1072,12 +929,12 @@ function draw() {
         fill('black')
         stroke('black')
         textAlign(CENTER)
-        translate(bigBar.x+bigBar.width + bigBar.change/2*easing(t) , bigBar.y+(bigBar.height/3/2))
+        translate(bigBar.x+bigBar.width + bigBar.change*easing(t) , bigBar.y+(bigBar.height/3/2))
         text((settings.bigBarWidth + (bigBar.change*easing(t))).toFixed(2) + 'mm', -(bigBar.width/2), 40);
         strokeWeight(1.5)
         translate(0, 0)
         rotate(90)
-        curlyBracket(dist(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change/2*easing(t)),bigBar.y))
+        curlyBracket(dist(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change*easing(t)),bigBar.y))
         resetMatrix()
     }
 
@@ -1088,14 +945,14 @@ function draw() {
         fill('black')
         stroke('black')
         textAlign(CENTER)
-        translate(bigBar.x + bigBar.width + bigBar.change/2*easing(t), smallBar.y)
+        translate(bigBar.x + bigBar.width + bigBar.change*easing(t), smallBar.y)
 
 
         text((settings.smallBarWidth + (smallBar.change*easing(t))).toFixed(2) + 'mm', smallBar.width/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
-        curlyBracket(dist(bigBar.x + bigBar.width +(bigBar.change/2*easing(t)), bigBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change/2*easing(t)) + (smallBar.change/2*easing(t)),bigBar.y))
+        curlyBracket(dist(bigBar.x + bigBar.width +(bigBar.change*easing(t)), bigBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change*easing(t)) + (smallBar.change*easing(t)),bigBar.y))
 
         resetMatrix()
     }
@@ -1110,38 +967,23 @@ function draw() {
     bigBarForcePoint.value(settings.force1Distance);
     bigBarCrossArea.value(settings.bigBarHeight);
     bigBarModulus.value(settings.bigBarModulus);
-    bigBarForceValue.value(forces[0][1].x / 3);
+    bigBarForceValue.value(settings.force1Value);
 
     // objectTab2
     smallBarWidth.value(settings.smallBarWidth);
-    crossArea1.value(settings.bigBarHeight);
-    crossArea2.value(settings.smallBarHeight);
-    forcePoint1.value(settings.force1Distance);
-    forcePoint2.value(settings.force2Distance);
-    forceMagni1.value(Math.round(forces[0][1].x / 5 / 0.5) * 0.5);
-    if(forces.length > 1) {
-        forceMagni1.value(Math.round(forces[0][1].x / 5 / 0.5) * 0.5);
+
+    if (addedForce) {
+        smallBarForcePoint.value(settings.force2Distance);
     } else {
-        forceMagni2.value(0)
+        smallBarForcePoint.value(0);
     }
-
-
-
-    // Added by Joseph
-    // For interacting with elements outside the canvas
-        /*
-        givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
-
-
-        arrowPoint.value(settings.angleDistance);
-
-        if(inputOfCrossArea == false){
-            crossArea.value(cylinderCrossArea(smallBar.height/2).toFixed(2));
-        }
-        youngsModulus.value(settings.greyRopeModulus);
-        forceMagni.value(forces[0][1].y / 2);
-
-        */
+    smallBarCrossArea.value(settings.smallBarHeight);
+    smallBarModulus.value(settings.smallBarModulus);
+    if (addedForce) {
+        smallBarForceValue.value(settings.force2Value);
+    } else {
+        smallBarForceValue.value(0);
+    }
 
 }
 
@@ -1169,11 +1011,7 @@ materialElements.forEach((element) => {
                     el.classList.remove('active');
                 }
             });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
-            }
+            element.classList.add('active');
         }
     });
 });
