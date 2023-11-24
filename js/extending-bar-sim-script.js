@@ -82,6 +82,8 @@ let settings = {
     smallBarHeight: 100,
     bigBarModulus: 200,
     smallBarModulus: 200,
+    bigBarLimit: 0,
+    smallBarLimit: 0,
     force1Distance: 1000,
     force2Distance: 0,
     force1Value: 10.0,
@@ -107,7 +109,7 @@ let bigBar = {
     animation: false,
     width: settings.bigBarWidth / 20,
     height: 200,
-    color: '#FFB81C',
+    color: '#bbdbf0',
     angle: 0
 }
 
@@ -119,7 +121,7 @@ let smallBar = {
     animation: false,
     width: settings.smallBarWidth / 20,
     height: 100,
-    color: '#747474',
+    color: '#CCC9C9',
     angle: 0
 }
 
@@ -202,62 +204,32 @@ function setup() {
     let changeWood1 = document.getElementById('changeMatToWood1');
     changeWood1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#B48777' && settings.bigBarModulus != 100){
-            bigBar.color = '#B48777';
-            settings.bigBarModulus = 100;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#B48777';
+        settings.bigBarModulus = 25;
     });
     let changeMetal1 = document.getElementById('changeMatToMetal1');
     changeMetal1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#CCC9C9' && settings.bigBarModulus != 300){
-            bigBar.color = '#CCC9C9';
-            settings.bigBarModulus = 300;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#CCC9C9';
+        settings.bigBarModulus = 75;
     });
     let changeLog1 = document.getElementById('changeMatToLog1');
     changeLog1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#724D3F' && settings.bigBarModulus != 400){
-            bigBar.color = '#724D3F';
-            settings.bigBarModulus = 400;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#724D3F';
+        settings.bigBarModulus = 100
     });
     let changeSteel1 = document.getElementById('changeMatToSteel1');
     changeSteel1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#000000' && settings.bigBarModulus != 500){
-            bigBar.color = '#000000';
-            settings.bigBarModulus = 500;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#bbdbf0';
+        settings.bigBarModulus = 200;
     });
     let changeRuby1 = document.getElementById('changeMatToRuby1');
     changeRuby1.addEventListener('click', function(event) {
         resetDrawing();
-        if(bigBar.color != '#FD0606' && settings.bigBarModulus != 600){
-            bigBar.color = '#FD0606';
-            settings.bigBarModulus = 600;
-        }
-        else{
-            bigBar.color = '#FFB81C';
-            settings.bigBarModulus = 200;
-        }
+        bigBar.color = '#FD0606';
+        settings.bigBarModulus = 50;
     });
 
     // objectTab2
@@ -265,62 +237,32 @@ function setup() {
     let changeWood2 = document.getElementById('changeMatToWood2');
     changeWood2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 100){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 100;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#B48777';
+        settings.smallBarModulus = 25;
     });
     let changeMetal2 = document.getElementById('changeMatToMetal2');
     changeMetal2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#CCC9C9' && settings.smallBarModulus != 300){
-            smallBar.color = '#CCC9C9';
-            settings.smallBarModulus = 300;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#CCC9C9';
+        settings.smallBarModulus = 75;
     });
     let changeLog2 = document.getElementById('changeMatToLog2');
     changeLog2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#B48777' && settings.smallBarModulus != 400){
-            smallBar.color = '#B48777';
-            settings.smallBarModulus = 400;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#B48777';
+        settings.smallBarModulus = 100;
     });
     let changeSteel2 = document.getElementById('changeMatToSteel2');
     changeSteel2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#000000' && settings.smallBarModulus != 500){
-            smallBar.color = '#000000';
-            settings.smallBarModulus = 500;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#bbdbf0';
+        settings.smallBarModulus = 200;
     });
     let changeRuby2 = document.getElementById('changeMatToRuby2');
     changeRuby2.addEventListener('click', function(event) {
         resetDrawing();
-        if(smallBar.color != '#FD0606' && settings.smallBarModulus != 600){
-            smallBar.color = '#FD0606';
-            settings.smallBarModulus = 600;
-        }
-        else{
-            smallBar.color = '#747474';
-            settings.smallBarModulus = 200;
-        }
+        smallBar.color = '#FD0606';
+        settings.smallBarModulus = 50;
     });
 
     forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), 'coral']
@@ -364,18 +306,9 @@ function setup() {
     });
 
     smallBarWidth.input(function() {
-
         settings.smallBarWidth = parseFloat(pivotPointBar.value());
         smallBar.width = settings.smallBarWidth / 20;
         updateForces();
-
-
-        // Debugging
-        // console.log("pivotPointBar: " + pivotPointBar.value());
-        // console.log("settings.ropeDistance: " + settings.ropeDistance);
-        // console.log("temp: " + temp);
-        // console.log("smallBar.width + smallBar.x: " + smallBar.width + smallBar.x);
-        // console.log("bigBar.x: " + bigBar.x);
     });
 
 
@@ -454,6 +387,9 @@ function setup() {
             smallBarForceValue.attribute('readonly', '');
         }
     });
+
+    // Setup Material
+
 }
 
 let deformationGrey = 0;
@@ -479,15 +415,19 @@ function changeDrawing() {
 
     var bigLoadLength = 0;
     var smallLoadLength = 0;
+    var bigLoad = 0;
+    var smallLoad = 0;
 
     bigForces.forEach(bigforce => {
         bigLoadLength += bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]);
+        bigLoad += bigforce[0];
         console.log("Added bigLoadLength = " + bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]));
     });
     console.log("Total bigLoadLength = " + bigLoadLength);
 
     smallForces.forEach(smallforce => {
         smallLoadLength += smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth);
+        smallLoad += smallforce[0];
         console.log("Added smallLoadLength = " + smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth));
     });
     console.log("Total smallLoadLength = " + smallLoadLength);
@@ -504,6 +444,8 @@ function changeDrawing() {
 
     bigBar.change = bigDeformation;
     smallBar.change = smallDeformation;
+
+
 
     if(bigDeformation < 0){
         document.getElementById('deformationFirst').textContent = -(bigDeformation).toFixed(4) + 'mm' + " (contraction)";
@@ -536,6 +478,11 @@ function changeDrawing() {
     } else {
         document.getElementById('deflectionSecond').textContent = "0.0000mm";
     }
+
+    bigMaterialAxial = bigLoad * 1000 / settings.bigBarHeight
+    smallMaterialAxial = smallLoad * 1000 / settings.smallBarHeight
+    console.log("bigMaterialAxial = " + bigMaterialAxial);
+    console.log("smallMaterialAxial = " + smallMaterialAxial);
 
     if (atan2(bigBar.change, settings.bigBarWidth) > 5){
         alert(
@@ -622,78 +569,6 @@ function mouseReleased() {
     force2MoveToo = false;
 }
 
-
-function changeMaterialToWood(x, y){
-    resetDrawing();
-    if(smallBar.color != '#B48777' && settings.greyRopeModulus != 100){
-        smallBar.color = '#B48777';
-        settings.greyRopeModulus = 100;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-
-    // Get the element's position relative to the document
-    var elementRect = clickableElement.getBoundingClientRect();
-    var elementX = elementRect.left;
-    var elementY = elementRect.top;
-
-    // Calculate the mouse position relative to the element
-    var relativeX = x - elementX;
-    var relativeY = y - elementY;
-
-    console.log('Mouse clicked at:', relativeX, relativeY);
-}
-
-function changeMaterialToMetal(){
-    resetDrawing();
-    if(smallBar.color != '#CCC9C9' && settings.greyRopeModulus != 300){
-        smallBar.color = '#CCC9C9';
-        settings.greyRopeModulus = 300;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToLog(){
-    resetDrawing();
-    if(smallBar.color != '#724D3F' && settings.greyRopeModulus != 400){
-        smallBar.color = '#724D3F';
-        settings.greyRopeModulus = 400;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToSteel(){
-    resetDrawing();
-    if(smallBar.color != '#000000' && settings.greyRopeModulus != 500){
-        smallBar.color = '#000000';
-        settings.greyRopeModulus = 500;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToRuby(){
-    resetDrawing();
-    if(smallBar.color != '#FD0606' && settings.greyRopeModulus != 600){
-        smallBar.color = '#FD0606';
-        settings.greyRopeModulus = 600;
-    }
-    else{
-        smallBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
 function curlyBracket(length){
     mid = length/2
     mid += 20
@@ -736,6 +611,19 @@ function draw() {
     }
 
     resetMatrix()
+
+    if(bigBar.animation) {
+        drawingContext.setLineDash([6, 6]);
+        stroke(0);
+        strokeWeight(2);
+        noFill();
+        rectMode(CENTER);
+        rect((bigBar.x + (bigBar.width/2)), bigBar.y, bigBar.width, bigBar.height/3)
+        rect((bigBar.x + bigBar.width + (smallBar.width/2)), bigBar.y, smallBar.width, smallBar.height/3)
+        drawingContext.setLineDash([]);
+        resetMatrix()
+        rectMode(CORNER)
+    }
 
     // Force values
 
@@ -1123,11 +1011,7 @@ materialElements.forEach((element) => {
                     el.classList.remove('active');
                 }
             });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
-            }
+            element.classList.add('active');
         }
     });
 });
