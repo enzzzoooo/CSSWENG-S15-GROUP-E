@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./css/Quiz.css" />
+    <link rel="stylesheet" href="./css/Quiz2Hint.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Avenir LT Std:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Optima:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="quiz-2-hint">
+      <div class="sandbox2">
+        <div class="consider-two-rigid2">
+          Consider two rigid bars ABC and DEF which are supported by three
+          cables AD, BG, and CF. A downward load P is applied at point E of DEF.
+        </div>
+        <div class="what-are-the-container">
+          <ul class="what-are-the">
+            2. What are the axial forces (in kN) in the cables? (Type your answers
+            in the textboxes.) Hint: The length of cable BG can be obtained
+            using trigonometry.
+          </ul>
+        </div>
+        <div class="top-bar2">
+          <img
+            class="image-2023-09-17-225739150-1-icon2"
+            alt=""
+            src="./imgs/image-20230917-225739150-1@2x.png"
+            id="image202309172257391501Icon"
+          />
+        </div>
+        <div class="analysis-of-axial2">
+          Analysis of Axial Deformations in a Structure
+        </div>
+      </div>
+      <div class="image4">
+        <div class="freebody-diagram4">
+          <div class="freebody-diagram-child23"></div>
+          <div class="freebody-diagram-child24"></div>
+          <div class="sandbox-label4">
+            <div class="sandbox-label-child2"></div>
+            <div class="figure4">Figure</div>
+          </div>
+          <img class="vector-icon5" alt="" src="./imgs/vector.svg" />
+
+          <img
+            class="freebody-diagram-child25"
+            alt=""
+            src="./imgs/group-47.svg"
+          />
+
+          <img
+            class="freebody-diagram-child26"
+            alt=""
+            src="./imgs/group-30.svg"
+          />
+        </div>
+        <div class="d-container">
+          <div class="d2">D</div>
+          <div class="f2">F</div>
+          <div class="e5">E</div>
+          <div class="p4">P</div>
+          <div class="a7">A</div>
+          <div class="c6">C</div>
+          <div class="b6">B</div>
+          <div class="g2">G</div>
+          <div class="div6">θ</div>
+        </div>
+        <div class="x1-container">
+          <div class="x12">X1</div>
+          <div class="a12">A1</div>
+          <div class="a22">A2</div>
+          <div class="a32">A3</div>
+          <div class="e12">E1</div>
+          <div class="e22">E2</div>
+          <div class="e32">E3</div>
+        </div>
+        <img class="image-inner" alt="" src="./imgs/group-58.svg" />
+
+        <div class="x22">X2</div>
+        <div class="y2">Y</div>
+        <div class="x32">X3</div>
+        <div class="x42">X4</div>
+      </div>
+      <div class="image5">
+        <div class="freebody-diagram5">
+          <div class="freebody-diagram-child23"></div>
+          <div class="sandbox-label4">
+            <div class="sandbox-label-child2"></div>
+            <div class="figure4">FBD of bar ABC</div>
+          </div>
+          <img class="vector-icon5" alt="" src="./imgs/vector.svg" />
+
+          <div class="group-div">
+            <div class="group-child4"></div>
+          </div>
+          <img
+            class="freebody-diagram-child28"
+            alt=""
+            src="./imgs/group-39.svg"
+          />
+
+          <img
+            class="freebody-diagram-child29"
+            alt=""
+            src="./imgs/group-41.svg"
+          />
+
+          <img
+            class="freebody-diagram-child30"
+            alt=""
+            src="./imgs/group-48.svg"
+          />
+
+          <img
+            class="freebody-diagram-child31"
+            alt=""
+            src="./imgs/ellipse-4.svg"
+          />
+        </div>
+        <div class="ay-parent">
+          <div class="ay">Ay</div>
+          <div class="ax">Ax</div>
+          <div class="pad-04kn">PAD = 0.4kN</div>
+          <div class="ad">δAD =</div>
+          <div class="pbg-6kn">PBG = 6kN</div>
+          <div class="bg6">δBG =</div>
+          <div class="mm">mm</div>
+          <div class="mm1">mm</div>
+          <div class="mm2">mm</div>
+          <div class="pcf-06kn">PCF = 0.6kN</div>
+          <div class="cf2">δCF =</div>
+          <div class="c7">C</div>
+          <div class="b7">B</div>
+        </div>
+        <div class="text-input2">
+          <input
+            class="rectangle-input"
+            name="delta_BG_input"
+            id="delta_BG_input"
+            type="number"
+          />
+
+          <input
+            class="text-input-child2"
+            name="delta_AD_input"
+            id="delta_AD_input"
+            type="number"
+          />
+
+          <input
+            class="text-input-child3"
+            name="delta_CF_input"
+            id="delta_CF_input"
+            type="number"
+          />
+        </div>
+        <button class="rectangle-button" id="no2_checkbutton"></button>
+        <b class="check" id="checkText">Check</b>
+      </div>
+      <div class="object-settings2">
+        <div class="object-settings-child4"></div>
+        <div class="object-settings-child5"></div>
+        <div class="object-settings-child6"></div>
+        <div class="force2">Force</div>
+        <div class="p-1kn2">P = 1kN</div>
+        <div class="dimensions2">Dimensions</div>
+        <div class="youngs-modulus2">Young’s modulus</div>
+        <div class="x1-1-container4">
+          <span class="x1-1-container5">
+            <p class="x1-12">X1 = 1 m</p>
+            <p class="x1-12">X2 = 4 m</p>
+            <p class="x1-12">X3 = 3 m</p>
+            <p class="x1-12">X4 = 2 m</p>
+          </span>
+        </div>
+        <div class="a1-10-container4">
+          <span class="x1-1-container5">
+            <p class="x1-12">A1 = 10 mm2</p>
+            <p class="x1-12">A2 = 10 mm2</p>
+            <p class="x1-12">A3 = 10 mm2</p>
+          </span>
+        </div>
+        <div class="e1-200-container4">
+          <span class="x1-1-container5">
+            <p class="x1-12">E1 = 200 GPa</p>
+            <p class="x1-12">E2 = 200 GPa</p>
+            <p class="x1-12">E3 = 200 GPa</p>
+          </span>
+        </div>
+        <div class="y-2m-container4">
+          <span class="x1-1-container5">
+            <p class="x1-12">y = 2m</p>
+            <p class="x1-12">
+              <span class="span2">θ</span>
+              <span> = 30°</span>
+            </p>
+          </span>
+        </div>
+      </div>
+      <div class="answer-prompt4">
+        <img class="bulb-1-icon" alt="" src="./imgs/bulb-1@2x.png" />
+
+        <div class="incorrect-cable-bg-container4">
+          Hint! The length of cable BG can be obtained using trigonometry.
+        </div>
+      </div>
+    </div>
+
+    <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+      <div class="menu-dropdown">
+        <div class="home">Home</div>
+        <div class="simulation" id="popupsimulationText">Simulation</div>
+        <div class="lessons" id="popuplessonsText">Lessons</div>
+        <div class="resources">Resources</div>
+        <div class="credits" id="popupcreditsText">Credits</div>
+        <div class="menu-dropdown-child"></div>
+        <div class="menu-dropdown-item"></div>
+        <div class="menu-dropdown-inner"></div>
+        <div class="line-div"></div>
+        <div class="menu-dropdown-child1"></div>
+      </div>
+    </div>
+
+    <script src="./js/Quiz2.js"></script>
+  </body>
+</html>

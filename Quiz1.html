@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./css/Quiz.css" />
+    <link rel="stylesheet" href="./css/Quiz1.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Avenir LT Std:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Optima:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="quiz-1" id="quiz1Container">
+      <div class="sandbox5">
+        <div class="consider-two-rigid5">
+          Consider two rigid bars ABC and DEF which are supported by three
+          cables AD, BG, and CF. A downward load P is applied at point E of DEF.
+        </div>
+        <div class="what-are-the-container2">
+          <ul class="what-are-the2">
+            1. What are the axial forces (in kN) in the cables? (Type your answers
+            in the textboxes.)
+          </ul>
+        </div>
+        <div class="top-bar5">
+          <img
+            class="image-2023-09-17-225739150-1-icon5"
+            alt=""
+            src="./imgs/image-20230917-225739150-1@2x.png"
+            id="image202309172257391501Icon"
+          />
+        </div>
+        <div class="analysis-of-axial5">
+          Analysis of Axial Deformations in a Structure
+        </div>
+      </div>
+      <div class="image10">
+        <div class="freebody-diagram10">
+          <div class="freebody-diagram-child55"></div>
+          <div class="freebody-diagram-child56"></div>
+          <div class="sandbox-label10">
+            <div class="sandbox-label-child8"></div>
+            <div class="figure10">Figure</div>
+          </div>
+          <img class="vector-icon10" alt="" src="./imgs/vector.svg" />
+
+          <img
+            class="freebody-diagram-child57"
+            alt=""
+            src="./imgs/group-47.svg"
+          />
+
+          <img
+            class="freebody-diagram-child58"
+            alt=""
+            src="./imgs/group-30.svg"
+          />
+        </div>
+        <div class="d-parent3">
+          <div class="d5">D</div>
+          <div class="f5">F</div>
+          <div class="e8">E</div>
+          <div class="p10">P</div>
+          <div class="a15">A</div>
+          <div class="c13">C</div>
+          <div class="b13">B</div>
+          <div class="g5">G</div>
+          <div class="div11">θ</div>
+        </div>
+        <div class="x1-parent3">
+          <div class="x15">X1</div>
+          <div class="a16">A1</div>
+          <div class="a25">A2</div>
+          <div class="a35">A3</div>
+          <div class="e15">E1</div>
+          <div class="e25">E2</div>
+          <div class="e35">E3</div>
+        </div>
+        <img class="image-child4" alt="" src="./imgs/group-58.svg" />
+
+        <div class="x25">X2</div>
+        <div class="y5">Y</div>
+        <div class="x35">X3</div>
+        <div class="x45">X4</div>
+      </div>
+      <div class="image11">
+        <div class="freebody-diagram10">
+          <div class="freebody-diagram-child55"></div>
+          <div class="sandbox-label10">
+            <div class="sandbox-label-child8"></div>
+            <div class="figure10">FBD of bar ABC</div>
+          </div>
+          <img class="vector-icon10" alt="" src="./imgs/vector.svg" />
+
+          <div class="freebody-diagram-inner2">
+            <div class="group-child9"></div>
+          </div>
+          <img
+            class="freebody-diagram-child60"
+            alt=""
+            src="./imgs/group-39.svg"
+          />
+
+          <img
+            class="freebody-diagram-child61"
+            alt=""
+            src="./imgs/group-41.svg"
+          />
+
+          <img
+            class="freebody-diagram-child62"
+            alt=""
+            src="./imgs/group-48.svg"
+          />
+
+          <img
+            class="freebody-diagram-child63"
+            alt=""
+            src="./imgs/ellipse-4.svg"
+          />
+        </div>
+        <div class="ay-container">
+          <div class="ay2">Ay</div>
+          <div class="ax2">Ax</div>
+          <div class="pad">PAD =</div>
+          <div class="pbg">PBG =</div>
+          <div class="kn">kN</div>
+          <div class="kn1">kN</div>
+          <div class="kn2">kN</div>
+          <div class="pcf">PCF =</div>
+          <div class="c14">C</div>
+          <div class="b14">B</div>
+        </div>
+        <div class="text-input5">
+          <input
+            class="text-input-child9"
+            name="P_BG_input"
+            id="P_BG_input"
+            type="number"
+          />
+
+          <input
+            class="text-input-child10"
+            name="P_AD_input"
+            id="P_AD_input"
+            type="number"
+          />
+
+          <input
+            class="text-input-child11"
+            name="P_CF_input"
+            id="P_CF_input"
+            type="number"
+          />
+        </div>
+        <button class="image-child5" id="no1_checkbutton"></button>
+        <b class="check3" id="no1_checkbuttontext">Check</b>
+      </div>
+      <div class="object-settings5">
+        <div class="object-settings-child13"></div>
+        <div class="object-settings-child14"></div>
+        <div class="object-settings-child15"></div>
+        <div class="force5">Force</div>
+        <div class="p-1kn5">P = 1kN</div>
+        <div class="dimensions5">Dimensions</div>
+        <div class="youngs-modulus5">Young’s modulus</div>
+        <div class="x1-1-container10">
+          <span class="x1-1-container11">
+            <p class="x1-15">X1 = 1 m</p>
+            <p class="x1-15">X2 = 4 m</p>
+            <p class="x1-15">X3 = 3 m</p>
+            <p class="x1-15">X4 = 2 m</p>
+          </span>
+        </div>
+        <div class="a1-10-container10">
+          <span class="x1-1-container11">
+            <p class="x1-15">A1 = 10 mm2</p>
+            <p class="x1-15">A2 = 10 mm2</p>
+            <p class="x1-15">A3 = 10 mm2</p>
+          </span>
+        </div>
+        <div class="e1-200-container10">
+          <span class="x1-1-container11">
+            <p class="x1-15">E1 = 200 GPa</p>
+            <p class="x1-15">E2 = 200 GPa</p>
+            <p class="x1-15">E3 = 200 GPa</p>
+          </span>
+        </div>
+        <div class="y-2m-container10">
+          <span class="x1-1-container11">
+            <p class="x1-15">y = 2m</p>
+            <p class="x1-15">
+              <span class="span5">θ</span>
+              <span> = 30°</span>
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+      <div class="menu-dropdown">
+        <div class="home">Home</div>
+        <div class="simulation" id="popupsimulationText">Simulation</div>
+        <div class="lessons" id="popuplessonsText">Lessons</div>
+        <div class="resources">Resources</div>
+        <div class="credits" id="popupcreditsText">Credits</div>
+        <div class="menu-dropdown-child"></div>
+        <div class="menu-dropdown-item"></div>
+        <div class="menu-dropdown-inner"></div>
+        <div class="line-div"></div>
+        <div class="menu-dropdown-child1"></div>
+      </div>
+    </div>
+
+    <script>
+      var checkButton = document.getElementById("no1_checkbutton");
+      if (checkButton) {
+        checkButton.addEventListener("click", function (e) {
+          window.location.href = "./Quiz2Hint.html";
+        });
+      }
+      var checkButtonText = document.getElementById("no1_checkbuttontext");
+      if (checkButtonText) {
+        checkButtonText.addEventListener("click", function (e) {
+          window.location.href = "./Quiz2Hint.html";
+        });
+      }
+      </script>
+  </body>
+</html>
