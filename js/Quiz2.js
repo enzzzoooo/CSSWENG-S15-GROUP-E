@@ -55,7 +55,7 @@ if (rectangleButton) {
             hintpanel.style.visibility="visible";
         }
         else{
-            window.location.href = "./Quiz3Prompts1.html";
+            window.location.href = "./Quiz3.html";
         }
     });
 }
@@ -67,7 +67,7 @@ if (checkText) {
             hintpanel.style.visibility="visible";
         }
         else{
-            window.location.href = "./Quiz3Prompts1.html";
+            window.location.href = "./Quiz3.html";
         }
     });
 }
