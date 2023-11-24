@@ -46,7 +46,18 @@ if (image202309172257391501Icon) {
         popup.addEventListener("click", onClick);
     });
 }
-
+var homeButton = document.getElementsByClassName("home")[0];
+var lessonButton = document.getElementById("popuplessonsText");
+if (homeButton) {
+    homeButton.addEventListener("click", function (e) {
+        window.location.href = "./index.html";
+    });
+}
+if (lessonButton) {
+    lessonButton.addEventListener("click", function (e) {
+        window.location.href = "./lesson-picker.html";
+    });
+}
 var rectangleButton = document.getElementById("no2_checkbutton");
 var hintpanel = document.getElementsByClassName("answer-prompt4")[0];
 if (rectangleButton) {

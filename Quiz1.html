@@ -14,6 +14,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Optima:wght@400;700&display=swap"
     />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body>
     <div class="quiz-1" id="quiz1Container">
@@ -128,12 +130,12 @@
         <div class="ay-container">
           <div class="ay2">Ay</div>
           <div class="ax2">Ax</div>
-          <div class="pad">PAD =</div>
-          <div class="pbg">PBG =</div>
+          <div class="pad">\(P_{AD}\) =</div>
+          <div class="pbg">\(P_{BG}\) =</div>
           <div class="kn">kN</div>
           <div class="kn1">kN</div>
           <div class="kn2">kN</div>
-          <div class="pcf">PCF =</div>
+          <div class="pcf">\(P_{CF}\) =</div>
           <div class="c14">C</div>
           <div class="b14">B</div>
         </div>
@@ -180,9 +182,9 @@
         </div>
         <div class="a1-10-container10">
           <span class="x1-1-container11">
-            <p class="x1-15">A1 = 10 mm2</p>
-            <p class="x1-15">A2 = 10 mm2</p>
-            <p class="x1-15">A3 = 10 mm2</p>
+            <p class="x1-15">A1 = 10 \(mm^2\)</p>
+            <p class="x1-15">A2 = 10 \(mm^2\)</p>
+            <p class="x1-15">A3 = 10 \(mm^2\)</p>
           </span>
         </div>
         <div class="e1-200-container10">
@@ -219,19 +221,6 @@
       </div>
     </div>
 
-    <script>
-      var checkButton = document.getElementById("no1_checkbutton");
-      if (checkButton) {
-        checkButton.addEventListener("click", function (e) {
-          window.location.href = "./Quiz2.html";
-        });
-      }
-      var checkButtonText = document.getElementById("no1_checkbuttontext");
-      if (checkButtonText) {
-        checkButtonText.addEventListener("click", function (e) {
-          window.location.href = "./Quiz2.html";
-        });
-      }
-      </script>
+    <script src="./js/Quiz1.js"></script>
   </body>
 </html>

@@ -566,6 +566,7 @@
   justify-content: center;
   width: 134px;
   height: 55px;
+  cursor: pointer;
 }
 .image11 {
   position: absolute;
@@ -702,7 +703,6 @@
   width: 100%;
   height: 1622px;
   overflow: hidden;
-  cursor: pointer;
   text-align: center;
   font-size: var(--font-size-6xl);
   color: var(--color-black);
@@ -718,6 +718,7 @@
   align-items: center;
   width: 423px;
   height: 65px;
+  cursor: pointer;
 }
 .simulation {
   top: 65px;
@@ -743,10 +744,10 @@
 .credits,
 .resources {
   top: 195px;
+  cursor: pointer;
 }
 .credits {
   top: 260px;
-  cursor: pointer;
 }
 .line-div,
 .menu-dropdown-child,
@@ -780,10 +781,12 @@
   top: 324.5px;
 }
 .menu-dropdown {
-  position: relative;
+  position: fixed;
   background-color: var(--color-white);
   width: 472px;
   height: 946px;
+  left: 0;
+  top: 78px;
   overflow: hidden;
   max-width: 90%;
   max-height: 90%;
