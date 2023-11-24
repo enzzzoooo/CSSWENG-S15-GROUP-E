@@ -39,7 +39,20 @@ const hangingBar = [
     \\[2P_B\\,\\sin30^{\\circ} = 4(5\\mathrm{~kN}) \\]
     \\[P_B = 20 \\mathrm{~kN}\\]
     The corresponding axial deformation is 
-    \\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]
+    <span class="needExplain">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]
+      <div class="explanation-popup-wrapper">
+        <div class="sim-error-popup">
+          <div class="popup-title-wrapper">
+            <div class="popup-title">Explanation</div>
+          </div>
+          <div class="popup-text-wrapper">
+            <div class="popup-text">
+              <img style="height:100%; width:100%" src="imgs/Group 80.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
     \\[\\delta_B = \\frac{20\\sqrt{3}}{3}\\mathrm{~mm}\,\\text{(elongation)}\\]`,
     `Next, we draw again the deformation diagram of rigid bar ABC.
     This time, the vertical deflection of B is not simply equal to the

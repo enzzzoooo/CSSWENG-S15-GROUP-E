@@ -7,6 +7,9 @@ const slideTxt = document.querySelector('.lessonTxt');
 const slideNumTxt = document.querySelector('.slideNum');
 const slideImg2 = document.querySelector('.lessonImg2');
 const slideTxt2 = document.querySelector('.lessonTxt2');
+const a2000mm = document.querySelector('.needExplain');
+const popup = document.querySelector('.explanation-popup-wrapper')
+
 const lessons = new Map();
 lessons.set("Hanging Bar", hangingBar);
 lessons.set("Compound Bar", compoundBar);
@@ -39,6 +42,18 @@ rightButton.addEventListener('click', () => {
 
     });
 
+    a2000mm.addEventListener('mouseover', () => {
+      popup.style.display = "flex"
+      setTimeout(out, 1000)
+    })
+
+    // a2000mm.addEventListener('mouseout', () => {
+    //   setTimeout(out, 1000)
+    // })
+    function out () {
+      popup.style.display = "none"
+    }
+
   // Added animation
   function changeSlide (number) {
     let lessonTitle = document.querySelector('.page-title').innerHTML;
@@ -57,6 +72,7 @@ rightButton.addEventListener('click', () => {
 
     showCanvasArrows();
   }
+  
   
 
 

@@ -140,3 +140,56 @@ body {
 a:link {
     text-decoration: none!important;
 }
+
+.needExplain {
+}
+
+.needExplain:hover .explanation-popup-wrapper {
+    display: flex;
+}
+
+.explanation-popup-wrapper {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-avenir);
+}
+.sim-error-popup {
+    width: 465px;
+    height: 265px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.popup-title-wrapper{
+    position: relative;
+    width: 100%;
+    height: 57px;
+    background-color: var(--color-maroon);
+    border-radius: 10px 10px 0 0 ;
+    font-size: 33px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-text-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 208px;
+}
+.popup-text {
+    width: 411px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: #000000;
+    text-align: center;
+}
