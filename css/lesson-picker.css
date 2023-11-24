@@ -18,3 +18,21 @@
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
+
+.intro-title{
+  margin: 1.5rem auto;
+  width: 75%;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.intro-layout{
+ width: 75%;
+ margin: 1.5rem auto;
+}
+
+.intro-text{
+  font-size: 24px;
+  text-align: justify;
+  text-justify: inter-word;
+}
