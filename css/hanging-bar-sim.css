@@ -281,6 +281,10 @@ canvas {
     cursor: pointer;
 }
 
+#change-drawing.disabled:hover {
+    filter: brightness(100%);
+    cursor: default;
+}
 
 /* idk what */
 .toggle-buttons {

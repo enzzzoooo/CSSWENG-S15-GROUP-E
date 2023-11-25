@@ -1,12 +1,12 @@
 // For interacting with the elements outside of the canvas
 let yellowBarWidth;
 let youngsModulus;
-let arrowForce;
+let forceMagnitude;
 let crossArea;
 let pivotPointWall;
 let givenAngle;
 let pivotPointBar;
-let arrowPoint;
+let forcePoint;
 let snapInput;
 
 function deformation(load, length, crossArea, elasticity) {
@@ -23,17 +23,6 @@ function cylinderCrossArea(radius) {
 
 function pythagorean(a, b) {
     return Math.sqrt(a * a + b * b)
-}
-
-// Added by Joseph
-function deflectionAtPoint(load, length, crossArea, elasticity, angle, ropeDistance, calcDistance) {
-    let radians = toRadians(angle);
-    console.log("b: " + length);
-    console.log("P: " + load);
-    console.log("E: " + elasticity);
-    console.log("A: " + crossArea);
-    console.log("angle: " + angle);
-    return (load * length) / (ropeDistance * crossArea * elasticity * Math.pow(Math.sin(radians),2) * Math.cos(radians)) * calcDistance;
 }
 
 function toRadians(angle) {
@@ -61,16 +50,28 @@ function internalHanging(lengthRope, upwardRope, distanceRope, downward, upward,
     return (downwardForces - upwardForces)/((upwardRope * distanceRope)/lengthRope)
 }
 
-function drawArrow(base, vec, myColor) {
+function drawStrokedLine(x1, y1, x2, y2, lineHeight, strokecolor){
+    push();
+    stroke(strokecolor)
+    strokeWeight(lineHeight + 1)
+    line(x1 - 0.5, y1, x2 + 0.5, y2)
+    pop();
+}
+
+function drawArrow(base, vec, myColor, size) {
     push();
     stroke(myColor);
-    strokeWeight(15);
+    strokeWeight(size);
     fill(myColor);
     translate(base.x, base.y);
-    line(0, 0, vec.x, vec.y);
+    if(vec.x >= 0){
+        line(0, 0, vec.x, vec.y - 15);
+    } else {
+        line(0, 0, vec.x, vec.y + 15)
+    }
     rotate(vec.heading());
-    let arrowSize = 15;
-    translate(vec.mag() - arrowSize, 0);
+    let arrowSize = 12/5;
+    translate(vec.mag() - arrowSize - 15, 0);
     triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
     pop();
 }
@@ -83,10 +84,14 @@ let canvasOrigin = {
 let settings = {
     ropeHeight: 3000,
     ropeDistance: 4000,
+    ropeCrossArea: Math.round((cylinderCrossArea(25) + Number.EPSILON) * 100) / 100,
+    ropeAwayFromWall: 0,
     yellowBarWidth: 6000,
-    greyRopeModulus: 200,
+    ropeModulus: 200,
     snapValue: 50,
-    angleDistance: 6000
+    forceDistance: 6000,
+    forceMagnitude: 39,
+    ropeMaterial: 1
 }
 
 // wall
@@ -110,15 +115,15 @@ let yellowBar = {
     angle: 0
 }
 
-// greyBar
-let greyBar = {
+// rope
+let rope = {
     x: 230 - canvasOrigin.x,
     y: yellowBar.y - settings.ropeHeight/20,
     change: 0,
     animation: false,
     width: settings.ropeDistance / 20,
     height: 50,
-    color: '#747474',
+    color: '#bbdbf0',
     angle: 28.42
 }
 
@@ -132,7 +137,7 @@ let heightChange = false;
 let distanceChange = false;
 let barChange = false;
 let lengthChange = false;
-let inputOfCrossArea =false;
+let inputOfCrossArea = false;
 
 function preload() {
     font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
@@ -159,8 +164,8 @@ function setup() {
         } else {
             toggleImg.src = 'imgs/toggle-data-show.png';
         }
-        console.log((greyBar.x + yellowBar.x + yellowBar.width) / 2)
-        console.log((greyBar.y + yellowBar.y) / 2 + 20)
+        console.log((rope.x + yellowBar.x + yellowBar.width) / 2)
+        console.log((rope.y + yellowBar.y) / 2 + 20)
     });
 
 
@@ -177,17 +182,38 @@ function setup() {
 
 
     let changeWood = document.getElementById('changeMatToWood');
-    changeWood.addEventListener('click', changeMaterialToWood);
+    changeWood.addEventListener('click', function(event) {
+        resetDrawing();
+        rope.color = '#B48777';
+        settings.ropeModulus = 15;
+    });
     let changeMetal = document.getElementById('changeMatToMetal');
-    changeMetal.addEventListener('click', changeMaterialToMetal);
-    let changeLog = document.getElementById('changeMatToLog');
-    changeLog.addEventListener('click', changeMaterialToLog);
+    changeMetal.addEventListener('click', function(event) {
+        resetDrawing();
+        rope.color = '#CCC9C9';
+        settings.ropeModulus = 69;
+    });
+    let changeBronze = document.getElementById('changeMatToBronze');
+    changeBronze.addEventListener('click', function(event) {
+        resetDrawing();
+        rope.color = '#724D3F';
+        settings.ropeModulus = 100
+    });
     let changeSteel = document.getElementById('changeMatToSteel');
-    changeSteel.addEventListener('click', changeMaterialToSteel);
-    let changeRuby = document.getElementById('changeMatToRuby');
-    changeRuby.addEventListener('click', changeMaterialToRuby);
+    changeSteel.addEventListener('click', function(event) {
+        resetDrawing();
+        rope.color = '#bbdbf0';
+        settings.ropeModulus = 200;
+    });
+    let changeNylon = document.getElementById('changeMatToNylon');
+    changeNylon.addEventListener('click', function(event) {
+        resetDrawing();
+        rope.color = '#FD0606';
+        settings.ropeModulus = 2;
+    });
 
-    forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 39*2), 'coral']
+
+    forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 150), 'coral']
     console.log("x: " + forces[0][0].x, "y: " + forces[0][0].y)
 
     textFont(font);
@@ -197,7 +223,7 @@ function setup() {
     // For interacting with elements outside the canvas
     yellowBarWidth = select('#yellowBarWidth');
     youngsModulus = select('#youngsModulus');
-    arrowForce = select('#arrowForce');
+    forceMagnitude = select('#forceMagnitude');
     crossArea = select('#crossArea');
 
     // pivotPointWall = select('#pivotPointWall');
@@ -205,28 +231,24 @@ function setup() {
     givenAngle = select('#givenAngle');
 
     pivotPointBar = select('#pivotPointBar');
-    arrowPoint = select('#arrowPoint');
+    forcePoint = select('#forcePoint');
 
     snapInput = select('#snapInterval');
 
     givenAngle.input(function () {
         pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
-
-
-
         let temp = -(pivotPointWall/20 - yellowBar.y);
         if (temp < yellowBar.y){
-            greyBar.y = temp
+            rope.y = temp
             settings.ropeHeight = parseFloat(pivotPointWall);
         } else {
-            greyBar.y = yellowBar.y;
+            rope.y = yellowBar.y;
+            settings.ropeHeight = 0;
         }
     });
 
     snapInput.input(function () {
-        console.log("snapInput: " + snapInput.value());
         settings.snapValue = snapInput.value();
-        console.log("settings.snapValue: " + settings.snapValue);
 
         if(settings.snapValue == 0) {
             settings.snapValue = 1;
@@ -234,114 +256,95 @@ function setup() {
     });
 
 
-    // pivotPointWall.input(function() {
-
-    //     let temp = -(pivotPointWall.value()/20 - yellowBar.y);
-    //     if(temp < yellowBar.y){
-    //         greyBar.y = temp
-    //         settings.ropeHeight = parseFloat(pivotPointWall.value());
-    //     } else {
-    //         greyBar.y = yellowBar.y;
-    //     }
-
-    //     // Debugging
-    //     // console.log("pivotPointWall: " + pivotPointWall.value());
-    //     // console.log("settings.ropeHeight: " + settings.ropeHeight);
-    //     // console.log("temp: " + temp);
-    //     // console.log("greyBar.y: " + greyBar.y);
-    //     // console.log("yellowBar.y: " + yellowBar.y);
-    // });
-
     pivotPointBar.input(function() {
-        let temp = pivotPointBar.value()/20 + yellowBar.x - greyBar.x;
+        let temp = pivotPointBar.value()/20 + yellowBar.x - rope.x;
 
-        if(temp + greyBar.x > yellowBar.x){
-            greyBar.width = temp
+        if(temp + rope.x > yellowBar.x){
+            rope.width = temp
             settings.ropeDistance = parseFloat(pivotPointBar.value());
         } else {
-            greyBar.width = yellowBar.x;
+            rope.width = yellowBar.x;
         }
-
-        // Debugging
-        // console.log("pivotPointBar: " + pivotPointBar.value());
-        // console.log("settings.ropeDistance: " + settings.ropeDistance);
-        // console.log("temp: " + temp);
-        // console.log("greyBar.width + greyBar.x: " + greyBar.width + greyBar.x);
-        // console.log("yellowBar.x: " + yellowBar.x);
     });
 
     yellowBarWidth.input(function () {
-        // Debugging
-        // console.log("yellowbarwidth: " + yellowBarWidth.value());
-        // console.log("settings.yellowBarWidth: " + settings.yellowBarWidth);
-        // console.log("yellowBar.width: " + yellowBar.width);
+
         settings.yellowBarWidth = parseFloat(yellowBarWidth.value());
         yellowBar.width = settings.yellowBarWidth / 20;
         updateForces();
     });
 
-    arrowPoint.input(function() {
-        forces[0][0].x = parseFloat(arrowPoint.value())/20 + yellowBar.x;
-        settings.angleDistance = parseFloat(arrowPoint.value());
+    forcePoint.input(function() {
+        if(forcePoint.value() > 0){
+            forces[0][0].x = parseFloat(forcePoint.value())/20 + yellowBar.x;
+            settings.forceDistance = parseFloat(forcePoint.value());
+        } else {
+            settings.forceDistance = 0
+        }
+
     });
 
     crossArea.input(function () {
-        if (crossArea.value() != 0) {
-            inputOfCrossArea = true;
+        if(crossArea.value() > 0){
+        settings.ropeCrossArea = parseFloat(crossArea.value());
         } else {
-            inputOfCrossArea = false;
+            settings.ropeCrossArea = 0;
         }
     });
 
     youngsModulus.input(function () {
-        settings.greyRopeModulus = parseFloat(youngsModulus.value());
+        settings.ropeModulus = parseFloat(youngsModulus.value());
     });
 
-    arrowForce.input(function() {
-        if(arrowForce.value() > 0){
-            forces[0][1].y = parseFloat(arrowForce.value()) * 2;
+    forceMagnitude.input(function() {
+        if(forceMagnitude.value() > 0){
+            forces[0][1].y = parseFloat(forceMagnitude.value()) * 5;
+            if (forces[0][1].y >= 150){
+                forces[0][1].y = 150;
+            }
+            settings.forceMagnitude = parseFloat(forceMagnitude.value())
         } else {
-            forces[0][1].y = 0;
+            forces[0][1].y = 1;
+            settings.forceMagnitude = 0
         }
     });
-
-
-
 }
 
 let deformationGrey = 0;
 
 function changeDrawing() {
 
+    document.getElementById('change-drawing').setAttribute("disabled", "true");
+
     downward = []
     downwardDistances = []
 
     forces.forEach(force => {
-        downward.push(parseFloat((force[1].y/2).toFixed(1)))
-        downwardDistances.push(settings.angleDistance)
+        downward.push(parseFloat(settings.forceMagnitude))
+        downwardDistances.push(settings.forceDistance)
     });
     console.log(downward)
     console.log(downwardDistances)
 
 
-    ropeLength = pythagorean(settings.ropeHeight, settings.ropeDistance)
+    ropeLength = pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance))
     console.log(ropeLength)
     // Changed by Joseph
-    ropeForce = internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, [])
-    deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), settings.greyRopeModulus);
+    ropeForce = internalHanging(ropeLength, settings.ropeHeight, parseFloat(settings.ropeDistance), downward, [], downwardDistances, [])
+    deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), parseFloat(settings.ropeModulus));
     console.log("Cross Area: " + crossArea.value())
     console.log(deformationGrey)
-    yellowBar.change = settings.yellowBarWidth * ropeLength / settings.ropeHeight / settings.ropeDistance * deformationGrey;
+    yellowBar.change = parseFloat(settings.yellowBarWidth) * ropeLength / parseFloat(settings.ropeHeight) / parseFloat(settings.ropeDistance) * deformationGrey;
     console.log(yellowBar.change)
     yellowBar.animation = true;
 
-    greyBar.change = (yellowBar.change*greyBar.width/yellowBar.width)
-    greyBar.animation = true;
+    rope.change = (yellowBar.change*rope.width/yellowBar.width)
+    rope.animation = true;
 
-    deflectionB = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value(), settings.ropeDistance, settings.ropeDistance)
-    deflectionForce = deflectionAtPoint(arrowForce.value(), arrowPoint.value(), crossArea.value(), settings.greyRopeModulus, givenAngle.value(), settings.ropeDistance, settings.angleDistance)
+    deflectionB = rope.change
+    deflectionForce = yellowBar.change * parseFloat(settings.forceDistance) / parseFloat(settings.yellowBarWidth);
     // Displaying Results
-    document.getElementById('forceCable').textContent = ropeForce.toFixed(4) + 'kN';
+    document.getElementById('forceCable').textContent = ropeForce.toFixed(2) + 'kN';
     document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4) + 'mm';
     document.getElementById('deflectionAtPointB').textContent = deflectionB.toFixed(4) + 'mm';
     document.getElementById('deflectionAtPointEnd').textContent = (yellowBar.change).toFixed(4) + 'mm';
@@ -349,12 +352,10 @@ function changeDrawing() {
     document.getElementById('angleBar').textContent = atan2(yellowBar.change, settings.yellowBarWidth).toFixed(2) + '°';
 
     warning = false;
-    console.log(atan2(yellowBar.change, settings.yellowBarWidth));
-    console.log(atan2(yellowBar.change, settings.yellowBarWidth) > 5);
 
-    if (atan2(yellowBar.change, settings.yellowBarWidth) > 5){
+    if (atan2(yellowBar.change, settings.yellowBarWidth) >= 5){
         const popupText = document.getElementById('popup-text');
-        popupText.textContent = "Too much deflection. Since the angle generated from the force is greater than 5°, this simulation does not have accurate values. Take the results with that in mind.";
+        popupText.textContent = "Too much deflection. Since the angle generated from the force reaches 5°, this simulation is not entirely accurate. Take the results with that in mind.";
 
         const popup = document.getElementById('sim-error-popup-wrapper');
         popup.style.display = 'flex';
@@ -372,14 +373,30 @@ function changeDrawing() {
         "Deflection at end of bar: " + (yellowBar.change) + "\n" +
         "Deflection at force point: " + deflectionForce
         );
+
+
+    var button = document.getElementById('change-drawing');
+    button.removeEventListener('click', changeDrawing);
+    button.classList.add('disabled');
 }
 
 function resetDrawing() {
+    var button = document.getElementById('change-drawing');
+    button.addEventListener('click', changeDrawing);
+    button.classList.remove('disabled')
+
+    document.getElementById('forceCable').textContent = "";
+    document.getElementById('deformationCable').textContent = "";
+    document.getElementById('deflectionAtPointB').textContent = "";
+    document.getElementById('deflectionAtPointEnd').textContent = "";
+    document.getElementById('deflectionAtPointForce').textContent = "";
+    document.getElementById('angleBar').textContent = "";
+
     yellowBar.change = 0;
     yellowBar.animation = false;
 
-    greyBar.change = 0;
-    greyBar.animation = false;
+    rope.change = 0;
+    rope.animation = false;
 
     deformationGrey = 0;
     t = 0;
@@ -398,7 +415,7 @@ function updateForces(){
         }
         if(force[0].x > yellowBar.x + yellowBar.width){
             force[0].x = yellowBar.x + yellowBar.width
-            settings.angleDistance = settings.yellowBarWidth
+            settings.forceDistance = settings.yellowBarWidth
         }
     });
 
@@ -416,66 +433,6 @@ function mouseReleased() {
     lengthChange = false;
 }
 
-
-function changeMaterialToWood(){
-    resetDrawing();
-    if(greyBar.color != '#B48777' && settings.greyRopeModulus != 100){
-        greyBar.color = '#B48777';
-        settings.greyRopeModulus = 100;
-    }
-    else{
-        greyBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToMetal(){
-    resetDrawing();
-    if(greyBar.color != '#CCC9C9' && settings.greyRopeModulus != 300){
-        greyBar.color = '#CCC9C9';
-        settings.greyRopeModulus = 300;
-    }
-    else{
-        greyBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToLog(){
-    resetDrawing();
-    if(greyBar.color != '#724D3F' && settings.greyRopeModulus != 400){
-        greyBar.color = '#724D3F';
-        settings.greyRopeModulus = 400;
-    }
-    else{
-        greyBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToSteel(){
-    resetDrawing();
-    if(greyBar.color != '#000000' && settings.greyRopeModulus != 500){
-        greyBar.color = '#000000';
-        settings.greyRopeModulus = 500;
-    }
-    else{
-        greyBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
-
-function changeMaterialToRuby(){
-    resetDrawing();
-    if(greyBar.color != '#FD0606' && settings.greyRopeModulus != 600){
-        greyBar.color = '#FD0606';
-        settings.greyRopeModulus = 600;
-    }
-    else{
-        greyBar.color = '#747474';
-        settings.greyRopeModulus = 200;
-    }
-}
 
 function curlyBracket(length){
     mid = length/2
@@ -497,138 +454,154 @@ function draw() {
 
     // yellowBar
 
+
+    // After animation
+
+    resetMatrix()
+
     stroke(yellowBar.color);
     strokeWeight(yellowBar.height/3);
     if(yellowBar.animation && t < 1){
         t += 0.035
-        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/10*easing(t)))
+        drawStrokedLine(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/3*easing(t)), yellowBar.height/3, 'black');
+        stroke(yellowBar.color)
+        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/3*easing(t)))
     } else {
         stroke(yellowBar.color + '80');
         line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y)
         stroke(yellowBar.color);
-        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/10))
+        drawStrokedLine(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/3), yellowBar.height/3, 'black');
+        line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/3))
     }
 
-    stroke(greyBar.color);
-    strokeWeight(greyBar.height/3);
-    if(greyBar.animation && t < 1){
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change/10*easing(t)))
+    stroke(rope.color);
+    strokeWeight(rope.height/3);
+    if(rope.animation && t < 1){
+        drawStrokedLine(rope.x, rope.y, rope.x+rope.width, (yellowBar.y)+(rope.change/3*easing(t)), rope.height/3, 'black');
+        line(rope.x, rope.y, rope.x+rope.width, (yellowBar.y)+(rope.change/3*easing(t)))
     } else {
-        stroke(greyBar.color + '80');
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y))
-        stroke(greyBar.color)
-        line(greyBar.x, greyBar.y, greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change/10))
+        stroke(rope.color + '80');
+        line(rope.x, rope.y, rope.x+rope.width, (yellowBar.y))
+        stroke(rope.color)
+        drawStrokedLine(rope.x, rope.y, rope.x+rope.width, yellowBar.y+(rope.change/3), (rope.height)/3, 'black')
+        line(rope.x, rope.y, rope.x+rope.width, (yellowBar.y)+(rope.change/3))
     }
 
     strokeWeight(1);
     stroke('#000000');
     fill('#FFFFFF');
     circle(yellowBar.x, yellowBar.y, 30)
-    circle(greyBar.x, greyBar.y, 25)
-    if(greyBar.animation && t < 1){
-        circle(greyBar.x+greyBar.width, (yellowBar.y)+greyBar.change/10*easing(t), 25)
+    circle(rope.x, rope.y, 25)
+    if(rope.animation && t < 1){
+        circle(rope.x+rope.width, (yellowBar.y)+rope.change/3*easing(t), 25)
     } else {
         stroke('#000000' + '80');
         fill('#FFFFFF' + '80');
-        circle(greyBar.x+greyBar.width, (yellowBar.y), 25)
+        circle(rope.x+rope.width, (yellowBar.y), 25)
         stroke('#000000');
         fill('#FFFFFF');
-        circle(greyBar.x+greyBar.width, (yellowBar.y)+(greyBar.change/10), 25)
+        circle(rope.x+rope.width, (yellowBar.y)+(rope.change/3), 25)
     }
     resetMatrix()
 
 
     // Force values
-    if(!yellowBar.animation){
 
-        forces.forEach(force => {
-            drawArrow(force[0], force[1], force[2])
 
-        });
+    forces.forEach(force => {
+        drawArrow(force[0], force[1], force[2], 12)
 
-        forces.forEach(force => {
-            if(dist(mouseX, mouseY, force[0].x, force[0].y + force[1].y + 15) < 10){
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                circle(force[0].x, force[0].y + force[1].y + 15, 25);
-                if(mouseIsPressed & !active){
-                    force[3] = true;
-                    active = true;
-                }
+    });
+
+    forces.forEach(force => {
+        if(dist(mouseX, mouseY, force[0].x, force[0].y + force[1].y) < 10){
+            strokeWeight(0)
+            fill(255, 255, 200, 175);
+            circle(force[0].x, force[0].y + force[1].y, 25);
+            if(mouseIsPressed & !active){
+                force[3] = true;
+                active = true;
+            }
+        }
+
+        if(mouseX > force[0].x - 7.5 && mouseX < force[0].x + 7.5 &&
+            mouseY > force[0].y + 10 && mouseY < force[0].y + force[1].y - 10){
+            drawArrow(force[0], force[1], 'tomato', 12);
+            strokeWeight(0)
+            fill(255, 255, 200, 175);
+            if(mouseIsPressed & !active){
+                force[4] = true;
+                active = true;
+            }
+        }
+        if(force[4]){
+            drawArrow(force[0], force[1], 'orangered', 12);
+            if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
+                force[0].x = mouseX;
+                settings.forceDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
+            } else if (mouseX > yellowBar.x + yellowBar.width){
+                force[0].x = yellowBar.x + yellowBar.width
+                settings.forceDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
+            } else if (mouseX < yellowBar.x){
+                force[0].x = yellowBar.x
+                settings.forceDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
+            }
+        }
+
+        push()
+        if(displayForce || force[4]){
+            // Distance of rope
+            resetMatrix()
+            strokeWeight(0)
+            fill('black')
+            stroke('black')
+            textAlign(CENTER)
+            translate(yellowBar.x, yellowBar.y)
+            angular = atan2(((yellowBar.y)+((rope.change/3)*easing(t))) - yellowBar.y, (rope.x+rope.width) - yellowBar.x);
+            rotate(angular);
+            text(settings.forceDistance.toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
+            strokeWeight(1.5)
+            rotate(-90)
+            translate(0, 0)
+            curlyBracket(dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))
+
+            resetMatrix()
+        }
+        pop()
+
+        if(displayData || force[3] || displayForce){
+            strokeWeight(0);
+            fill(0, 0, 0, 250);
+            text(settings.forceMagnitude + " kN", force[0].x + 15, (force[0].y*2 + force[1].y)/2);
+        }
+
+        if (force[3]){
+            strokeWeight(0);
+            fill(255, 255, 200, 250);
+                circle(force[0].x, force[0].y + force[1].y, 25);
+            if(mouseY > yellowBar.y){
+                force[1] = createVector(0, -(force[0].y - mouseY))
+                settings.forceMagnitude = (Math.round(((force[1].y) / 5 ) / 0.5) * 0.5).toFixed(1)
+            } if(mouseY < yellowBar.y + 2){
+                force[1] = createVector(0, 5 / 5)
+                settings.forceMagnitude = (Math.round((5 / 5 ) / 0.5) * 0.5).toFixed(1)
             }
 
-            if(mouseX > force[0].x - 7.5 && mouseX < force[0].x + 7.5 &&
-                mouseY > force[0].y + 10 && mouseY < force[0].y + force[1].y - 10){
-                drawArrow(force[0], force[1], 'tomato');
-                strokeWeight(0)
-                fill(255, 255, 200, 175);
-                if(mouseIsPressed & !active){
-                    force[4] = true;
-                    active = true;
-                }
+            if(force[1].y >= 150) {
+                force[1].y = 150;
             }
-            if(force[4]){
-                drawArrow(force[0], force[1], 'orangered');
-                if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
-                    force[0].x = mouseX;
-                    settings.angleDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
-                } else if (mouseX > yellowBar.x + yellowBar.width){
-                    force[0].x = yellowBar.x + yellowBar.width
-                    settings.angleDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
-                } else if (mouseX < yellowBar.x){
-                    force[0].x = yellowBar.x
-                    settings.angleDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
-                }
-            }
+        }
+    });
 
-            push()
-            if(displayForce || force[4]){
-                // Distance of rope
-                resetMatrix()
-                strokeWeight(0)
-                fill('black')
-                stroke('black')
-                textAlign(CENTER)
-                translate(yellowBar.x, yellowBar.y)
-                angular = atan2(((yellowBar.y)+((greyBar.change/10)*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
-                rotate(angular);
-                text(settings.angleDistance.toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
-                strokeWeight(1.5)
-                rotate(-90)
-                translate(0, 0)
-                curlyBracket(dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))
-
-                resetMatrix()
-            }
-            pop()
-
-            if(displayData || force[3] || displayForce){
-                strokeWeight(0);
-                fill(0, 0, 0, 250);
-                text((force[1].y/2).toFixed(1) + " kN", force[0].x + 15, (force[0].y*2 + force[1].y)/2);
-            }
-
-            if (force[3]){
-                strokeWeight(0);
-                fill(255, 255, 200, 250);
-                    circle(force[0].x, force[0].y + force[1].y + 15, 25);
-                if(mouseY > yellowBar.y + 15){
-                    force[1] = createVector(0, -(force[0].y - mouseY + 15))
-                } if(mouseY < yellowBar.y + 15){
-                    force[1] = createVector(0, 0)
-                }
-            }
-        });
-    }
     resetMatrix();
 
     // Change values
     if(!yellowBar.animation){
         // Rope Height
-        if(dist(mouseX, mouseY, greyBar.x, greyBar.y) < 15){
+        if(dist(mouseX, mouseY, rope.x, rope.y) < 15){
             strokeWeight(0)
             fill(255, 255, 150, 180);
-            circle(greyBar.x, greyBar.y, 24);
+            circle(rope.x, rope.y, 24);
             if(mouseIsPressed && !active){
                 heightChange = true
                 active = true
@@ -637,25 +610,25 @@ function draw() {
         if(heightChange){
             strokeWeight(0);
             fill(255, 200, 90, 255);
-            circle(greyBar.x, greyBar.y, 24);
+            circle(rope.x, rope.y, 24);
             if(mouseY < yellowBar.y){
-                greyBar.y = mouseY;
+                rope.y = mouseY;
                 settings.ropeHeight = Math.round(dist(yellowBar.x, mouseY, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             } else if(mouseY > yellowBar.y){
-                greyBar.y = yellowBar.y;
+                rope.y = yellowBar.y;
                 settings.ropeHeight = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
             } if(mouseY < 15) {
-                greyBar.y = 15;
-                settings.ropeHeight = Math.round(dist(yellowBar.x, greyBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
+                rope.y = 15;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, rope.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             }
         }
 
 
         // Rope Distance
-        if(dist(mouseX, mouseY, greyBar.x + greyBar.width, yellowBar.y) < 15){
+        if(dist(mouseX, mouseY, rope.x + rope.width, yellowBar.y) < 15){
             strokeWeight(0)
             fill(255, 255, 150, 180);
-            circle(greyBar.x + greyBar.width, yellowBar.y, 24);
+            circle(rope.x + rope.width, yellowBar.y, 24);
             if(mouseIsPressed && !active){
                 distanceChange = true
                 active = true
@@ -664,15 +637,15 @@ function draw() {
         if(distanceChange){
             strokeWeight(0);
             fill(255, 200, 90, 255);
-            circle(greyBar.x + greyBar.width, yellowBar.y, 24);
+            circle(rope.x + rope.width, yellowBar.y, 24);
             if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
-                greyBar.width = mouseX - yellowBar.x;
+                rope.width = mouseX - yellowBar.x;
                 settings.ropeDistance = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             } else if(mouseX < yellowBar.x){
-                greyBar.width = 0;
+                rope.width = 0;
                 settings.ropeDistance = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
             } else if(mouseX > yellowBar.x + yellowBar.width){
-                greyBar.width = yellowBar.width;
+                rope.width = yellowBar.width;
                 settings.ropeDistance = settings.yellowBarWidth
             }
         }
@@ -692,17 +665,17 @@ function draw() {
             strokeWeight(0);
             fill(255, 200, 90, 255);
             circle(yellowBar.x, yellowBar.y, 29);
-            if(mouseY > greyBar.y && mouseY < 350){
+            if(mouseY > rope.y && mouseY < 350){
                 yellowBar.y = mouseY;
-                settings.ropeHeight = Math.round(dist(yellowBar.x, mouseY, greyBar.x, greyBar.y) * 20 / settings.snapValue) * settings.snapValue;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, mouseY, rope.x, rope.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
-            } else if(mouseY < greyBar.y){
-                yellowBar.y = greyBar.y;
-                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, greyBar.x, greyBar.y) * 20;
+            } else if(mouseY < rope.y){
+                yellowBar.y = rope.y;
+                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, rope.x, rope.y) * 20;
                 updateForces();
             } if(mouseY > 350){
                 yellowBar.y = 350;
-                settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, greyBar.x, greyBar.y) * 20 / settings.snapValue) * settings.snapValue;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, rope.x, rope.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
             }
         }
@@ -725,12 +698,12 @@ function draw() {
                 yellowBar.width = (10000 / 20);
                 settings.yellowBarWidth = 10000;
             }
-            else if(mouseX > greyBar.x + greyBar.width){
+            else if(mouseX > rope.x + rope.width){
                 yellowBar.width = mouseX - yellowBar.x;
                 settings.yellowBarWidth = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
-            } else if(mouseX < greyBar.x + greyBar.width){
-                yellowBar.width = greyBar.width;
+            } else if(mouseX < rope.x + rope.width){
+                yellowBar.width = rope.width;
                 settings.yellowBarWidth = settings.ropeDistance
                 updateForces();
             }
@@ -745,14 +718,14 @@ function draw() {
 
 
     // After animation
-    if(greyBar.animation && t >= 1){
+    if(rope.animation && t >= 1){
         resetMatrix()
         strokeWeight(0)
         fill('black')
         translate(yellowBar.x + yellowBar.width, yellowBar.y)
-        text((yellowBar.change).toFixed(2) + 'mm', 25, yellowBar.change/10/2 + 5);
+        text((yellowBar.change).toFixed(2) + 'mm', 25, yellowBar.change/3/2 + 5);
         strokeWeight(1.5)
-        curlyBracket(yellowBar.change/10)
+        drawArrow(createVector(15, 0), createVector(0, Math.max(25, yellowBar.change/3 + 10)), 'black', 5)
     }
 
     push()
@@ -763,14 +736,14 @@ function draw() {
         strokeWeight(0)
         fill('black')
         textAlign(CENTER)
-        angular = atan2(yellowBar.y+(yellowBar.change/10*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
-        translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change/10*easing(t)))
+        angular = atan2(yellowBar.y+(yellowBar.change/3*easing(t)) - yellowBar.y, yellowBar.x+yellowBar.width - yellowBar.x);
+        translate(yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.height/3/2)+(yellowBar.change/3*easing(t)))
         rotate(angular);
         text((settings.yellowBarWidth).toFixed(2) + 'mm', -(yellowBar.width/2), 40);
         strokeWeight(1.5)
         translate(0, 0)
         rotate(90)
-        curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change/10*easing(t))))
+        curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change/3*easing(t))))
         resetMatrix()
     }
     if(displayData || barChange || heightChange || distanceChange){
@@ -781,14 +754,14 @@ function draw() {
         fill('black')
         textAlign(CENTER)
 
-        angular = atan2(((yellowBar.y)+(greyBar.change/10*easing(t))) - greyBar.y, (greyBar.x+greyBar.width) - greyBar.x);
-        translate(greyBar.x, greyBar.y)
+        angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - rope.y, (rope.x+rope.width) - rope.x);
+        translate(rope.x, rope.y)
         rotate(angular);
-        text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change/10*easing(t))))/2, -40);
+        text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(rope.x, rope.y, (rope.x+rope.width),((yellowBar.y)+(rope.change/3*easing(t))))/2, -40);
         strokeWeight(1.5)
         rotate(-90)
         translate(12, 0)
-        curlyBracket(dist(greyBar.x, greyBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change/10*easing(t)))))
+        curlyBracket(dist(rope.x, rope.y, (rope.x+rope.width),((yellowBar.y)+(rope.change/3*easing(t)))))
         resetMatrix()
 
         // Added by Joseph
@@ -797,10 +770,10 @@ function draw() {
         fill('black')
         textAlign(CENTER)
         let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
-        text(`Angle: ${angle.toFixed(2)}°`, yellowBar.x + greyBar.width, yellowBar.y - 50);
+        text(`Angle: ${angle.toFixed(2)}°`, yellowBar.x + rope.width + 75, yellowBar.y - 50);
         strokeWeight(2)
         fill(255, 0, 0, 0);
-        arc(greyBar.x + greyBar.width, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
+        arc(rope.x + rope.width, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
         fill('black')
     }
 
@@ -829,21 +802,18 @@ function draw() {
         stroke('black')
         textAlign(CENTER)
         translate(yellowBar.x, yellowBar.y)
-        angular = atan2(((yellowBar.y)+(greyBar.change/10*easing(t))) - yellowBar.y, (greyBar.x+greyBar.width) - yellowBar.x);
+        angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - yellowBar.y, (rope.x+rope.width) - yellowBar.x);
         rotate(angular);
         text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
-        curlyBracket(dist(yellowBar.x, yellowBar.y, (greyBar.x+greyBar.width),((yellowBar.y)+(greyBar.change/10*easing(t)))))
+        curlyBracket(dist(yellowBar.x, yellowBar.y, (rope.x+rope.width),((yellowBar.y)+(rope.change/3*easing(t)))))
 
         resetMatrix()
     }
     pop()
 
-
-    // // Hover feature Test
-    // if (mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width && mouseY > yellowBar.y && mouseY < yellowBar.y + yellowBar.height)
 
 
     // Added by Joseph
@@ -851,13 +821,10 @@ function draw() {
     givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
     pivotPointBar.value(settings.ropeDistance);
     yellowBarWidth.value(settings.yellowBarWidth);
-    arrowPoint.value(settings.angleDistance);
-
-    if(inputOfCrossArea == false){
-        crossArea.value(cylinderCrossArea(greyBar.height/2).toFixed(2));
-    }
-    youngsModulus.value(settings.greyRopeModulus);
-    arrowForce.value(forces[0][1].y / 2);
+    forcePoint.value(settings.forceDistance);
+    crossArea.value(settings.ropeCrossArea);
+    youngsModulus.value(settings.ropeModulus);
+    forceMagnitude.value(settings.forceMagnitude);
     snapInput.value(settings.snapValue);
 
 
@@ -881,10 +848,24 @@ materialElements.forEach((element) => {
         materialElements.forEach((el) => {
             el.classList.remove('active');
         });
-        if (active == true) {
-            element.classList.remove('active');
-        } else {
-            element.classList.add('active');
+        element.classList.add('active');
+        var name = element.getAttribute("alt")
+        switch(name){
+            case "Wood":
+                settings.ropeMaterial = 0;
+                break;
+            case "Steel":
+                settings.ropeMaterial = 1;
+                break;
+            case "Nylon":
+                settings.ropeMaterial = 2;
+                break;
+            case "Bronze":
+                settings.ropeMaterial = 3;
+                break;
+            case "Aluminum":
+                settings.ropeMaterial = 4;
+                break;
         }
     });
 });
