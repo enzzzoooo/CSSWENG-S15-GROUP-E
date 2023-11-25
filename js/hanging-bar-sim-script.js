@@ -9,47 +9,45 @@ let pivotPointBar;
 let forcePoint;
 let snapInput;
 
+// Finds deformation using normal deformation formula.
 function deformation(load, length, crossArea, elasticity) {
+
     return (load * length) / (crossArea * elasticity)
 }
 
-function squareCrossArea(width) {
-    return width * width
-}
-
+// Finds the cross area of a cylinder based on radius
 function cylinderCrossArea(radius) {
     return Math.PI * radius * radius
 }
 
+// Finds the answer of the pythagorean formula of A^2 + B^2 = C^2 of two numbers
 function pythagorean(a, b) {
     return Math.sqrt(a * a + b * b)
 }
 
+// Returns angle of degrees to radians
 function toRadians(angle) {
     return angle * (Math.PI / 180);
 }
 
+// Returns angle of radians to degrees
 function toDegrees(angle) {
     return angle * (180 / Math.PI);
 }
 
-function internalHanging(lengthRope, upwardRope, distanceRope, downward, upward, distancesDown, distancesUp) {
-    downwardForces = 0;
-    upwardForces = 0;
-
-    // Get total of downward forces
-    for (i = 0; i < downward.length; i++){
-        downwardForces += (distancesDown[i]) * downward[i]
+// Finds internal forces on object.
+// If rope is perpendicular, the formula is simplified.
+function internalHanging(forceMagnitude, forceDistance, lengthRope, heightRope, distanceRope, distancefromWall) {
+    if(distanceRope - distancefromWall != 0){
+        return forceMagnitude * forceDistance /(heightRope * distanceRope / lengthRope)
+    } else {
+        return forceMagnitude * forceDistance / distanceRope
     }
-
-    // Get total of upward forces
-    for (i = 0; i < upward.length; i++){
-        downwardUp += distancesUp[i] * upward[i]
-    }
-
-    return (downwardForces - upwardForces)/((upwardRope * distanceRope)/lengthRope)
 }
 
+// Draws stroke for the lines generated in the code.
+//    NOTE:
+//    ~ Does not look right for slanted lines (may fix in the last bugfix but it might not be worth it)
 function drawStrokedLine(x1, y1, x2, y2, lineHeight, strokecolor){
     push();
     stroke(strokecolor)
@@ -58,6 +56,11 @@ function drawStrokedLine(x1, y1, x2, y2, lineHeight, strokecolor){
     pop();
 }
 
+// Draws an arrow.
+// base - variable of the starting point of arrow
+// vec - variable of the vector that indicates the direction of the arrow.
+// myColor - the color of the resulting arrow
+// size - the size of the resulting arrow
 function drawArrow(base, vec, myColor, size) {
     push();
     stroke(myColor);
@@ -76,11 +79,22 @@ function drawArrow(base, vec, myColor, size) {
     pop();
 }
 
+// Variable for canvas origin
 let canvasOrigin = {
     x: 65,
     y: 250,
 }
 
+// Various variables used in the program
+// ropeHeight - height of rope
+// ropeDistance - distance of rope pivot point from wall
+// ropeCrossArea - cross area of rope
+// yellowBarWidth - width of bar
+// ropeModulus - young's modulus of rope
+// snapValue - value of increment for distances
+// forceDistance - distance of force from wall
+// forceMagnitude - magnitude of force
+// ropeMaterial - from 0 to 4 that indicates kind of material used. (NOTE: not used yet)
 let settings = {
     ropeHeight: 3000,
     ropeDistance: 4000,
@@ -94,16 +108,16 @@ let settings = {
     ropeMaterial: 1
 }
 
-// wall
+// Wall variables
 let wall = {
     x: 65 - canvasOrigin.x,
     y: 250 - canvasOrigin.y,
     width: 168,
     height: 534,
-    color: '#595959'
+    color: '#999999'
 }
 
-// yellowBar
+// Variables for yellow bar
 let yellowBar = {
     x: 230 - canvasOrigin.x,
     y: 525 - canvasOrigin.y,
@@ -115,46 +129,55 @@ let yellowBar = {
     angle: 0
 }
 
-// rope
+// Variables for rope
 let rope = {
     x: 230 - canvasOrigin.x,
     y: yellowBar.y - settings.ropeHeight/20,
     change: 0,
     animation: false,
-    width: settings.ropeDistance / 20,
+    end: settings.ropeDistance / 20 + yellowBar.x,
     height: 50,
     color: '#bbdbf0',
     angle: 28.42
 }
 
+// Variable for time used for animation
 let t = 0;
 
+// Various global variables used throughout.
 let forces = []
 let active = false;
-let displayData = false;
+let displayData = true;
 let displayForce = false;
 let heightChange = false;
 let distanceChange = false;
 let barChange = false;
 let lengthChange = false;
 let inputOfCrossArea = false;
+let keeptoWall = true;
 
+// Loads font.
 function preload() {
     font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
 }
 
+// Setup for simulation.
 function setup() {
+
+    // Creates canvas.
     let canvas = createCanvas(822, 534)
     canvas.parent('canvas-container');
     angleMode(DEGREES);
 
-
+    // Button for changing drawing
     let button = document.getElementById('change-drawing');
     button.addEventListener('click', changeDrawing);
 
+    // Button for reseting drawing
     let reset = document.getElementById('reset-drawing');
     reset.addEventListener('click', resetDrawing);
 
+    // Button for displaying data on and off
     let toggle = document.getElementById('toggle');
     toggle.addEventListener("click", function () {
         displayData = !displayData;
@@ -168,7 +191,7 @@ function setup() {
         console.log((rope.y + yellowBar.y) / 2 + 20)
     });
 
-
+    // Button for displaying force data on and off
     let forceButton = document.getElementById('force');
     forceButton.addEventListener("click", function () {
         displayForce = !displayForce;
@@ -180,7 +203,7 @@ function setup() {
         }
     });
 
-
+    // Buttons for changing materials
     let changeWood = document.getElementById('changeMatToWood');
     changeWood.addEventListener('click', function(event) {
         resetDrawing();
@@ -212,30 +235,27 @@ function setup() {
         settings.ropeModulus = 2;
     });
 
-
+    // Set the starting force.
     forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 150), 'coral']
-    console.log("x: " + forces[0][0].x, "y: " + forces[0][0].y)
 
+    // Setup text
     textFont(font);
     textSize(20);
 
 
-    // For interacting with elements outside the canvas
+    // For interacting with elements outside the canvas (textboxes)
     yellowBarWidth = select('#yellowBarWidth');
     youngsModulus = select('#youngsModulus');
     forceMagnitude = select('#forceMagnitude');
     crossArea = select('#crossArea');
-
-    // pivotPointWall = select('#pivotPointWall');
-
     givenAngle = select('#givenAngle');
-
     pivotPointBar = select('#pivotPointBar');
     forcePoint = select('#forcePoint');
-
     snapInput = select('#snapInterval');
 
+    // Sets up the textboxes
     givenAngle.input(function () {
+        givenAngle.value(givenAngle.value().replace(/[^\d.]/g, ''));
         pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
         let temp = -(pivotPointWall/20 - yellowBar.y);
         if (temp < yellowBar.y){
@@ -248,45 +268,62 @@ function setup() {
     });
 
     snapInput.input(function () {
+        snapInput.value(snapInput.value().replace(/[^\d.]/g, ''));
         settings.snapValue = snapInput.value();
 
-        if(settings.snapValue == 0) {
-            settings.snapValue = 1;
+        if(settings.snapValue < 0) {
+            settings.snapValue = 0;
         }
     });
 
 
     pivotPointBar.input(function() {
-        let temp = pivotPointBar.value()/20 + yellowBar.x - rope.x;
-
-        if(temp + rope.x > yellowBar.x){
-            rope.width = temp
+        pivotPointBar.value(pivotPointBar.value().replace(/[^\d.]/g, ''));
+        if(pivotPointBar.value()/20 > 0 && pivotPointBar.value() < parseFloat(settings.yellowBarWidth)){
+            rope.end = parseFloat(pivotPointBar.value()/20) + yellowBar.x
             settings.ropeDistance = parseFloat(pivotPointBar.value());
+        } else if (pivotPointBar.value()/20 < 0) {
+            rope.end = yellowBar.x;
+            settings.ropeDistance = 0;
         } else {
-            rope.width = yellowBar.x;
+            rope.end = yellowBar.x + yellowBar.width;
+            settings.ropeDistance = parseFloat(settings.yellowBarWidth);
         }
     });
 
     yellowBarWidth.input(function () {
-
-        settings.yellowBarWidth = parseFloat(yellowBarWidth.value());
-        yellowBar.width = settings.yellowBarWidth / 20;
+        yellowBarWidth.value(yellowBarWidth.value().replace(/[^\d.]/g, ''));
+        if(yellowBarWidth.value()/20 > 0 && yellowBarWidth.value() <= 10000){
+            settings.yellowBarWidth = parseFloat(yellowBarWidth.value());
+            yellowBar.width = settings.yellowBarWidth / 20;
+        } else if (yellowBarWidth.value()/20 < 0) {
+            settings.yellowBarWidth = 0;
+            yellowBar.width = 0
+        } else {
+            rope.end = 10000/20;
+            settings.ropeDistance = parseFloat(10000);
+        }
         updateForces();
     });
 
     forcePoint.input(function() {
-        if(forcePoint.value() > 0){
+        forcePoint.value(forcePoint.value().replace(/[^\d.]/g, ''));
+        if(forcePoint.value() < 0){
+            forces[0][0].x = yellowBar.x;
+            settings.forceDistance = 0
+        } else if (forcePoint.value() > settings.yellowBarWidth){
+            forces[0][0].x = yellowBar.width + yellowBar.x;
+            settings.forceDistance = settings.yellowBarWidth
+        } else {
             forces[0][0].x = parseFloat(forcePoint.value())/20 + yellowBar.x;
             settings.forceDistance = parseFloat(forcePoint.value());
-        } else {
-            settings.forceDistance = 0
         }
-
     });
 
     crossArea.input(function () {
+        crossArea.value(forcePoint.value().replace(/[^\d.]/g, ''));
         if(crossArea.value() > 0){
-        settings.ropeCrossArea = parseFloat(crossArea.value());
+            settings.ropeCrossArea = parseFloat(crossArea.value());
         } else {
             settings.ropeCrossArea = 0;
         }
@@ -304,7 +341,7 @@ function setup() {
             }
             settings.forceMagnitude = parseFloat(forceMagnitude.value())
         } else {
-            forces[0][1].y = 1;
+            forces[0][1].y = 5 * 5;
             settings.forceMagnitude = 0
         }
     });
@@ -327,18 +364,22 @@ function changeDrawing() {
     console.log(downwardDistances)
 
 
-    ropeLength = pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance))
+    ropeLength = pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall))
+
     console.log(ropeLength)
     // Changed by Joseph
-    ropeForce = internalHanging(ropeLength, settings.ropeHeight, parseFloat(settings.ropeDistance), downward, [], downwardDistances, [])
+    ropeForce = internalHanging(parseFloat(settings.forceMagnitude), parseFloat(settings.forceDistance), ropeLength, parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance), parseFloat(settings.ropeAwayFromWall))
     deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), parseFloat(settings.ropeModulus));
-    console.log("Cross Area: " + crossArea.value())
-    console.log(deformationGrey)
-    yellowBar.change = parseFloat(settings.yellowBarWidth) * ropeLength / parseFloat(settings.ropeHeight) / parseFloat(settings.ropeDistance) * deformationGrey;
-    console.log(yellowBar.change)
-    yellowBar.animation = true;
 
-    rope.change = (yellowBar.change*rope.width/yellowBar.width)
+    if(parseFloat(settings.ropeAwayFromWall) == settings.ropeDistance){
+        rope.change = deformationGrey;
+        yellowBar.change = deformationGrey * parseFloat(settings.yellowBarWidth) / parseFloat(settings.ropeDistance)
+    } else{
+        yellowBar.change = parseFloat(settings.yellowBarWidth) * ropeLength / parseFloat(settings.ropeHeight) / parseFloat(settings.ropeDistance) * deformationGrey;
+        rope.change = (yellowBar.change*(rope.end - rope.x)/yellowBar.width)
+    }
+
+    yellowBar.animation = true;
     rope.animation = true;
 
     deflectionB = rope.change
@@ -367,7 +408,7 @@ function changeDrawing() {
     }
 
     alert(
-        "Force in Cable: " + internalHanging(ropeLength, settings.ropeHeight, settings.ropeDistance, downward, [], downwardDistances, []) + "\n" +
+        "Force in Cable: " + ropeForce + "\n" +
         "Deformation Grey: " + deformationGrey + "\n" +
         "Deflection at pivot point: " + deflectionB + "\n" +
         "Deflection at end of bar: " + (yellowBar.change) + "\n" +
@@ -419,6 +460,11 @@ function updateForces(){
         }
     });
 
+    if (settings.ropeDistance > settings.yellowBarWidth){
+        rope.end = yellowBar.x + yellowBar.width
+        settings.ropeDistance = settings.yellowBarWidth
+    }
+
 }
 
 function mouseReleased() {
@@ -452,8 +498,6 @@ function draw() {
     rect(wall.x,wall.y,wall.width,wall.height);
 
 
-    // yellowBar
-
 
     // After animation
 
@@ -462,7 +506,7 @@ function draw() {
     stroke(yellowBar.color);
     strokeWeight(yellowBar.height/3);
     if(yellowBar.animation && t < 1){
-        t += 0.035
+        t += 0.030
         drawStrokedLine(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/3*easing(t)), yellowBar.height/3, 'black');
         stroke(yellowBar.color)
         line(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width, yellowBar.y+(yellowBar.change/3*easing(t)))
@@ -477,14 +521,14 @@ function draw() {
     stroke(rope.color);
     strokeWeight(rope.height/3);
     if(rope.animation && t < 1){
-        drawStrokedLine(rope.x, rope.y, rope.x+rope.width, (yellowBar.y)+(rope.change/3*easing(t)), rope.height/3, 'black');
-        line(rope.x, rope.y, rope.x+rope.width, (yellowBar.y)+(rope.change/3*easing(t)))
+        drawStrokedLine(rope.x, rope.y, rope.end, (yellowBar.y)+(rope.change/3*easing(t)), rope.height/3, 'black');
+        line(rope.x, rope.y, rope.end, (yellowBar.y)+(rope.change/3*easing(t)))
     } else {
         stroke(rope.color + '80');
-        line(rope.x, rope.y, rope.x+rope.width, (yellowBar.y))
+        line(rope.x, rope.y, rope.end, (yellowBar.y))
         stroke(rope.color)
-        drawStrokedLine(rope.x, rope.y, rope.x+rope.width, yellowBar.y+(rope.change/3), (rope.height)/3, 'black')
-        line(rope.x, rope.y, rope.x+rope.width, (yellowBar.y)+(rope.change/3))
+        drawStrokedLine(rope.x, rope.y, rope.end, yellowBar.y+(rope.change/3), (rope.height)/3, 'black')
+        line(rope.x, rope.y, rope.end, (yellowBar.y)+(rope.change/3))
     }
 
     strokeWeight(1);
@@ -493,14 +537,14 @@ function draw() {
     circle(yellowBar.x, yellowBar.y, 30)
     circle(rope.x, rope.y, 25)
     if(rope.animation && t < 1){
-        circle(rope.x+rope.width, (yellowBar.y)+rope.change/3*easing(t), 25)
+        circle(rope.end, (yellowBar.y)+rope.change/3*easing(t), 25)
     } else {
         stroke('#000000' + '80');
         fill('#FFFFFF' + '80');
-        circle(rope.x+rope.width, (yellowBar.y), 25)
+        circle(rope.end, (yellowBar.y), 25)
         stroke('#000000');
         fill('#FFFFFF');
-        circle(rope.x+rope.width, (yellowBar.y)+(rope.change/3), 25)
+        circle(rope.end, (yellowBar.y)+(rope.change/3), 25)
     }
     resetMatrix()
 
@@ -557,7 +601,7 @@ function draw() {
             stroke('black')
             textAlign(CENTER)
             translate(yellowBar.x, yellowBar.y)
-            angular = atan2(((yellowBar.y)+((rope.change/3)*easing(t))) - yellowBar.y, (rope.x+rope.width) - yellowBar.x);
+            angular = atan2(((yellowBar.y)+((rope.change/3)*easing(t))) - yellowBar.y, rope.end - yellowBar.x);
             rotate(angular);
             text(settings.forceDistance.toFixed(2) + 'mm', (dist(yellowBar.x, yellowBar.y, force[0].x, force[0].y))/2, -25);
             strokeWeight(1.5)
@@ -611,24 +655,37 @@ function draw() {
             strokeWeight(0);
             fill(255, 200, 90, 255);
             circle(rope.x, rope.y, 24);
-            if(mouseY < yellowBar.y){
+            if(mouseY <= yellowBar.y){
                 rope.y = mouseY;
-                settings.ropeHeight = Math.round(dist(yellowBar.x, mouseY, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
-            } else if(mouseY > yellowBar.y){
-                rope.y = yellowBar.y;
-                settings.ropeHeight = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
-            } if(mouseY < 15) {
-                rope.y = 15;
                 settings.ropeHeight = Math.round(dist(yellowBar.x, rope.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
+            } else if(mouseY < 15) {
+                rope.y = 15;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, 15, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
+            } else {
+                rope.y = yellowBar.y;
+                settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
+            }
+
+            if(!keeptoWall){
+                if(mouseX < rope.end && mouseX > yellowBar.x) {
+                    rope.x = mouseX;
+                    settings.ropeAwayFromWall = Math.round(dist(rope.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
+                } else if (mouseX >= rope.end) {
+                    rope.x = rope.end;
+                    settings.ropeAwayFromWall = parseFloat(settings.ropeDistance);
+                } else {
+                    rope.x = yellowBar.x;
+                    settings.ropeAwayFromWall = 0;
+                }
             }
         }
 
 
         // Rope Distance
-        if(dist(mouseX, mouseY, rope.x + rope.width, yellowBar.y) < 15){
+        if(dist(mouseX, mouseY, rope.end, yellowBar.y) < 15){
             strokeWeight(0)
             fill(255, 255, 150, 180);
-            circle(rope.x + rope.width, yellowBar.y, 24);
+            circle(rope.end, yellowBar.y, 24);
             if(mouseIsPressed && !active){
                 distanceChange = true
                 active = true
@@ -637,15 +694,15 @@ function draw() {
         if(distanceChange){
             strokeWeight(0);
             fill(255, 200, 90, 255);
-            circle(rope.x + rope.width, yellowBar.y, 24);
-            if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
-                rope.width = mouseX - yellowBar.x;
+            circle(rope.end, yellowBar.y, 24);
+            if(mouseX > rope.x && mouseX < yellowBar.x + yellowBar.width){
+                rope.end = mouseX;
                 settings.ropeDistance = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
-            } else if(mouseX < yellowBar.x){
-                rope.width = 0;
-                settings.ropeDistance = dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20;
-            } else if(mouseX > yellowBar.x + yellowBar.width){
-                rope.width = yellowBar.width;
+            } else if(mouseX <= rope.x){
+                rope.end = rope.x;
+                settings.ropeDistance = settings.ropeAwayFromWall
+            } else if(mouseX >= yellowBar.x + yellowBar.width){
+                rope.end = yellowBar.x + yellowBar.width;
                 settings.ropeDistance = settings.yellowBarWidth
             }
         }
@@ -698,12 +755,12 @@ function draw() {
                 yellowBar.width = (10000 / 20);
                 settings.yellowBarWidth = 10000;
             }
-            else if(mouseX > rope.x + rope.width){
+            else if(mouseX > rope.end){
                 yellowBar.width = mouseX - yellowBar.x;
                 settings.yellowBarWidth = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
                 updateForces();
-            } else if(mouseX < rope.x + rope.width){
-                yellowBar.width = rope.width;
+            } else if(mouseX < rope.end){
+                yellowBar.width = rope.end - yellowBar.x;
                 settings.yellowBarWidth = settings.ropeDistance
                 updateForces();
             }
@@ -754,27 +811,39 @@ function draw() {
         fill('black')
         textAlign(CENTER)
 
-        angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - rope.y, (rope.x+rope.width) - rope.x);
+        angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - rope.y, rope.end - rope.x);
         translate(rope.x, rope.y)
         rotate(angular);
-        text(((pythagorean(settings.ropeHeight, settings.ropeDistance)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(rope.x, rope.y, (rope.x+rope.width),((yellowBar.y)+(rope.change/3*easing(t))))/2, -40);
+        text(((pythagorean(settings.ropeHeight, settings.ropeDistance - settings.ropeAwayFromWall)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(rope.x, rope.y, (rope.end),((yellowBar.y)+(rope.change/3*easing(t))))/2, -40);
         strokeWeight(1.5)
         rotate(-90)
         translate(12, 0)
-        curlyBracket(dist(rope.x, rope.y, (rope.x+rope.width),((yellowBar.y)+(rope.change/3*easing(t)))))
+        curlyBracket(dist(rope.x, rope.y, rope.end,((yellowBar.y)+(rope.change/3*easing(t)))))
         resetMatrix()
-
-        // Added by Joseph
-        // Display angle between the two bars [SHOWING ANGULAR DATA][want to make curve but dk how...]
         strokeWeight(0)
         fill('black')
         textAlign(CENTER)
         let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
-        text(`Angle: ${angle.toFixed(2)}°`, yellowBar.x + rope.width + 75, yellowBar.y - 50);
+        text(`Angle: ${angle.toFixed(2)}°`, rope.end + 125, yellowBar.y - 50);
         strokeWeight(2)
         fill(255, 0, 0, 0);
-        arc(rope.x + rope.width, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
+        arc(rope.end, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
         fill('black')
+    } if((displayData || heightChange || distanceChange) && !keeptoWall && settings.ropeAwayFromWall > 0){
+        // Grey Bar
+        resetMatrix()
+        strokeWeight(0)
+        fill('black')
+        stroke('black')
+        textAlign(CENTER)
+        translate(yellowBar.x, rope.y)
+        text((settings.ropeAwayFromWall).toFixed(2) + 'mm', (rope.x - yellowBar.x)/2, -25);
+        strokeWeight(1.5)
+        rotate(-90)
+        translate(0, 0)
+        curlyBracket(dist(yellowBar.x, yellowBar.y, rope.x, yellowBar.y))
+
+        resetMatrix()
     }
 
     if(displayData || heightChange || barChange){
@@ -802,13 +871,13 @@ function draw() {
         stroke('black')
         textAlign(CENTER)
         translate(yellowBar.x, yellowBar.y)
-        angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - yellowBar.y, (rope.x+rope.width) - yellowBar.x);
+        angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - yellowBar.y, (rope.end) - yellowBar.x);
         rotate(angular);
         text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
-        curlyBracket(dist(yellowBar.x, yellowBar.y, (rope.x+rope.width),((yellowBar.y)+(rope.change/3*easing(t)))))
+        curlyBracket(dist(yellowBar.x, yellowBar.y, rope.end,((yellowBar.y)+(rope.change/3*easing(t)))))
 
         resetMatrix()
     }
@@ -897,5 +966,17 @@ snapCheckbox.addEventListener('click', () => {
     } else {
         settings.snapValue = 1;
         intervalContainer.classList.remove('active');
+    }
+});
+
+const wallCheckbox = document.getElementById('wallToggle');
+wallCheckbox.addEventListener('click', () => {
+    if (wallCheckbox.checked) {
+        keeptoWall = true;
+        rope.x = yellowBar.x
+        settings.ropeAwayFromWall = 0;
+    } else {
+        keeptoWall = false;
+
     }
 });
