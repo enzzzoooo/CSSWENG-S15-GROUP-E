@@ -972,9 +972,10 @@
   line-height: 130%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
-.answer-prompt2,
-.answer-prompt3 {
+#answerPromptContainer,
+#answerPromptContainer1 {
   position: absolute;
   left: 912px;
   border-radius: var(--br-3xs);
@@ -991,11 +992,23 @@
   color: var(--color-white);
   visibility: hidden;
 }
-.answer-prompt2 {
-  top: 1124px;
-  cursor: pointer;
+.animation {
+  animation: fadeIn 1s forwards;
+  visibility: hidden;
 }
-.answer-prompt3 {
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+#answerPromptContainer {
+  top: 1124px;
+}
+#answerPromptContainer1 {
   top: 1412px;
   height: 120px;
 }

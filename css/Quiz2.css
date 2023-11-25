@@ -152,7 +152,7 @@
 }
 .d2 {
   left: 0;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 }
 .a7,
 .b6,
@@ -174,7 +174,7 @@
 }
 .f2 {
   left: 410px;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 }
 .a7,
 .b6,
@@ -786,6 +786,19 @@
   color: var(--color-white);
   font-family: var(--font-avenir-lt-std);
   visibility: hidden;
+}
+.animation {
+  animation: fadeIn 1s forwards;
+  visibility: hidden;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 .quiz-2-hint {
   position: relative;

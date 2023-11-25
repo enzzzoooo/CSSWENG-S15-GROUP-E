@@ -37,8 +37,8 @@ if (lessonButton) {
         window.location.href = "./lesson-picker.html";
     });
 }
-var explanationpane1 = document.getElementsByClassName("answer-prompt2")[0];
-var explanationpane2 = document.getElementsByClassName("answer-prompt3")[0];
+var explanationpane1 = document.getElementById("answerPromptContainer");
+var explanationpane2 = document.getElementById("answerPromptContainer1");
 var explanationpane1text = document.getElementById("explanationpane1text");
 var explanationpane2text = document.getElementById("explanationpane2text");
 var explanationpane1symbol = document.getElementById("explanationpane1symbol");
@@ -65,9 +65,20 @@ rectangle16.addEventListener("click", function (e) {
         explanationpane1symbol.src="./imgs/group.svg";
         explanationpane2.style.backgroundColor="var(--color-darkslategray)";
         explanationpane2symbol.src="./imgs/group.svg";
-        explanationpane1.style.visibility="visible";
-        explanationpane2.style.visibility="visible";
+        if (explanationpane1.classList.contains("animation")) {
+            explanationpane1.classList.remove("animation");
+            void explanationpane1.offsetWidth;
+            explanationpane1.classList.add("animation");
+        } 
+        explanationpane1.classList.add("animation");
+        if (explanationpane2.classList.contains("animation")) {
+            explanationpane2.classList.remove("animation");
+            void explanationpane2.offsetWidth;
+            explanationpane2.classList.add("animation");
+        } 
+        explanationpane2.classList.add("animation");
         checkButtonText.innerText = "Proceed";
+        rectangle16.style.backgroundColor = "green";
     }
     else{
         checkButtonText.innerText = "Try Again";
@@ -75,37 +86,67 @@ rectangle16.addEventListener("click", function (e) {
             explanationpane1text.textContent="Incorrect! Cable BG is not oriented vertically.";
             explanationpane1.style.backgroundColor="var(--color-brown)";
             explanationpane1symbol.src="./imgs/vector1.svg";
-            explanationpane1.style.visibility="visible";
+            if (explanationpane1.classList.contains("animation")) {
+                explanationpane1.classList.remove("animation");
+                void explanationpane1.offsetWidth;
+                explanationpane1.classList.add("animation");
+            } 
+            explanationpane1.classList.add("animation");
         }
         else if(deltaBGoverSin.checked){
             explanationpane1text.textContent="Correct!";
             explanationpane1.style.backgroundColor="var(--color-darkslategray)";
             explanationpane1symbol.src="./imgs/group.svg";
-            explanationpane1.style.visibility="visible";
+            if (explanationpane1.classList.contains("animation")) {
+                explanationpane1.classList.remove("animation");
+                void explanationpane1.offsetWidth;
+                explanationpane1.classList.add("animation");
+            } 
+            explanationpane1.classList.add("animation");
         }
         else {
             explanationpane1text.textContent="Incorrect! Redo your analysis (you may go back to the discussion)";
             explanationpane1.style.backgroundColor="var(--color-brown)";
             explanationpane1symbol.src="./imgs/vector1.svg";
-            explanationpane1.style.visibility="visible";
+            if (explanationpane1.classList.contains("animation")) {
+                explanationpane1.classList.remove("animation");
+                void explanationpane1.offsetWidth;
+                explanationpane1.classList.add("animation");
+            } 
+            explanationpane1.classList.add("animation");
         }
         if(dBplusdC.checked){
             explanationpane2text.textContent="Incorrect! The deflections of points B and C do not lie along the same axis.";
             explanationpane2.style.backgroundColor="var(--color-brown)";
             explanationpane2symbol.src="./imgs/vector1.svg";
-            explanationpane2.style.visibility="visible";
+            if (explanationpane2.classList.contains("animation")) {
+                explanationpane2.classList.remove("animation");
+                void explanationpane2.offsetWidth;
+                explanationpane2.classList.add("animation");
+            } 
+            explanationpane2.classList.add("animation");
         }
         else if(dC.checked){
             explanationpane2text.textContent="Correct!";
             explanationpane2.style.backgroundColor="var(--color-darkslategray)";
             explanationpane2symbol.src="./imgs/group.svg";
-            explanationpane2.style.visibility="visible";
+            if (explanationpane2.classList.contains("animation")) {
+                explanationpane2.classList.remove("animation");
+                void explanationpane2.offsetWidth;
+                explanationpane2.classList.add("animation");
+            } 
+            explanationpane2.classList.add("animation");
         }
         else{
             explanationpane2text.textContent="Incorrect! The deformation of cable CF does not affect the deflection of point C.";
             explanationpane2.style.backgroundColor="var(--color-brown)";
             explanationpane2symbol.src="./imgs/vector1.svg";
-            explanationpane2.style.visibility="visible";
+            if (explanationpane2.classList.contains("animation")) {
+                explanationpane2.classList.remove("animation");
+                void explanationpane2.offsetWidth;
+                explanationpane2.classList.add("animation");
+            } 
+            explanationpane2.classList.add("animation");
         }
     }
 });
@@ -122,9 +163,20 @@ submit.addEventListener("click", function (e) {
         explanationpane1symbol.src="./imgs/group.svg";
         explanationpane2.style.backgroundColor="var(--color-darkslategray)";
         explanationpane2symbol.src="./imgs/group.svg";
-        explanationpane1.style.visibility="visible";
-        explanationpane2.style.visibility="visible";
+        if (explanationpane1.classList.contains("animation")) {
+            explanationpane1.classList.remove("animation");
+            void explanationpane1.offsetWidth;
+            explanationpane1.classList.add("animation");
+        } 
+        explanationpane1.classList.add("animation");
+        if (explanationpane2.classList.contains("animation")) {
+            explanationpane2.classList.remove("animation");
+            void explanationpane2.offsetWidth;
+            explanationpane2.classList.add("animation");
+        } 
+        explanationpane2.classList.add("animation");
         checkButtonText.innerText = "Proceed";
+        rectangle16.style.backgroundColor = "green";
     }
     else{
         checkButtonText.innerText = "Try Again";
@@ -132,37 +184,67 @@ submit.addEventListener("click", function (e) {
             explanationpane1text.textContent="Incorrect! Cable BG is not oriented vertically.";
             explanationpane1.style.backgroundColor="var(--color-brown)";
             explanationpane1symbol.src="./imgs/vector1.svg";
-            explanationpane1.style.visibility="visible";
+            if (explanationpane1.classList.contains("animation")) {
+                explanationpane1.classList.remove("animation");
+                void explanationpane1.offsetWidth;
+                explanationpane1.classList.add("animation");
+            } 
+            explanationpane1.classList.add("animation");
         }
         else if(deltaBGoverSin.checked){
             explanationpane1text.textContent="Correct!";
             explanationpane1.style.backgroundColor="var(--color-darkslategray)";
             explanationpane1symbol.src="./imgs/group.svg";
-            explanationpane1.style.visibility="visible";
+            if (explanationpane1.classList.contains("animation")) {
+                explanationpane1.classList.remove("animation");
+                void explanationpane1.offsetWidth;
+                explanationpane1.classList.add("animation");
+            } 
+            explanationpane1.classList.add("animation");
         }
         else {
             explanationpane1text.textContent="Incorrect! Redo your analysis (you may go back to the discussion)";
             explanationpane1.style.backgroundColor="var(--color-brown)";
             explanationpane1symbol.src="./imgs/vector1.svg";
-            explanationpane1.style.visibility="visible";
+            if (explanationpane1.classList.contains("animation")) {
+                explanationpane1.classList.remove("animation");
+                void explanationpane1.offsetWidth;
+                explanationpane1.classList.add("animation");
+            } 
+            explanationpane1.classList.add("animation");
         }
         if(dBplusdC.checked){
             explanationpane2text.textContent="Incorrect! The deflections of points B and C do not lie along the same axis.";
             explanationpane2.style.backgroundColor="var(--color-brown)";
             explanationpane2symbol.src="./imgs/vector1.svg";
-            explanationpane2.style.visibility="visible";
+            if (explanationpane2.classList.contains("animation")) {
+                explanationpane2.classList.remove("animation");
+                void explanationpane2.offsetWidth;
+                explanationpane2.classList.add("animation");
+            } 
+            explanationpane2.classList.add("animation");
         }
         else if(dC.checked){
             explanationpane2text.textContent="Correct!";
             explanationpane2.style.backgroundColor="var(--color-darkslategray)";
             explanationpane2symbol.src="./imgs/group.svg";
-            explanationpane2.style.visibility="visible";
+            if (explanationpane2.classList.contains("animation")) {
+                explanationpane2.classList.remove("animation");
+                void explanationpane2.offsetWidth;
+                explanationpane2.classList.add("animation");
+            } 
+            explanationpane2.classList.add("animation");
         }
         else{
             explanationpane2text.textContent="Incorrect! The deformation of cable CF does not affect the deflection of point C.";
             explanationpane2.style.backgroundColor="var(--color-brown)";
             explanationpane2symbol.src="./imgs/vector1.svg";
-            explanationpane2.style.visibility="visible";
+            if (explanationpane2.classList.contains("animation")) {
+                explanationpane2.classList.remove("animation");
+                void explanationpane2.offsetWidth;
+                explanationpane2.classList.add("animation");
+            } 
+            explanationpane2.classList.add("animation");
         }
     }
 });

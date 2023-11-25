@@ -47,9 +47,31 @@ if (checkButton) {
         }
         else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
             checkButtonText.innerText = "Proceed";
+            checkButton.style.backgroundColor = "green";
+            PBG.style.backgroundColor = "green";
+            PAD.style.backgroundColor = "green";
+            PCF.style.backgroundColor = "green";
         }
         else{
             checkButtonText.innerText = "Try Again";
+            if(PBG.value == 6){
+                PBG.style.backgroundColor = "green";
+            }
+            else{
+                PBG.style.backgroundColor = "red";
+            }
+            if(PAD.value == 0.4){
+                PAD.style.backgroundColor = "green";
+            }
+            else{
+                PAD.style.backgroundColor = "red";
+            }
+            if(PCF.value == 0.6){
+                PCF.style.backgroundColor = "green";
+            }
+            else{
+                PCF.style.backgroundColor = "red";
+            }
         }
     });
 }
@@ -60,9 +82,31 @@ if (checkButtonText) {
         }
         else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
             checkButtonText.innerText = "Proceed";
+            checkButton.style.backgroundColor = "green";
+            PBG.style.backgroundColor = "green";
+            PAD.style.backgroundColor = "green";
+            PCF.style.backgroundColor = "green";
         }
         else{
             checkButtonText.innerText = "Try Again";
+            if(PBG.value == 6){
+                PBG.style.backgroundColor = "green";
+            }
+            else{
+                PBG.style.backgroundColor = "red";
+            }
+            if(PAD.value == 0.4){
+                PAD.style.backgroundColor = "green";
+            }
+            else{
+                PAD.style.backgroundColor = "red";
+            }
+            if(PCF.value == 0.6){
+                PCF.style.backgroundColor = "green";
+            }
+            else{
+                PCF.style.backgroundColor = "red";
+            }
         }
     });
 }

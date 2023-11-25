@@ -72,12 +72,34 @@ if (rectangleButton) {
         }
         else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
             checkText.innerText = "Proceed";
+            rectangleButton.style.backgroundColor = "green";
+            deltaBG.style.backgroundColor = "green";
+            deltaAD.style.backgroundColor = "green";
+            deltaCF.style.backgroundColor = "green";
         }
         else{
             i += 1;
             checkText.innerText = "Try Again";
             if(i >= 5){
-                hintpanel.style.visibility="visible";
+                hintpanel.classList.add("animation");
+            }
+            if(deltaBG.value == 3.46){
+                deltaBG.style.backgroundColor = "green";
+            }
+            else{
+                deltaBG.style.backgroundColor = "red";
+            }
+            if(deltaAD.value == 0.4){
+                deltaAD.style.backgroundColor = "green";
+            }
+            else{
+                deltaAD.style.backgroundColor = "red";
+            }
+            if(deltaCF.value == 0.6){
+                deltaCF.style.backgroundColor = "green";
+            }
+            else{
+                deltaCF.style.backgroundColor = "red";
             }
         }
     });
@@ -90,12 +112,34 @@ if (checkText) {
         }
         else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
             checkText.innerText = "Proceed";
+            rectangleButton.style.backgroundColor = "green";
+            deltaBG.style.backgroundColor = "green";
+            deltaAD.style.backgroundColor = "green";
+            deltaCF.style.backgroundColor = "green";
         }
         else{
             i += 1;
             checkText.innerText = "Try Again";
             if(i >= 5){
-                hintpanel.style.visibility="visible";
+                hintpanel.classList.add("animation");
+            }
+            if(deltaBG.value == 3.46){
+                deltaBG.style.backgroundColor = "green";
+            }
+            else{
+                deltaBG.style.backgroundColor = "red";
+            }
+            if(deltaAD.value == 0.4){
+                deltaAD.style.backgroundColor = "green";
+            }
+            else{
+                deltaAD.style.backgroundColor = "red";
+            }
+            if(deltaCF.value == 0.6){
+                deltaCF.style.backgroundColor = "green";
+            }
+            else{
+                deltaCF.style.backgroundColor = "red";
             }
         }
     });
