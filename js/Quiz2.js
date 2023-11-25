@@ -60,25 +60,43 @@ if (lessonButton) {
 }
 var rectangleButton = document.getElementById("no2_checkbutton");
 var hintpanel = document.getElementsByClassName("answer-prompt4")[0];
+var checkText = document.getElementById("checkText");
+var deltaBG = document.getElementById("delta_BG_input");
+var deltaAD = document.getElementById("delta_AD_input");
+var deltaCF = document.getElementById("delta_CF_input");
+var i = 0;
 if (rectangleButton) {
     rectangleButton.addEventListener("click", function (e) {
-        if(window.getComputedStyle(hintpanel).visibility === "hidden"){
-            hintpanel.style.visibility="visible";
+        if(checkText.innerText == "Proceed"){
+            window.location.href = "./Quiz3.html";
+        }
+        else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
+            checkText.innerText = "Proceed";
         }
         else{
-            window.location.href = "./Quiz3.html";
+            i += 1;
+            checkText.innerText = "Try Again";
+            if(i >= 5){
+                hintpanel.style.visibility="visible";
+            }
         }
     });
 }
 
-var checkText = document.getElementById("checkText");
 if (checkText) {
     checkText.addEventListener("click", function (e) {
-        if(window.getComputedStyle(hintpanel).visibility === "hidden"){
-            hintpanel.style.visibility="visible";
+        if(checkText.innerText == "Proceed"){
+            window.location.href = "./Quiz3.html";
+        }
+        else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
+            checkText.innerText = "Proceed";
         }
         else{
-            window.location.href = "./Quiz3.html";
+            i += 1;
+            checkText.innerText = "Try Again";
+            if(i >= 5){
+                hintpanel.style.visibility="visible";
+            }
         }
     });
 }

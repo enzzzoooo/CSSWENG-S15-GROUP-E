@@ -36,14 +36,33 @@ if (lessonButton) {
     });
 }
 var checkButton = document.getElementById("no1_checkbutton");
+var checkButtonText = document.getElementById("no1_checkbuttontext");
+var PBG = document.getElementById("P_BG_input");
+var PAD = document.getElementById("P_AD_input");
+var PCF = document.getElementById("P_CF_input");
 if (checkButton) {
     checkButton.addEventListener("click", function (e) {
-        window.location.href = "./Quiz2.html";
+        if(checkButtonText.innerText == "Proceed"){
+            window.location.href = "./Quiz2.html";
+        }
+        else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
+            checkButtonText.innerText = "Proceed";
+        }
+        else{
+            checkButtonText.innerText = "Try Again";
+        }
     });
 }
-var checkButtonText = document.getElementById("no1_checkbuttontext");
 if (checkButtonText) {
     checkButtonText.addEventListener("click", function (e) {
-        window.location.href = "./Quiz2.html";
+        if(checkButtonText.innerText == "Proceed"){
+            window.location.href = "./Quiz2.html";
+        }
+        else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
+            checkButtonText.innerText = "Proceed";
+        }
+        else{
+            checkButtonText.innerText = "Try Again";
+        }
     });
 }

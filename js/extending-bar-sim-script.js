@@ -81,7 +81,7 @@ let settings = {
     bigBarHeight: 200,
     smallBarHeight: 100,
     bigBarModulus: 200,
-    smallBarModulus: 200,
+    smallBarModulus: 69,
     bigBarLimit: 0,
     smallBarLimit: 0,
     force1Distance: 1000,
@@ -89,7 +89,9 @@ let settings = {
     force1Value: 10.0,
     force2Value: 0,
     crossArea1: 200,
-    crossArea2: 100
+    crossArea2: 100,
+    material1: 1,
+    material2: 4
 }
 
 // wall
@@ -136,11 +138,12 @@ let heightChange = false;
 let distanceChange = false;
 let barChange = false;
 let lengthChange = false;
-let inputOfCrossArea =false;
+let inputOfCrossArea = false;
 let force1Move = false;
 let force2Move = false;
 let force1MoveToo = false;
 let force2MoveToo = false;
+let materialLimit = [85, 250, 45, 100, 95]
 
 function preload() {
     font = loadFont('.\\fonts\\Avenir LT Std 55 Roman.otf');
@@ -205,16 +208,16 @@ function setup() {
     changeWood1.addEventListener('click', function(event) {
         resetDrawing();
         bigBar.color = '#B48777';
-        settings.bigBarModulus = 25;
+        settings.bigBarModulus = 15;
     });
     let changeMetal1 = document.getElementById('changeMatToMetal1');
     changeMetal1.addEventListener('click', function(event) {
         resetDrawing();
         bigBar.color = '#CCC9C9';
-        settings.bigBarModulus = 75;
+        settings.bigBarModulus = 69;
     });
-    let changeLog1 = document.getElementById('changeMatToLog1');
-    changeLog1.addEventListener('click', function(event) {
+    let changeBronze1 = document.getElementById('changeMatToBronze1');
+    changeBronze1.addEventListener('click', function(event) {
         resetDrawing();
         bigBar.color = '#724D3F';
         settings.bigBarModulus = 100
@@ -225,8 +228,8 @@ function setup() {
         bigBar.color = '#bbdbf0';
         settings.bigBarModulus = 200;
     });
-    let changeRuby1 = document.getElementById('changeMatToRuby1');
-    changeRuby1.addEventListener('click', function(event) {
+    let changeNylon1 = document.getElementById('changeMatToNylon1');
+    changeNylon1.addEventListener('click', function(event) {
         resetDrawing();
         bigBar.color = '#FD0606';
         settings.bigBarModulus = 50;
@@ -238,16 +241,16 @@ function setup() {
     changeWood2.addEventListener('click', function(event) {
         resetDrawing();
         smallBar.color = '#B48777';
-        settings.smallBarModulus = 25;
+        settings.smallBarModulus = 15;
     });
     let changeMetal2 = document.getElementById('changeMatToMetal2');
     changeMetal2.addEventListener('click', function(event) {
         resetDrawing();
         smallBar.color = '#CCC9C9';
-        settings.smallBarModulus = 75;
+        settings.smallBarModulus = 69;
     });
-    let changeLog2 = document.getElementById('changeMatToLog2');
-    changeLog2.addEventListener('click', function(event) {
+    let changeBronze2 = document.getElementById('changeMatToBronze2');
+    changeBronze2.addEventListener('click', function(event) {
         resetDrawing();
         smallBar.color = '#B48777';
         settings.smallBarModulus = 100;
@@ -258,11 +261,11 @@ function setup() {
         smallBar.color = '#bbdbf0';
         settings.smallBarModulus = 200;
     });
-    let changeRuby2 = document.getElementById('changeMatToRuby2');
-    changeRuby2.addEventListener('click', function(event) {
+    let changeNylon2 = document.getElementById('changeMatToNylon2');
+    changeNylon2.addEventListener('click', function(event) {
         resetDrawing();
         smallBar.color = '#FD0606';
-        settings.smallBarModulus = 50;
+        settings.smallBarModulus = 2;
     });
 
     forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), 'coral']
@@ -389,7 +392,6 @@ function setup() {
     });
 
     // Setup Material
-
 }
 
 let deformationGrey = 0;
@@ -483,12 +485,6 @@ function changeDrawing() {
     smallMaterialAxial = smallLoad * 1000 / settings.smallBarHeight
     console.log("bigMaterialAxial = " + bigMaterialAxial);
     console.log("smallMaterialAxial = " + smallMaterialAxial);
-
-    if (atan2(bigBar.change, settings.bigBarWidth) > 5){
-        alert(
-            "Too much deflection. Since the angle generated from the force is greater than 5°, this simulation does not have accurate values. Take the results with that in mind."
-        )
-    }
 
     alert(
         "Deformation of First Bar: " + bigDeformation.toFixed(4) + "\n" +
@@ -1012,6 +1008,26 @@ materialElements.forEach((element) => {
                 }
             });
             element.classList.add('active');
+            var name = element.getAttribute("alt")
+            console.log("Material1 " + name)
+            switch(name){
+                case "Wood":
+                    settings.material1 = 0;
+                    break;
+                case "Steel":
+                    settings.material1 = 1;
+                    break;
+                case "Nylon":
+                    settings.material1 = 2;
+                    break;
+                case "Bronze":
+                    settings.material1 = 3;
+                    break;
+                case "Aluminum":
+                    settings.material1 = 4;
+                    break;
+            }
+            console.log(settings.material1);
         }
     });
 });
@@ -1029,10 +1045,23 @@ materialElements2.forEach((element) => {
                     el.classList.remove('active');
                 }
             });
-            if (active == true) {
-                element.classList.remove('active');
-            } else {
-                element.classList.add('active');
+            element.classList.add('active');
+            switch(name){
+                case "Wood":
+                    settings.material2 = 0;
+                    break;
+                case "Steel":
+                    settings.material2 = 1;
+                    break;
+                case "Nylon":
+                    settings.material2 = 2;
+                    break;
+                case "Bronze":
+                    settings.material2 = 3;
+                    break;
+                case "Aluminum":
+                    settings.material2 = 4;
+                    break;
             }
         }
     });
