@@ -1,6 +1,7 @@
 body {
     min-width: 85em;
-    font-family: var(--font-avenir);
+    font-family: var(--font-avenir); 
+    position: absolute;
 }
 
 .lessonTitle {
@@ -15,9 +16,9 @@ body {
     margin-inline: 3.5em;
     height: 50vh;
     display: flex;
-    font-family: var(--font-avenir);
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .lessonImgBox {
@@ -128,6 +129,14 @@ body {
     padding-left: 1em;
 }
 
+.manualPad {
+    height: 0.35em;
+}
+
+.manualPadhalf {
+    height: .1px;
+}
+
 .m05 {
     margin-block: 1vw;
 }
@@ -142,29 +151,32 @@ a:link {
 }
 
 .needExplain{
-    position: relative;
+    box-shadow: 2px 2px 2px  rgba(0, 0, 0, 0.2);
+    padding-bottom: 0.3em;
+    padding-right: 0.5em;
 }
 
 .needExplain:hover .explanation-popup-wrapper {
     display: flex;
 }
 
-
 .explanation-popup-wrapper {
     display: none;
-    position: absolute;
-    left: auto;
-    bottom: 3em;
+    position: absolute; 
+    top: 0;
+    bottom: 0;
+    left: 30%;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-avenir);
 }
+
 .sim-error-popup {
     width: 465px;
     height: fit-content;
     background-color: #ffffff;
     border-radius: 10px;
 }
+
 .popup-title-wrapper{
     position: relative;
     width: 100%;
@@ -190,6 +202,6 @@ a:link {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
+    font-size: 0.78em;
     color: #000000;
 }
