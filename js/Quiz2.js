@@ -81,7 +81,7 @@ if (rectangleButton) {
             i += 1;
             checkText.innerText = "Try Again";
             if(i >= 5){
-                hintpanel.style.visibility="visible";
+                hintpanel.classList.add("animation");
             }
             if(deltaBG.value == 3.46){
                 deltaBG.style.backgroundColor = "green";
@@ -121,7 +121,7 @@ if (checkText) {
             i += 1;
             checkText.innerText = "Try Again";
             if(i >= 5){
-                hintpanel.style.visibility="visible";
+                hintpanel.classList.add("animation");
             }
             if(deltaBG.value == 3.46){
                 deltaBG.style.backgroundColor = "green";

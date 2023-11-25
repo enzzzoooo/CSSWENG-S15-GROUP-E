@@ -787,6 +787,19 @@
   font-family: var(--font-avenir-lt-std);
   visibility: hidden;
 }
+.animation {
+  animation: fadeIn 1s forwards;
+  visibility: hidden;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
 .quiz-2-hint {
   position: relative;
   background-color: var(--color-whitesmoke);
