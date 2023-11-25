@@ -141,27 +141,27 @@ a:link {
     text-decoration: none!important;
 }
 
-.needExplain {
+.needExplain{
+    position: relative;
 }
 
 .needExplain:hover .explanation-popup-wrapper {
     display: flex;
 }
 
+
 .explanation-popup-wrapper {
     display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    left: auto;
+    bottom: 3em;
     align-items: center;
     justify-content: center;
     font-family: var(--font-avenir);
 }
 .sim-error-popup {
     width: 465px;
-    height: 265px;
+    height: fit-content;
     background-color: #ffffff;
     border-radius: 10px;
 }
@@ -182,7 +182,8 @@ a:link {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 208px;
+    height: fit-content;
+    margin-block: .75em;
 }
 .popup-text {
     width: 411px;
@@ -191,5 +192,4 @@ a:link {
     align-items: center;
     font-size: 22px;
     color: #000000;
-    text-align: center;
 }

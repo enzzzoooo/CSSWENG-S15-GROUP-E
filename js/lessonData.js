@@ -27,10 +27,24 @@ const hangingBar = [
     \\[\\frac{d_B}{2}=\\frac{d_C}{4}\\]`,
     `You should realize that the vertical deflection of B is equal to
     the deformation of the cable,
-    \\[d_B = \\delta_B = 5 \\mathrm{~mm}\\]
+    <div class="needExplain">\\[d_B = \\delta_B = 5 \\mathrm{~mm}\\]
     Using the similar triangle relation, the deflection of
     C is 
-    \\[d_C = 2d_B = 10 \\mathrm{~mm}\\]`,
+    \\[d_C = 2d_B = 10 \\mathrm{~mm}\\]
+    <div class="explanation-popup-wrapper">
+        <div class="sim-error-popup">
+          <div class="popup-title-wrapper">
+            <div class="popup-title">Explanation</div>
+          </div>
+          <div class="popup-text-wrapper">
+            <div class="popup-text">
+The small angle approximation simplifies trigonometric calculations by assuming that the angle is small enough for the sine and tangent to be approximately equal to the angle in radians. In certain structural or mechanical contexts, the negligible horizontal deflection of points B and C is justified when the small angles and vertical loads make horizontal deflections insignificantly small compared to vertical ones.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
     `If the cable is oriented at some angle with respect to the bar,
     how will the analysis change?`,
     `First, let us recompute the force in the cable. Considering the
@@ -39,7 +53,7 @@ const hangingBar = [
     \\[2P_B\\,\\sin30^{\\circ} = 4(5\\mathrm{~kN}) \\]
     \\[P_B = 20 \\mathrm{~kN}\\]
     The corresponding axial deformation is 
-    <span class="needExplain">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]
+    <div class="needExplain">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]
       <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
           <div class="popup-title-wrapper">
@@ -52,7 +66,7 @@ const hangingBar = [
           </div>
         </div>
       </div>
-    </span>
+    </div>
     \\[\\delta_B = \\frac{20\\sqrt{3}}{3}\\mathrm{~mm}\,\\text{(elongation)}\\]`,
     `Next, we draw again the deformation diagram of rigid bar ABC.
     This time, the vertical deflection of B is not simply equal to the
@@ -96,7 +110,21 @@ const hangingBar = [
   <br><br>Summing forces along the horizontal, we obtain the reaction at
   end A to be
   \\[P_A=10 \\mathrm{~kN}\\]
+  <div class="needExplain">
   Note that there is no reaction at C!
+  <div class="explanation-popup-wrapper">
+        <div class="sim-error-popup">
+          <div class="popup-title-wrapper">
+            <div class="popup-title">Explanation</div>
+          </div>
+          <div class="popup-text-wrapper">
+            <div class="popup-text">
+            The absence of a reaction at point C in the free-body diagram is due to force equilibrium along the horizontal direction. Summing forces horizontally indicates that the external horizontal forces and the horizontal component of any support reactions at C balance each other out. Consequently, the horizontal reaction at C is determined to be zero, simplifying the analysis of axial deformations by clarifying the force distribution within the structure.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   `,
   `Next, we get the internal force in each bar by sectioning both
   bars. <br><br>
