@@ -68,6 +68,7 @@ rectangle16.addEventListener("click", function (e) {
         explanationpane1.style.visibility="visible";
         explanationpane2.style.visibility="visible";
         checkButtonText.innerText = "Proceed";
+        rectangle16.style.backgroundColor = "green";
     }
     else{
         checkButtonText.innerText = "Try Again";
@@ -125,6 +126,7 @@ submit.addEventListener("click", function (e) {
         explanationpane1.style.visibility="visible";
         explanationpane2.style.visibility="visible";
         checkButtonText.innerText = "Proceed";
+        rectangle16.style.backgroundColor = "green";
     }
     else{
         checkButtonText.innerText = "Try Again";

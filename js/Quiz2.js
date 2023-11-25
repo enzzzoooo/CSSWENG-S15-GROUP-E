@@ -72,6 +72,7 @@ if (rectangleButton) {
         }
         else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
             checkText.innerText = "Proceed";
+            rectangleButton.style.backgroundColor = "green";
         }
         else{
             i += 1;
@@ -90,6 +91,7 @@ if (checkText) {
         }
         else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
             checkText.innerText = "Proceed";
+            rectangleButton.style.backgroundColor = "green";
         }
         else{
             i += 1;
