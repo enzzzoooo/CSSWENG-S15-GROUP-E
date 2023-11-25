@@ -321,7 +321,7 @@ function setup() {
     });
 
     crossArea.input(function () {
-        crossArea.value(forcePoint.value().replace(/[^\d.]/g, ''));
+        crossArea.value(crossArea.value().replace(/[^\d.]/g, ''));
         if(crossArea.value() > 0){
             settings.ropeCrossArea = parseFloat(crossArea.value());
         } else {
@@ -330,10 +330,12 @@ function setup() {
     });
 
     youngsModulus.input(function () {
+        youngModulus.value(youngModulus.value().replace(/[^\d.]/g, ''));
         settings.ropeModulus = parseFloat(youngsModulus.value());
     });
 
     forceMagnitude.input(function() {
+        forceMagnitude.value(forceMagnitude.value().replace(/[^\d.]/g, ''));
         if(forceMagnitude.value() > 0){
             forces[0][1].y = parseFloat(forceMagnitude.value()) * 5;
             if (forces[0][1].y >= 150){
