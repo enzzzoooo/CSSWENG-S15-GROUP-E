@@ -29,7 +29,7 @@ const hangingBar = [
     the deformation of the cable,
     <div class="needExplain">\\[d_B = \\delta_B = 5 \\mathrm{~mm}\\]
     Using the similar triangle relation, the deflection of
-    C is 
+    C is
     \\[d_C = 2d_B = 10 \\mathrm{~mm}\\]
     <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
@@ -53,8 +53,8 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     \\[2P_B\\,\\sin30^{\\circ} = 4(5\\mathrm{~kN}) \\]
     \\[P_B = 20 \\mathrm{~kN}\\]
     The corresponding axial deformation is 
-    <div class="needExplain">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]
-      <div class="explanation-popup-wrapper">
+    <div class="needExplain">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]  
+    <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
           <div class="popup-title-wrapper">
             <div class="popup-title">Explanation</div>
@@ -110,7 +110,7 @@ The small angle approximation simplifies trigonometric calculations by assuming 
   <br><br>Summing forces along the horizontal, we obtain the reaction at
   end A to be
   \\[P_A=10 \\mathrm{~kN}\\]
-  <div class="needExplain">
+  <span class="needExplain">
   Note that there is no reaction at C!
   <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
@@ -124,7 +124,7 @@ The small angle approximation simplifies trigonometric calculations by assuming 
           </div>
         </div>
       </div>
-    </div>
+    </span>
   `,
   `Next, we get the internal force in each bar by sectioning both
   bars. <br><br>
