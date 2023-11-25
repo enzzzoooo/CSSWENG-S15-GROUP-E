@@ -152,7 +152,7 @@
 }
 .d2 {
   left: 0;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 }
 .a7,
 .b6,
@@ -174,7 +174,7 @@
 }
 .f2 {
   left: 410px;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 }
 .a7,
 .b6,

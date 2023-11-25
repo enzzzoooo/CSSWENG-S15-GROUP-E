@@ -972,6 +972,7 @@
   line-height: 130%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .answer-prompt2,
 .answer-prompt3 {
