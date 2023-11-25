@@ -1,7 +1,12 @@
+body {
+  min-width: 85em;
+}
+
 .lesson-layout {
   display: flex;
   width: 100%;
-  height: 1024px;
+  height: fit-content;
+  margin-bottom: 3.945em !important;
   text-align: center;
   margin: 0 auto 0 auto;
   font-size: var(--font-size-4xl);
@@ -20,9 +25,9 @@
 }
 
 .intro-layout{
- width: 1327px;
- height: 384px;
- margin: 1.5rem auto;
+ width: 80%;
+ margin-bottom: 3em;
+ margin-inline: auto;
  font-family: var(--font-avenir);
 }
 
@@ -31,4 +36,13 @@
   text-align: justify;
   text-justify: inter-word;
   font-family: var(--font-avenir);
+}
+
+ol.intro-text{ 
+  margin-top: .35em;
+}
+
+ol li {
+  padding-left: 1em;
+  margin-left: 1.5em;
 }

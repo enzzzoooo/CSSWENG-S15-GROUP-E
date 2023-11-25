@@ -125,20 +125,9 @@ body {
     margin-bottom: 0.5em;
 }
 
-.pad {
-    padding-left: 1em;
-}
-
-.manualPad {
-    height: 0.35em;
-}
-
-.manualPadhalf {
-    height: .1px;
-}
-
-.m05 {
-    margin-block: 1vw;
+div .pad {
+    padding-bottom: .4em;
+    padding-right: 1em;
 }
 
 .actionText {
@@ -152,8 +141,7 @@ a:link {
 
 .needExplain{
     box-shadow: 2px 2px 2px  rgba(0, 0, 0, 0.2);
-    padding-bottom: 0.3em;
-    padding-right: 0.5em;
+    padding-bottom: .3em;
 }
 
 .needExplain:hover .explanation-popup-wrapper {
