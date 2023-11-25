@@ -53,7 +53,7 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     \\[2P_B\\,\\sin30^{\\circ} = 4(5\\mathrm{~kN}) \\]
     \\[P_B = 20 \\mathrm{~kN}\\]
     The corresponding axial deformation is 
-    <div class="needExplain">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]  
+    <div class="needExplain halfBMargin">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]  
     <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
           <div class="popup-title-wrapper">
@@ -67,7 +67,9 @@ The small angle approximation simplifies trigonometric calculations by assuming 
         </div>
       </div>
     </div>
-    \\[\\delta_B = \\frac{20\\sqrt{3}}{3}\\mathrm{~mm}\,\\text{(elongation)}\\]`,
+    <div class="halfBMargin">\\[\\delta_B = \\frac{20\\sqrt{3}}{3}\\mathrm{~mm}\,\\text{(elongation)}\\]
+    </div>
+    `,
     `Next, we draw again the deformation diagram of rigid bar ABC.
     This time, the vertical deflection of B is not simply equal to the
     deformation of the cable, since the deformation should occur
@@ -110,7 +112,7 @@ The small angle approximation simplifies trigonometric calculations by assuming 
   <br><br>Summing forces along the horizontal, we obtain the reaction at
   end A to be
   \\[P_A=10 \\mathrm{~kN}\\]
-  <span class="needExplain">
+  <span class="needExplain pad">
   Note that there is no reaction at C!
   <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
