@@ -232,7 +232,7 @@ function setup() {
     changeNylon1.addEventListener('click', function(event) {
         resetDrawing();
         bigBar.color = '#FD0606';
-        settings.bigBarModulus = 50;
+        settings.bigBarModulus = 2;
     });
 
     // objectTab2
@@ -496,9 +496,22 @@ function changeDrawing() {
     bigBar.animation = true;
     smallBar.animation = true;
 
+    var button = document.getElementById('change-drawing');
+    button.removeEventListener('click', changeDrawing);
+    button.classList.add('disabled');
 }
 
 function resetDrawing() {
+    var button = document.getElementById('change-drawing');
+    button.addEventListener('click', changeDrawing);
+    button.classList.remove('disabled');
+
+    document.getElementById('deformationFirst').textContent = "";
+    document.getElementById('deformationSecond').textContent = "";
+    document.getElementById('deflectionFirst').textContent = "";
+    document.getElementById('deflectionSecond').textContent = "";
+
+
     bigBar.change = 0;
     bigBar.animation = false;
 
@@ -589,26 +602,26 @@ function draw() {
     strokeWeight(bigBar.height/3);
     if(bigBar.animation && t < 1){
         t += 0.035
-        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change*easing(t)), bigBar.y, bigBar.height/3, 'black');
-        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change*easing(t)), bigBar.y)
+        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change * 2*easing(t)), bigBar.y, bigBar.height/3, 'black');
+        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change * 2*easing(t)), bigBar.y)
     } else {
-        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change), bigBar.y, bigBar.height/3, 'black');
-        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change), bigBar.y)
+        drawStrokedLine(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change * 2), bigBar.y, bigBar.height/3, 'black');
+        line(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change * 2), bigBar.y)
     }
 
     stroke(smallBar.color);
     strokeWeight(smallBar.height/3);
     if(smallBar.animation && t < 1){
-        drawStrokedLine(bigBar.x + bigBar.width + (bigBar.change*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change*easing(t)) + (smallBar.change*easing(t)), (bigBar.y), smallBar.height/3, 'black');
-        line(bigBar.x + bigBar.width + (bigBar.change*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change*easing(t)) + (smallBar.change*easing(t)), (bigBar.y))
+        drawStrokedLine(bigBar.x + bigBar.width + (bigBar.change * 2*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change * 2*easing(t)) + (smallBar.change*easing(t)), (bigBar.y), smallBar.height/3, 'black');
+        line(bigBar.x + bigBar.width + (bigBar.change * 2*easing(t)), smallBar.y, bigBar.x + bigBar.width+smallBar.width + (bigBar.change * 2*easing(t)) + (smallBar.change*easing(t)), (bigBar.y))
     } else {
-        drawStrokedLine(bigBar.x + bigBar.width + bigBar.change, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change) + (smallBar.change), bigBar.y, smallBar.height/3, 'black');
-        line(bigBar.x + bigBar.width + bigBar.change, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change) + (smallBar.change), bigBar.y)
+        drawStrokedLine(bigBar.x + bigBar.width + bigBar.change * 2, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change * 2) + (smallBar.change), bigBar.y, smallBar.height/3, 'black');
+        line(bigBar.x + bigBar.width + bigBar.change * 2, smallBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change * 2) + (smallBar.change), bigBar.y)
     }
 
     resetMatrix()
 
-    if(bigBar.animation) {
+    if(bigBar.animation && t >= 1) {
         drawingContext.setLineDash([6, 6]);
         stroke(0);
         strokeWeight(2);
@@ -765,9 +778,6 @@ function draw() {
 
     // Change values
     if(!bigBar.animation){
-
-
-
         // Rope Distance
         if(dist(mouseX, mouseY, bigBar.x + bigBar.width + smallBar.width, bigBar.y) < 15){
             strokeWeight(0)
@@ -871,14 +881,8 @@ function draw() {
                 forces[1][0].x = bigBar.x + bigBar.width + smallBar.width
                 settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
             }
-
-
             updateForces()
-
         }
-
-
-
     }
 
 
@@ -890,14 +894,12 @@ function draw() {
         fill('black')
         translate(bigBar.x + bigBar.width, bigBar.y)
         text((bigBar.change).toFixed(2) + 'mm', -20, -80);
-        rotate(90)
         strokeWeight(1.5)
-        rotate(-90)
         translate(0, -80)
-        if(bigBar.change >= 0){
-            drawArrow(createVector(0, 15), createVector(Math.max(25, bigBar.change + 10), 0), 'black', 5)
+        if(bigBar.change * 2 >= 0){
+            drawArrow(createVector(0, 15), createVector(Math.max(25, bigBar.change * 2 + 10), 0), 'black', 5)
         } else {
-            drawArrow(createVector(0, 15), createVector(Math.min(-25, bigBar.change + 10), 0), 'black', 5)
+            drawArrow(createVector(0, 15), createVector(Math.min(-25, bigBar.change * 2 + 10), 0), 'black', 5)
         }
 
         resetMatrix()
@@ -905,14 +907,12 @@ function draw() {
         fill('black')
         translate(bigBar.x + bigBar.width + smallBar.width, bigBar.y)
         text((bigBar.change + smallBar.change).toFixed(2) + 'mm', -20, -60);
-        rotate(90)
         strokeWeight(1.5)
-        rotate(-90)
         translate(0, -60)
-        if(bigBar.change + smallBar.change >= 0){
-            drawArrow(createVector(0, 15), createVector(Math.max(25, bigBar.change + smallBar.change + 10), 0), 'black', 5)
+        if(bigBar.change * 2 + smallBar.change * 2 >= 0){
+            drawArrow(createVector(0, 15), createVector(Math.max(25, bigBar.change * 2 + smallBar.change + 10), 0), 'black', 5)
         } else {
-            drawArrow(createVector(0, 15), createVector(Math.min(-25, bigBar.change + smallBar.change + 10), 0), 'black', 5)
+            drawArrow(createVector(0, 15), createVector(Math.min(-25, bigBar.change * 2 + smallBar.change + 10), 0), 'black', 5)
         }
     }
 
@@ -925,12 +925,12 @@ function draw() {
         fill('black')
         stroke('black')
         textAlign(CENTER)
-        translate(bigBar.x+bigBar.width + bigBar.change*easing(t) , bigBar.y+(bigBar.height/3/2))
+        translate(bigBar.x+bigBar.width + bigBar.change*2*easing(t) , bigBar.y+(bigBar.height/3/2))
         text((settings.bigBarWidth + (bigBar.change*easing(t))).toFixed(2) + 'mm', -(bigBar.width/2), 40);
         strokeWeight(1.5)
         translate(0, 0)
         rotate(90)
-        curlyBracket(dist(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change*easing(t)),bigBar.y))
+        curlyBracket(dist(bigBar.x, bigBar.y, bigBar.x+bigBar.width+(bigBar.change * 2*easing(t)),bigBar.y))
         resetMatrix()
     }
 
@@ -941,14 +941,14 @@ function draw() {
         fill('black')
         stroke('black')
         textAlign(CENTER)
-        translate(bigBar.x + bigBar.width + bigBar.change*easing(t), smallBar.y)
+        translate(bigBar.x + bigBar.width + bigBar.change * 2*easing(t), smallBar.y)
 
 
         text((settings.smallBarWidth + (smallBar.change*easing(t))).toFixed(2) + 'mm', smallBar.width/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
-        curlyBracket(dist(bigBar.x + bigBar.width +(bigBar.change*easing(t)), bigBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change*easing(t)) + (smallBar.change*easing(t)),bigBar.y))
+        curlyBracket(dist(bigBar.x + bigBar.width +(bigBar.change * 2*easing(t)), bigBar.y, bigBar.x + bigBar.width + smallBar.width + (bigBar.change * 2*easing(t)) + (smallBar.change*easing(t)),bigBar.y))
 
         resetMatrix()
     }
@@ -1009,7 +1009,6 @@ materialElements.forEach((element) => {
             });
             element.classList.add('active');
             var name = element.getAttribute("alt")
-            console.log("Material1 " + name)
             switch(name){
                 case "Wood":
                     settings.material1 = 0;
@@ -1027,7 +1026,6 @@ materialElements.forEach((element) => {
                     settings.material1 = 4;
                     break;
             }
-            console.log(settings.material1);
         }
     });
 });
@@ -1046,6 +1044,7 @@ materialElements2.forEach((element) => {
                 }
             });
             element.classList.add('active');
+            var name = element.getAttribute("alt")
             switch(name){
                 case "Wood":
                     settings.material2 = 0;

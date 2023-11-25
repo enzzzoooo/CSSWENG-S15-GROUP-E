@@ -128,7 +128,7 @@ canvas {
 .material.active, .material2.active {
   filter: brightness(100%);
   border: 3px solid #000000;
-  border-radius: 25px;
+  border-radius: 43%;
 }
 
 .object-position-container {
@@ -282,6 +282,13 @@ canvas {
   filter: brightness(80%);
   cursor: pointer;
 }
+
+#change-drawing.disabled:hover {
+  filter: brightness(100%);
+  cursor: default;
+}
+
+
 
 
 /* idk what */
