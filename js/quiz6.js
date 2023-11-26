@@ -41,6 +41,10 @@ function populateValues() {
 // window.addEventListener('load', populateValues); 
 
 
+// Calculation of answer here.
+
+
+
 checkButton.addEventListener('click', () => {
   let answer1 = document.getElementById('question6-input1').value;
   let answer2 = document.getElementById('question6-input2').value;
