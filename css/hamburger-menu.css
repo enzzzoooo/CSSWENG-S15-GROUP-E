@@ -10,9 +10,7 @@
   right: 0;
 }
 
-.home,
 .lessons1,
-.resources,
 .simulation,
 .credits {
   cursor: pointer;
@@ -34,27 +32,23 @@
   height: 65px;
 }
 
-.lessons1,
-.resources,
 .simulation,
 .credits {
   top: 65px;
 }
 
-.lessons1,
-.resources,
 .credits {
   top: 130px;
 }
 
-.resources,
+/* .resources,
 .credits {
   top: 195px;
 }
 
 .credits {
   top: 260px;
-}
+} */
 
 .line-div,
 .menu-dropdown-child,
@@ -83,14 +77,6 @@
   top: 194.5px;
 }
 
-.line-div,
-.credits-line-div {
-  top: 259.5px;
-}
-
-.credits-line-div {
-  top: 324.5px;
-}
 
 .menu-dropdown {
   position: relative;
