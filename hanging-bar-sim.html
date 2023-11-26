@@ -31,7 +31,7 @@
 
   <div class="main-container">
     <div id="canvas-container">
-      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-show.png"></button>
+      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-hide.png"></button>
       <button id="force"><img id="forceImg" src="./imgs/force-data-show.png"></button>
 
     </div>
@@ -47,44 +47,50 @@
         <div class="label-bar">Type</div>
         <div class="material-change-container">
           <img class="material" src="imgs/wood.png" id="changeMatToWood" alt="Wood">
-          <img class="material" src="imgs/steel.png" id="changeMatToSteel" alt="Steel">
-          <img class="material" src="imgs/plastic.png" id="changeMatToRuby" alt="Plastic"> <!-- Should be Plastic -->
-          <img class="material" src="imgs/bronze.png" id="changeMatToLog" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material active" src="imgs/steel.png" id="changeMatToSteel" alt="Steel">
+          <img class="material" src="imgs/plastic.png" id="changeMatToNylon" alt="Nylon"> <!-- Should be Plastic -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToBrass" alt="Brass"> <!-- Should be Brass -->
           <img class="material" src="imgs/aluminum.png" id="changeMatToMetal" alt="Aluminum"> <!-- Should be Aluminum -->
         </div>
         <div class="label-bar">Object Position</div>
         <div class="object-position-container">
           <div class="attribute">
             <input class="attribute-input" id="givenAngle" type="text" placeholder="0">
-            <label class="attribute-label" for="givenAngle">Angle (Degrees)</label>
+            <label class="attribute-label" for="givenAngle">Angle (degrees)</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="yellowBarWidth" type="text" placeholder="0">
-            <label class="attribute-label" for="yellowBarWidth">Yellow Bar Width</label>
+            <label class="attribute-label" for="yellowBarWidth">Yellow Bar Width (mm)</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="pivotPointBar" type="text" placeholder="0">
-            <label class="attribute-label" for="pivotPointBar">Pivot Point Bar<label>
+            <label class="attribute-label" for="pivotPointBar">Pivot Point on Bar (mm)<label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="arrowPoint" type="text" placeholder="0">
-            <label class="attribute-label" for="arrowPoint">Force Point</label>
+            <input class="attribute-input" id="ropeDistanceAway" type="text" placeholder="0">
+            <label class="attribute-label" for="ropeDistanceAway">Distance From Wall (kn)</label>
           </div>
         </div>
         <div class="label-bar">Object Physics</div>
         <div class="object-physics-container">
           <div class="attribute">
             <input class="attribute-input" id="crossArea" type="text" placeholder="0">
-            <label class="attribute-label" for="crossArea">CS Area</label>
+            <label class="attribute-label" for="crossArea">CS Area (mm^2)</label>
           </div>
           <div class="attribute">
             <input class="attribute-input" id="youngsModulus" type="text" placeholder="0">
-            <label class="attribute-label" for="youngsModulus">Young's Modulus</label>
+            <label class="attribute-label" for="youngsModulus">Young's Modulus (GPa)</label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="arrowForce" type="text" placeholder="0">
-            <label class="attribute-label" for="arrowForce">Force</label>
+            <input class="attribute-input" id="forcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="forcePoint">Force Distance (mm)</label>
           </div>
+
+          <div class="attribute">
+            <input class="attribute-input" id="forceMagnitude" type="text" placeholder="0">
+            <label class="attribute-label" for="forceMagnitude">Force (kn)</label>
+          </div>
+
         </div>
       </div>
 
@@ -98,8 +104,13 @@
         <div class="interval-container active" id="intervalContainer">
           <div class="attribute">
             <input class="attribute-input" id="snapInterval" type="text" placeholder="0">
-            <label class="attribute-label" for="snapInterval">Snap Interval</label>
+            <label class="attribute-label" for="snapInterval">Snap Interval (mm)</label>
           </div>
+        </div>
+        <div class="snap-wrapper">
+          <input type="checkbox" name="checkbox" id="wallToggle" checked>
+          <label for="wallToggle" class="switch"></label>
+          <div class="snap-toggle-label">Keep Rope on Wall</div>
         </div>
       </div>
 
@@ -162,16 +173,12 @@
   <!-- Menu Modal -->
   <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
     <div class="menu-dropdown">
-      <button class="home">Home</button>
       <button class="simulation" id="popupsimulation">Simulation</button>
       <button class="lessons1" id="popuplessons">Lessons</button>
-      <button class="resources">Resources</button>
-      <button class="Credits" id="popupcredits">Credits</button>
+      <div class="credits" id="popupcredits">Credits</div>
       <div class="menu-dropdown-child"></div>
       <div class="menu-dropdown-item"></div>
       <div class="menu-dropdown-inner"></div>
-      <div class="menu-dropdown-last"></div>
-      <div class="line-div"></div>
     </div>
   </div>
 

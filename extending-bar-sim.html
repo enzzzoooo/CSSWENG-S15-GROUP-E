@@ -31,7 +31,7 @@
 
   <div class="main-container">
     <div id="canvas-container">
-      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-show.png"></button>
+      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-hide.png"></button>
       <button id="force"><img id="forceImg" src="./imgs/force-data-show.png"></button>
       <button id="add"><img id="addImg" src="./imgs/force-add-show.png"></button>
     </div>
@@ -49,8 +49,8 @@
         <div class="material-change-container">
           <img class="material" src="imgs/wood.png" id="changeMatToWood1" alt="Wood">
           <img class="material active" src="imgs/steel.png" id="changeMatToSteel1" alt="Steel">
-          <img class="material" src="imgs/plastic.png" id="changeMatToRuby1" alt="Plastic"> <!-- Should be Plastic -->
-          <img class="material" src="imgs/bronze.png" id="changeMatToLog1" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material" src="imgs/plastic.png" id="changeMatToNylon1" alt="Nylon"> <!-- Should be Plastic -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToBrass1" alt="Brass"> <!-- Should be Brass -->
           <img class="material" src="imgs/aluminum.png" id="changeMatToMetal1" alt="Aluminum"> <!-- Should be Aluminum -->
         </div>
         <div class="label-bar">Object Position</div>
@@ -87,8 +87,8 @@
         <div class="material-change-container">
           <img class="material2" src="imgs/wood.png" id="changeMatToWood2" alt="Wood">
           <img class="material2" src="imgs/steel.png" id="changeMatToSteel2" alt="Steel">
-          <img class="material2" src="imgs/plastic.png" id="changeMatToRuby2" alt="Plastic"> <!-- Should be Plastic -->
-          <img class="material2" src="imgs/bronze.png" id="changeMatToLog2" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material2" src="imgs/plastic.png" id="changeMatToNylon2" alt="Plastic"> <!-- Should be Plastic -->
+          <img class="material2" src="imgs/bronze.png" id="changeMatToBrass2" alt="Brass"> <!-- Should be Brass -->
           <img class="material2 active" src="imgs/aluminum.png" id="changeMatToMetal2" alt="Aluminum"> <!-- Should be Aluminum -->
         </div>
         <div class="label-bar">Object Position</div>
@@ -186,16 +186,12 @@
   <!-- Menu Modal -->
   <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
     <div class="menu-dropdown">
-      <button class="home">Home</button>
       <button class="simulation" id="popupsimulation">Simulation</button>
       <button class="lessons1" id="popuplessons">Lessons</button>
-      <button class="resources">Resources</button>
-      <button class="Credits" id="popupcredits">Credits</button>
+      <div class="credits" id="popupcredits">Credits</div>
       <div class="menu-dropdown-child"></div>
       <div class="menu-dropdown-item"></div>
       <div class="menu-dropdown-inner"></div>
-      <div class="menu-dropdown-last"></div>
-      <div class="line-div"></div>
     </div>
   </div>
 
