@@ -59,7 +59,7 @@
   width: 100%;
   height: 872px;
   text-align: left;
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .freebody-diagram-child55,
 .freebody-diagram-child56,
@@ -149,7 +149,7 @@
   text-align: left;
   font-size: var(--font-size-4xl);
   color: var(--color-white);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .d5 {
   left: 0;
@@ -223,7 +223,7 @@
   top: 126px;
   left: 85px;
   font-size: var(--font-size-xl);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   width: 29px;
   height: 27px;
 }
@@ -608,7 +608,7 @@
   top: 0.19%;
   left: 4.38%;
   font-size: var(--font-size-4xl);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   color: var(--color-white);
   text-align: left;
 }
@@ -635,7 +635,7 @@
   top: 21.31%;
   left: 4.38%;
   font-size: var(--font-size-4xl);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   color: var(--color-white);
   text-align: left;
 }
@@ -673,7 +673,7 @@
   left: 49.89%;
 }
 .span5 {
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .y-2m-container10 {
   position: absolute;
@@ -706,7 +706,7 @@
   text-align: center;
   font-size: var(--font-size-6xl);
   color: var(--color-black);
-  font-family: var(--font-optima);
+  font-family: var(--font-avenir);
 }
 .home {
   position: absolute;
@@ -793,5 +793,5 @@
   text-align: left;
   font-size: var(--font-size-8xl);
   color: var(--color-black);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
