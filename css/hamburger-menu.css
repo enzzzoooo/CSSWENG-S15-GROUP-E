@@ -13,8 +13,7 @@
 .home,
 .lessons1,
 .resources,
-.simulation,
-.credits {
+.simulation, .Credits {
   cursor: pointer;
   border: 0;
   padding: 0;
@@ -36,31 +35,27 @@
 
 .lessons1,
 .resources,
-.simulation,
-.credits {
+.simulation, .Credits {
   top: 65px;
 }
 
 .lessons1,
-.resources,
-.credits {
+.resources, .Credits {
   top: 130px;
 }
 
-.resources,
-.credits {
+.resources, .Credits {
   top: 195px;
 }
 
-.credits {
+.Credits{
   top: 260px;
 }
 
 .line-div,
 .menu-dropdown-child,
 .menu-dropdown-inner,
-.menu-dropdown-item,
-.credits-line-div {
+.menu-dropdown-item, .menu-dropdown-last {
   position: absolute;
   top: 64.5px;
   left: -0.5px;
@@ -72,25 +67,23 @@
 
 .line-div,
 .menu-dropdown-inner,
-.menu-dropdown-item,
-.credits-line-div {
+.menu-dropdown-item, .menu-dropdown-last {
   top: 129.5px;
 }
 
 .line-div,
-.menu-dropdown-inner,
-.credits-line-div {
+.menu-dropdown-inner, .menu-dropdown-last {
   top: 194.5px;
 }
 
-.line-div,
-.credits-line-div {
-  top: 259.5px;
+.line-div, .menu-dropdown-last {
+  top: 260px;
 }
 
-.credits-line-div {
-  top: 324.5px;
+.line-div {
+  top: 324.5px
 }
+
 
 .menu-dropdown {
   position: relative;
@@ -101,4 +94,3 @@
   max-width: 90%;
   max-height: 90%;
 }
-

@@ -127,8 +127,6 @@ canvas {
 
 .material.active {
     filter: brightness(100%);
-    border: 3px solid #000000;
-    border-radius: 43%;
 }
 
 .object-position-container {
@@ -283,10 +281,6 @@ canvas {
     cursor: pointer;
 }
 
-#change-drawing.disabled:hover {
-    filter: brightness(100%);
-    cursor: default;
-}
 
 /* idk what */
 .toggle-buttons {

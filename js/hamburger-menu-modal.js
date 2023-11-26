@@ -2,9 +2,8 @@ const hamburgerButton = document.getElementById('hamburgerButton');
 const menuDropdownContainer = document.getElementById('menuDropdownContainer');
 
 const simulationButton = document.getElementById('popupsimulation');
-const lessonsButton = document.getElementById('popuplessons');
-
-const creditsButton = document.getElementById('popupcredits');
+const lesseonsButton = document.getElementById('popuplessons');
+const creditsbutton = document.getElementById('popupcredits');
 
 // Show the menu dropdown container when the hamburger button is clicked
 hamburgerButton.addEventListener('click', () => {
@@ -29,10 +28,11 @@ simulationButton.addEventListener('click', () => {
 });
 
 // Event handler for "Lessons"
-lessonsButton.addEventListener('click', () => {
+lesseonsButton.addEventListener('click', () => {
   window.location.href = "lesson-picker.html"; // should change to lessons
 });
 
-creditsButton.addEventListener('click', () => {
-  window.location.href = "credits.html";
-});
+// Event handler for "Credits"
+creditsbutton.addEventListener('click', () => {
+  window.location.href = "trial-credits.html";
+})

@@ -36,77 +36,14 @@ if (lessonButton) {
     });
 }
 var checkButton = document.getElementById("no1_checkbutton");
-var checkButtonText = document.getElementById("no1_checkbuttontext");
-var PBG = document.getElementById("P_BG_input");
-var PAD = document.getElementById("P_AD_input");
-var PCF = document.getElementById("P_CF_input");
 if (checkButton) {
     checkButton.addEventListener("click", function (e) {
-        if(checkButtonText.innerText == "Proceed"){
-            window.location.href = "./Quiz2.html";
-        }
-        else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
-            checkButtonText.innerText = "Proceed";
-            checkButton.style.backgroundColor = "green";
-            PBG.style.backgroundColor = "green";
-            PAD.style.backgroundColor = "green";
-            PCF.style.backgroundColor = "green";
-        }
-        else{
-            checkButtonText.innerText = "Try Again";
-            if(PBG.value == 6){
-                PBG.style.backgroundColor = "green";
-            }
-            else{
-                PBG.style.backgroundColor = "red";
-            }
-            if(PAD.value == 0.4){
-                PAD.style.backgroundColor = "green";
-            }
-            else{
-                PAD.style.backgroundColor = "red";
-            }
-            if(PCF.value == 0.6){
-                PCF.style.backgroundColor = "green";
-            }
-            else{
-                PCF.style.backgroundColor = "red";
-            }
-        }
+        window.location.href = "./Quiz2.html";
     });
 }
+var checkButtonText = document.getElementById("no1_checkbuttontext");
 if (checkButtonText) {
     checkButtonText.addEventListener("click", function (e) {
-        if(checkButtonText.innerText == "Proceed"){
-            window.location.href = "./Quiz2.html";
-        }
-        else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
-            checkButtonText.innerText = "Proceed";
-            checkButton.style.backgroundColor = "green";
-            PBG.style.backgroundColor = "green";
-            PAD.style.backgroundColor = "green";
-            PCF.style.backgroundColor = "green";
-        }
-        else{
-            checkButtonText.innerText = "Try Again";
-            if(PBG.value == 6){
-                PBG.style.backgroundColor = "green";
-            }
-            else{
-                PBG.style.backgroundColor = "red";
-            }
-            if(PAD.value == 0.4){
-                PAD.style.backgroundColor = "green";
-            }
-            else{
-                PAD.style.backgroundColor = "red";
-            }
-            if(PCF.value == 0.6){
-                PCF.style.backgroundColor = "green";
-            }
-            else{
-                PCF.style.backgroundColor = "red";
-            }
-        }
+        window.location.href = "./Quiz2.html";
     });
 }

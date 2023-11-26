@@ -7,6 +7,8 @@ const slideTxt = document.querySelector('.lessonTxt');
 const slideNumTxt = document.querySelector('.slideNum');
 const slideImg2 = document.querySelector('.lessonImg2');
 const slideTxt2 = document.querySelector('.lessonTxt2');
+const a2000mm = document.querySelector('.needExplain');
+const popup = document.querySelector('.explanation-popup-wrapper')
 
 const lessons = new Map();
 lessons.set("Hanging Bar", hangingBar);
@@ -14,120 +16,62 @@ lessons.set("Compound Bar", compoundBar);
 
 
 rightButton.addEventListener('click', () => {
-  let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
-  let lessonTitle = document.querySelector('.page-title').innerHTML;
-  let lessonMap = lessons.get(lessonTitle);
-  
-  if (slideNum <= lessonMap.length) {
-    slideNumTxt.innerHTML = slideNum;
-    changeSlide(slideNum, 'right');
-    leftButton.style.opacity = 1;
-  }
-
-  if (slideNum == lessonMap.length)
-    rightButton.style.opacity = .5;
-});
-
-leftButton.addEventListener('click', () => {
-  let slideNum = parseInt(slideNumTxt.innerHTML) - 1;
-  if (slideNum > 0) {
-    slideNumTxt.innerHTML = slideNum;
-    changeSlide (slideNum, 'left')
-    rightButton.style.opacity = 1;
-  }
-  if (slideNum == 1)
-    leftButton.style.opacity = .5;
-
-});
-
-  
-
-  // a2000mm.addEventListener('mouseout', () => {
-  //   setTimeout(out, 1000)
-  // })
-function out () {
-  popup.style.display = "none"
-}
-
-// moving through slides with arrow keys
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowRight') {
     let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
     let lessonTitle = document.querySelector('.page-title').innerHTML;
     let lessonMap = lessons.get(lessonTitle);
-  
+    
     if (slideNum <= lessonMap.length) {
       slideNumTxt.innerHTML = slideNum;
-      changeSlide(slideNum, 'right');
+      changeSlide (slideNum)
       leftButton.style.opacity = 1;
     }
 
     if (slideNum == lessonMap.length)
       rightButton.style.opacity = .5;
-  }
-  
-  if (event.key === 'ArrowLeft') {
+  });
+
+  leftButton.addEventListener('click', () => {
     let slideNum = parseInt(slideNumTxt.innerHTML) - 1;
     if (slideNum > 0) {
       slideNumTxt.innerHTML = slideNum;
-      changeSlide(slideNum, 'left')
+      changeSlide (slideNum)
       rightButton.style.opacity = 1;
     }
     if (slideNum == 1)
       leftButton.style.opacity = .5;
-  }
-});
 
+    });
 
-// Added animation
-function changeSlide (number, direction) {
-  let lessonTitle = document.querySelector('.page-title').innerHTML;
-  let lessonMap = lessons.get(lessonTitle);
+    a2000mm.addEventListener('mouseover', () => {
+      popup.style.display = "flex"
+      setTimeout(out, 1000)
+    })
 
-  let newImage = new Image(); // for fixing animation bug
-  newImage.onload = function() {
-    slideImg.src = this.src;
-  }
-
-  number--;
-  lessonTitle = lessonTitle.toLowerCase().replace(/\s+/g, '-');
-  if (direction == 'right') {
-    // fixing animation bug
-    if (slideImg.src.includes(`/imgs/hanging-bar-lesson/4(2)-4(1).gif`)) {
-      newImage.src = `./imgs/${lessonTitle}-lesson/4(1)-5.gif`
-    } else if (slideImg.src.includes(`/imgs/hanging-bar-lesson/4(1)-4(2).gif`)) {
-      newImage.src = `./imgs/${lessonTitle}-lesson/4(2)-5.gif`
-    } else {
-      newImage.src = `./imgs/${lessonTitle}-lesson/${number}-${number+1}.gif`;
+    // a2000mm.addEventListener('mouseout', () => {
+    //   setTimeout(out, 1000)
+    // })
+    function out () {
+      popup.style.display = "none"
     }
-  } else {
-    // for fixing animation bug
-    if (slideImg.src.includes(`/imgs/hanging-bar-lesson/4(2)-4(1).gif`)) {
-      newImage.src = `./imgs/${lessonTitle}-lesson/4(1)-3.gif`
-    } else if (slideImg.src.includes(`/imgs/hanging-bar-lesson/4(1)-4(2).gif`)) {
-      newImage.src = `./imgs/${lessonTitle}-lesson/4(2)-3.gif`
-    }else {
-      newImage.src = `./imgs/${lessonTitle}-lesson/${number+2}-${number+1}.gif`;
-    }
+
+  // Added animation
+  function changeSlide (number) {
+    let lessonTitle = document.querySelector('.page-title').innerHTML;
+    let lessonMap = lessons.get(lessonTitle);
+    number--;
+    lessonTitle = lessonTitle.toLowerCase().replace(/\s+/g, '-');
+    slideImg.src = `./imgs/${lessonTitle}-lesson/${number+1}.png`
+
+    // For animation
+    slideTxt.classList.add('hide');
+    setTimeout(function() {
+      slideTxt.innerHTML = lessonMap[number]; 
+      slideTxt.classList.remove('hide');
+      MathJax.typeset();        
+    }, 500) // adjust this depending on css transition duration
+
+    showCanvasArrows();
   }
-
-
-  // For animation
-  slideTxt.classList.add('hide');
-  setTimeout(function() {
-    slideTxt.innerHTML = lessonMap[number]; 
-    slideTxt.classList.remove('hide');
-    MathJax.typeset();        
-  }, 500) // adjust this depending on css transition duration
-
-  showCanvasArrows();
-
-  // if (number+1 == 13 && lessonTitle == 'hanging-bar') {
-  //   setTimeout(() => {
-      
-  //   }, 300);
-  // }
-}
   
   
 
@@ -144,14 +88,8 @@ function showCanvasArrows () {
     rightArrow.style.opacity = 1;
     leftArrow.style.opacity = 0;
     
-    // for fixing animation bug
-    let newImage = new Image(); 
-    newImage.onload = function() {
-      slideImg.src = this.src;
-    }
-
     leftArrow.addEventListener('click', () => {
-      newImage.src = `./imgs/hanging-bar-lesson/4(2)-4(1).gif`
+      slideImg.src = `./imgs/hanging-bar-lesson/4.png`
       leftArrow.style.opacity = 0;
       leftArrow.style.cursor = "default";
       rightArrow.style.opacity = 1;
@@ -159,7 +97,7 @@ function showCanvasArrows () {
     });
 
     rightArrow.addEventListener('click', () => {
-      newImage.src = `./imgs/hanging-bar-lesson/4(1)-4(2).gif`
+      slideImg.src = `./imgs/hanging-bar-lesson/4_2.png`
       rightArrow.style.opacity = 0;
       rightArrow.style.cursor = "default";
       leftArrow.style.opacity = 1;

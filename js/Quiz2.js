@@ -60,87 +60,25 @@ if (lessonButton) {
 }
 var rectangleButton = document.getElementById("no2_checkbutton");
 var hintpanel = document.getElementsByClassName("answer-prompt4")[0];
-var checkText = document.getElementById("checkText");
-var deltaBG = document.getElementById("delta_BG_input");
-var deltaAD = document.getElementById("delta_AD_input");
-var deltaCF = document.getElementById("delta_CF_input");
-var i = 0;
 if (rectangleButton) {
     rectangleButton.addEventListener("click", function (e) {
-        if(checkText.innerText == "Proceed"){
-            window.location.href = "./Quiz3.html";
-        }
-        else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
-            checkText.innerText = "Proceed";
-            rectangleButton.style.backgroundColor = "green";
-            deltaBG.style.backgroundColor = "green";
-            deltaAD.style.backgroundColor = "green";
-            deltaCF.style.backgroundColor = "green";
+        if(window.getComputedStyle(hintpanel).visibility === "hidden"){
+            hintpanel.style.visibility="visible";
         }
         else{
-            i += 1;
-            checkText.innerText = "Try Again";
-            if(i >= 5){
-                hintpanel.classList.add("animation");
-            }
-            if(deltaBG.value == 3.46){
-                deltaBG.style.backgroundColor = "green";
-            }
-            else{
-                deltaBG.style.backgroundColor = "red";
-            }
-            if(deltaAD.value == 0.4){
-                deltaAD.style.backgroundColor = "green";
-            }
-            else{
-                deltaAD.style.backgroundColor = "red";
-            }
-            if(deltaCF.value == 0.6){
-                deltaCF.style.backgroundColor = "green";
-            }
-            else{
-                deltaCF.style.backgroundColor = "red";
-            }
+            window.location.href = "./Quiz3.html";
         }
     });
 }
 
+var checkText = document.getElementById("checkText");
 if (checkText) {
     checkText.addEventListener("click", function (e) {
-        if(checkText.innerText == "Proceed"){
-            window.location.href = "./Quiz3.html";
-        }
-        else if(deltaBG.value == 3.46 && deltaAD.value == 0.4 && deltaCF.value == 0.6){
-            checkText.innerText = "Proceed";
-            rectangleButton.style.backgroundColor = "green";
-            deltaBG.style.backgroundColor = "green";
-            deltaAD.style.backgroundColor = "green";
-            deltaCF.style.backgroundColor = "green";
+        if(window.getComputedStyle(hintpanel).visibility === "hidden"){
+            hintpanel.style.visibility="visible";
         }
         else{
-            i += 1;
-            checkText.innerText = "Try Again";
-            if(i >= 5){
-                hintpanel.classList.add("animation");
-            }
-            if(deltaBG.value == 3.46){
-                deltaBG.style.backgroundColor = "green";
-            }
-            else{
-                deltaBG.style.backgroundColor = "red";
-            }
-            if(deltaAD.value == 0.4){
-                deltaAD.style.backgroundColor = "green";
-            }
-            else{
-                deltaAD.style.backgroundColor = "red";
-            }
-            if(deltaCF.value == 0.6){
-                deltaCF.style.backgroundColor = "green";
-            }
-            else{
-                deltaCF.style.backgroundColor = "red";
-            }
+            window.location.href = "./Quiz3.html";
         }
     });
 }
