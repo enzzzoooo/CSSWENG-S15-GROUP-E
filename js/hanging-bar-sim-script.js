@@ -410,6 +410,8 @@ function setup() {
             settings.ropeAwayFromWall = parseFloat(ropeAwayFromWall.value())
         }
     });
+
+    document.getElementById('ropeDistanceAway').setAttribute("disabled", "true");
 }
 
 let deformationGrey = 0;
@@ -1041,8 +1043,9 @@ wallCheckbox.addEventListener('click', () => {
         keeptoWall = true;
         rope.x = yellowBar.x
         settings.ropeAwayFromWall = 0;
+        document.getElementById('ropeDistanceAway').setAttribute("disabled", "true");
     } else {
         keeptoWall = false;
-
+        document.getElementById('ropeDistanceAway').removeAttribute("disabled", "true");
     }
 });
