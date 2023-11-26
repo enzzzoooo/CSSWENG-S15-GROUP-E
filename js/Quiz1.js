@@ -35,6 +35,21 @@ if (lessonButton) {
         window.location.href = "./lesson-picker.html";
     });
 }
+
+var force = document.getElementsByClassName("p-1kn5");
+var x1Element = document.getElementById("x1");
+var x2Element = document.getElementById("x2");
+var x3Element = document.getElementById("x3");
+var x4Element = document.getElementById("x4");
+var yElement = document.getElementById("y");
+var angleElement = document.getElementById("angle");
+var a1Element = document.getElementById("a1");
+var a2Element = document.getElementById("a2");
+var a3Element = document.getElementById("a3");
+var e1Element = document.getElementById("e1");
+var e2Element = document.getElementById("e2");
+var e3Element = document.getElementById("e3");
+
 var checkButton = document.getElementById("no1_checkbutton");
 var checkButtonText = document.getElementById("no1_checkbuttontext");
 var PBG = document.getElementById("P_BG_input");
