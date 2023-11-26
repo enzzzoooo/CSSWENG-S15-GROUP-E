@@ -97,7 +97,7 @@ function generateValues() {
     console.log("quiz6_Dd = " + (quiz6_Dd * 1000).toFixed(2))
     console.log("quiz6_Df = " + (quiz6_Df * 1000).toFixed(2))
 
-    quiz7_a = Math.atan(Math.abs(quiz6_Df - quiz6_Dd) / (1000 * (x3 + x4)))
+    quiz7_a = atan(Math.abs(quiz6_Df - quiz6_Dd) / (1000 * (x3 + x4)))
     console.log("quiz7_a = " + (quiz7_a * 1000).toFixed(2))
 }
 
