@@ -30,9 +30,10 @@ simulationButton.addEventListener('click', () => {
 
 // Event handler for "Lessons"
 lessonsButton.addEventListener('click', () => {
-  window.location.href = "lesson-picker.html"; // should change to lessons
+  window.location.href = "lesson-picker.html";
 });
 
+// Event handler for "Credits"
 creditsButton.addEventListener('click', () => {
   window.location.href = "credits.html";
 });
