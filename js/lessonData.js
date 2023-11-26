@@ -57,7 +57,7 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
           <div class="popup-title-wrapper">
-            <div class="popup-title">Explanation</div>
+            <div class="popup-title">Computation for Length</div>
           </div>
           <div class="popup-text-wrapper">
             <div class="popup-text">
