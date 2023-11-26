@@ -202,24 +202,24 @@
         </div>
         <div class="frame-container">
           <div class="radiobutton-parent6">
-            <input class="radiobutton9" name="CtoC'" type="radio" />
+            <input class="radiobutton9" name="CtoC'" id="dC" type="radio" />
 
             <div class="dc1">\(d_C\)</div>
           </div>
           <div class="radiobutton-parent7">
-            <input class="radiobutton9" name="CtoC'" type="radio" />
+            <input class="radiobutton9" name="CtoC'" id="dB+dC" type="radio" />
 
             <div class="dc1">\(d_B\) + \(d_C\)</div>
           </div>
           <div class="radiobutton-parent8">
-            <input class="radiobutton9" name="CtoC'" type="radio" />
+            <input class="radiobutton9" name="CtoC'" id="deltaCF" type="radio" />
 
             <div class="dc1">\(δ_{CF}\)</div>
           </div>
           <div class="radiobutton-parent9">
-            <input class="radiobutton9" name="CtoC'" type="radio" />
+            <input class="radiobutton9" name="CtoC'" id="dC+deltaCF" type="radio" />
 
-            <div class="dc1">\(d_C\) + \(d_{CF}\)</div>
+            <div class="dc1">\(d_C\) + \(δ_{CF}\)</div>
           </div>
         </div>
       </div>
@@ -231,22 +231,22 @@
         </div>
         <div class="frame-parent1">
           <div class="radiobutton-parent10">
-            <input class="radiobutton9" name="BtoB'" type="radio" />
+            <input class="radiobutton9" name="BtoB'" id="deltaBG" type="radio" />
 
             <div class="dc1">\(δ_{BG}\)</div>
           </div>
           <div class="radiobutton-parent11">
-            <input class="radiobutton9" name="BtoB'" type="radio" />
+            <input class="radiobutton9" name="BtoB'" id="deltaBG*cos" type="radio" />
 
             <div class="dc1">\(δ_{BG}\) cos θ</div>
           </div>
           <div class="radiobutton-parent12">
-            <input class="radiobutton9" name="BtoB'" type="radio" />
+            <input class="radiobutton9" name="BtoB'" id="deltaBG*sin" type="radio" />
 
             <div class="dc1">\(δ_{BG}\) sin θ</div>
           </div>
           <div class="radiobutton-parent13">
-            <input class="radiobutton9" name="BtoB'" type="radio" />
+            <input class="radiobutton9" name="BtoB'" id="deltaBG/sin" type="radio" />
 
             <div class="bg-container">
               <div class="bg4">\(δ_{BG}\)</div>
@@ -255,7 +255,7 @@
             </div>
           </div>
           <div class="radiobutton-parent14">
-            <input class="radiobutton9" name="BtoB'" type="radio" />
+            <input class="radiobutton9" name="BtoB'" id="deltaBG/cos" type="radio" />
 
             <div class="bg-parent1">
               <div class="bg5">\(δ_{BG}\)</div>
@@ -268,9 +268,9 @@
       </div>
       <button class="submit1" id="no3_tryagainbutton">
         <div class="submit-item" id="rectangle16"></div>
-        <b class="try-again1">Try Again</b>
+        <b class="try-again1" id="checkButtonText">Check</b>
       </button>
-      <div class="answer-prompt2" id="answerPromptContainer">
+      <div id="answerPromptContainer">
         <div class="frame1">
           <img class="vector-icon3" id="explanationpane1symbol" alt="" src="./imgs/vector1.svg" />
         </div>
@@ -278,7 +278,7 @@
             Incorrect! Cable BG is not oriented vertically.
         </div>
       </div>
-      <div class="answer-prompt3">
+      <div id="answerPromptContainer1">
         <div class="frame1">
           <img class="vector-icon3" id="explanationpane2symbol" alt="" src="./imgs/vector1.svg" />
         </div>
@@ -291,17 +291,12 @@
 
     <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
       <div class="menu-dropdown">
-        <div class="home">Home</div>
-        <div class="simulation" id="popupsimulationText">Simulation</div>
-        <div class="lessons" id="popuplessonsText">Lessons</div>
-        <div class="resources">Resources</div>
+        <button class="simulation" id="popupsimulation">Simulation</button>
+        <button class="lessons1" id="popuplessons">Lessons</button>
         <div class="credits" id="popupcredits">Credits</div>
         <div class="menu-dropdown-child"></div>
         <div class="menu-dropdown-item"></div>
         <div class="menu-dropdown-inner"></div>
-        <div class="menu-dropdown-last"></div>
-        <div class="line-div"></div>
-        <div class="menu-dropdown-child1"></div>
       </div>
     </div>
 

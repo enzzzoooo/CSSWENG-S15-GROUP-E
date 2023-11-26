@@ -10,10 +10,9 @@
   right: 0;
 }
 
-.home,
 .lessons1,
-.resources,
-.simulation, .Credits {
+.simulation,
+.credits {
   cursor: pointer;
   border: 0;
   padding: 0;
@@ -33,29 +32,29 @@
   height: 65px;
 }
 
-.lessons1,
-.resources,
-.simulation, .Credits {
+.simulation,
+.credits {
   top: 65px;
 }
 
-.lessons1,
-.resources, .Credits {
+.credits {
   top: 130px;
 }
 
-.resources, .Credits {
+/* .resources,
+.credits {
   top: 195px;
 }
 
-.Credits{
+.credits {
   top: 260px;
-}
+} */
 
 .line-div,
 .menu-dropdown-child,
 .menu-dropdown-inner,
-.menu-dropdown-item, .menu-dropdown-last {
+.menu-dropdown-item,
+.credits-line-div {
   position: absolute;
   top: 64.5px;
   left: -0.5px;
@@ -67,18 +66,17 @@
 
 .line-div,
 .menu-dropdown-inner,
-.menu-dropdown-item, .menu-dropdown-last {
+.menu-dropdown-item,
+.credits-line-div {
   top: 129.5px;
 }
 
 .line-div,
-.menu-dropdown-inner, .menu-dropdown-last {
+.menu-dropdown-inner,
+.credits-line-div {
   top: 194.5px;
 }
 
-.line-div, .menu-dropdown-last {
-  top: 260px;
-}
 
 .line-div {
   top: 324.5px
@@ -94,3 +92,4 @@
   max-width: 90%;
   max-height: 90%;
 }
+

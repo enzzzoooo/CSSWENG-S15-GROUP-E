@@ -58,7 +58,7 @@
   left: 0;
   width: 1440px;
   height: 904px;
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .freebody-diagram-child23,
 .freebody-diagram-child24,
@@ -148,11 +148,11 @@
   text-align: left;
   font-size: var(--font-size-4xl);
   color: var(--color-white);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .d2 {
   left: 0;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 }
 .a7,
 .b6,
@@ -174,7 +174,7 @@
 }
 .f2 {
   left: 410px;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 }
 .a7,
 .b6,
@@ -222,7 +222,7 @@
   top: 126px;
   left: 85px;
   font-size: var(--font-size-xl);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   width: 29px;
   height: 27px;
 }
@@ -416,7 +416,7 @@
   height: 534px;
   font-size: var(--font-size-4xl);
   color: var(--color-white);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .ay {
   position: absolute;
@@ -618,7 +618,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  width: 134px;
+  width: 154px;
   height: 55px;
   cursor: pointer;
 }
@@ -661,7 +661,7 @@
   top: 0.19%;
   left: 4.38%;
   font-size: var(--font-size-4xl);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   color: var(--color-white);
   text-align: left;
 }
@@ -688,7 +688,7 @@
   top: 21.31%;
   left: 4.38%;
   font-size: var(--font-size-4xl);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   color: var(--color-white);
   text-align: left;
 }
@@ -726,7 +726,7 @@
   left: 49.89%;
 }
 .span2 {
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }
 .y-2m-container4 {
   position: absolute;
@@ -784,8 +784,21 @@
   box-sizing: border-box;
   gap: var(--gap-lg);
   color: var(--color-white);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
   visibility: hidden;
+}
+.animation {
+  animation: fadeIn 1s forwards;
+  visibility: hidden;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 .quiz-2-hint {
   position: relative;
@@ -796,7 +809,7 @@
   text-align: left;
   font-size: var(--font-size-6xl);
   color: var(--color-black);
-  font-family: var(--font-optima);
+  font-family: var(--font-avenir);
 }
 .home {
   position: absolute;
@@ -883,5 +896,5 @@
   text-align: left;
   font-size: var(--font-size-8xl);
   color: var(--color-black);
-  font-family: var(--font-avenir-lt-std);
+  font-family: var(--font-avenir);
 }

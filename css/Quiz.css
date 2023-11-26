@@ -1,6 +1,18 @@
+@font-face {
+  font-family: 'Avenir';
+  src: url('../fonts/Avenir\ LT\ Std\ 55\ Roman.otf');
+}
+
+@font-face {
+  font-family: 'Optima';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Optima'), url('../fonts/OPTIMA.woff') format('woff');
+}
 body {
   margin: 0;
   line-height: normal;
+  font-family: var(--font-avenir);
 }
 
 .popup-overlay {
@@ -13,7 +25,8 @@ body {
 :root {
   /* fonts */
   --font-avenir-lt-std: "Avenir LT Std";
-  --font-optima: Optima;
+  --font-optima: 'Optima';
+  --font-avenir: 'Avenir';
   --font-inherit: inherit;
 
   /* font sizes */
@@ -55,4 +68,12 @@ body {
   /* Border radiuses */
   --br-3xs: 10px;
   --br-xl: 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  font-size: 20px; 
 }

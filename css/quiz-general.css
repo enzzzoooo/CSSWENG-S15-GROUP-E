@@ -1,0 +1,150 @@
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-wrapper {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Instructions part */
+.quiz-instructions-container {
+  display: flex;
+  width: 1309px;
+  height: 100px;
+  margin: 49px 0 19px 0;
+  font-family: var(--font-avenir);
+  font-size: 25px;
+}
+
+/* Information part */
+.quiz-information-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.question-settings {
+  display: flex;
+  flex-direction: column;
+  width: 457px;
+  height: 535px;
+  margin: 0 0 0 31px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  background-color: #D4D4D4;
+}
+
+.topic {
+  display: flex;
+  width: 457px;
+  height: 42px;
+  background-color: var(--color-forestgreen);
+  align-items: center;
+}
+
+.topic-title {
+  margin: 0 0 0 20px;
+  font-family: var(--font-avenir);
+  font-size: 23px;
+  color: white;
+}
+
+.info {
+  font-family: var(--font-optima);
+  font-size: 27px;
+}
+
+.force-info {
+  display: flex;
+  flex-wrap: wrap;
+  height: 71px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dimension-info {
+  display: flex;
+  flex-direction: row;
+  height: 182px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.youngs-modulus-info {
+  display: flex;
+  flex-direction: row;
+  height: 157px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+/* Question part */
+.quiz-question-container {
+  display: flex;
+  width: 1309px;
+  height:32px;
+
+  margin: 60px 0 40px 0;
+
+  font-family: var(--font-avenir);
+  font-size: 25px;
+  text-align: left;
+}
+
+
+/* Answer part */
+.quiz-answer-container {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+}
+
+.question-image {
+  position: relative;
+}
+
+.quiz-hint {
+  width: 869px;
+  border-radius: 10px;
+  margin: 12px 0 0 0;
+  align-items: center;
+  background-color: #EB7911;
+  display: none;
+}
+
+#hintIcon {
+  width: 66px;
+  height: 66px;
+  margin: 15px 18px 15px 15px;
+}
+
+.hint-info {
+  font-family: var(--font-avenir);
+  font-size: 25px;
+  color: white;
+}
+
+
+#checkButton {
+  width: 263px;
+  height: 71px;
+
+  margin: 40px 0 60px 0;
+  border: 0;
+
+  background-color: #B6B6B6;
+  border-radius: 10px; 
+
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 130%;
+  font-size: 33px;
+  font-family: var(--font-optima);
+}
+
