@@ -96,7 +96,7 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     If you have understood well the discussion, test your
     knowledge by answering the quiz.
     <div class="flex-center m05">
-      <a class="flex-center" href="lesson-picker.html">
+      <a class="flex-center" href="quiz1.html">
         <img src="imgs/learnMore.png"><strong class="actionText pad">Test your knowledge!</strong></a>
     </div>`
   ]
