@@ -8,6 +8,7 @@ let givenAngle;
 let pivotPointBar;
 let forcePoint;
 let snapInput;
+let ropeAwayFromWall;
 
 // Finds deformation using normal deformation formula.
 function deformation(load, length, crossArea, elasticity) {
@@ -216,8 +217,8 @@ function setup() {
         rope.color = '#CCC9C9';
         settings.ropeModulus = 69;
     });
-    let changeBronze = document.getElementById('changeMatToBronze');
-    changeBronze.addEventListener('click', function(event) {
+    let changeBrass = document.getElementById('changeMatToBrass');
+    changeBrass.addEventListener('click', function(event) {
         resetDrawing();
         rope.color = '#724D3F';
         settings.ropeModulus = 100
@@ -247,6 +248,7 @@ function setup() {
     yellowBarWidth = select('#yellowBarWidth');
     youngsModulus = select('#youngsModulus');
     forceMagnitude = select('#forceMagnitude');
+    ropeAwayFromWall = select('#ropeDistanceAway');
     crossArea = select('#crossArea');
     givenAngle = select('#givenAngle');
     pivotPointBar = select('#pivotPointBar');
@@ -255,21 +257,29 @@ function setup() {
 
     // Sets up the textboxes
     givenAngle.input(function () {
-        givenAngle.value(givenAngle.value().replace(/[^\d.]/g, ''));
-        pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
-        let temp = -(pivotPointWall/20 - yellowBar.y);
-        if (temp < yellowBar.y){
-            rope.y = temp
-            settings.ropeHeight = parseFloat(pivotPointWall);
+        givenAngle.value(givenAngle.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+        if(settings.ropeAwayFromWall != settings.ropeDistance){
+            pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
+            let temp = -(pivotPointWall/20 - yellowBar.y);
+            if (temp < yellowBar.y){
+                rope.y = temp
+                settings.ropeHeight = parseFloat(pivotPointWall);
+            } else {
+                rope.y = yellowBar.y;
+                settings.ropeHeight = 0;
+            }
         } else {
-            rope.y = yellowBar.y;
-            settings.ropeHeight = 0;
+            givenAngle.value(90)
         }
     });
 
     snapInput.input(function () {
-        snapInput.value(snapInput.value().replace(/[^\d.]/g, ''));
+        snapInput.value(snapInput.value().replace(/[^\d]|(?<=\..*)\./g, ''));
         settings.snapValue = snapInput.value();
+
+        if(isNaN(parseFloat(snapInput.value()))){
+            snapInput.value(0)
+        }
 
         if(settings.snapValue < 0) {
             settings.snapValue = 0;
@@ -278,13 +288,18 @@ function setup() {
 
 
     pivotPointBar.input(function() {
-        pivotPointBar.value(pivotPointBar.value().replace(/[^\d.]/g, ''));
-        if(pivotPointBar.value()/20 > 0 && pivotPointBar.value() < parseFloat(settings.yellowBarWidth)){
+        pivotPointBar.value(pivotPointBar.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(pivotPointBar.value()))){
+            pivotPointBar.value(0)
+        }
+
+        if(pivotPointBar.value()/20 > rope.x && pivotPointBar.value() < parseFloat(settings.yellowBarWidth)){
             rope.end = parseFloat(pivotPointBar.value()/20) + yellowBar.x
             settings.ropeDistance = parseFloat(pivotPointBar.value());
-        } else if (pivotPointBar.value()/20 < 0) {
-            rope.end = yellowBar.x;
-            settings.ropeDistance = 0;
+        } else if (pivotPointBar.value()/20 < rope.x) {
+            rope.end = rope.x;
+            settings.ropeDistance = settings.ropeAwayfromWall;
         } else {
             rope.end = yellowBar.x + yellowBar.width;
             settings.ropeDistance = parseFloat(settings.yellowBarWidth);
@@ -292,7 +307,12 @@ function setup() {
     });
 
     yellowBarWidth.input(function () {
-        yellowBarWidth.value(yellowBarWidth.value().replace(/[^\d.]/g, ''));
+        yellowBarWidth.value(yellowBarWidth.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(yellowBarWidth.value()))){
+            yellowBarWidth.value(0)
+        }
+
         if(yellowBarWidth.value()/20 > 0 && yellowBarWidth.value() <= 10000){
             settings.yellowBarWidth = parseFloat(yellowBarWidth.value());
             yellowBar.width = settings.yellowBarWidth / 20;
@@ -307,7 +327,12 @@ function setup() {
     });
 
     forcePoint.input(function() {
-        forcePoint.value(forcePoint.value().replace(/[^\d.]/g, ''));
+        forcePoint.value(forcePoint.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(forcePoint.value()))){
+            forcePoint.value(0)
+        }
+
         if(forcePoint.value() < 0){
             forces[0][0].x = yellowBar.x;
             settings.forceDistance = 0
@@ -321,7 +346,12 @@ function setup() {
     });
 
     crossArea.input(function () {
-        crossArea.value(crossArea.value().replace(/[^\d.]/g, ''));
+        crossArea.value(crossArea.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(crossArea.value()))){
+            crossArea.value(0)
+        }
+
         if(crossArea.value() > 0){
             settings.ropeCrossArea = parseFloat(crossArea.value());
         } else {
@@ -330,12 +360,26 @@ function setup() {
     });
 
     youngsModulus.input(function () {
-        youngModulus.value(youngModulus.value().replace(/[^\d.]/g, ''));
-        settings.ropeModulus = parseFloat(youngsModulus.value());
+        youngsModulus.value(youngsModulus.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(youngsModulus.value()))){
+            youngsModulus.value(0)
+        }
+
+        if(youngsModulus.value() > 0){
+            settings.ropeModulus = parseFloat(youngsModulus.value());
+        } else {
+            settings.ropeModulus = 0;
+        }
     });
 
     forceMagnitude.input(function() {
-        forceMagnitude.value(forceMagnitude.value().replace(/[^\d.]/g, ''));
+        forceMagnitude.value(forceMagnitude.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(forceMagnitude.value()))){
+            forceMagnitude.value(0)
+        }
+
         if(forceMagnitude.value() > 0){
             forces[0][1].y = parseFloat(forceMagnitude.value()) * 5;
             if (forces[0][1].y >= 150){
@@ -345,6 +389,25 @@ function setup() {
         } else {
             forces[0][1].y = 5 * 5;
             settings.forceMagnitude = 0
+        }
+    });
+
+    ropeAwayFromWall.input(function () {
+        ropeAwayFromWall.value(ropeAwayFromWall.value().replace(/[^\d]|(?<=\..*)\./g, ''));
+
+        if(isNaN(parseFloat(ropeAwayFromWall.value()))){
+            ropeAwayFromWall.value(0)
+        }
+
+        if (parseFloat(ropeAwayFromWall.value()) <= 0){
+            rope.x = yellowBar.x
+            settings.ropeAwayFromWall = 0;
+        } else if (parseFloat(ropeAwayFromWall.value()) >= settings.ropeDistance){
+            rope.x = rope.end;
+            settings.ropeAwayFromWall = settings.ropeDistance;
+        } else {
+            rope.x = (parseFloat(ropeAwayFromWall.value()) / 20) + yellowBar.x;
+            settings.ropeAwayFromWall = parseFloat(ropeAwayFromWall.value())
         }
     });
 }
@@ -897,6 +960,7 @@ function draw() {
     youngsModulus.value(settings.ropeModulus);
     forceMagnitude.value(settings.forceMagnitude);
     snapInput.value(settings.snapValue);
+    ropeAwayFromWall.value(settings.ropeAwayFromWall)
 
 
 }
@@ -931,7 +995,7 @@ materialElements.forEach((element) => {
             case "Nylon":
                 settings.ropeMaterial = 2;
                 break;
-            case "Bronze":
+            case "Brass":
                 settings.ropeMaterial = 3;
                 break;
             case "Aluminum":

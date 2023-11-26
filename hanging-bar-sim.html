@@ -49,7 +49,7 @@
           <img class="material" src="imgs/wood.png" id="changeMatToWood" alt="Wood">
           <img class="material active" src="imgs/steel.png" id="changeMatToSteel" alt="Steel">
           <img class="material" src="imgs/plastic.png" id="changeMatToNylon" alt="Nylon"> <!-- Should be Plastic -->
-          <img class="material" src="imgs/bronze.png" id="changeMatToBronze" alt="Bronze"> <!-- Should be Bronze -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToBrass" alt="Brass"> <!-- Should be Brass -->
           <img class="material" src="imgs/aluminum.png" id="changeMatToMetal" alt="Aluminum"> <!-- Should be Aluminum -->
         </div>
         <div class="label-bar">Object Position</div>
@@ -67,8 +67,8 @@
             <label class="attribute-label" for="pivotPointBar">Pivot Point on Bar (mm)<label>
           </div>
           <div class="attribute">
-            <input class="attribute-input" id="forcePoint" type="text" placeholder="0">
-            <label class="attribute-label" for="forcePoint">Force Distance (mm)</label>
+            <input class="attribute-input" id="ropeDistanceAway" type="text" placeholder="0">
+            <label class="attribute-label" for="ropeDistanceAway">Distance From Wall (kn)</label>
           </div>
         </div>
         <div class="label-bar">Object Physics</div>
@@ -82,9 +82,15 @@
             <label class="attribute-label" for="youngsModulus">Young's Modulus (GPa)</label>
           </div>
           <div class="attribute">
+            <input class="attribute-input" id="forcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="forcePoint">Force Distance (mm)</label>
+          </div>
+
+          <div class="attribute">
             <input class="attribute-input" id="forceMagnitude" type="text" placeholder="0">
             <label class="attribute-label" for="forceMagnitude">Force (kn)</label>
           </div>
+
         </div>
       </div>
 
