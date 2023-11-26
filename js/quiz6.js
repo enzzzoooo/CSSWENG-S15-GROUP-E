@@ -48,6 +48,11 @@ function populateValues() {
 checkButton.addEventListener('click', () => {
   let answer1 = document.getElementById('question6-input1').value;
   let answer2 = document.getElementById('question6-input2').value;
+
+  if (checkButton.textContent == 'Proceed') {
+    window.location.href = 'quiz7.html';
+  }
+
   if (answer1 != expectedAnswer1 || answer2 != expectedAnswer2) {
     console.log('wrong'); 
     if (wrongCounter == 0) {
@@ -65,5 +70,7 @@ checkButton.addEventListener('click', () => {
 
   } else {
     console.log('correct');
+    checkButton.textContent = 'Proceed';
+
   }
 });
