@@ -14,13 +14,13 @@ input {
 }
 .credits-rHK {
   width: 100%;
-  overflow: hidden;
-  position: relative;
   align-items: center;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
 }
+
+
 .credits-rHK .top-bar-Po3 {
   margin-bottom: 4.1rem;
   box-sizing: border-box;
@@ -37,7 +37,6 @@ input {
   vertical-align: top;
 }
 .credits-rHK .credits-qQ9 {
-  margin-right: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,12 +47,11 @@ input {
   font-family: Optima, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
-  margin: 19px auto 30px auto;
+  margin: .9em auto 30px auto;
 }
 .credits-rHK .auto-group-qkj9-xDs {
   box-sizing: border-box;
-  padding: 2.2rem 5rem 1.9rem 4.9rem;
-  width: 100%;
+  margin-bottom: 11em;
   row-gap: 1rem;
   align-items: center;
   display: flex;

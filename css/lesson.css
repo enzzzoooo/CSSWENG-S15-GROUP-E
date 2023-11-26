@@ -125,6 +125,14 @@ body {
     margin-bottom: 0.5em;
 }
 
+.pad {
+    padding-left: 1em;
+}
+
+.m05 {
+    margin-block: 1vw;
+}
+
 div .pad {
     padding-bottom: .4em;
     padding-right: 1em;
