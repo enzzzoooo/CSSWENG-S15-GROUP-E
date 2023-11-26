@@ -270,7 +270,6 @@ function setup() {
     });
 
     forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), 'coral']
-    console.log("x: " + forces[0][0].x, "y: " + forces[0][0].y)
 
     textFont(font);
     textSize(20);
@@ -550,16 +549,16 @@ function changeDrawing() {
     bigForces.forEach(bigforce => {
         bigLoadLength += bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]);
         bigLoad += bigforce[0];
-        console.log("Added bigLoadLength = " + bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]));
+        // console.log("Added bigLoadLength = " + bigforce[0] * Math.min(settings.bigBarWidth, bigforce[1]));
     });
-    console.log("Total bigLoadLength = " + bigLoadLength);
+    // console.log("Total bigLoadLength = " + bigLoadLength);
 
     smallForces.forEach(smallforce => {
         smallLoadLength += smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth);
         smallLoad += smallforce[0];
-        console.log("Added smallLoadLength = " + smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth));
+        // console.log("Added smallLoadLength = " + smallforce[0] * Math.min(settings.smallBarWidth, smallforce[1] - settings.bigBarWidth));
     });
-    console.log("Total smallLoadLength = " + smallLoadLength);
+    // console.log("Total smallLoadLength = " + smallLoadLength);
 
     var bigDeformation = 0;
     var smallDeformation = 0;
@@ -610,8 +609,8 @@ function changeDrawing() {
 
     bigMaterialAxial = bigLoad * 1000 / settings.bigBarHeight
     smallMaterialAxial = smallLoad * 1000 / settings.smallBarHeight
-    console.log("bigMaterialAxial = " + bigMaterialAxial);
-    console.log("smallMaterialAxial = " + smallMaterialAxial);
+    // console.log("bigMaterialAxial = " + bigMaterialAxial);
+    // console.log("smallMaterialAxial = " + smallMaterialAxial);
 
     alert(
         "Deformation of First Bar: " + bigDeformation.toFixed(4) + "\n" +
@@ -682,10 +681,8 @@ function updateForces(){
             force[0].x = bigBar.x + bigBar.width + smallBar.width
             if(index == 0){
                 settings.force1Distance = settings.bigBarWidth + settings.smallBarWidth
-                console.log(settings.force1Distance)
             } else {
                 settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
-                console.log(settings.force2Distance)
             }
         }
     });
@@ -991,7 +988,6 @@ function draw() {
                 settings.bigBarWidth = 100;
             } else {
                 bigBar.width = mouseX - bigBar.x;
-                console.log()
                 settings.bigBarWidth = Math.round(dist(bigBar.x, bigBar.y, bigBar.x + bigBar.width, bigBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;
             }
 

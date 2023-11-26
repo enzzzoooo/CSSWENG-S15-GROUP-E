@@ -99,7 +99,7 @@ let canvasOrigin = {
 let settings = {
     ropeHeight: 3000,
     ropeDistance: 4000,
-    ropeCrossArea: Math.round((cylinderCrossArea(25) + Number.EPSILON) * 100) / 100,
+    ropeCrossArea: 100,
     ropeAwayFromWall: 0,
     yellowBarWidth: 6000,
     ropeModulus: 200,
@@ -188,8 +188,6 @@ function setup() {
         } else {
             toggleImg.src = 'imgs/toggle-data-show.png';
         }
-        console.log((rope.x + yellowBar.x + yellowBar.width) / 2)
-        console.log((rope.y + yellowBar.y) / 2 + 20)
     });
 
     // Button for displaying force data on and off
@@ -294,7 +292,7 @@ function setup() {
             pivotPointBar.value(0)
         }
 
-        if(pivotPointBar.value()/20 > rope.x && pivotPointBar.value() < parseFloat(settings.yellowBarWidth)){
+        if(pivotPointBar.value()/20 > (rope.x - yellowBar.x) && pivotPointBar.value() < parseFloat(settings.yellowBarWidth)){
             rope.end = parseFloat(pivotPointBar.value()/20) + yellowBar.x
             settings.ropeDistance = parseFloat(pivotPointBar.value());
         } else if (pivotPointBar.value()/20 < rope.x) {
@@ -427,13 +425,11 @@ function changeDrawing() {
         downward.push(parseFloat(settings.forceMagnitude))
         downwardDistances.push(settings.forceDistance)
     });
-    console.log(downward)
-    console.log(downwardDistances)
+
 
 
     ropeLength = pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall))
 
-    console.log(ropeLength)
     // Changed by Joseph
     ropeForce = internalHanging(parseFloat(settings.forceMagnitude), parseFloat(settings.forceDistance), ropeLength, parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance), parseFloat(settings.ropeAwayFromWall))
     deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), parseFloat(settings.ropeModulus));
@@ -660,7 +656,7 @@ function draw() {
         }
 
         push()
-        if(displayForce || force[4]){
+        if((displayForce || force[4])){
             // Distance of rope
             resetMatrix()
             strokeWeight(0)
@@ -887,15 +883,17 @@ function draw() {
         translate(12, 0)
         curlyBracket(dist(rope.x, rope.y, rope.end,((yellowBar.y)+(rope.change/3*easing(t)))))
         resetMatrix()
-        strokeWeight(0)
-        fill('black')
-        textAlign(CENTER)
-        let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
-        text(`Angle: ${angle.toFixed(2)}°`, rope.end + 125, yellowBar.y - 50);
-        strokeWeight(2)
-        fill(255, 0, 0, 0);
-        arc(rope.end, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
-        fill('black')
+        if(!yellowBar.animation){
+            strokeWeight(0)
+            fill('black')
+            textAlign(CENTER)
+            let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
+            text(`Angle: ${angle.toFixed(2)}°`, rope.end + 125, yellowBar.y - 50);
+            strokeWeight(2)
+            fill(255, 0, 0, 0);
+            arc(rope.end, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
+            fill('black')
+        }
     } if((displayData || heightChange || distanceChange) && !keeptoWall && settings.ropeAwayFromWall > 0){
         // Grey Bar
         resetMatrix()
