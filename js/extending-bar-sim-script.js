@@ -76,8 +76,8 @@ let canvasOrigin = {
 
 let settings = {
     snapValue: 50,
-    bigBarWidth: 1000,
-    smallBarWidth: 2000,
+    bigBarWidth: 2000,
+    smallBarWidth: 3000,
     bigBarHeight: 200,
     smallBarHeight: 100,
     bigBarModulus: 200,
@@ -110,7 +110,7 @@ let bigBar = {
     change: 0,
     animation: false,
     width: settings.bigBarWidth / 20,
-    height: 200,
+    height: 225,
     color: '#bbdbf0',
     angle: 0
 }
@@ -122,7 +122,7 @@ let smallBar = {
     change: 0,
     animation: false,
     width: settings.smallBarWidth / 20,
-    height: 100,
+    height: 125,
     color: '#CCC9C9',
     angle: 0
 }
@@ -292,51 +292,41 @@ function setup() {
 
 
     snapInput.input(function () {
-        console.log("snapInput: " + snapInput.value());
+        snapInput.value(snapInput.value().replace(/[^\d.]/g, ''));
         settings.snapValue = snapInput.value();
-        console.log("settings.snapValue: " + settings.snapValue);
 
-        if(settings.snapValue == 0) {
-            settings.snapValue = 1;
+        if(settings.snapValue < 0) {
+            settings.snapValue = 0;
         }
     });
 
     // objectTab1
     bigBarWidth.input(function () {
-        settings.bigBarWidth = parseFloat(bigBarWidth.value());
-        bigBar.width = settings.bigBarWidth / 20;
-        updateForces();
-    });
-
-    smallBarWidth.input(function() {
-        settings.smallBarWidth = parseFloat(pivotPointBar.value());
-        smallBar.width = settings.smallBarWidth / 20;
-        updateForces();
-    });
-
-
-    // objectTab1
-    bigBarWidth.input(function () {
+        bigBarWidth.value(pivotPointBar.value().replace(/[^\d.]/g, ''));
         settings.bigBarWidth = parseFloat(bigBarWidth.value());
         bigBar.width = settings.bigBarWidth / 20;
         updateForces();
     });
 
     bigBarForcePoint.input(function () {
+        bigBarForcePoint.value(bigBarForcePoint.value().replace(/[^\d.]/g, ''));
         forces[0][0].x = parseFloat(bigBarForcePoint.value())/20 + bigBar.x;
         settings.force1Distance = parseFloat(bigBarForcePoint.value());
         updateForces();
     });
 
     bigBarCrossArea.input(function () {
+        bigBarCrossArea.value(bigBarCrossArea.value().replace(/[^\d.]/g, ''));
         settings.bigBarHeight = parseInt(bigBarCrossArea.value());
     });
 
     bigBarModulus.input(function () {
+        bigBarModulus.value(bigBarModulus.value().replace(/[^\d.]/g, ''));
         settings.bigBarModulus = parseFloat(bigBarModulus.value());
     });
 
     bigBarForceValue.input(function () {
+        bigBarForceValue.value(bigBarForceValue.value().replace(/[^\d.]/g, ''));
         forces[0][1].x = parseFloat(bigBarForceValue.value()) * 5;
         if (forces[0][1].x >= 150){
             forces[0][1].x = 150;
@@ -348,12 +338,14 @@ function setup() {
 
     // objectTab2
     smallBarWidth.input(function() {
+        smallBarWidth.value(pivotPointBar.value().replace(/[^\d.]/g, ''));
         settings.smallBarWidth = parseFloat(pivotPointBar.value());
         smallBar.width = settings.smallBarWidth / 20;
         updateForces();
     });
 
     smallBarForcePoint.input(function() {
+        smallBarForcePoint.value(smallBarForcePoint.value().replace(/[^\d.]/g, ''));
         if(addedForce){
             smallBarForcePoint.removeAttribute('readonly');
 
@@ -362,21 +354,22 @@ function setup() {
             settings.force2Distance = parseFloat(smallBarForcePoint.value());
             updateForces();
         } else {
-            smallBarForcePoint.attribute('readonly', '');
+            smallBarForcePoint.attribute('disabled', 'true');
         }
     });
 
     smallBarCrossArea.input(function () {
+        smallBarModulus.value(smallBarModulus.value().replace(/[^\d.]/g, ''));
         settings.smallBarHeight = parseInt(smallBarCrossArea.value());
     });
 
     smallBarModulus.input(function () {
+        smallBarModulus.value(bsmallBarModulus.value().replace(/[^\d.]/g, ''));
         settings.smallBarModulus = parseFloat(smallBarModulus.value());
     });
 
     smallBarForceValue.input(function () {
-
-
+        smallBarForceValue.value(smallBarForceValue.value().replace(/[^\d.]/g, ''));
         if(addedForce) {
             smallBarForceValue.removeAttribute('readonly');
             forces[1][1].x = parseFloat(smallBarForceValue.value()) * 5;
@@ -390,8 +383,6 @@ function setup() {
             smallBarForceValue.attribute('readonly', '');
         }
     });
-
-    // Setup Material
 }
 
 let deformationGrey = 0;

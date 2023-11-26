@@ -31,7 +31,7 @@
 
   <div class="main-container">
     <div id="canvas-container">
-      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-show.png"></button>
+      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-hide.png"></button>
       <button id="force"><img id="forceImg" src="./imgs/force-data-show.png"></button>
 
     </div>
@@ -100,6 +100,11 @@
             <input class="attribute-input" id="snapInterval" type="text" placeholder="0">
             <label class="attribute-label" for="snapInterval">Snap Interval (mm)</label>
           </div>
+        </div>
+        <div class="snap-wrapper">
+          <input type="checkbox" name="checkbox" id="wallToggle" checked>
+          <label for="wallToggle" class="switch"></label>
+          <div class="snap-toggle-label">Keep Rope on Wall</div>
         </div>
       </div>
 
