@@ -6,10 +6,10 @@
   <link rel="stylesheet" href="./css/global.css"/>
   <link rel="stylesheet" href="./css/hamburger-menu.css"/>
   <link rel="stylesheet" href="./css/quiz-general.css"/>
-  <link rel="stylesheet" href="./css/Quiz1-new.css"/>
+  <link rel="stylesheet" href="./css/Quiz2-new.css"/>
 
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <title>Question 1</title>
+  <title>Question 2</title>
 </head>
 <body>
   <header>
@@ -75,22 +75,32 @@
     </div>
     <div class="quiz-question-container">
       <div class="quiz-question">
-        1. What are the axial forces (in kN) in the cables? (Type your answers in the textboxes. Round to 2 decimal places.)
+        2. What are the axial deformations (in mm) of the cables? (Type your answers in the textboxes. Round to 2 decimal places.)
       </div>
     </div>
     <div class="quiz-answer-container">
       <div class="image-wrapper">
-        <img src="./imgs/quiz/question1-image.png" alt="" class="question-image"/>
-        <input type="number" class="question1-input1" id="question1-input1"> <!--BG-->
-        <input type="number" class="question1-input2" id="question1-input2"> <!--AD-->
-        <input type="number" class="question1-input3" id="question1-input3"> <!--CF-->
+        <img src="./imgs/quiz/question2-image.png" alt="" class="question-image"/>
+        <input type="number" class="question1-input1" id="question1-input1" disabled> <!--BG-->
+        <input type="number" class="question1-input2" id="question1-input2" disabled> <!--AD-->
+        <input type="number" class="question1-input3" id="question1-input3" disabled> <!--CF-->
+        <input type="number" class="question2-input1" id="question2-input1"> <!--BG-->
+        <input type="number" class="question2-input2" id="question2-input2"> <!--AD-->
+        <input type="number" class="question2-input3" id="question2-input3"> <!--CF-->
+      </div>
+      <div class="quiz-hint" id="quizHint">
+        <img src="./imgs/hint-icon.png" id="hintIcon">
+  
+        <div class="hint-info">
+          <b>Hint!</b> The length of cable BG can be obtained using trigonometry.
+        </div>
       </div>
       <div class="quiz-hint correct" id="correctResult" hidden>
         <img src="./imgs/quiz/quiz-correct-icon.png" id="hintIcon">
 
         <div class="hint-info">
-          <b>Correct!</b> The forces in cable BG is <span id="expectedAnswer1">0</span> kN, in cable AD is <span id="expectedAnswer2">0</span> kN, and
-          in cable CF is <span id="expectedAnswer3">0</span> kN.
+          <b>Correct!</b> The deformation in cable BG is <span id="expectedAnswer1">0</span> mm, in cable AD is <span id="expectedAnswer2">0</span> mm, and
+          in cable CF is <span id="expectedAnswer3">0</span> mm.
         </div>  
       </div>
 
@@ -110,7 +120,6 @@
   </div>
 
   <script src="./js/hamburger-menu-modal.js"></script>
-  <script src="./js/Quiz1-new.js"></script>
-  <script src="./js/quizvalues.js"></script>
+  <script src="./js/Quiz2-new.js"></script>
 </body>
 </html>

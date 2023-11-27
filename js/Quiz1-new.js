@@ -21,15 +21,7 @@ function populateValues() {
   const e1ValueElement = document.getElementById('e1Value');
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
-  
-  // Question 2 Specific
-  const question1Input1 = document.getElementById('question1-input1');
-  const question1Input2 = document.getElementById('question1-input2');
-  const question1Input3 = document.getElementById('question1-input3');
 
-  question1Input1.value = parseFloat(sessionStorage.getItem('quiz1_Pbg')).toFixed(2);
-  question1Input2.value = parseFloat(sessionStorage.getItem('quiz1_Pad')).toFixed(2);
-  question1Input3.value = parseFloat(sessionStorage.getItem('quiz1_Pcf')).toFixed(2);
  
   forceValueElement.textContent = sessionStorage.getItem('force');
   x1ValueElement.textContent = sessionStorage.getItem('x1');
@@ -45,16 +37,15 @@ function populateValues() {
   e2ValueElement.textContent = sessionStorage.getItem('modulus2');
   e3ValueElement.textContent = sessionStorage.getItem('modulus3');
 
-
-  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz2_Dbg')) * 1000).toFixed(2);
-  expectedAnswer2 = (parseFloat(sessionStorage.getItem('quiz2_Dad')) * 1000).toFixed(2);
-  expectedAnswer3 = (parseFloat(sessionStorage.getItem('quiz2_Dcf')) * 1000).toFixed(2);
+  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz1_Pbg'))).toFixed(2);
+  expectedAnswer2 = (parseFloat(sessionStorage.getItem('quiz1_Pad'))).toFixed(2);
+  expectedAnswer3 = (parseFloat(sessionStorage.getItem('quiz1_Pcf'))).toFixed(2);
 }
 
 window.addEventListener('load', populateValues); 
 
 // Prevent more the 2 decimal places
-document.getElementById('question2-input1').addEventListener('input', function() {
+document.getElementById('question1-input1').addEventListener('input', function() {
   if (this.value.includes('.')) {
     const decimalPlaces = this.value.split('.')[1];
     if (decimalPlaces && decimalPlaces.length > 2) {
@@ -63,7 +54,7 @@ document.getElementById('question2-input1').addEventListener('input', function()
   }
 });
 
-document.getElementById('question2-input2').addEventListener('input', function() {
+document.getElementById('question1-input2').addEventListener('input', function() {
   if (this.value.includes('.')) {
     const decimalPlaces = this.value.split('.')[1];
     if (decimalPlaces && decimalPlaces.length > 2) {
@@ -73,7 +64,7 @@ document.getElementById('question2-input2').addEventListener('input', function()
 });
 
 
-document.getElementById('question2-input3').addEventListener('input', function() {
+document.getElementById('question1-input3').addEventListener('input', function() {
   if (this.value.includes('.')) {
     const decimalPlaces = this.value.split('.')[1];
     if (decimalPlaces && decimalPlaces.length > 2) {
@@ -84,23 +75,20 @@ document.getElementById('question2-input3').addEventListener('input', function()
 
 
 checkButton.addEventListener('click', () => {
-  const hintElement = document.getElementById('quizHint');
   const correntElement = document.getElementById('correctResult');
   const expectedAnswer1Element = document.getElementById('expectedAnswer1');
   const expectedAnswer2Element = document.getElementById('expectedAnswer2');
   const expectedAnswer3Element = document.getElementById('expectedAnswer3');
-  let answer1 = document.getElementById('question2-input1').value;
-  let answer2 = document.getElementById('question2-input2').value;
-  let answer3 = document.getElementById('question2-input3').value;
+  let answer1 = document.getElementById('question1-input1').value;
+  let answer2 = document.getElementById('question1-input2').value;
+  let answer3 = document.getElementById('question1-input3').value;
 
   let err1 = Math.abs(answer1 - expectedAnswer1);
   let err2 = Math.abs(answer2 - expectedAnswer2);
   let err3 = Math.abs(answer3 - expectedAnswer3);
 
-  console.log(expectedAnswer1, expectedAnswer2, expectedAnswer3);
-
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = 'quiz3.html';
+    window.location.href = 'quiz2.html';
   }
 
   // Checking answer
@@ -108,43 +96,34 @@ checkButton.addEventListener('click', () => {
     console.log('wrong');
     wrongCounter++;
     if (err1 > 0.01) {
-      document.getElementById('question2-input1').style.backgroundColor = 'lightcoral';
+      document.getElementById('question1-input1').style.backgroundColor = 'lightcoral';
     } else {
-      document.getElementById('question2-input1').style.backgroundColor = 'lightgreen';
+      document.getElementById('question1-input1').style.backgroundColor = 'lightgreen';
     }
     if (err2 > 0.01) {
-      document.getElementById('question2-input2').style.backgroundColor = 'lightcoral';
+      document.getElementById('question1-input2').style.backgroundColor = 'lightcoral';
     } else {
-      document.getElementById('question2-input2').style.backgroundColor = 'lightgreen';
+      document.getElementById('question1-input2').style.backgroundColor = 'lightgreen';
     }
     if (err3 > 0.01) {
-      document.getElementById('question2-input3').style.backgroundColor = 'lightcoral';
+      document.getElementById('question1-input3').style.backgroundColor = 'lightcoral';
     } else {
-      document.getElementById('question2-input3').style.backgroundColor = 'lightgreen';
-    }
-    if (wrongCounter == 5) {
-      hintElement.classList.add('buff');
-      setTimeout(() => {
-        hintElement.classList.remove('buff');
-        hintElement.classList.add('show');
-      }, 500);
+      document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
     }
   } else {
     correntElement.classList.add('show');
     expectedAnswer1Element.textContent = expectedAnswer1;
     expectedAnswer2Element.textContent = expectedAnswer2;
     expectedAnswer3Element.textContent = expectedAnswer3;
-    hintElement.classList.remove('show');
     correntElement.classList.add('buff');
     setTimeout(() => {
       correntElement.classList.remove('buff');
       correntElement.classList.add('show');
     }, 500);
 
-
-    document.getElementById('question2-input1').style.backgroundColor = 'lightgreen';
-    document.getElementById('question2-input2').style.backgroundColor = 'lightgreen';
-    document.getElementById('question2-input3').style.backgroundColor = 'lightgreen';
+    document.getElementById('question1-input1').style.backgroundColor = 'lightgreen';
+    document.getElementById('question1-input2').style.backgroundColor = 'lightgreen';
+    document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
 
     console.log('correct');
     checkButton.textContent = 'Proceed';
