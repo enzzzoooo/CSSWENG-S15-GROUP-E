@@ -37,6 +37,35 @@ if (lessonButton) {
         window.location.href = "./lesson-picker.html";
     });
 }
+
+var forcePElement = document.getElementsByClassName("p-1kn1")[0];
+var x1Element = document.getElementById("x1panel");
+var x2Element = document.getElementById("x2");
+var x3Element = document.getElementById("x3");
+var x4Element = document.getElementById("x4");
+var yElement = document.getElementById("y");
+var angleElement = document.getElementById("anglepanel");
+var a1Element = document.getElementById("a1panel");
+var a2Element = document.getElementById("a2");
+var a3Element = document.getElementById("a3");
+var e1Element = document.getElementById("e1panel");
+var e2Element = document.getElementById("e2");
+var e3Element = document.getElementById("e3");
+
+forcePElement.innerText = "P = " + forceP + "kN";
+x1Element.innerText = "X1 = " + x1 + " m";
+x2Element.innerText = "X2 = " + x2 + " m";
+x3Element.innerText = "X3 = " + x3 + " m";
+x4Element.innerText = "X4 = " + x4 + " m";
+yElement.innerText = "y = " + y + "m";
+angleElement.innerText = " = " + angle + "°";
+a1Element.innerText= "A1 = " + (area1*1000) + ` \\(mm^2\\)`;
+a2Element.innerText= "A2 = " + (area2*1000) + ` \\(mm^2\\)`;
+a3Element.innerText= "A3 = " + (area3*1000) + ` \\(mm^2\\)`;
+e1Element.innerText = "E1 = " + modulus1 + " GPa";
+e2Element.innerText = "E2 = " + modulus2 + " GPa";
+e3Element.innerText = "E3 = " + modulus3 + " GPa";
+
 var explanationpane1 = document.getElementById("answerPromptContainer");
 var explanationpane2 = document.getElementById("answerPromptContainer1");
 var explanationpane1text = document.getElementById("explanationpane1text");

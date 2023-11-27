@@ -36,7 +36,7 @@ if (lessonButton) {
     });
 }
 
-var force = document.getElementsByClassName("p-1kn5");
+var force = document.getElementsByClassName("p-1kn5")[0];
 var x1Element = document.getElementById("x1");
 var x2Element = document.getElementById("x2");
 var x3Element = document.getElementById("x3");
@@ -50,6 +50,20 @@ var e1Element = document.getElementById("e1");
 var e2Element = document.getElementById("e2");
 var e3Element = document.getElementById("e3");
 
+force.innerText = "P = " + forceP + "kN";
+x1Element.innerText = "X1 = " + x1 + " m";
+x2Element.innerText = "X2 = " + x2 + " m";
+x3Element.innerText = "X3 = " + x3 + " m";
+x4Element.innerText = "X4 = " + x4 + " m";
+yElement.innerText = "y = " + y + "m";
+angleElement.innerText = " = " + angle + "°";
+a1Element.innerText= "A1 = " + (area1*1000) + ` \\(mm^2\\)`;
+a2Element.innerText= "A2 = " + (area2*1000) + ` \\(mm^2\\)`;
+a3Element.innerText= "A3 = " + (area3*1000) + ` \\(mm^2\\)`;
+e1Element.innerText = "E1 = " + modulus1 + " GPa";
+e2Element.innerText = "E2 = " + modulus2 + " GPa";
+e3Element.innerText = "E3 = " + modulus3 + " GPa";
+
 var checkButton = document.getElementById("no1_checkbutton");
 var checkButtonText = document.getElementById("no1_checkbuttontext");
 var PBG = document.getElementById("P_BG_input");
@@ -60,7 +74,7 @@ if (checkButton) {
         if(checkButtonText.innerText == "Proceed"){
             window.location.href = "./Quiz2.html";
         }
-        else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
+        else if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2)) && PAD.value == parseFloat(quiz1_Pad.toFixed(2)) && PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
             checkButtonText.innerText = "Proceed";
             checkButton.style.backgroundColor = "green";
             PBG.style.backgroundColor = "green";
@@ -69,19 +83,19 @@ if (checkButton) {
         }
         else{
             checkButtonText.innerText = "Try Again";
-            if(PBG.value == 6){
+            if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2))){
                 PBG.style.backgroundColor = "green";
             }
             else{
                 PBG.style.backgroundColor = "red";
             }
-            if(PAD.value == 0.4){
+            if(PAD.value == parseFloat(quiz1_Pad.toFixed(2))){
                 PAD.style.backgroundColor = "green";
             }
             else{
                 PAD.style.backgroundColor = "red";
             }
-            if(PCF.value == 0.6){
+            if(PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
                 PCF.style.backgroundColor = "green";
             }
             else{
@@ -95,7 +109,7 @@ if (checkButtonText) {
         if(checkButtonText.innerText == "Proceed"){
             window.location.href = "./Quiz2.html";
         }
-        else if(PBG.value == 6 && PAD.value == 0.4 && PCF.value == 0.6){
+        else if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2)) && PAD.value == parseFloat(quiz1_Pad.toFixed(2)) && PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
             checkButtonText.innerText = "Proceed";
             checkButton.style.backgroundColor = "green";
             PBG.style.backgroundColor = "green";
@@ -104,19 +118,19 @@ if (checkButtonText) {
         }
         else{
             checkButtonText.innerText = "Try Again";
-            if(PBG.value == 6){
+            if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2))){
                 PBG.style.backgroundColor = "green";
             }
             else{
                 PBG.style.backgroundColor = "red";
             }
-            if(PAD.value == 0.4){
+            if(PAD.value == parseFloat(quiz1_Pad.toFixed(2))){
                 PAD.style.backgroundColor = "green";
             }
             else{
                 PAD.style.backgroundColor = "red";
             }
-            if(PCF.value == 0.6){
+            if(PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
                 PCF.style.backgroundColor = "green";
             }
             else{
