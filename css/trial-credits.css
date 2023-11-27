@@ -14,6 +14,7 @@ input {
 }
 .credits-rHK {
   width: 100%;
+  margin-top: 6em;
   align-items: center;
   display: flex;
   flex-direction: column;

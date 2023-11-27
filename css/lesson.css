@@ -158,6 +158,7 @@ a:link {
 }
 
 .explanation-popup-wrapper {
+    display: flex;
     visibility: hidden;
     opacity: 0;
     position: absolute;

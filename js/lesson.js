@@ -17,6 +17,8 @@ rightButton.addEventListener('click', () => {
   let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
   let lessonTitle = document.querySelector('.page-title').innerHTML;
   let lessonMap = lessons.get(lessonTitle);
+  leftButton.style.cursor = "pointer";
+  console.log("what")
   
   if (slideNum <= lessonMap.length) {
     slideNumTxt.innerHTML = slideNum;
@@ -24,20 +26,24 @@ rightButton.addEventListener('click', () => {
     leftButton.style.opacity = 1;
   }
 
-  if (slideNum == lessonMap.length)
+  if (slideNum == lessonMap.length) {
     rightButton.style.opacity = .5;
+    rightButton.style.cursor = "default";
+  }
 });
 
 leftButton.addEventListener('click', () => {
   let slideNum = parseInt(slideNumTxt.innerHTML) - 1;
+  rightButton.style.cursor = "pointer";
   if (slideNum > 0) {
     slideNumTxt.innerHTML = slideNum;
     changeSlide (slideNum, 'left')
     rightButton.style.opacity = 1;
   }
-  if (slideNum == 1)
+  if (slideNum == 1) {
     leftButton.style.opacity = .5;
-
+    leftButton.style.cursor = "default";
+  }
 });
 
   
@@ -55,7 +61,7 @@ document.addEventListener('keydown', (event) => {
     let slideNum = parseInt(slideNumTxt.innerHTML) + 1;
     let lessonTitle = document.querySelector('.page-title').innerHTML;
     let lessonMap = lessons.get(lessonTitle);
-  
+    console.log("f")
     if (slideNum <= lessonMap.length) {
       slideNumTxt.innerHTML = slideNum;
       changeSlide(slideNum, 'right');

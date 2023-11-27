@@ -24,7 +24,7 @@ body {
   width: 1309px;
   height: 100px;
   max-width: 100%;
-  margin: 49px 10px 19px 10px;
+  margin: 6em 10px 19px 10px;
   font-family: var(--font-avenir);
   font-size: 25px;
 }
