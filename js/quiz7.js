@@ -63,7 +63,9 @@ checkButton.addEventListener('click', () => {
     window.location.href = 'QuizResults.html';
   }
 
-  if (answer1 != expectedAnswer1) {
+  // Checking answer
+
+  if (Math.abs(answer1 - expectedAnswer1) > 0.01) {
     console.log('wrong'); 
     wrongCounter++;
     if (wrongCounter == 5) {

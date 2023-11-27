@@ -58,13 +58,13 @@ checkButton.addEventListener('click', () => {
   const expectedAnswer1Element = document.getElementById('expectedAnswer1');
   let answer1 = document.getElementById('question4-input1').value;
 
-  console.log(expectedAnswer1);
 
   if (checkButton.textContent == 'Proceed') {
     window.location.href = 'quiz5.html';
   }
 
-  if (answer1 != expectedAnswer1) {
+  // Checking answer
+  if (Math.abs(answer1 - expectedAnswer1) > 0.01) {
     console.log('wrong');
     wrongCounter++;
     if (wrongCounter == 5) {
