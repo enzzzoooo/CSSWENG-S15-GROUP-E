@@ -23,14 +23,6 @@ function deformation(load, length, crossArea, elasticity) {
     return (load * length) / (crossArea * elasticity)
 }
 
-function squareCrossArea(width) {
-    return width * width
-}
-
-function cylinderCrossArea(radius) {
-    return Math.PI * radius * radius
-}
-
 function pythagorean(a, b) {
     return Math.sqrt(a * a + b * b)
 }
