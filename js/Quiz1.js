@@ -6,7 +6,7 @@ let wrongCounter = 0;
 let rightCounter = 0;
 
 // for placing randomv values for calculation
-// might be better to put this in a separate js file and have it consisent throughout all questions 
+// might be better to put this in a separate js file and have it consisent throughout all questions
 function populateValues() {
   const forceValueElement = document.getElementById('forceValue');
   const x1ValueElement = document.getElementById('x1Value');
@@ -22,7 +22,7 @@ function populateValues() {
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
 
- 
+
   forceValueElement.textContent = sessionStorage.getItem('force');
   x1ValueElement.textContent = sessionStorage.getItem('x1');
   x2ValueElement.textContent = sessionStorage.getItem('x2');
@@ -42,7 +42,7 @@ function populateValues() {
   expectedAnswer3 = (parseFloat(sessionStorage.getItem('quiz1_Pcf'))).toFixed(2);
 }
 
-window.addEventListener('load', populateValues); 
+window.addEventListener('load', populateValues);
 
 // Prevent more the 2 decimal places
 document.getElementById('question1-input1').addEventListener('input', function() {
@@ -95,17 +95,17 @@ checkButton.addEventListener('click', () => {
   if (err1 > 0.015 || err2 > 0.015 || err3 > 0.015) {
     console.log('wrong');
     wrongCounter++;
-    if (err1 > 0.01) {
+    if (err1 > 0.015) {
       document.getElementById('question1-input1').style.backgroundColor = 'lightcoral';
     } else {
       document.getElementById('question1-input1').style.backgroundColor = 'lightgreen';
     }
-    if (err2 > 0.01) {
+    if (err2 > 0.015) {
       document.getElementById('question1-input2').style.backgroundColor = 'lightcoral';
     } else {
       document.getElementById('question1-input2').style.backgroundColor = 'lightgreen';
     }
-    if (err3 > 0.01) {
+    if (err3 > 0.015) {
       document.getElementById('question1-input3').style.backgroundColor = 'lightcoral';
     } else {
       document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
@@ -127,6 +127,6 @@ checkButton.addEventListener('click', () => {
 
     console.log('correct');
     checkButton.textContent = 'Proceed';
-    
+
   }
 });

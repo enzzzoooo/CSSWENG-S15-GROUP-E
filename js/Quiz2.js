@@ -6,7 +6,7 @@ let wrongCounter = 0;
 let rightCounter = 0;
 
 // for placing randomv values for calculation
-// might be better to put this in a separate js file and have it consisent throughout all questions 
+// might be better to put this in a separate js file and have it consisent throughout all questions
 function populateValues() {
   const forceValueElement = document.getElementById('forceValue');
   const x1ValueElement = document.getElementById('x1Value');
@@ -21,7 +21,7 @@ function populateValues() {
   const e1ValueElement = document.getElementById('e1Value');
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
-  
+
   // Question 2 Specific
   const question1Input1 = document.getElementById('question1-input1');
   const question1Input2 = document.getElementById('question1-input2');
@@ -30,7 +30,7 @@ function populateValues() {
   question1Input1.value = parseFloat(sessionStorage.getItem('quiz1_Pbg')).toFixed(2);
   question1Input2.value = parseFloat(sessionStorage.getItem('quiz1_Pad')).toFixed(2);
   question1Input3.value = parseFloat(sessionStorage.getItem('quiz1_Pcf')).toFixed(2);
- 
+
   forceValueElement.textContent = sessionStorage.getItem('force');
   x1ValueElement.textContent = sessionStorage.getItem('x1');
   x2ValueElement.textContent = sessionStorage.getItem('x2');
@@ -51,7 +51,7 @@ function populateValues() {
   expectedAnswer3 = (parseFloat(sessionStorage.getItem('quiz2_Dcf')) * 1000).toFixed(2);
 }
 
-window.addEventListener('load', populateValues); 
+window.addEventListener('load', populateValues);
 
 // Prevent more the 2 decimal places
 document.getElementById('question2-input1').addEventListener('input', function() {
@@ -107,17 +107,17 @@ checkButton.addEventListener('click', () => {
   if (err1 > 0.015 || err2 > 0.015 || err3 > 0.015) {
     console.log('wrong');
     wrongCounter++;
-    if (err1 > 0.01) {
+    if (err1 > 0.015) {
       document.getElementById('question2-input1').style.backgroundColor = 'lightcoral';
     } else {
       document.getElementById('question2-input1').style.backgroundColor = 'lightgreen';
     }
-    if (err2 > 0.01) {
+    if (err2 > 0.015) {
       document.getElementById('question2-input2').style.backgroundColor = 'lightcoral';
     } else {
       document.getElementById('question2-input2').style.backgroundColor = 'lightgreen';
     }
-    if (err3 > 0.01) {
+    if (err3 > 0.015) {
       document.getElementById('question2-input3').style.backgroundColor = 'lightcoral';
     } else {
       document.getElementById('question2-input3').style.backgroundColor = 'lightgreen';
@@ -148,6 +148,6 @@ checkButton.addEventListener('click', () => {
 
     console.log('correct');
     checkButton.textContent = 'Proceed';
-    
+
   }
 });
