@@ -60,9 +60,9 @@ x3Element.innerText = "X3 = " + x3 + " m";
 x4Element.innerText = "X4 = " + x4 + " m";
 yElement.innerText = "y = " + y + "m";
 angleElement.innerText = " = " + angle + "°";
-a1Element.innerText= "A1 = " + (area1*1000) + ` \\(mm^2\\)`;
-a2Element.innerText= "A2 = " + (area2*1000) + ` \\(mm^2\\)`;
-a3Element.innerText= "A3 = " + (area3*1000) + ` \\(mm^2\\)`;
+a1Element.innerText= "A1 = " + (area1) + ` \\(mm^2\\)`;
+a2Element.innerText= "A2 = " + (area2) + ` \\(mm^2\\)`;
+a3Element.innerText= "A3 = " + (area3) + ` \\(mm^2\\)`;
 e1Element.innerText = "E1 = " + modulus1 + " GPa";
 e2Element.innerText = "E2 = " + modulus2 + " GPa";
 e3Element.innerText = "E3 = " + modulus3 + " GPa";
@@ -99,13 +99,13 @@ rectangle16.addEventListener("click", function (e) {
             explanationpane1.classList.remove("animation");
             void explanationpane1.offsetWidth;
             explanationpane1.classList.add("animation");
-        } 
+        }
         explanationpane1.classList.add("animation");
         if (explanationpane2.classList.contains("animation")) {
             explanationpane2.classList.remove("animation");
             void explanationpane2.offsetWidth;
             explanationpane2.classList.add("animation");
-        } 
+        }
         explanationpane2.classList.add("animation");
         checkButtonText.innerText = "Proceed";
         rectangle16.style.backgroundColor = "green";
@@ -120,7 +120,7 @@ rectangle16.addEventListener("click", function (e) {
                 explanationpane1.classList.remove("animation");
                 void explanationpane1.offsetWidth;
                 explanationpane1.classList.add("animation");
-            } 
+            }
             explanationpane1.classList.add("animation");
         }
         else if(deltaBGoverSin.checked){
@@ -131,7 +131,7 @@ rectangle16.addEventListener("click", function (e) {
                 explanationpane1.classList.remove("animation");
                 void explanationpane1.offsetWidth;
                 explanationpane1.classList.add("animation");
-            } 
+            }
             explanationpane1.classList.add("animation");
         }
         else {
@@ -142,7 +142,7 @@ rectangle16.addEventListener("click", function (e) {
                 explanationpane1.classList.remove("animation");
                 void explanationpane1.offsetWidth;
                 explanationpane1.classList.add("animation");
-            } 
+            }
             explanationpane1.classList.add("animation");
         }
         if(dBplusdC.checked){
@@ -153,7 +153,7 @@ rectangle16.addEventListener("click", function (e) {
                 explanationpane2.classList.remove("animation");
                 void explanationpane2.offsetWidth;
                 explanationpane2.classList.add("animation");
-            } 
+            }
             explanationpane2.classList.add("animation");
         }
         else if(dC.checked){
@@ -164,7 +164,7 @@ rectangle16.addEventListener("click", function (e) {
                 explanationpane2.classList.remove("animation");
                 void explanationpane2.offsetWidth;
                 explanationpane2.classList.add("animation");
-            } 
+            }
             explanationpane2.classList.add("animation");
         }
         else{
@@ -175,7 +175,7 @@ rectangle16.addEventListener("click", function (e) {
                 explanationpane2.classList.remove("animation");
                 void explanationpane2.offsetWidth;
                 explanationpane2.classList.add("animation");
-            } 
+            }
             explanationpane2.classList.add("animation");
         }
     }
@@ -197,13 +197,13 @@ submit.addEventListener("click", function (e) {
             explanationpane1.classList.remove("animation");
             void explanationpane1.offsetWidth;
             explanationpane1.classList.add("animation");
-        } 
+        }
         explanationpane1.classList.add("animation");
         if (explanationpane2.classList.contains("animation")) {
             explanationpane2.classList.remove("animation");
             void explanationpane2.offsetWidth;
             explanationpane2.classList.add("animation");
-        } 
+        }
         explanationpane2.classList.add("animation");
         checkButtonText.innerText = "Proceed";
         rectangle16.style.backgroundColor = "green";
@@ -218,7 +218,7 @@ submit.addEventListener("click", function (e) {
                 explanationpane1.classList.remove("animation");
                 void explanationpane1.offsetWidth;
                 explanationpane1.classList.add("animation");
-            } 
+            }
             explanationpane1.classList.add("animation");
         }
         else if(deltaBGoverSin.checked){
@@ -229,7 +229,7 @@ submit.addEventListener("click", function (e) {
                 explanationpane1.classList.remove("animation");
                 void explanationpane1.offsetWidth;
                 explanationpane1.classList.add("animation");
-            } 
+            }
             explanationpane1.classList.add("animation");
         }
         else {
@@ -240,7 +240,7 @@ submit.addEventListener("click", function (e) {
                 explanationpane1.classList.remove("animation");
                 void explanationpane1.offsetWidth;
                 explanationpane1.classList.add("animation");
-            } 
+            }
             explanationpane1.classList.add("animation");
         }
         if(dBplusdC.checked){
@@ -251,7 +251,7 @@ submit.addEventListener("click", function (e) {
                 explanationpane2.classList.remove("animation");
                 void explanationpane2.offsetWidth;
                 explanationpane2.classList.add("animation");
-            } 
+            }
             explanationpane2.classList.add("animation");
         }
         else if(dC.checked){
@@ -262,7 +262,7 @@ submit.addEventListener("click", function (e) {
                 explanationpane2.classList.remove("animation");
                 void explanationpane2.offsetWidth;
                 explanationpane2.classList.add("animation");
-            } 
+            }
             explanationpane2.classList.add("animation");
         }
         else{
@@ -273,7 +273,7 @@ submit.addEventListener("click", function (e) {
                 explanationpane2.classList.remove("animation");
                 void explanationpane2.offsetWidth;
                 explanationpane2.classList.add("animation");
-            } 
+            }
             explanationpane2.classList.add("animation");
         }
     }
