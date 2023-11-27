@@ -50,6 +50,7 @@ var e1Element = document.getElementById("e1");
 var e2Element = document.getElementById("e2");
 var e3Element = document.getElementById("e3");
 
+//Displaying the specs of the problem based on the generated values
 force.innerText = "P = " + forceP + "kN";
 x1Element.innerText = "X1 = " + x1 + " m";
 x2Element.innerText = "X2 = " + x2 + " m";
@@ -69,6 +70,33 @@ var checkButtonText = document.getElementById("no1_checkbuttontext");
 var PBG = document.getElementById("P_BG_input");
 var PAD = document.getElementById("P_AD_input");
 var PCF = document.getElementById("P_CF_input");
+
+// Prevent more the 2 decimal places
+PBG.addEventListener('input', function() {
+    if (this.value.includes('.')) {
+        const decimalPlaces = this.value.split('.')[1];
+        if (decimalPlaces && decimalPlaces.length > 2) {
+            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+        }
+    }
+});
+PAD.addEventListener('input', function() {
+    if (this.value.includes('.')) {
+        const decimalPlaces = this.value.split('.')[1];
+        if (decimalPlaces && decimalPlaces.length > 2) {
+            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+        }
+    }
+});
+PCF.addEventListener('input', function() {
+    if (this.value.includes('.')) {
+        const decimalPlaces = this.value.split('.')[1];
+        if (decimalPlaces && decimalPlaces.length > 2) {
+            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+        }
+    }
+});
+
 if (checkButton) {
     checkButton.addEventListener("click", function (e) {
         if(checkButtonText.innerText == "Proceed"){
@@ -77,29 +105,29 @@ if (checkButton) {
         else if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2)) && PAD.value == parseFloat(quiz1_Pad.toFixed(2)) && PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
             checkButtonText.innerText = "Proceed";
             checkButton.style.backgroundColor = "green";
-            PBG.style.backgroundColor = "green";
-            PAD.style.backgroundColor = "green";
-            PCF.style.backgroundColor = "green";
+            PBG.style.backgroundColor = "lightgreen";
+            PAD.style.backgroundColor = "lightgreen";
+            PCF.style.backgroundColor = "lightgreen";
         }
         else{
             checkButtonText.innerText = "Try Again";
             if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2))){
-                PBG.style.backgroundColor = "green";
+                PBG.style.backgroundColor = "lightgreen";
             }
             else{
-                PBG.style.backgroundColor = "red";
+                PBG.style.backgroundColor = "lightcoral";
             }
             if(PAD.value == parseFloat(quiz1_Pad.toFixed(2))){
-                PAD.style.backgroundColor = "green";
+                PAD.style.backgroundColor = "lightgreen";
             }
             else{
-                PAD.style.backgroundColor = "red";
+                PAD.style.backgroundColor = "lightcoral";
             }
             if(PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
-                PCF.style.backgroundColor = "green";
+                PCF.style.backgroundColor = "lightgreen";
             }
             else{
-                PCF.style.backgroundColor = "red";
+                PCF.style.backgroundColor = "lightcoral";
             }
         }
     });
@@ -112,29 +140,29 @@ if (checkButtonText) {
         else if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2)) && PAD.value == parseFloat(quiz1_Pad.toFixed(2)) && PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
             checkButtonText.innerText = "Proceed";
             checkButton.style.backgroundColor = "green";
-            PBG.style.backgroundColor = "green";
-            PAD.style.backgroundColor = "green";
-            PCF.style.backgroundColor = "green";
+            PBG.style.backgroundColor = "lightgreen";
+            PAD.style.backgroundColor = "lightgreen";
+            PCF.style.backgroundColor = "lightgreen";
         }
         else{
             checkButtonText.innerText = "Try Again";
             if(PBG.value == parseFloat(quiz1_Pbg.toFixed(2))){
-                PBG.style.backgroundColor = "green";
+                PBG.style.backgroundColor = "lightgreen";
             }
             else{
-                PBG.style.backgroundColor = "red";
+                PBG.style.backgroundColor = "lightcoral";
             }
             if(PAD.value == parseFloat(quiz1_Pad.toFixed(2))){
-                PAD.style.backgroundColor = "green";
+                PAD.style.backgroundColor = "lightgreen";
             }
             else{
-                PAD.style.backgroundColor = "red";
+                PAD.style.backgroundColor = "lightcoral";
             }
             if(PCF.value == parseFloat(quiz1_Pcf.toFixed(2))){
-                PCF.style.backgroundColor = "green";
+                PCF.style.backgroundColor = "lightgreen";
             }
             else{
-                PCF.style.backgroundColor = "red";
+                PCF.style.backgroundColor = "lightcoral";
             }
         }
     });
