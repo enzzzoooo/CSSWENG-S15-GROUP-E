@@ -4,7 +4,7 @@ let wrongCounter = 0;
 let rightCounter = 0;
 
 // for placing randomv values for calculation
-// might be better to put this in a separate js file and have it consisent throughout all questions 
+// might be better to put this in a separate js file and have it consisent throughout all questions
 function populateValues() {
   const forceValueElement = document.getElementById('forceValue');
   const x1ValueElement = document.getElementById('x1Value');
@@ -20,26 +20,26 @@ function populateValues() {
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
 
- 
-  forceValueElement.textContent = sessionStorage.getItem('force');
-  x1ValueElement.textContent = sessionStorage.getItem('x1');
-  x2ValueElement.textContent = sessionStorage.getItem('x2');
-  x3ValueElement.textContent = sessionStorage.getItem('x3');
-  x4ValueElement.textContent = sessionStorage.getItem('x4');
-  yValueElement.textContent = sessionStorage.getItem('y');
-  thetaValueElement.textContent = sessionStorage.getItem('angle');
-  a1ValueElement.textContent = sessionStorage.getItem('area1');
-  a2ValueElement.textContent = sessionStorage.getItem('area2');
-  a3ValueElement.textContent = sessionStorage.getItem('area3');
-  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
-  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
-  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
 
-  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz4_Dc')) * 1000).toFixed(2);
+  forceValueElement.textContent = myData.force
+  x1ValueElement.textContent = myData.x1
+  x2ValueElement.textContent = myData.x2
+  x3ValueElement.textContent = myData.x3
+  x4ValueElement.textContent = myData.x4
+  yValueElement.textContent = myData.y
+  thetaValueElement.textContent = myData.angle
+  a1ValueElement.textContent = myData.area1
+  a2ValueElement.textContent = myData.area2
+  a3ValueElement.textContent = myData.area3
+  e1ValueElement.textContent = myData.modulus1
+  e2ValueElement.textContent = myData.modulus2
+  e3ValueElement.textContent = myData.modulus3
+
+  expectedAnswer1 = (parseFloat(myData.quiz4_Dc) * 1000).toFixed(2);
 
 }
 
-window.addEventListener('load', populateValues); 
+window.addEventListener('load', populateValues);
 
 // Prevent more the 2 decimal places
 document.getElementById('question4-input1').addEventListener('input', function() {
@@ -90,6 +90,6 @@ checkButton.addEventListener('click', () => {
 
     console.log('correct');
     checkButton.textContent = 'Proceed';
-    
+
   }
 });
