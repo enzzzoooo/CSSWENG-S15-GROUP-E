@@ -76,6 +76,7 @@ var PadElement = document.getElementsByClassName("pad-04kn")[0];
 var PbgElement = document.getElementsByClassName("pbg-6kn")[0];
 var PcfElement = document.getElementsByClassName("pcf-06kn")[0];
 
+//Displaying the specs of the problem based on the generated values
 forcePElement.innerText = "P = " + forceP + "kN";
 x1Element.innerText = "X1 = " + x1 + " m";
 x2Element.innerText = "X2 = " + x2 + " m";
@@ -100,6 +101,33 @@ var deltaBG = document.getElementById("delta_BG_input");
 var deltaAD = document.getElementById("delta_AD_input");
 var deltaCF = document.getElementById("delta_CF_input");
 var i = 0;
+
+// Prevent more the 2 decimal places
+deltaBG.addEventListener('input', function() {
+    if (this.value.includes('.')) {
+        const decimalPlaces = this.value.split('.')[1];
+        if (decimalPlaces && decimalPlaces.length > 2) {
+            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+        }
+    }
+});
+deltaAD.addEventListener('input', function() {
+    if (this.value.includes('.')) {
+        const decimalPlaces = this.value.split('.')[1];
+        if (decimalPlaces && decimalPlaces.length > 2) {
+            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+        }
+    }
+});
+deltaCF.addEventListener('input', function() {
+    if (this.value.includes('.')) {
+        const decimalPlaces = this.value.split('.')[1];
+        if (decimalPlaces && decimalPlaces.length > 2) {
+            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+        }
+    }
+});
+
 if (rectangleButton) {
     rectangleButton.addEventListener("click", function (e) {
         if(checkText.innerText == "Proceed"){
@@ -108,9 +136,9 @@ if (rectangleButton) {
         else if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2)) && deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2)) && deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
             checkText.innerText = "Proceed";
             rectangleButton.style.backgroundColor = "green";
-            deltaBG.style.backgroundColor = "green";
-            deltaAD.style.backgroundColor = "green";
-            deltaCF.style.backgroundColor = "green";
+            deltaBG.style.backgroundColor = "lightgreen";
+            deltaAD.style.backgroundColor = "lightgreen";
+            deltaCF.style.backgroundColor = "lightgreen";
         }
         else{
             i += 1;
@@ -119,22 +147,22 @@ if (rectangleButton) {
                 hintpanel.classList.add("animation");
             }
             if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2))){
-                deltaBG.style.backgroundColor = "green";
+                deltaBG.style.backgroundColor = "lightgreen";
             }
             else{
-                deltaBG.style.backgroundColor = "red";
+                deltaBG.style.backgroundColor = "lightcoral";
             }
             if(deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2))){
-                deltaAD.style.backgroundColor = "green";
+                deltaAD.style.backgroundColor = "lightgreen";
             }
             else{
-                deltaAD.style.backgroundColor = "red";
+                deltaAD.style.backgroundColor = "lightcoral";
             }
             if(deltaCF.value == deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
-                deltaCF.style.backgroundColor = "green";
+                deltaCF.style.backgroundColor = "lightgreen";
             }
             else{
-                deltaCF.style.backgroundColor = "red";
+                deltaCF.style.backgroundColor = "lightcoral";
             }
         }
     });
@@ -148,9 +176,9 @@ if (checkText) {
         else if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2)) && deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2)) && deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
             checkText.innerText = "Proceed";
             rectangleButton.style.backgroundColor = "green";
-            deltaBG.style.backgroundColor = "green";
-            deltaAD.style.backgroundColor = "green";
-            deltaCF.style.backgroundColor = "green";
+            deltaBG.style.backgroundColor = "lightgreen";
+            deltaAD.style.backgroundColor = "lightgreen";
+            deltaCF.style.backgroundColor = "lightgreen";
         }
         else{
             i += 1;
@@ -159,22 +187,22 @@ if (checkText) {
                 hintpanel.classList.add("animation");
             }
             if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2))){
-                deltaBG.style.backgroundColor = "green";
+                deltaBG.style.backgroundColor = "lightgreen";
             }
             else{
-                deltaBG.style.backgroundColor = "red";
+                deltaBG.style.backgroundColor = "lightcoral";
             }
             if(deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2))){
-                deltaAD.style.backgroundColor = "green";
+                deltaAD.style.backgroundColor = "lightgreen";
             }
             else{
-                deltaAD.style.backgroundColor = "red";
+                deltaAD.style.backgroundColor = "lightcoral";
             }
             if(deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
-                deltaCF.style.backgroundColor = "green";
+                deltaCF.style.backgroundColor = "lightgreen";
             }
             else{
-                deltaCF.style.backgroundColor = "red";
+                deltaCF.style.backgroundColor = "lightcoral";
             }
         }
     });

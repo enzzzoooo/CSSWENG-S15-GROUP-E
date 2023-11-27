@@ -52,6 +52,7 @@ var e1Element = document.getElementById("e1panel");
 var e2Element = document.getElementById("e2");
 var e3Element = document.getElementById("e3");
 
+//Displaying the specs of the problem based on the generated values
 forcePElement.innerText = "P = " + forceP + "kN";
 x1Element.innerText = "X1 = " + x1 + " m";
 x2Element.innerText = "X2 = " + x2 + " m";
@@ -85,7 +86,7 @@ var dBplusdC = document.getElementById("dB+dC");
 var dCplusdeltaCF = document.getElementById("dC+deltaCF");
 rectangle16.addEventListener("click", function (e) {
     if(checkButtonText.innerText == "Proceed"){
-        window.location.href = "./Quiz1.html"; /*Change to Quiz no 4*/
+        window.location.href = "./Quiz4.html"; /*Go to Quiz no 4*/
     }
     else if(deltaBGoverSin.checked && dC.checked){
         explanationpane1text.textContent="Correct!";
@@ -183,7 +184,7 @@ rectangle16.addEventListener("click", function (e) {
 var submit = document.getElementById("no3_tryagainbutton");
 submit.addEventListener("click", function (e) {
     if(checkButtonText.innerText == "Proceed"){
-        window.location.href = "./Quiz1.html"; /*Change to Quiz no 4*/
+        window.location.href = "./Quiz4.html"; /*Go to Quiz no 4*/
     }
     else if(deltaBGoverSin.checked && dC.checked){
         explanationpane1text.textContent="Correct!";
