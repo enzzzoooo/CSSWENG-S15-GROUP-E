@@ -35,14 +35,14 @@ function populateValues() {
   e2ValueElement.textContent = sessionStorage.getItem('modulus2');
   e3ValueElement.textContent = sessionStorage.getItem('modulus3');
 
-  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz7_a')) * 1000).toFixed(2);
+  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz4_Dc')) * 1000).toFixed(2);
 
 }
 
 window.addEventListener('load', populateValues); 
 
 // Prevent more the 2 decimal places
-document.getElementById('question7-input1').addEventListener('input', function() {
+document.getElementById('question4-input1').addEventListener('input', function() {
   if (this.value.includes('.')) {
     const decimalPlaces = this.value.split('.')[1];
     if (decimalPlaces && decimalPlaces.length > 2) {
@@ -56,15 +56,16 @@ checkButton.addEventListener('click', () => {
   const hintElement = document.getElementById('quizHint');
   const correntElement = document.getElementById('correctResult');
   const expectedAnswer1Element = document.getElementById('expectedAnswer1');
-  let answer1 = document.getElementById('question7-input1').value;
+  let answer1 = document.getElementById('question4-input1').value;
 
+  console.log(expectedAnswer1);
 
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = 'QuizResults.html';
+    window.location.href = 'quiz5.html';
   }
 
   if (answer1 != expectedAnswer1) {
-    console.log('wrong'); 
+    console.log('wrong');
     wrongCounter++;
     if (wrongCounter == 5) {
       hintElement.classList.add('buff');
@@ -73,7 +74,7 @@ checkButton.addEventListener('click', () => {
         hintElement.classList.add('show');
       }, 500);
     }
-    document.getElementById('question7-input1').style.backgroundColor = 'lightcoral';
+    document.getElementById('question4-input1').style.backgroundColor = 'lightcoral';
   } else {
     correntElement.classList.add('show');
     expectedAnswer1Element.textContent = expectedAnswer1;
@@ -85,7 +86,7 @@ checkButton.addEventListener('click', () => {
       correntElement.classList.add('show');
     }, 500);
 
-    document.getElementById('question7-input1').style.backgroundColor = 'lightgreen';
+    document.getElementById('question4-input1').style.backgroundColor = 'lightgreen';
 
     console.log('correct');
     checkButton.textContent = 'Proceed';
