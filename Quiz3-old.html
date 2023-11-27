@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./css/Quiz.css" />
+    <link rel="stylesheet" href="./css/Quiz3.css" />
+    <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Avenir LT Std:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Optima:wght@400;700&display=swap"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="quiz-3-prompts1">
+      <div class="sandbox1">
+        <div class="consider-two-rigid1">
+          Consider two rigid bars ABC and DEF which are supported by three
+          cables AD, BG, and CF. A downward load P is applied at point E of DEF.
+        </div>
+        <div class="complete-the-deformation-container1">
+          <ul class="complete-the-deformation1">
+            3. Complete the deformation diagram of ABC.
+          </ul>
+        </div>
+        <div class="top-bar1">
+          <img
+          class="hamburger-button"
+          alt=""
+          src="./imgs/image-20230917-225739150-1@2x.png"
+          id="hamburgerButton"
+        />
+        <div class="analysis-of-axial1">
+          Analysis of Axial Deformations in a Structure
+        </div>
+      </div>
+      <div class="image-wrapper">
+        <img src="./imgs/quiz/main-body.png" alt="" class="main-body" />
+      </div>
+      <div class="image3">
+        <div class="freebody-diagram3">
+          <div class="freebody-diagram-child9"></div>
+          <div class="sandbox-label3">
+            <div class="sandbox-label-inner"></div>
+            <div class="figure2">FBD of bar ABC</div>
+          </div>
+          <img
+            class="freebody-diagram-child14"
+            alt=""
+            src="./imgs/vector-7.svg"
+          />
+
+          <img
+            class="freebody-diagram-child15"
+            alt=""
+            src="./imgs/ellipse-5.svg"
+          />
+
+          <img
+            class="freebody-diagram-child16"
+            alt=""
+            src="./imgs/ellipse-5.svg"
+          />
+
+          <img
+            class="freebody-diagram-child17"
+            alt=""
+            src="./imgs/ellipse-8.svg"
+          />
+
+          <img
+            class="freebody-diagram-child18"
+            alt=""
+            src="./imgs/ellipse-5.svg"
+          />
+
+          <img
+            class="freebody-diagram-child19"
+            alt=""
+            src="./imgs/ellipse-9.svg"
+          />
+
+          <div class="freebody-diagram-child20"></div>
+          <div class="freebody-diagram-child21"></div>
+          <div class="rectangle-group">
+            <div class="group-child1"></div>
+            <div class="group-child2"></div>
+            <div class="group-child3"></div>
+          </div>
+          <div class="freebody-diagram-child22"></div>
+          <div class="a6">A</div>
+          <div class="b4">B</div>
+          <div class="b5">B’</div>
+          <div class="c4">C</div>
+          <div class="c5">C’</div>
+        </div>
+        <div class="text-input1">
+          <div class="text-input-inner"></div>
+          <div class="text-input-child1"></div>
+          <div class="div4">1</div>
+          <div class="div5">2</div>
+        </div>
+      </div>
+      <div class="object-settings1">
+        <div class="object-settings-child1"></div>
+        <div class="object-settings-child2"></div>
+        <div class="object-settings-child3"></div>
+        <div class="force1">Force</div>
+        <div class="p-1kn1">P = 1kN</div>
+        <div class="dimensions1">Dimensions</div>
+        <div class="youngs-modulus1">Cross Areas and Young’s modulus</div>
+        <div class="x1-1-container2">
+          <span class="x1-1-container3">
+            <p class="x1-11" id="x1panel">X1 = 1 m</p>
+            <p class="x1-11" id="x2">X2 = 4 m</p>
+            <p class="x1-11" id="x3">X3 = 3 m</p>
+            <p class="x1-11" id="x4">X4 = 2 m</p>
+          </span>
+        </div>
+        <div class="a1-10-container2">
+          <span class="x1-1-container3">
+            <p class="x1-11" id="a1panel">A1 = 10 \(mm^2\)</p>
+            <p class="x1-11" id="a2">A2 = 10 \(mm^2\)</p>
+            <p class="x1-11" id="a3">A3 = 10 \(mm^2\)</p>
+          </span>
+        </div>
+        <div class="e1-200-container2">
+          <span class="x1-1-container3">
+            <p class="x1-11" id="e1panel">E1 = 200 GPa</p>
+            <p class="x1-11" id="e2">E2 = 200 GPa</p>
+            <p class="x1-11" id="e3">E3 = 200 GPa</p>
+          </span>
+        </div>
+        <div class="y-2m-container2">
+          <span class="x1-1-container3">
+            <p class="x1-11" id="y">y = 2m</p>
+            <p class="x1-11">
+              <span class="span1">θ</span>
+              <span id="anglepanel"> = 30°</span>
+            </p>
+          </span>
+        </div>
+      </div>
+      <div class="c-to-c-group">
+        <div class="c-to-c-container1">
+          <ul class="complete-the-deformation1">
+            C to C’
+          </ul>
+        </div>
+        <div class="frame-container">
+          <div class="radiobutton-parent6">
+            <input class="radiobutton9" name="CtoC'" id="dC" type="radio" />
+
+            <div class="dc1">\(d_C\)</div>
+          </div>
+          <div class="radiobutton-parent7">
+            <input class="radiobutton9" name="CtoC'" id="dB+dC" type="radio" />
+
+            <div class="dc1">\(d_B\) + \(d_C\)</div>
+          </div>
+          <div class="radiobutton-parent8">
+            <input class="radiobutton9" name="CtoC'" id="deltaCF" type="radio" />
+
+            <div class="dc1">\(δ_{CF}\)</div>
+          </div>
+          <div class="radiobutton-parent9">
+            <input class="radiobutton9" name="CtoC'" id="dC+deltaCF" type="radio" />
+
+            <div class="dc1">\(d_C\) + \(δ_{CF}\)</div>
+          </div>
+        </div>
+      </div>
+      <div class="b-to-b-group">
+        <div class="c-to-c-container1">
+          <ul class="complete-the-deformation1">
+            B to B’
+          </ul>
+        </div>
+        <div class="frame-parent1">
+          <div class="radiobutton-parent10">
+            <input class="radiobutton9" name="BtoB'" id="deltaBG" type="radio" />
+
+            <div class="dc1">\(δ_{BG}\)</div>
+          </div>
+          <div class="radiobutton-parent11">
+            <input class="radiobutton9" name="BtoB'" id="deltaBG*cos" type="radio" />
+
+            <div class="dc1">\(δ_{BG}\) cos θ</div>
+          </div>
+          <div class="radiobutton-parent12">
+            <input class="radiobutton9" name="BtoB'" id="deltaBG*sin" type="radio" />
+
+            <div class="dc1">\(δ_{BG}\) sin θ</div>
+          </div>
+          <div class="radiobutton-parent13">
+            <input class="radiobutton9" name="BtoB'" id="deltaBG/sin" type="radio" />
+
+            <div class="bg-container">
+              <div class="bg4">\(δ_{BG}\)</div>
+              <div class="sin1">sin θ</div>
+              <img class="frame-inner" alt="" src="./imgs/vector-25.svg" />
+            </div>
+          </div>
+          <div class="radiobutton-parent14">
+            <input class="radiobutton9" name="BtoB'" id="deltaBG/cos" type="radio" />
+
+            <div class="bg-parent1">
+              <div class="bg5">\(δ_{BG}\)</div>
+              <img class="frame-child1" alt="" src="./imgs/vector-26.svg" />
+
+              <div class="bg5">cos θ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="submit1" id="no3_tryagainbutton">
+        <div class="submit-item" id="rectangle16"></div>
+        <b class="try-again1" id="checkButtonText">Check</b>
+      </button>
+      <div id="answerPromptContainer">
+        <div class="frame1">
+          <img class="vector-icon3" id="explanationpane1symbol" alt="" src="./imgs/vector1.svg" />
+        </div>
+        <div class="incorrect-cable-bg-container2" id="explanationpane1text">
+            Incorrect! Cable BG is not oriented vertically.
+        </div>
+      </div>
+      <div id="answerPromptContainer1">
+        <div class="frame1">
+          <img class="vector-icon3" id="explanationpane2symbol" alt="" src="./imgs/vector1.svg" />
+        </div>
+        <div class="incorrect-cable-bg-container2" id="explanationpane2text">
+          Incorrect! The deformation of cable CF does not affect the deflection
+          of point C.
+        </div>
+      </div>
+    </div>
+
+    <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="simulation" id="popupsimulation">Simulation</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <div class="credits" id="popupcredits">Credits</div>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+    </div>
+  </div>
+    <script src="./js/quizvalues.js"></script>
+    <script src="./js/Quiz3.js"></script>
+    <script src="js/hamburger-menu-modal.js"></script>
+  </body>
+</html>

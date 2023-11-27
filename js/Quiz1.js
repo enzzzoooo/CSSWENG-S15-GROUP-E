@@ -1,169 +1,132 @@
-var image202309172257391501Icon = document.getElementById("image202309172257391501Icon");
-if (image202309172257391501Icon) {
-    image202309172257391501Icon.addEventListener("click", function () {
-        var popup = document.getElementById("menuDropdownContainer");
-        if (!popup) return;
-        var popupStyle = popup.style;
-        if (popupStyle) {
-            popupStyle.display = "flex";
-            popupStyle.zIndex = 100;
-            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
-            popupStyle.alignItems = "center";
-            popupStyle.justifyContent = "center";
-        }
-        popup.setAttribute("closable", "");
+const checkButton = document.getElementById('checkButton');
+let expectedAnswer1 = 0;
+let expectedAnswer2 = 0;
+let expectedAnswer3 = 0;
+let wrongCounter = 0;
+let rightCounter = 0;
 
-        var onClick =
-        popup.onClick ||
-        function (e) {
-            if (e.target === popup && popup.hasAttribute("closable")) {
-                popupStyle.display = "none";
-            }
-        };
-        popup.addEventListener("click", onClick);
-    });
+// for placing randomv values for calculation
+// might be better to put this in a separate js file and have it consisent throughout all questions 
+function populateValues() {
+  const forceValueElement = document.getElementById('forceValue');
+  const x1ValueElement = document.getElementById('x1Value');
+  const x2ValueElement = document.getElementById('x2Value');
+  const x3ValueElement = document.getElementById('x3Value');
+  const x4ValueElement = document.getElementById('x4Value');
+  const yValueElement = document.getElementById('yValue');
+  const thetaValueElement = document.getElementById('thetaValue');
+  const a1ValueElement = document.getElementById('a1Value');
+  const a2ValueElement = document.getElementById('a2Value');
+  const a3ValueElement = document.getElementById('a3Value');
+  const e1ValueElement = document.getElementById('e1Value');
+  const e2ValueElement = document.getElementById('e2Value');
+  const e3ValueElement = document.getElementById('e3Value');
+
+ 
+  forceValueElement.textContent = sessionStorage.getItem('force');
+  x1ValueElement.textContent = sessionStorage.getItem('x1');
+  x2ValueElement.textContent = sessionStorage.getItem('x2');
+  x3ValueElement.textContent = sessionStorage.getItem('x3');
+  x4ValueElement.textContent = sessionStorage.getItem('x4');
+  yValueElement.textContent = sessionStorage.getItem('y');
+  thetaValueElement.textContent = sessionStorage.getItem('angle');
+  a1ValueElement.textContent = sessionStorage.getItem('area1');
+  a2ValueElement.textContent = sessionStorage.getItem('area2');
+  a3ValueElement.textContent = sessionStorage.getItem('area3');
+  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
+  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
+  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
+
+  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz1_Pbg'))).toFixed(2);
+  expectedAnswer2 = (parseFloat(sessionStorage.getItem('quiz1_Pad'))).toFixed(2);
+  expectedAnswer3 = (parseFloat(sessionStorage.getItem('quiz1_Pcf'))).toFixed(2);
 }
-var homeButton = document.getElementsByClassName("home")[0];
-var lessonButton = document.getElementById("popuplessonsText");
-if (homeButton) {
-    homeButton.addEventListener("click", function (e) {
-        window.location.href = "./index.html";
-    });
-}
-if (lessonButton) {
-    lessonButton.addEventListener("click", function (e) {
-        window.location.href = "./lesson-picker.html";
-    });
-}
 
-var force = document.getElementsByClassName("p-1kn5")[0];
-var x1Element = document.getElementById("x1");
-var x2Element = document.getElementById("x2");
-var x3Element = document.getElementById("x3");
-var x4Element = document.getElementById("x4");
-var yElement = document.getElementById("y");
-var angleElement = document.getElementById("angle");
-var a1Element = document.getElementById("a1");
-var a2Element = document.getElementById("a2");
-var a3Element = document.getElementById("a3");
-var e1Element = document.getElementById("e1");
-var e2Element = document.getElementById("e2");
-var e3Element = document.getElementById("e3");
-
-//Displaying the specs of the problem based on the generated values
-force.innerText = "P = " + forceP + "kN";
-x1Element.innerText = "X1 = " + x1 + " m";
-x2Element.innerText = "X2 = " + x2 + " m";
-x3Element.innerText = "X3 = " + x3 + " m";
-x4Element.innerText = "X4 = " + x4 + " m";
-yElement.innerText = "y = " + y + "m";
-angleElement.innerText = " = " + angle + "°";
-a1Element.innerText= "A1 = " + (area1) + ` \\(mm^2\\)`;
-a2Element.innerText= "A2 = " + (area2) + ` \\(mm^2\\)`;
-a3Element.innerText= "A3 = " + (area3) + ` \\(mm^2\\)`;
-e1Element.innerText = "E1 = " + modulus1 + " GPa";
-e2Element.innerText = "E2 = " + modulus2 + " GPa";
-e3Element.innerText = "E3 = " + modulus3 + " GPa";
-
-var checkButton = document.getElementById("no1_checkbutton");
-var checkButtonText = document.getElementById("no1_checkbuttontext");
-var PBG = document.getElementById("P_BG_input");
-var PAD = document.getElementById("P_AD_input");
-var PCF = document.getElementById("P_CF_input");
+window.addEventListener('load', populateValues); 
 
 // Prevent more the 2 decimal places
-PBG.addEventListener('input', function() {
-    if (this.value.includes('.')) {
-        const decimalPlaces = this.value.split('.')[1];
-        if (decimalPlaces && decimalPlaces.length > 2) {
-            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
-        }
+document.getElementById('question1-input1').addEventListener('input', function() {
+  if (this.value.includes('.')) {
+    const decimalPlaces = this.value.split('.')[1];
+    if (decimalPlaces && decimalPlaces.length > 2) {
+      this.value = this.value.slice(0, this.value.indexOf('.') + 3);
     }
-});
-PAD.addEventListener('input', function() {
-    if (this.value.includes('.')) {
-        const decimalPlaces = this.value.split('.')[1];
-        if (decimalPlaces && decimalPlaces.length > 2) {
-            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
-        }
-    }
-});
-PCF.addEventListener('input', function() {
-    if (this.value.includes('.')) {
-        const decimalPlaces = this.value.split('.')[1];
-        if (decimalPlaces && decimalPlaces.length > 2) {
-            this.value = this.value.slice(0, this.value.indexOf('.') + 3);
-        }
-    }
+  }
 });
 
-if (checkButton) {
-    checkButton.addEventListener("click", function (e) {
-        if(checkButtonText.innerText == "Proceed"){
-            window.location.href = "./Quiz2.html";
-        }
-        else if((Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02) && (Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02) && (Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02)){
-            checkButtonText.innerText = "Proceed";
-            checkButton.style.backgroundColor = "green";
-            PBG.style.backgroundColor = "lightgreen";
-            PAD.style.backgroundColor = "lightgreen";
-            PCF.style.backgroundColor = "lightgreen";
-        }
-        else{
-            checkButtonText.innerText = "Try Again";
-            if(Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02){
-                PBG.style.backgroundColor = "lightgreen";
-            }
-            else{
-                PBG.style.backgroundColor = "lightcoral";
-            }
-            if(Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02){
-                PAD.style.backgroundColor = "lightgreen";
-            }
-            else{
-                PAD.style.backgroundColor = "lightcoral";
-            }
-            if(Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02){
-                PCF.style.backgroundColor = "lightgreen";
-            }
-            else{
-                PCF.style.backgroundColor = "lightcoral";
-            }
-        }
-    });
-}
-if (checkButtonText) {
-    checkButtonText.addEventListener("click", function (e) {
-        if(checkButtonText.innerText == "Proceed"){
-            window.location.href = "./Quiz2.html";
-        }
-        else if((Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02) && (Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02) && (Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02)){
-            checkButtonText.innerText = "Proceed";
-            checkButton.style.backgroundColor = "green";
-            PBG.style.backgroundColor = "lightgreen";
-            PAD.style.backgroundColor = "lightgreen";
-            PCF.style.backgroundColor = "lightgreen";
-        }
-        else{
-            checkButtonText.innerText = "Try Again";
-            if(Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02){
-                PBG.style.backgroundColor = "lightgreen";
-            }
-            else{
-                PBG.style.backgroundColor = "lightcoral";
-            }
-            if(Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02){
-                PAD.style.backgroundColor = "lightgreen";
-            }
-            else{
-                PAD.style.backgroundColor = "lightcoral";
-            }
-            if(Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02){
-                PCF.style.backgroundColor = "lightgreen";
-            }
-            else{
-                PCF.style.backgroundColor = "lightcoral";
-            }
-        }
-    });
-}
+document.getElementById('question1-input2').addEventListener('input', function() {
+  if (this.value.includes('.')) {
+    const decimalPlaces = this.value.split('.')[1];
+    if (decimalPlaces && decimalPlaces.length > 2) {
+      this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+    }
+  }
+});
+
+
+document.getElementById('question1-input3').addEventListener('input', function() {
+  if (this.value.includes('.')) {
+    const decimalPlaces = this.value.split('.')[1];
+    if (decimalPlaces && decimalPlaces.length > 2) {
+      this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+    }
+  }
+});
+
+
+checkButton.addEventListener('click', () => {
+  const correntElement = document.getElementById('correctResult');
+  const expectedAnswer1Element = document.getElementById('expectedAnswer1');
+  const expectedAnswer2Element = document.getElementById('expectedAnswer2');
+  const expectedAnswer3Element = document.getElementById('expectedAnswer3');
+  let answer1 = document.getElementById('question1-input1').value;
+  let answer2 = document.getElementById('question1-input2').value;
+  let answer3 = document.getElementById('question1-input3').value;
+
+  let err1 = Math.abs(answer1 - expectedAnswer1);
+  let err2 = Math.abs(answer2 - expectedAnswer2);
+  let err3 = Math.abs(answer3 - expectedAnswer3);
+
+  if (checkButton.textContent == 'Proceed') {
+    window.location.href = 'quiz2.html';
+  }
+
+  // Checking answer
+  if (err1 > 0.01 || err2 > 0.01 || err3 > 0.01) {
+    console.log('wrong');
+    wrongCounter++;
+    if (err1 > 0.01) {
+      document.getElementById('question1-input1').style.backgroundColor = 'lightcoral';
+    } else {
+      document.getElementById('question1-input1').style.backgroundColor = 'lightgreen';
+    }
+    if (err2 > 0.01) {
+      document.getElementById('question1-input2').style.backgroundColor = 'lightcoral';
+    } else {
+      document.getElementById('question1-input2').style.backgroundColor = 'lightgreen';
+    }
+    if (err3 > 0.01) {
+      document.getElementById('question1-input3').style.backgroundColor = 'lightcoral';
+    } else {
+      document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
+    }
+  } else {
+    correntElement.classList.add('show');
+    expectedAnswer1Element.textContent = expectedAnswer1;
+    expectedAnswer2Element.textContent = expectedAnswer2;
+    expectedAnswer3Element.textContent = expectedAnswer3;
+    correntElement.classList.add('buff');
+    setTimeout(() => {
+      correntElement.classList.remove('buff');
+      correntElement.classList.add('show');
+    }, 500);
+
+    document.getElementById('question1-input1').style.backgroundColor = 'lightgreen';
+    document.getElementById('question1-input2').style.backgroundColor = 'lightgreen';
+    document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
+
+    console.log('correct');
+    checkButton.textContent = 'Proceed';
+    
+  }
+});
