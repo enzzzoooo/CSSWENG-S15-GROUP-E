@@ -152,7 +152,15 @@
 }
 .d2 {
   left: 0;
-  -webkit-text-stroke: 0.5px #fff;
+  text-shadow:
+    -1px -1px 0 #FFF,
+     0   -1px 0 #FFF,
+     1px -1px 0 #FFF,
+     1px  0   0 #FFF,
+     1px  1px 0 #FFF,
+     0    1px 0 #FFF,
+    -1px  1px 0 #FFF,
+    -1px  0   0 #FFF;
 }
 .a7,
 .b6,
@@ -174,7 +182,15 @@
 }
 .f2 {
   left: 410px;
-  -webkit-text-stroke: 0.5px #fff;
+  text-shadow:
+    -1px -1px 0 #FFF,
+     0   -1px 0 #FFF,
+     1px -1px 0 #FFF,
+     1px  0   0 #FFF,
+     1px  1px 0 #FFF,
+     0    1px 0 #FFF,
+    -1px  1px 0 #FFF,
+    -1px  0   0 #FFF;
 }
 .a7,
 .b6,
