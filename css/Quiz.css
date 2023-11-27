@@ -77,3 +77,10 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   font-size: 20px; 
 }
+
+.hamburger-button {
+  position: absolute;
+  left: 40px;
+  width: 26px;
+  height: 26px;
+}
