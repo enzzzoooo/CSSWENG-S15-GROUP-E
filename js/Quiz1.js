@@ -102,7 +102,7 @@ if (checkButton) {
         if(checkButtonText.innerText == "Proceed"){
             window.location.href = "./Quiz2.html";
         }
-        else if((Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) <= 0.01) && (Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) <= 0.01) && (Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) <= 0.01)){
+        else if((Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02) && (Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02) && (Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02)){
             checkButtonText.innerText = "Proceed";
             checkButton.style.backgroundColor = "green";
             PBG.style.backgroundColor = "lightgreen";
@@ -111,19 +111,19 @@ if (checkButton) {
         }
         else{
             checkButtonText.innerText = "Try Again";
-            if(Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) <= 0.01){
+            if(Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02){
                 PBG.style.backgroundColor = "lightgreen";
             }
             else{
                 PBG.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) <= 0.01){
+            if(Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02){
                 PAD.style.backgroundColor = "lightgreen";
             }
             else{
                 PAD.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) <= 0.01){
+            if(Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02){
                 PCF.style.backgroundColor = "lightgreen";
             }
             else{
@@ -137,7 +137,7 @@ if (checkButtonText) {
         if(checkButtonText.innerText == "Proceed"){
             window.location.href = "./Quiz2.html";
         }
-        else if((Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) <= 0.01) && (Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) <= 0.01) && (Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) <= 0.01)){
+        else if((Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02) && (Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02) && (Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02)){
             checkButtonText.innerText = "Proceed";
             checkButton.style.backgroundColor = "green";
             PBG.style.backgroundColor = "lightgreen";
@@ -146,19 +146,19 @@ if (checkButtonText) {
         }
         else{
             checkButtonText.innerText = "Try Again";
-            if(Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) <= 0.01){
+            if(Math.abs(PBG.value - parseFloat(quiz1_Pbg.toFixed(2))) < 0.02){
                 PBG.style.backgroundColor = "lightgreen";
             }
             else{
                 PBG.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) <= 0.01){
+            if(Math.abs(PAD.value - parseFloat(quiz1_Pad.toFixed(2))) < 0.02){
                 PAD.style.backgroundColor = "lightgreen";
             }
             else{
                 PAD.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) <= 0.01){
+            if(Math.abs(PCF.value - parseFloat(quiz1_Pcf.toFixed(2))) < 0.02){
                 PCF.style.backgroundColor = "lightgreen";
             }
             else{
