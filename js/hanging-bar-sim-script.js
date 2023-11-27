@@ -16,11 +16,6 @@ function deformation(load, length, crossArea, elasticity) {
     return (load * length) / (crossArea * elasticity)
 }
 
-// Finds the cross area of a cylinder based on radius
-function cylinderCrossArea(radius) {
-    return Math.PI * radius * radius
-}
-
 // Finds the answer of the pythagorean formula of A^2 + B^2 = C^2 of two numbers
 function pythagorean(a, b) {
     return Math.sqrt(a * a + b * b)
@@ -412,8 +407,10 @@ function setup() {
     document.getElementById('ropeDistanceAway').setAttribute("disabled", "true");
 }
 
+// Deformation variable. For simulation text displaying the rope length.
 let deformationGrey = 0;
 
+// Calculates the answers and displays the change as an animation.
 function changeDrawing() {
 
     document.getElementById('change-drawing').setAttribute("disabled", "true");
@@ -421,19 +418,19 @@ function changeDrawing() {
     downward = []
     downwardDistances = []
 
+    // Gets the force & distance. Originally had a more broad implementation, but now it just pushes the info of one force.
     forces.forEach(force => {
         downward.push(parseFloat(settings.forceMagnitude))
         downwardDistances.push(settings.forceDistance)
     });
 
 
-
+    // Get the necessary values
     ropeLength = pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall))
-
-    // Changed by Joseph
     ropeForce = internalHanging(parseFloat(settings.forceMagnitude), parseFloat(settings.forceDistance), ropeLength, parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance), parseFloat(settings.ropeAwayFromWall))
     deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), parseFloat(settings.ropeModulus));
 
+    // Modifies the simulation settings (also checks if it is 90 degrees first)
     if(parseFloat(settings.ropeAwayFromWall) == settings.ropeDistance){
         rope.change = deformationGrey;
         yellowBar.change = deformationGrey * parseFloat(settings.yellowBarWidth) / parseFloat(settings.ropeDistance)
@@ -442,11 +439,14 @@ function changeDrawing() {
         rope.change = (yellowBar.change*(rope.end - rope.x)/yellowBar.width)
     }
 
+    // Starts the animation.
     yellowBar.animation = true;
     rope.animation = true;
 
+    // Other necessary values
     deflectionB = rope.change
     deflectionForce = yellowBar.change * parseFloat(settings.forceDistance) / parseFloat(settings.yellowBarWidth);
+
     // Displaying Results
     document.getElementById('forceCable').textContent = ropeForce.toFixed(2) + 'kN';
     document.getElementById('deformationCable').textContent = deformationGrey.toFixed(4) + 'mm';
@@ -457,6 +457,7 @@ function changeDrawing() {
 
     warning = false;
 
+    // If deflection is more than 5 degrees, warning is popped up.
     if (atan2(yellowBar.change, settings.yellowBarWidth) >= 5){
         const popupText = document.getElementById('popup-text');
         popupText.textContent = "Too much deflection. Since the angle generated from the force reaches 5°, this simulation is not entirely accurate. Take the results with that in mind.";
@@ -470,25 +471,30 @@ function changeDrawing() {
         });
     }
 
+    // Makes alert of the information
     alert(
         "Force in Cable: " + ropeForce + "\n" +
         "Deformation Grey: " + deformationGrey + "\n" +
         "Deflection at pivot point: " + deflectionB + "\n" +
         "Deflection at end of bar: " + (yellowBar.change) + "\n" +
-        "Deflection at force point: " + deflectionForce
+        "Deflection at force point: " + deflectionForce + "\n" + "\n" +
+        "Check results tab for all the info."
         );
 
-
+    // Disables play button.
     var button = document.getElementById('change-drawing');
     button.removeEventListener('click', changeDrawing);
     button.classList.add('disabled');
 }
 
+// Resets the simulation.
 function resetDrawing() {
+    // Reenables play button.
     var button = document.getElementById('change-drawing');
     button.addEventListener('click', changeDrawing);
     button.classList.remove('disabled')
 
+    // Empty results page.
     document.getElementById('forceCable').textContent = "";
     document.getElementById('deformationCable').textContent = "";
     document.getElementById('deflectionAtPointB').textContent = "";
@@ -496,9 +502,9 @@ function resetDrawing() {
     document.getElementById('deflectionAtPointForce').textContent = "";
     document.getElementById('angleBar').textContent = "";
 
+    // Reset simulation settings
     yellowBar.change = 0;
     yellowBar.animation = false;
-
     rope.change = 0;
     rope.animation = false;
 
@@ -507,11 +513,12 @@ function resetDrawing() {
 
 }
 
-
+// Easing function for the simulation animation.
 function easing(x) {
     return 1 - Math.pow(1 - x, 3);
 }
 
+// Updates the forces so forces and rope stay inside the lengths of the bar.
 function updateForces(){
     forces.forEach(force => {
         if(force[0].y != yellowBar.y){
@@ -530,6 +537,7 @@ function updateForces(){
 
 }
 
+// Resets all variables related to modifying the simulation when mouse is released.
 function mouseReleased() {
     forces.forEach(force => {
         force[3] = false;
@@ -542,7 +550,7 @@ function mouseReleased() {
     lengthChange = false;
 }
 
-
+// Generates a curly bracket with a given length.
 function curlyBracket(length){
     mid = length/2
     mid += 20
@@ -551,7 +559,9 @@ function curlyBracket(length){
     bezier(20, length/2, 0, length/2, 20, length, 0, length)
 }
 
+// Main function.
 function draw() {
+    // Set up background
     background('#D9D9D9');
 
     fill(wall.color);
@@ -562,10 +572,9 @@ function draw() {
 
 
 
-    // After animation
 
+    // Displays rope and bar. yellowBar.change and rope.change is zero before pressing play.
     resetMatrix()
-
     stroke(yellowBar.color);
     strokeWeight(yellowBar.height/3);
     if(yellowBar.animation && t < 1){
@@ -594,6 +603,7 @@ function draw() {
         line(rope.x, rope.y, rope.end, (yellowBar.y)+(rope.change/3))
     }
 
+    // Add circles for intersections and pivot points.
     strokeWeight(1);
     stroke('#000000');
     fill('#FFFFFF');
@@ -612,15 +622,15 @@ function draw() {
     resetMatrix()
 
 
-    // Force values
-
-
+    // Draws arrows for forces.
     forces.forEach(force => {
         drawArrow(force[0], force[1], force[2], 12)
 
     });
 
+    // Controls force data and force manipulation
     forces.forEach(force => {
+        // Checks if mouse is near the end of the mouse
         if(dist(mouseX, mouseY, force[0].x, force[0].y + force[1].y) < 10){
             strokeWeight(0)
             fill(255, 255, 200, 175);
@@ -631,6 +641,7 @@ function draw() {
             }
         }
 
+        // Checks if the mouse is in the body part of arrow.
         if(mouseX > force[0].x - 7.5 && mouseX < force[0].x + 7.5 &&
             mouseY > force[0].y + 10 && mouseY < force[0].y + force[1].y - 10){
             drawArrow(force[0], force[1], 'tomato', 12);
@@ -641,6 +652,8 @@ function draw() {
                 active = true;
             }
         }
+
+        // If clicked at body part, moves arrow/force to where mouse is dragged.
         if(force[4]){
             drawArrow(force[0], force[1], 'orangered', 12);
             if(mouseX > yellowBar.x && mouseX < yellowBar.x + yellowBar.width){
@@ -654,10 +667,10 @@ function draw() {
                 settings.forceDistance = Math.round((force[0].x - 165) * 20 / settings.snapValue) * settings.snapValue
             }
         }
-
         push()
+
+        // Displays distance of force away from wall.
         if((displayForce || force[4])){
-            // Distance of rope
             resetMatrix()
             strokeWeight(0)
             fill('black')
@@ -676,12 +689,15 @@ function draw() {
         }
         pop()
 
+        // Displays force magnitude
         if(displayData || force[3] || displayForce){
             strokeWeight(0);
             fill(0, 0, 0, 250);
             text(settings.forceMagnitude + " kN", force[0].x + 15, (force[0].y*2 + force[1].y)/2);
         }
 
+        // If clicked at arrow end, changes force based on where mouse is dragged.
+        // Arrow will stop at a certain point, but force can still be changed if dragged further.
         if (force[3]){
             strokeWeight(0);
             fill(255, 255, 200, 250);
@@ -702,9 +718,10 @@ function draw() {
 
     resetMatrix();
 
-    // Change values
+    // Changes to various variables using simulation.
     if(!yellowBar.animation){
-        // Rope Height
+
+        // Checks if mouse is near rope starting point. If clicked, will move it to where mouse is located.
         if(dist(mouseX, mouseY, rope.x, rope.y) < 15){
             strokeWeight(0)
             fill(255, 255, 150, 180);
@@ -729,6 +746,7 @@ function draw() {
                 settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             }
 
+            // If keep to wall is disabled, it can be dragged away from wall.
             if(!keeptoWall){
                 if(mouseX < rope.end && mouseX > yellowBar.x) {
                     rope.x = mouseX;
@@ -744,7 +762,8 @@ function draw() {
         }
 
 
-        // Rope Distance
+        // Checks if mouse is near rope pivot point. If clicked, will move under to where mouse is located.
+        // Will always stick to the bar.
         if(dist(mouseX, mouseY, rope.end, yellowBar.y) < 15){
             strokeWeight(0)
             fill(255, 255, 150, 180);
@@ -771,7 +790,7 @@ function draw() {
         }
 
 
-        // Yellow Bar Change
+        // Checks if mouse is near the bar starting point. If clicked, will move it to where mouse is located.
         if(dist(mouseX, mouseY, yellowBar.x, yellowBar.y) < 20){
             strokeWeight(0)
             fill(255, 255, 150, 180);
@@ -800,7 +819,7 @@ function draw() {
             }
         }
 
-        // Bar Length
+        // Checks if mouse is near the bar end point. If clicked, will change length based on mouse position.
         if(dist(mouseX, mouseY, yellowBar.x + yellowBar.width, yellowBar.y) < 10){
             strokeWeight(0)
             fill(255, 255, 150, 180);
@@ -827,17 +846,10 @@ function draw() {
                 settings.yellowBarWidth = settings.ropeDistance
                 updateForces();
             }
-
-
         }
-
-
-
     }
 
-
-
-    // After animation
+    // After animation, it will display the amount of deflection at the end of bar.
     if(rope.animation && t >= 1){
         resetMatrix()
         strokeWeight(0)
@@ -850,8 +862,10 @@ function draw() {
 
     push()
 
+    // Displaying other data.
+
+    // Length of bar
     if(displayData || lengthChange){
-        //Yellow Bar
         resetMatrix()
         strokeWeight(0)
         fill('black')
@@ -866,8 +880,8 @@ function draw() {
         curlyBracket(dist(yellowBar.x, yellowBar.y, yellowBar.x+yellowBar.width,yellowBar.y+(yellowBar.change/3*easing(t))))
         resetMatrix()
     }
+    // Length of rope.
     if(displayData || barChange || heightChange || distanceChange){
-        // Grey Bar
         resetMatrix()
 
         strokeWeight(0)
@@ -894,7 +908,9 @@ function draw() {
             arc(rope.end, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
             fill('black')
         }
-    } if((displayData || heightChange || distanceChange) && !keeptoWall && settings.ropeAwayFromWall > 0){
+    }
+    // Length or Rope Origin from Wall
+    if((displayData || heightChange || distanceChange) && !keeptoWall && settings.ropeAwayFromWall > 0){
         // Grey Bar
         resetMatrix()
         strokeWeight(0)
@@ -910,9 +926,8 @@ function draw() {
 
         resetMatrix()
     }
-
+    // Height of Rope from Bar
     if(displayData || heightChange || barChange){
-        // Height of rope
         strokeWeight(0)
         fill('white')
         stroke('white')
@@ -928,8 +943,8 @@ function draw() {
         resetMatrix()
     }
 
+    // Distance of Rope Pivot Point Away From Wall
     if(displayData || distanceChange){
-        // Distance of rope
         resetMatrix()
         strokeWeight(0)
         fill('black')
@@ -950,8 +965,7 @@ function draw() {
 
 
 
-    // Added by Joseph
-    // For interacting with elements outside the canvas
+    // Sets the textboxes to the given values of settings.
     givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
     pivotPointBar.value(settings.ropeDistance);
     yellowBarWidth.value(settings.yellowBarWidth);
@@ -1035,6 +1049,7 @@ snapCheckbox.addEventListener('click', () => {
     }
 });
 
+// Keep to wall checkbox. Makes sure the rope is set back to wall if reenabled.
 const wallCheckbox = document.getElementById('wallToggle');
 wallCheckbox.addEventListener('click', () => {
     if (wallCheckbox.checked) {
