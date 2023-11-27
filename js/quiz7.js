@@ -35,11 +35,21 @@ function populateValues() {
   e2ValueElement.textContent = sessionStorage.getItem('modulus2');
   e3ValueElement.textContent = sessionStorage.getItem('modulus3');
 
-  expectedAnswer1 = parseFloat(sessionStorage.getItem('quiz7_a')).toFixed(4);
+  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz7_a')) * 1000).toFixed(2);
 
 }
 
 window.addEventListener('load', populateValues); 
+
+// Prevent more the 2 decimal places
+document.getElementById('question7-input1').addEventListener('input', function() {
+  if (this.value.includes('.')) {
+    const decimalPlaces = this.value.split('.')[1];
+    if (decimalPlaces && decimalPlaces.length > 2) {
+      this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+    }
+  }
+});
 
 
 checkButton.addEventListener('click', () => {
@@ -56,14 +66,15 @@ checkButton.addEventListener('click', () => {
 
   if (answer1 != expectedAnswer1) {
     console.log('wrong'); 
-    if (wrongCounter == 0) {
-      wrongCounter++;
+    wrongCounter++;
+    if (wrongCounter == 5) {
       hintElement.classList.add('buff');
       setTimeout(() => {
         hintElement.classList.remove('buff');
         hintElement.classList.add('show');
       }, 500);
     }
+    document.getElementById('question7-input1').style.backgroundColor = 'lightcoral';
   } else {
     correntElement.classList.add('show');
     expectedAnswer1Element.textContent = expectedAnswer1;

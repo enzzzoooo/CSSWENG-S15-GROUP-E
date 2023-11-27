@@ -1,5 +1,6 @@
 const checkButton = document.getElementById('checkButton');
-let wrongCounter = 0;
+let wrongCounter1 = 0;
+let wrongCounter2 = 0;
 let rightCounter = 0;
 let expectedAnswer1 = 0;
 let expectedAnswer2 = 0;
@@ -38,13 +39,30 @@ function populateValues() {
   e2ValueElement.textContent = sessionStorage.getItem('modulus2');
   e3ValueElement.textContent = sessionStorage.getItem('modulus3');
 
-  expectedAnswer1 = parseFloat(sessionStorage.getItem('quiz6_Dd')).toFixed(4);
-  expectedAnswer2 = parseFloat(sessionStorage.getItem('quiz6_Df')).toFixed(4);
+  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz6_Dd')) * 1000).toFixed(2);
+  expectedAnswer2 = (parseFloat(sessionStorage.getItem('quiz6_Df')) * 1000).toFixed(2);
 }
 
 // uncomment when ready to use
 window.addEventListener('load', populateValues); 
 
+// Prevent more the 2 decimal digit inputs
+document.getElementById('question6-input1').addEventListener('input', function() {
+  if (this.value.includes('.')) {
+    const decimalPlaces = this.value.split('.')[1];
+    if (decimalPlaces && decimalPlaces.length > 2) {
+      this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+    }
+  }
+});
+document.getElementById('question6-input2').addEventListener('input', function() {
+  if (this.value.includes('.')) {
+    const decimalPlaces = this.value.split('.')[1];
+    if (decimalPlaces && decimalPlaces.length > 2) {
+      this.value = this.value.slice(0, this.value.indexOf('.') + 3);
+    }
+  }
+});
 
 
 checkButton.addEventListener('click', () => {
@@ -66,33 +84,31 @@ checkButton.addEventListener('click', () => {
 
     if (answer1 != expectedAnswer1) {
       document.getElementById('question6-input1').style.backgroundColor = 'lightcoral';
+      wrongCounter1++;
     } else {
       document.getElementById('question6-input1').style.backgroundColor = 'lightgreen';
     }
     if (answer2 != expectedAnswer2) {
       document.getElementById('question6-input2').style.backgroundColor = 'lightcoral';
+      wrongCounter2++;
     } else {
       document.getElementById('question6-input2').style.backgroundColor = 'lightgreen';
     }
 
-    if (wrongCounter == 0) {
-      wrongCounter++;
+    if (wrongCounter1 == 5) {
       hintElement.classList.add('buff');
       setTimeout(function() {
         hintElement.classList.remove('buff');
         hintElement.classList.add('show');
       }, 500);
       
-    } else {
-      wrongCounter++;
-      
-      hintElement.classList.add('buff');
+    } 
+    if (wrongCounter2 == 5) {
+      hintElement2.classList.add('buff');
       setTimeout(function() {
+        hintElement2.classList.remove('buff');
         hintElement2.classList.add('show');
-      }, 500)
-
-      hintElement.style.display = 'none';
-      hintElement2.style.display = 'flex';
+      }, 500);
     }
 
   } else {
