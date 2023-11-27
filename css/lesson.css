@@ -1,6 +1,6 @@
 body {
     min-width: 85em;
-    font-family: var(--font-avenir); 
+    font-family: var(--font-avenir);
     }
 
 .lessonTitle {
@@ -79,7 +79,7 @@ body {
 .lessonTxt {
     transition: opacity 0.5s ease-in-out;
 }
-  
+
 .lessonTxt.hide {
     opacity: 0;
 }
@@ -101,7 +101,7 @@ body {
     height: 30px;
     top: 6em;
     left: 3em;
-    display: none;  
+    display: none;
 }
 
 #imageRight {
@@ -147,22 +147,30 @@ a:link {
 }
 
 .needExplain{
-    box-shadow: 2px 2px 2px  rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    padding-top: .4em;
     padding-bottom: .3em;
 }
 
 .needExplain:hover .explanation-popup-wrapper {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
 }
 
 .explanation-popup-wrapper {
-    display: none;
-    position: absolute; 
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
     top: 0;
     bottom: 0;
+    opacity: 0;
     left: 30%;
     align-items: center;
     justify-content: center;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .sim-error-popup {
@@ -194,6 +202,7 @@ a:link {
 }
 .popup-text {
     width: 411px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
