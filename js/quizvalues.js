@@ -77,21 +77,21 @@ function generateValues() {
         console.log("modulus3 = " + modulus3);
 
         quiz1_Pad = parseFloat((x4 * forceP / (x3 + x4)).toFixed(2))
-        quiz1_Pcf = parseFloat(x3 * forceP / (x3 + x4).toFixed(2))
-        quiz1_Pbg = parseFloat(x3 * forceP / (x1 * sin(angle)).toFixed(2))
+        quiz1_Pcf = parseFloat((x3 * forceP / (x3 + x4)).toFixed(2))
+        quiz1_Pbg = parseFloat((x3 * forceP / (x1 * sin(angle))).toFixed(2))
         console.log("quiz1_Pad = " + (quiz1_Pad).toFixed(2))
         console.log("quiz1_Pcf = " + (quiz1_Pcf).toFixed(2))
         console.log("quiz1_Pbg = " + (quiz1_Pbg).toFixed(2))
 
-        quiz2_Dad = parseFloat(quiz1_Pad * y / (area2 * modulus2).toFixed(2))
-        quiz2_Dcf = parseFloat(quiz1_Pcf * y / (area3 * modulus3).toFixed(2))
-        quiz2_Dbg = parseFloat(quiz1_Pbg * x1 / (cos(angle) * area1 * modulus1).toFixed(2))
+        quiz2_Dad = parseFloat((quiz1_Pad * y / (area2 * modulus2)).toFixed(2))
+        quiz2_Dcf = parseFloat((quiz1_Pcf * y / (area3 * modulus3)).toFixed(2))
+        quiz2_Dbg = parseFloat((quiz1_Pbg * x1 / (cos(angle) * area1 * modulus1)).toFixed(2))
         console.log("cos_angle = " + cos(angle))
         console.log("quiz2_Dad = " + (quiz2_Dad * 1000).toFixed(2))
         console.log("quiz2_Dcf = " + (quiz2_Dcf * 1000).toFixed(2))
         console.log("quiz2_Dbg = " + (quiz2_Dbg * 1000).toFixed(2))
 
-        quiz4_Dc = parseFloat((quiz2_Dbg / sin(angle)) * ((x1 + x2) / x1).toFixed(2))
+        quiz4_Dc = parseFloat(((quiz2_Dbg / sin(angle)) * ((x1 + x2) / x1)).toFixed(2))
         console.log("quiz4_Dc = " + (quiz4_Dc * 1000).toFixed(2))
 
         quiz6_Dd = quiz2_Dad
