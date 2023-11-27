@@ -79,9 +79,9 @@ function generateValues() {
         quiz1_Pad = x4 * forceP / (x3 + x4)
         quiz1_Pcf = x3 * forceP / (x3 + x4)
         quiz1_Pbg = x3 * forceP / (x1 * sin(angle))
-        console.log("quiz1_Pad = " + (quiz1_Pad * 1000).toFixed(2))
-        console.log("quiz1_Pcf = " + (quiz1_Pcf * 1000).toFixed(2))
-        console.log("quiz1_Pbg = " + (quiz1_Pbg * 1000).toFixed(2))
+        console.log("quiz1_Pad = " + (quiz1_Pad).toFixed(2))
+        console.log("quiz1_Pcf = " + (quiz1_Pcf).toFixed(2))
+        console.log("quiz1_Pbg = " + (quiz1_Pbg).toFixed(2))
 
         quiz2_Dad = quiz1_Pad * y / (area2 * modulus2)
         quiz2_Dcf = quiz1_Pcf * y / (area3 * modulus3)
@@ -100,7 +100,7 @@ function generateValues() {
 
         quiz7_a = Math.atan(Math.abs(quiz6_Df - quiz6_Dd) / (1000 * (x3 + x4)))
         quiz7_a = quiz7_a * (180 / Math.PI) // to degrees
-        console.log("quiz7_a = " + (quiz7_a * 1000).toFixed(2))
+        console.log("quiz7_a = " + (quiz7_a).toFixed(2))
 
         sessionStorage.setItem("scriptExecuted", true);
         sessionStorage.setItem("forceP", forceP);
@@ -154,4 +154,4 @@ function generateValues() {
     }
 }
 
-generateValues()
+ generateValues()
