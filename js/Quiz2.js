@@ -133,7 +133,7 @@ if (rectangleButton) {
         if(checkText.innerText == "Proceed"){
             window.location.href = "./Quiz3.html";
         }
-        else if((Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01)){
+        else if((Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) < 0.02) && (Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) < 0.02) && (Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) < 0.02)){
             checkText.innerText = "Proceed";
             rectangleButton.style.backgroundColor = "green";
             deltaBG.style.backgroundColor = "lightgreen";
@@ -146,19 +146,19 @@ if (rectangleButton) {
             if(incorrectAttempts >= 5){
                 hintpanel.classList.add("animation");
             }
-            if(Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01){
+            if(Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) < 0.02){
                 deltaBG.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaBG.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01){
+            if(Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) < 0.02){
                 deltaAD.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaAD.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01){
+            if(Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) < 0.02){
                 deltaCF.style.backgroundColor = "lightgreen";
             }
             else{
@@ -173,7 +173,7 @@ if (checkText) {
         if(checkText.innerText == "Proceed"){
             window.location.href = "./Quiz3.html";
         }
-        else if((Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01)){
+        else if((Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) < 0.02) && (Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) < 0.02) && (Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) < 0.02)){
             checkText.innerText = "Proceed";
             rectangleButton.style.backgroundColor = "green";
             deltaBG.style.backgroundColor = "lightgreen";
@@ -186,19 +186,19 @@ if (checkText) {
             if(incorrectAttempts >= 5){
                 hintpanel.classList.add("animation");
             }
-            if(Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01){
+            if(Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) < 0.02){
                 deltaBG.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaBG.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01){
+            if(Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) < 0.02){
                 deltaAD.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaAD.style.backgroundColor = "lightcoral";
             }
-            if(Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01){
+            if(Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) < 0.02){
                 deltaCF.style.backgroundColor = "lightgreen";
             }
             else{
