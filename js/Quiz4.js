@@ -60,7 +60,7 @@ checkButton.addEventListener('click', () => {
 
 
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = '../Quiz5.html';
+    window.location.href = './Quiz5.html';
   }
 
   // Checking answer
