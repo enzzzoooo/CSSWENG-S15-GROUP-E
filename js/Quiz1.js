@@ -22,24 +22,23 @@ function populateValues() {
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
 
+  forceValueElement.textContent = myData.forceP
+  x1ValueElement.textContent = myData.x1
+  x2ValueElement.textContent = myData.x2
+  x3ValueElement.textContent = myData.x3
+  x4ValueElement.textContent = myData.x4
+  yValueElement.textContent = myData.y
+  thetaValueElement.textContent = myData.angle
+  a1ValueElement.textContent = myData.area1
+  a2ValueElement.textContent = myData.area2
+  a3ValueElement.textContent = myData.area3
+  e1ValueElement.textContent = myData.modulus1
+  e2ValueElement.textContent = myData.modulus2
+  e3ValueElement.textContent = myData.modulus3
 
-  forceValueElement.textContent = sessionStorage.getItem('force');
-  x1ValueElement.textContent = sessionStorage.getItem('x1');
-  x2ValueElement.textContent = sessionStorage.getItem('x2');
-  x3ValueElement.textContent = sessionStorage.getItem('x3');
-  x4ValueElement.textContent = sessionStorage.getItem('x4');
-  yValueElement.textContent = sessionStorage.getItem('y');
-  thetaValueElement.textContent = sessionStorage.getItem('angle');
-  a1ValueElement.textContent = sessionStorage.getItem('area1');
-  a2ValueElement.textContent = sessionStorage.getItem('area2');
-  a3ValueElement.textContent = sessionStorage.getItem('area3');
-  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
-  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
-  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
-
-  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz1_Pbg'))).toFixed(2);
-  expectedAnswer2 = (parseFloat(sessionStorage.getItem('quiz1_Pad'))).toFixed(2);
-  expectedAnswer3 = (parseFloat(sessionStorage.getItem('quiz1_Pcf'))).toFixed(2);
+  expectedAnswer1 = (parseFloat(myData.quiz1_Pbg)).toFixed(2);
+  expectedAnswer2 = (parseFloat(myData.quiz1_Pad)).toFixed(2);
+  expectedAnswer3 = (parseFloat(myData.quiz1_Pcf)).toFixed(2);
 }
 
 window.addEventListener('load', populateValues);

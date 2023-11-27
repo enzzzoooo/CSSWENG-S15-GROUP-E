@@ -18,25 +18,25 @@ function populateValues() {
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
 
- 
-  forceValueElement.textContent = sessionStorage.getItem('force');
-  x1ValueElement.textContent = sessionStorage.getItem('x1');
-  x2ValueElement.textContent = sessionStorage.getItem('x2');
-  x3ValueElement.textContent = sessionStorage.getItem('x3');
-  x4ValueElement.textContent = sessionStorage.getItem('x4');
-  yValueElement.textContent = sessionStorage.getItem('y');
-  thetaValueElement.textContent = sessionStorage.getItem('angle');
-  a1ValueElement.textContent = sessionStorage.getItem('area1');
-  a2ValueElement.textContent = sessionStorage.getItem('area2');
-  a3ValueElement.textContent = sessionStorage.getItem('area3');
-  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
-  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
-  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
+
+  forceValueElement.textContent = myData.force
+  x1ValueElement.textContent = myData.x1
+  x2ValueElement.textContent = myData.x2
+  x3ValueElement.textContent = myData.x3
+  x4ValueElement.textContent = myData.x4
+  yValueElement.textContent = myData.y
+  thetaValueElement.textContent = myData.angle
+  a1ValueElement.textContent = myData.area1
+  a2ValueElement.textContent = myData.area2
+  a3ValueElement.textContent = myData.area3
+  e1ValueElement.textContent = myData.modulus1
+  e2ValueElement.textContent = myData.modulus2
+  e3ValueElement.textContent = myData.modulus3
 
 
 }
 
-window.addEventListener('load', populateValues); 
+window.addEventListener('load', populateValues);
 
 
 checkButton.addEventListener('click', () => {
@@ -57,17 +57,17 @@ checkButton.addEventListener('click', () => {
   if (checkButton.textContent == 'Proceed') {
     window.location.href = 'quiz4.html';
   }
-  
+
   if (input1) {
     input1 = input1.value;
   } else {
-    input1 = null; 
+    input1 = null;
   }
-  
+
   if (input2) {
     input2 = input2.value;
   } else {
-    input2 = null; 
+    input2 = null;
   }
 
   if (input1 == 'option1') {
@@ -124,7 +124,7 @@ checkButton.addEventListener('click', () => {
   }
 
 
-  
+
   console.log(input1);
   console.log(input2);
 });

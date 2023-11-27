@@ -7,7 +7,7 @@ let expectedAnswer2 = 0;
 
 
 // for placing randomv values for calculation
-// might be better to put this in a separate js file and have it consisent throughout all questions 
+// might be better to put this in a separate js file and have it consisent throughout all questions
 function populateValues() {
   const forceValueElement = document.getElementById('forceValue');
   const x1ValueElement = document.getElementById('x1Value');
@@ -25,26 +25,26 @@ function populateValues() {
 
 
 
-  forceValueElement.textContent = sessionStorage.getItem('force');
-  x1ValueElement.textContent = sessionStorage.getItem('x1');
-  x2ValueElement.textContent = sessionStorage.getItem('x2');
-  x3ValueElement.textContent = sessionStorage.getItem('x3');
-  x4ValueElement.textContent = sessionStorage.getItem('x4');
-  yValueElement.textContent = sessionStorage.getItem('y');
-  thetaValueElement.textContent = sessionStorage.getItem('angle');
-  a1ValueElement.textContent = sessionStorage.getItem('area1');
-  a2ValueElement.textContent = sessionStorage.getItem('area2');
-  a3ValueElement.textContent = sessionStorage.getItem('area3');
-  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
-  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
-  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
+  forceValueElement.textContent = myData.force
+  x1ValueElement.textContent = myData.x1
+  x2ValueElement.textContent = myData.x2
+  x3ValueElement.textContent = myData.x3
+  x4ValueElement.textContent = myData.x4
+  yValueElement.textContent = myData.y
+  thetaValueElement.textContent = myData.angle
+  a1ValueElement.textContent = myData.area1
+  a2ValueElement.textContent = myData.area2
+  a3ValueElement.textContent = myData.area3
+  e1ValueElement.textContent = myData.modulus1
+  e2ValueElement.textContent = myData.modulus2
+  e3ValueElement.textContent = myData.modulus3
 
-  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz6_Dd')) * 1000).toFixed(2);
-  expectedAnswer2 = (parseFloat(sessionStorage.getItem('quiz6_Df')) * 1000).toFixed(2);
+  expectedAnswer1 = (parseFloat(myData.quiz6_Dd) * 1000).toFixed(2);
+  expectedAnswer2 = (parseFloat(myData.quiz6_Df) * 1000).toFixed(2);
 }
 
 // uncomment when ready to use
-window.addEventListener('load', populateValues); 
+window.addEventListener('load', populateValues);
 
 // Prevent more the 2 decimal digit inputs
 document.getElementById('question6-input1').addEventListener('input', function() {
@@ -83,7 +83,7 @@ checkButton.addEventListener('click', () => {
   // Checking answer
 
   if (err1 > 0.015 || err2 > 0.015) {
-    console.log('wrong'); 
+    console.log('wrong');
 
     if (err1 > 0.015) {
       document.getElementById('question6-input1').style.backgroundColor = 'lightcoral';
@@ -104,8 +104,8 @@ checkButton.addEventListener('click', () => {
         hintElement.classList.remove('buff');
         hintElement.classList.add('show');
       }, 500);
-      
-    } 
+
+    }
     if (wrongCounter2 == 5) {
       hintElement2.classList.add('buff');
       setTimeout(function() {
@@ -138,7 +138,7 @@ checkButton.addEventListener('click', () => {
         correntElement.classList.add('show');
       }, 500);
     }
-    
+
     console.log('correct');
     checkButton.textContent = 'Proceed';
 
