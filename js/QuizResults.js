@@ -1,3 +1,3 @@
 window.addEventListener('beforeunload', function() {
-  sessionStorage.clear();
+  this.window.name = '';
 });

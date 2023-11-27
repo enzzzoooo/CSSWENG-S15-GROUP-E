@@ -100,7 +100,7 @@ checkButton.addEventListener('click', () => {
   console.log(expectedAnswer1, expectedAnswer2, expectedAnswer3);
 
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = './Quiz3.html';
+    window.location.href = 'Quiz3.html';
   }
 
   // Checking answer

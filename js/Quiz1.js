@@ -87,7 +87,7 @@ checkButton.addEventListener('click', () => {
   let err3 = Math.abs(answer3 - expectedAnswer3);
 
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = './Quiz2.html';
+    window.location.href = 'Quiz2.html';
   }
 
   // Checking answer

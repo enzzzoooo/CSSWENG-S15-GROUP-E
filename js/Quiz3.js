@@ -55,7 +55,7 @@ checkButton.addEventListener('click', () => {
   input2 = document.querySelector('#question3-input2 input[type="radio"]:checked');
 
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = './Quiz4.html';
+    window.location.href = 'Quiz4.html';
   }
 
   if (input1) {
