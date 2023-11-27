@@ -77,18 +77,18 @@ checkButton.addEventListener('click', () => {
     window.location.href = 'quiz7.html';
   }
 
-  console.log(expectedAnswer1);
-  console.log(expectedAnswer2); 
-  if (answer1 != expectedAnswer1 || answer2 != expectedAnswer2) {
+  // Checking answer
+
+  if (Math.abs(answer1 - expectedAnswer1) > 0.01 || Math.abs(answer2 - expectedAnswer2) > 0.01) {
     console.log('wrong'); 
 
-    if (answer1 != expectedAnswer1) {
+    if (Math.abs(answer1 - expectedAnswer1) > 0.01) {
       document.getElementById('question6-input1').style.backgroundColor = 'lightcoral';
       wrongCounter1++;
     } else {
       document.getElementById('question6-input1').style.backgroundColor = 'lightgreen';
     }
-    if (answer2 != expectedAnswer2) {
+    if (Math.abs(answer2 - expectedAnswer2) > 0.01) {
       document.getElementById('question6-input2').style.backgroundColor = 'lightcoral';
       wrongCounter2++;
     } else {
