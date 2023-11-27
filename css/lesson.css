@@ -1,8 +1,7 @@
 body {
     min-width: 85em;
     font-family: var(--font-avenir); 
-    position: absolute;
-}
+    }
 
 .lessonTitle {
     margin-top: 2.75em;
