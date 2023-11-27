@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./css/quiz6.css"/>
 
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <title>Question 7</title>
+  <title>Question 6</title>
 </head>
 <body>
   <header>
@@ -75,7 +75,7 @@
     </div>
     <div class="quiz-question-container">
       <div class="quiz-question">
-        6. What are the deflections of points D and F? (Type your answers in the textboxes.)
+        6. What are the deflections of points D and F? (Type your answers in the textboxes. Round to 4 decimal places.)
       </div>
     </div>
     <div class="quiz-answer-container">
@@ -98,6 +98,13 @@
           <b>Hint!</b> What is the only cable that is connected to point D? Will the deflection point of C affect that of point F?
         </div>
       </div>
+      <div class="quiz-hint correct" id="correctResult" hidden>
+        <img src="./imgs/quiz/quiz-correct-icon.png" id="hintIcon">
+
+        <div class="hint-info">
+          <b>Correct!</b> The deflection of point D is <span id="expectedAnswer1">0</span> m and the deflection of point F is <span id="expectedAnswer2">0</span> m.
+        </div>  
+      </div>
 
       <button id="checkButton">Check</button>
     </div>
@@ -105,17 +112,12 @@
 
   <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
     <div class="menu-dropdown">
-      <div class="home">Home</div>
       <div class="simulation" id="popupsimulation">Simulation</div>
       <div class="lessons1" id="popuplessons">Lessons</div>
-      <div class="resources">Resources</div>
       <div class="credits" id="popupcredits">Credits</div>
       <div class="menu-dropdown-child"></div>
       <div class="menu-dropdown-item"></div>
       <div class="menu-dropdown-inner"></div>
-      <div class="line-div"></div>
-      <div class="menu-dropdown-child1"></div>
-      <div class="credits-line-div"></div>
     </div>
   </div>
 

@@ -1,6 +1,7 @@
 const checkButton = document.getElementById('checkButton');
-let expectedAngle = 10;
-
+let expectedAnswer1 = 0;
+let wrongCounter = 0;
+let rightCounter = 0;
 
 // for placing randomv values for calculation
 // might be better to put this in a separate js file and have it consisent throughout all questions 
@@ -20,49 +21,64 @@ function populateValues() {
   const e3ValueElement = document.getElementById('e3Value');
 
  
-  forceValueElement.textContent = 'value';
-  x1ValueElement.textContent = 'value';
-  x2ValueElement.textContent = 'value';
-  x3ValueElement.textContent = 'value';
-  x4ValueElement.textContent = 'value';
-  yValueElement.textContent = 'value';
-  thetaValueElement.textContent = 'value';
-  a1ValueElement.textContent = 'value';
-  a2ValueElement.textContent = 'value';
-  a3ValueElement.textContent = 'value';
-  e1ValueElement.textContent = 'value';
-  e2ValueElement.textContent = 'value';
-  e3ValueElement.textContent = 'value';
+  forceValueElement.textContent = sessionStorage.getItem('force');
+  x1ValueElement.textContent = sessionStorage.getItem('x1');
+  x2ValueElement.textContent = sessionStorage.getItem('x2');
+  x3ValueElement.textContent = sessionStorage.getItem('x3');
+  x4ValueElement.textContent = sessionStorage.getItem('x4');
+  yValueElement.textContent = sessionStorage.getItem('y');
+  thetaValueElement.textContent = sessionStorage.getItem('angle');
+  a1ValueElement.textContent = sessionStorage.getItem('area1');
+  a2ValueElement.textContent = sessionStorage.getItem('area2');
+  a3ValueElement.textContent = sessionStorage.getItem('area3');
+  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
+  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
+  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
+
+  expectedAnswer1 = parseFloat(sessionStorage.getItem('quiz7_a')).toFixed(4);
+
 }
 
-// uncomment when ready to use
-// window.addEventListener('load', populateValues); 
+window.addEventListener('load', populateValues); 
 
-
-
-
-
-
-// calculate the angle, can remove deflectionF, and deflectionD and caculate value inside function instead.
-function calculateAngle(deflectionF, deflectionD, x3, x4) {
-  let numerator = Math.abs(deflectionF - deflectionD);
-  let result = numerator / (1000 * (x3 + x4));
-  let angle = Math.atan(result);
-  
-  return angle;
-}
 
 checkButton.addEventListener('click', () => {
-  let answer = document.getElementById('question7-input1').value;
-  answer = answer;
-  if (answer != expectedAngle) {
+  const hintElement = document.getElementById('quizHint');
+  const correntElement = document.getElementById('correctResult');
+  const expectedAnswer1Element = document.getElementById('expectedAnswer1');
+  let answer1 = document.getElementById('question7-input1').value;
+
+  console.log(expectedAnswer1);
+
+  if (checkButton.textContent == 'Proceed') {
+    window.location.href = 'QuizResults.html';
+  }
+
+  if (answer1 != expectedAnswer1) {
     console.log('wrong'); 
-    const hintElement = document.getElementById('quizHint');
-    hintElement.style.display = 'flex';
-
+    if (wrongCounter == 0) {
+      wrongCounter++;
+      hintElement.classList.add('buff');
+      setTimeout(() => {
+        hintElement.classList.remove('buff');
+        hintElement.classList.add('show');
+      }, 500);
+    }
   } else {
-    console.log('correct');
-    
+    correntElement.classList.add('show');
+    expectedAnswer1Element.textContent = expectedAnswer1;
+    hintElement.classList.remove('show');
+    hintElement.classList.remove('buff');
+    correntElement.classList.add('buff');
+    setTimeout(() => {
+      correntElement.classList.remove('buff');
+      correntElement.classList.add('show');
+    }, 500);
 
+    document.getElementById('question7-input1').style.backgroundColor = 'lightgreen';
+
+    console.log('correct');
+    checkButton.textContent = 'Proceed';
+    
   }
 });
