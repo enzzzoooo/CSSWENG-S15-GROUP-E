@@ -1,6 +1,41 @@
 const checkButton = document.getElementById('checkButton');
 let selectedAnswer;
 
+
+// for placing randomv values for calculation
+// might be better to put this in a separate js file and have it consisent throughout all questions 
+function populateValues() {
+  const forceValueElement = document.getElementById('forceValue');
+  const x1ValueElement = document.getElementById('x1Value');
+  const x2ValueElement = document.getElementById('x2Value');
+  const x3ValueElement = document.getElementById('x3Value');
+  const x4ValueElement = document.getElementById('x4Value');
+  const yValueElement = document.getElementById('yValue');
+  const thetaValueElement = document.getElementById('thetaValue');
+  const a1ValueElement = document.getElementById('a1Value');
+  const a2ValueElement = document.getElementById('a2Value');
+  const a3ValueElement = document.getElementById('a3Value');
+  const e1ValueElement = document.getElementById('e1Value');
+  const e2ValueElement = document.getElementById('e2Value');
+  const e3ValueElement = document.getElementById('e3Value');
+
+  forceValueElement.textContent = sessionStorage.getItem('force');
+  x1ValueElement.textContent = sessionStorage.getItem('x1');
+  x2ValueElement.textContent = sessionStorage.getItem('x2');
+  x3ValueElement.textContent = sessionStorage.getItem('x3');
+  x4ValueElement.textContent = sessionStorage.getItem('x4');
+  yValueElement.textContent = sessionStorage.getItem('y');
+  thetaValueElement.textContent = sessionStorage.getItem('angle');
+  a1ValueElement.textContent = sessionStorage.getItem('area1');
+  a2ValueElement.textContent = sessionStorage.getItem('area2');
+  a3ValueElement.textContent = sessionStorage.getItem('area3');
+  e1ValueElement.textContent = sessionStorage.getItem('modulus1');
+  e2ValueElement.textContent = sessionStorage.getItem('modulus2');
+  e3ValueElement.textContent = sessionStorage.getItem('modulus3');
+}
+
+window.addEventListener('load', populateValues); 
+
 const choiceElements = document.getElementsByClassName('question-choice-wrapper');
 for (let i = 0; i < choiceElements.length; i++) {
   choiceElements[i].addEventListener('click', function() {
