@@ -827,6 +827,13 @@
   color: var(--color-black);
   font-family: var(--font-avenir);
 }
+.image-wrapper {
+  position: absolute;
+  top: 246px;
+  left: 65px;
+  width: 822px;
+  height: 534px;
+}
 .home {
   position: absolute;
   top: 0;

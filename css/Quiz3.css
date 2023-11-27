@@ -718,9 +718,9 @@
 }
 .object-settings1 {
   position: absolute;
-  height: 32.98%;
+  height: 534px;
   width: 31.74%;
-  top: 15.04%;
+  top: 246px;
   right: 4.51%;
   bottom: 51.97%;
   left: 63.75%;
@@ -1038,6 +1038,13 @@
   font-size: var(--font-size-6xl);
   color: var(--color-black);
   font-family: var(--font-avenir);
+}
+.image-wrapper {
+  position: absolute;
+  top: 246px;
+  left: 65px;
+  width: 822px;
+  height: 534px;
 }
 .home {
   position: absolute;
