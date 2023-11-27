@@ -35,7 +35,7 @@ function populateValues() {
   e2ValueElement.textContent = sessionStorage.getItem('modulus2');
   e3ValueElement.textContent = sessionStorage.getItem('modulus3');
 
-  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz7_a')) * 1000).toFixed(2);
+  expectedAnswer1 = (parseFloat(sessionStorage.getItem('quiz7_a'))).toFixed(2);
 
 }
 
