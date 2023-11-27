@@ -69,9 +69,12 @@ checkButton.addEventListener('click', () => {
   const hintElement = document.getElementById('quizHint1');
   const hintElement2 = document.getElementById('quizHint2');
 
-
   let answer1 = document.getElementById('question6-input1').value;
   let answer2 = document.getElementById('question6-input2').value;
+
+  // margin of err
+  let err1 = Math.abs(answer1 - expectedAnswer1);
+  let err2 = Math.abs(answer2 - expectedAnswer2);
 
   if (checkButton.textContent == 'Proceed') {
     window.location.href = 'quiz7.html';
@@ -79,16 +82,16 @@ checkButton.addEventListener('click', () => {
 
   // Checking answer
 
-  if (Math.abs(answer1 - expectedAnswer1) > 0.01 || Math.abs(answer2 - expectedAnswer2) > 0.01) {
+  if (err1 > 0.015 || err2 > 0.015) {
     console.log('wrong'); 
 
-    if (Math.abs(answer1 - expectedAnswer1) > 0.01) {
+    if (err1 > 0.015) {
       document.getElementById('question6-input1').style.backgroundColor = 'lightcoral';
       wrongCounter1++;
     } else {
       document.getElementById('question6-input1').style.backgroundColor = 'lightgreen';
     }
-    if (Math.abs(answer2 - expectedAnswer2) > 0.01) {
+    if (err2 > 0.015) {
       document.getElementById('question6-input2').style.backgroundColor = 'lightcoral';
       wrongCounter2++;
     } else {

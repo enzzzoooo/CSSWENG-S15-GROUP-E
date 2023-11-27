@@ -64,7 +64,7 @@ checkButton.addEventListener('click', () => {
   }
 
   // Checking answer
-  if (Math.abs(answer1 - expectedAnswer1) > 0.01) {
+  if (Math.abs(answer1 - expectedAnswer1) > 0.015) {
     console.log('wrong');
     wrongCounter++;
     if (wrongCounter == 5) {

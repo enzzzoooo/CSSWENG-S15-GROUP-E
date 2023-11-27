@@ -92,7 +92,7 @@ checkButton.addEventListener('click', () => {
   }
 
   // Checking answer
-  if (err1 > 0.01 || err2 > 0.01 || err3 > 0.01) {
+  if (err1 > 0.015 || err2 > 0.015 || err3 > 0.015) {
     console.log('wrong');
     wrongCounter++;
     if (err1 > 0.01) {
