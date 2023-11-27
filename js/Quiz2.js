@@ -100,7 +100,7 @@ var checkText = document.getElementById("checkText");
 var deltaBG = document.getElementById("delta_BG_input");
 var deltaAD = document.getElementById("delta_AD_input");
 var deltaCF = document.getElementById("delta_CF_input");
-var i = 0;
+var incorrectAttempts = 0;
 
 // Prevent more the 2 decimal places
 deltaBG.addEventListener('input', function() {
@@ -133,7 +133,7 @@ if (rectangleButton) {
         if(checkText.innerText == "Proceed"){
             window.location.href = "./Quiz3.html";
         }
-        else if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2)) && deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2)) && deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
+        else if((Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01)){
             checkText.innerText = "Proceed";
             rectangleButton.style.backgroundColor = "green";
             deltaBG.style.backgroundColor = "lightgreen";
@@ -141,24 +141,24 @@ if (rectangleButton) {
             deltaCF.style.backgroundColor = "lightgreen";
         }
         else{
-            i += 1;
+            incorrectAttempts += 1;
             checkText.innerText = "Try Again";
-            if(i >= 5){
+            if(incorrectAttempts >= 5){
                 hintpanel.classList.add("animation");
             }
-            if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2))){
+            if(Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01){
                 deltaBG.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaBG.style.backgroundColor = "lightcoral";
             }
-            if(deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2))){
+            if(Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01){
                 deltaAD.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaAD.style.backgroundColor = "lightcoral";
             }
-            if(deltaCF.value == deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
+            if(Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01){
                 deltaCF.style.backgroundColor = "lightgreen";
             }
             else{
@@ -173,7 +173,7 @@ if (checkText) {
         if(checkText.innerText == "Proceed"){
             window.location.href = "./Quiz3.html";
         }
-        else if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2)) && deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2)) && deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
+        else if((Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01) && (Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01)){
             checkText.innerText = "Proceed";
             rectangleButton.style.backgroundColor = "green";
             deltaBG.style.backgroundColor = "lightgreen";
@@ -181,24 +181,24 @@ if (checkText) {
             deltaCF.style.backgroundColor = "lightgreen";
         }
         else{
-            i += 1;
+            incorrectAttempts += 1;
             checkText.innerText = "Try Again";
-            if(i >= 5){
+            if(incorrectAttempts >= 5){
                 hintpanel.classList.add("animation");
             }
-            if(deltaBG.value == parseFloat((quiz2_Dbg * 1000).toFixed(2))){
+            if(Math.abs(deltaBG.value - parseFloat((quiz2_Dbg * 1000).toFixed(2))) <= 0.01){
                 deltaBG.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaBG.style.backgroundColor = "lightcoral";
             }
-            if(deltaAD.value == parseFloat((quiz2_Dad * 1000).toFixed(2))){
+            if(Math.abs(deltaAD.value - parseFloat((quiz2_Dad * 1000).toFixed(2))) <= 0.01){
                 deltaAD.style.backgroundColor = "lightgreen";
             }
             else{
                 deltaAD.style.backgroundColor = "lightcoral";
             }
-            if(deltaCF.value == parseFloat((quiz2_Dcf * 1000).toFixed(2))){
+            if(Math.abs(deltaCF.value - parseFloat((quiz2_Dcf * 1000).toFixed(2))) <= 0.01){
                 deltaCF.style.backgroundColor = "lightgreen";
             }
             else{
