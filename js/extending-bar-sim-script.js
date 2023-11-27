@@ -261,7 +261,7 @@ function setup() {
         settings.smallBarModulus = 2;
     });
 
-    forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), 'coral']
+    forces[0] = [createVector(bigBar.x + bigBar.width, bigBar.y),  createVector(10 * 5, 0), "#EB7911"]
 
     textFont(font);
     textSize(20);
@@ -647,7 +647,7 @@ function easing(x) {
 }
 
 function addForce() {
-    forces[1] = [createVector(bigBar.x + bigBar.width + smallBar.width, bigBar.y),  createVector(15 * 5, 0), 'crimson']
+    forces[1] = [createVector(bigBar.x + bigBar.width + smallBar.width, bigBar.y),  createVector(15 * 5, 0), "#b53105"]
     settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
     settings.force2Value = 15.0;
     document.getElementById('smallBarForceValue').removeAttribute('disabled');
@@ -757,8 +757,11 @@ function draw() {
 
 
     forces.forEach(force => {
-        drawArrow(force[0], force[1], force[2], 12)
-
+        if(smallBar.animation){
+            drawArrow(force[0], force[1], force[2] + "60", 12)
+        }else {
+            drawArrow(force[0], force[1], force[2], 12)
+        }
     });
 
     forces.forEach((force,index) => {

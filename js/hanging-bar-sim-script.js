@@ -230,7 +230,7 @@ function setup() {
     });
 
     // Set the starting force.
-    forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 150), 'coral']
+    forces[0] = [createVector(yellowBar.x + yellowBar.width, yellowBar.y),  createVector(0, 150), "#EB7911"]
 
     // Setup text
     textFont(font);
@@ -624,7 +624,11 @@ function draw() {
 
     // Draws arrows for forces.
     forces.forEach(force => {
-        drawArrow(force[0], force[1], force[2], 12)
+        if(yellowBar.animation){
+            drawArrow(force[0], force[1], force[2] + "60", 12)
+        }else {
+            drawArrow(force[0], force[1], force[2], 12)
+        }
 
     });
 
