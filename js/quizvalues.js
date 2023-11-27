@@ -88,14 +88,14 @@ function generateValues() {
 
         myData.quiz2_Dad = parseFloat((myData.quiz1_Pad * myData.y / (myData.area2 * myData.modulus2)).toFixed(5));
         myData.quiz2_Dcf = parseFloat((myData.quiz1_Pcf * myData.y / (myData.area3 * myData.modulus3)).toFixed(5));
-        myData.quiz2_Dbg = parseFloat((myData.quiz1_Pbg * myData.x1 / (cos(myData.angle) * myData.area1 * myData.modulus1)).toFixed(4));
+        myData.quiz2_Dbg = parseFloat((myData.quiz1_Pbg * myData.x1 / (cos(myData.angle) * myData.area1 * myData.modulus1)).toFixed(5));
 
         console.log("cos_angle = " + Math.cos(myData.angle));
         console.log("quiz2_Dad = " + (myData.quiz2_Dad * 1000).toFixed(2));
         console.log("quiz2_Dcf = " + (myData.quiz2_Dcf * 1000).toFixed(2));
         console.log("quiz2_Dbg = " + (myData.quiz2_Dbg * 1000).toFixed(2));
 
-        myData.quiz4_Dc = parseFloat(((myData.quiz2_Dbg / sin(myData.angle)) * ((myData.x1 + myData.x2) / myData.x1)).toFixed(4));
+        myData.quiz4_Dc = parseFloat(((myData.quiz2_Dbg / sin(myData.angle)) * ((myData.x1 + myData.x2) / myData.x1)).toFixed(5));
 
         console.log("quiz4_Dc = " + (myData.quiz4_Dc * 1000).toFixed(2));
 
