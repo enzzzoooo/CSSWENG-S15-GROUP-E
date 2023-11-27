@@ -120,20 +120,68 @@ body {
   align-items: center;
 }
 
+/* Multiple choice questions */
 .multiple-choice-container {
   display: flex;
   width: 1308px;
-  height: 857px;
   min-width: auto;
-  align-content: space-between;
-  justify-content: space-between;
+  gap: 30px;
   flex-wrap: wrap;
 }
 
-.question-choice {
-  cursor: pointer;
+.question-choice-wrapper {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-out;
 }
 
+.question-choice-wrapper.selected {
+  transform: scale(1.05);
+}
+
+.question-choice-explanation-wrapper {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  width: 636px;
+  margin: 17.62px 0 24.62px  0;
+  background-color: var(--color-maroon);
+  border-radius: 10px;
+}
+
+.wrong {
+  background-color: var(--color-maroon);
+}
+
+.correct {
+  background-color: var(--color-forestgreen);
+}
+
+.question-choice-explanation-icon {
+  width: 59.32px;
+  height: 60.77px;
+  margin: 15px 18px 15px 15px;
+}
+
+.question-choice-explanation {
+  font-family: var(--font-avenir);
+  font-size: 25px;
+  color: white;
+  margin: 0 15px 0 0;
+}
+
+.question-choice-explanation-wrapper.show {
+  display: flex;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.question-choice-explanation-wrapper.buff {
+  display: flex;
+  opacity: 0;
+}
+
+/* Fill in the blank questions */
 .question-image {
   position: relative;
   width: 822px;

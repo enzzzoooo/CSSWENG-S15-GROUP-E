@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="./css/global.css"/>
   <link rel="stylesheet" href="./css/hamburger-menu.css"/>
   <link rel="stylesheet" href="./css/quiz-general.css"/>
-  <link rel="stylesheet" href="./css/quiz5.css"/>
 
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <title>Question 5</title>
@@ -80,26 +79,48 @@
     </div>
     <div class="quiz-answer-container">
       <div class="image-wrapper multiple-choice-container">
-        <img src="./imgs/quiz/question5-1-image.png" alt="" class="question-choice"/>
-        <img src="./imgs/quiz/question5-2-image.png" alt="" class="question-choice"/>
-        <img src="./imgs/quiz/question5-3-image.png" alt="" class="question-choice"/>
-        <img src="./imgs/quiz/question5-4-image.png" alt="" class="question-choice"/>
-      </div>
-      <div class="quiz-hint" id="quizHint1">
-        <img src="./imgs/hint-icon.png" id="hintIcon">
-  
-        <div class="hint-info">
-          <b>Hint!</b> What is the only cable that is connected to point D?
-        </div>
-      </div>
-      <div class="quiz-hint" id="quizHint2">
-        <img src="./imgs/hint-icon.png" id="hintIcon">
-  
-        <div class="hint-info">
-          <b>Hint!</b> What is the only cable that is connected to point D? Will the deflection point of C affect that of point F?
-        </div>
-      </div>
 
+        <div class="question-choice-wrapper" id="choice1">
+          <img src="./imgs/quiz/question5-1-image.png" alt="" class="question-choice"/>
+          <div class="question-choice-explanation-wrapper wrong">
+            <img src="./imgs/quiz/quiz-wrong-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-choice-explanation">
+              <b>Incorrect!</b> Point D is not fixed, so it must also move.
+            </div>
+          </div>
+        </div>
+
+        <div class="question-choice-wrapper" id="choice2">
+          <img src="./imgs/quiz/question5-2-image.png" alt="" class="question-choice"/>
+          <div class="question-choice-explanation-wrapper wrong">
+            <img src="./imgs/quiz/quiz-wrong-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-choice-explanation">
+              <b>Incorrect!</b> Since all cables will elongate, it is impossible for point D to move up.
+            </div>
+          </div>
+        </div>  
+      
+        <div class="question-choice-wrapper" id="choice3">
+          <img src="./imgs/quiz/question5-3-image.png" alt="" class="question-choice"/>
+          <div class="question-choice-explanation-wrapper correct">
+            <img src="./imgs/quiz/quiz-correct-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-choice-explanation">
+              <b>Correct!</b> (you may assume at first the tilt of DEF)
+            </div>
+          </div>
+        </div>  
+
+        <div class="question-choice-wrapper" id="choice4" value>
+          <img src="./imgs/quiz/question5-4-image.png" alt="" class="question-choice"/>
+          <div class="question-choice-explanation-wrapper correct">
+            <img src="./imgs/quiz/quiz-correct-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-choice-explanation">
+              <b>Correct!</b> (you may assume at first the tilt of DEF)
+            </div>
+          </div>
+        </div> 
+
+      </div>
       <button id="checkButton">Check</button>
     </div>
   </div>
@@ -112,14 +133,11 @@
       <div class="menu-dropdown-child"></div>
       <div class="menu-dropdown-item"></div>
       <div class="menu-dropdown-inner"></div>
-      <div class="line-div"></div>
-      <div class="menu-dropdown-child1"></div>
-      <div class="credits-line-div"></div>
     </div>
   </div>
 
   <script src="./js/hamburger-menu-modal.js"></script>
 
-  <script src="./js/quiz6.js"></script>
+  <script src="./js/quiz5.js"></script>
 </body>
 </html>
