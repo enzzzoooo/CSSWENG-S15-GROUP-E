@@ -56,7 +56,7 @@ for (let i = 0; i < choiceElements.length; i++) {
 
 checkButton.addEventListener('click', () => {
   if (checkButton.textContent == 'Proceed') {
-    window.location.href = 'Quiz6.html';
+    window.location.href = './Quiz6.html';
   }
 
   console.log(selectedAnswer);
