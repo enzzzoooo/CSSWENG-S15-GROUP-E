@@ -16,7 +16,7 @@ const hangingBar = [
     ABC is rigid; it cannot bend. But it is not fixed, so it can rotate
     about the hinge at A.<br><br>
     (The next slide shows the intended deflection of the bar)`,
-    `To analyze the rotation of bar ABC, we construct a “deformation 
+    `To analyze the rotation of bar ABC, we construct a “deformation
     diagram”. The deformation diagram is a superposition of the
     initial and final positions of the bar, indicating the deflection of
     the points in the bar. From this diagram, we will be able to
@@ -49,11 +49,11 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     how will the analysis change?`,
     `First, let us recompute the force in the cable. Considering the
     free-body diagram of ABC and summing moments about point
-    A, the force in the cable is 
+    A, the force in the cable is
     \\[2P_B\\,\\sin30^{\\circ} = 4(5\\mathrm{~kN}) \\]
     \\[P_B = 20 \\mathrm{~kN}\\]
-    The corresponding axial deformation is 
-    <div class="needExplain halfBMargin">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]  
+    The corresponding axial deformation is
+    <div class="needExplain halfBMargin">\\[\\delta_B = \\frac{(20\\mathrm{~kN}) \\left( \\frac{2000  \\mathrm{~mm}}{\\cos 30^\\circ} \\right)}{(20  \\mathrm{~mm}^2)(200  \\mathrm{~GPa})}\\]
     <div class="explanation-popup-wrapper">
         <div class="sim-error-popup">
           <div class="popup-title-wrapper">
@@ -74,8 +74,8 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     This time, the vertical deflection of B is not simply equal to the
     deformation of the cable, since the deformation should occur
     along the direction of the cable (not vertically).`,
-    `To relate \\(d_B\\) and \\(\\delta_B\\), we create another 
-    right triangle as shown, where 
+    `To relate \\(d_B\\) and \\(\\delta_B\\), we create another
+    right triangle as shown, where
     \\[\\sin30^{\\circ}=\\frac{\\delta_B}{d_B}\\]
     Therefore,
     \\[d_B = \\frac{40\\sqrt{3}}{3}\\mathrm{~mm}\\]`,
@@ -90,17 +90,17 @@ The small angle approximation simplifies trigonometric calculations by assuming 
     properties of the cable (length, cross-sectional area, and
     material).
     <div class="flex-center m05">
-      <a class="flex-center" href="hanging-bar-sim.html">
+      <a class="flex-center" href="./hanging-bar-sim.html">
         <img src="imgs/tryNow.png"><strong class="actionText pad">Try it now!</strong></a>
     </div>
     If you have understood well the discussion, test your
     knowledge by answering the quiz.
     <div class="flex-center m05">
-      <a class="flex-center" href="Quiz1.html">
+      <a class="flex-center" href="./Quiz1.html">
         <img src="imgs/learnMore.png"><strong class="actionText pad">Test your knowledge!</strong></a>
     </div>`
   ]
-  
+
   const compoundBar = [ `First, let us consider a simple system of two steel bars <strong>AB</strong> and
   <strong>BC</strong> \\((E=200 \\mathrm{~GPa})\\) that are connected to each other in series.
   End A is fixed while end C is free to move. <br><br>When the 10-\\(\\mathrm{kN}\\)
@@ -158,12 +158,12 @@ The small angle approximation simplifies trigonometric calculations by assuming 
   second load. You may also change the properties of the bars
   (length, cross-sectional area, and material).
   <div class="flex-center m05">
-    <a class="flex-center" href="extending-bar-sim.html">
+    <a class="flex-center" href="./extending-bar-sim.html">
       <img src="imgs/tryNow.png"><strong class="actionText pad">Try it now!</strong></a>
   </div>
   Alternatively, you may proceed to the next discussion.
   <div class="flex-center m05">
-    <a class="flex-center" href="lesson-picker.html">
+    <a class="flex-center" href="./lesson-picker.html">
       <img src="imgs/learnMore.png"><strong class="actionText pad">Learn more!</strong></a>
   </div>
   `]
