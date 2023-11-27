@@ -16,6 +16,7 @@ body {
   margin: 0;
   line-height: normal;
   background-color: #F2F2F2;
+  min-width: 100% !important;
 }
 
 header {

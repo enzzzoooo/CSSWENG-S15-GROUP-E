@@ -198,6 +198,7 @@ input[type="number"] {
   border: none;
   font-size: 20px;
   font-family: var(--font-avenir);
+  padding-left: .5em;
 }
 
 .quiz-hint {
