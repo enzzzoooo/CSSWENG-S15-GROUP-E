@@ -831,8 +831,6 @@ function draw() {
             stroke('black')
             textAlign(CENTER)
             translate(bigBar.x, bigBar.y)
-            angular = atan2(((bigBar.y)+((smallBar.change)*easing(t))) - bigBar.y, (bigBar.x + bigBar.width+smallBar.width) - bigBar.x);
-            rotate(angular);
             if(index == 0){
                 text(settings.force1Distance.toFixed(2) + 'mm', (dist(bigBar.x, bigBar.y, force[0].x, force[0].y))/2, -25);
             } else if (!displayForce) {
