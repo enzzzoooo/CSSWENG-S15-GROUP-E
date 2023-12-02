@@ -21,7 +21,7 @@ function populateValues() {
   const e3ValueElement = document.getElementById('e3Value');
 
 
-  forceValueElement.textContent = myData.force
+  forceValueElement.textContent = myData.forceP
   x1ValueElement.textContent = myData.x1
   x2ValueElement.textContent = myData.x2
   x3ValueElement.textContent = myData.x3
@@ -90,6 +90,7 @@ checkButton.addEventListener('click', () => {
     document.getElementById('question7-input1').style.backgroundColor = 'lightgreen';
 
     console.log('correct');
+    checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
 
   }
