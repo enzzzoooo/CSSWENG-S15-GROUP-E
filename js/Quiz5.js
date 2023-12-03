@@ -19,7 +19,7 @@ function populateValues() {
   const e2ValueElement = document.getElementById('e2Value');
   const e3ValueElement = document.getElementById('e3Value');
 
-  forceValueElement.textContent = myData.force
+  forceValueElement.textContent = myData.forceP
   x1ValueElement.textContent = myData.x1
   x2ValueElement.textContent = myData.x2
   x3ValueElement.textContent = myData.x3
@@ -67,6 +67,7 @@ checkButton.addEventListener('click', () => {
     explanationWrapper.classList.add('show');
   }, 500);
   if (selectedAnswer.id === 'choice3' || selectedAnswer.id === 'choice4') {
+    checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
   }
 

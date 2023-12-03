@@ -31,7 +31,7 @@ function populateValues() {
   question1Input2.value = parseFloat(myData.quiz1_Pad).toFixed(2);
   question1Input3.value = parseFloat(myData.quiz1_Pcf).toFixed(2);
 
-  forceValueElement.textContent = myData.force
+  forceValueElement.textContent = myData.forceP
   x1ValueElement.textContent = myData.x1
   x2ValueElement.textContent = myData.x2
   x3ValueElement.textContent = myData.x3
@@ -147,6 +147,7 @@ checkButton.addEventListener('click', () => {
     document.getElementById('question2-input3').style.backgroundColor = 'lightgreen';
 
     console.log('correct');
+    checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
 
   }

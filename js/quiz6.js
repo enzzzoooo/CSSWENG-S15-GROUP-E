@@ -25,7 +25,7 @@ function populateValues() {
 
 
 
-  forceValueElement.textContent = myData.force
+  forceValueElement.textContent = myData.forceP
   x1ValueElement.textContent = myData.x1
   x2ValueElement.textContent = myData.x2
   x3ValueElement.textContent = myData.x3

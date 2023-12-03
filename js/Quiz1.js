@@ -125,6 +125,7 @@ checkButton.addEventListener('click', () => {
     document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
 
     console.log('correct');
+    checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
 
   }
