@@ -1,5 +1,5 @@
 body {
-    min-width: 85em;
+    min-width: 85.83em;
     font-family: var(--font-avenir);
     }
 
@@ -130,6 +130,10 @@ body {
 
 .m05 {
     margin-block: 1vw;
+}
+
+.m10 {
+    margin-top : 4vw ;
 }
 
 div .pad {

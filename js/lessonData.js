@@ -2,15 +2,20 @@ const hangingBar = [
     `Next, let us consider a rigid bar <strong>ABC</strong> that is hinged at <strong>A</strong> and
     supported by a deformable cable at <strong>B</strong> \\((E=200 \\mathrm{~GPa})\\). <br><br>
     When the
-    5-\\(\\mathrm{kN}\\) downward force is applied at end C, what will be the
-    deflection of end C?`,
+    \\(5-\\mathrm{kN}\\) downward force is applied at end C, what will be the
+    deflection of end C?
+    <div class="flex-center m05 m10">
+    <a class="flex-center" href="./hanging-bar-sim.html">
+      <img src="imgs/tryNow.png"><strong class="actionText pad">Skip to the Simulation!</strong></a>
+  </div>
+    `,
     `Following the same procedure in the previous discussion, let us
     draw first the free-body diagram of the rigid bar. Summing
     moments about point A,
     \\[P_B=10 \\mathrm{~kN},\\mathrm{~T}\\]`,
     `The axial deformation of the cable can be computed as \\[\\delta_B=\\frac{P L}{A E}=\\frac{(10 \\mathrm{~kN})(2000 \\mathrm{~mm})}{\\left(20 \\mathrm{~mm}^2\\right)(200 \\mathrm{~GPa})}\\]
     \\[\\delta_B=5 \\mathrm{~mm} \\text { (elongation) }\\]`,
-    `Therefore, when the 10-\\(\\mathrm{kN}\\) force is applied to the system, the
+    `Therefore, when the \\(10-\\mathrm{kN}\\) force is applied to the system, the
     cable will elongate by \\(5\\mathrm{~mm}\\). This means that bar ABC must
     move to “accommodate” this elongation. Take note that bar
     ABC is rigid; it cannot bend. But it is not fixed, so it can rotate
@@ -103,9 +108,13 @@ The small angle approximation simplifies trigonometric calculations by assuming 
 
   const compoundBar = [ `First, let us consider a simple system of two steel bars <strong>AB</strong> and
   <strong>BC</strong> \\((E=200 \\mathrm{~GPa})\\) that are connected to each other in series.
-  End A is fixed while end C is free to move. <br><br>When the 10-\\(\\mathrm{kN}\\)
+  End A is fixed while end C is free to move. <br><br>When the \\(10-\\mathrm{kN}\\)
   force at B is applied, how will the system respond? By how
-  much will end C move?`,
+  much will end C move? 
+  <div class="flex-center m05 m10">
+    <a class="flex-center" href="./extending-bar-sim.html">
+      <img src="imgs/tryNow.png"><strong class="actionText pad">Skip to the Simulation!</strong></a>
+  </div>`,
   `Before you can analyze the axial deformations occurring in any
   system, you must first determine the forces in its members.
   Shown on the left is the free-body diagram of the system.
