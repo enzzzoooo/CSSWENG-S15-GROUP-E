@@ -18,7 +18,7 @@ function deformation(load, length, crossArea, elasticity) {
 
 // Finds the answer of the pythagorean formula of A^2 + B^2 = C^2 of two numbers
 function pythagorean(a, b) {
-    return Math.sqrt(a * a + b * b)
+    return Math.sqrt((a * a) + (b * b))
 }
 
 // Returns angle of degrees to radians
@@ -29,6 +29,17 @@ function toRadians(angle) {
 // Returns angle of radians to degrees
 function toDegrees(angle) {
     return angle * (180 / Math.PI);
+}
+function calculateAngle(a, b, c) {
+    // Calculate the cosine of the angle using the Law of Cosines
+    let cosC = ((-Math.pow(a, 2)) - Math.pow(b, 2) + Math.pow(c, 2)) / -(2 * a * b);
+
+    // Use arccosine to find the angle in radians
+    let angleInRadians = Math.acos(cosC);
+    // Convert the angle from radians to degrees
+    let angleInDegrees = angleInRadians * (180 / Math.PI);
+
+    return angleInDegrees;
 }
 
 // Finds internal forces on object.
@@ -250,13 +261,28 @@ function setup() {
 
     // Sets up the textboxes
     givenAngle.input(function () {
-        givenAngle.value(givenAngle.value().replace(/[^\d]|(?<=\..*)\./g, ''));
-        if(settings.ropeAwayFromWall != settings.ropeDistance){
-            pivotPointWall = pivotPointBar.value() * Math.tan((givenAngle.value() * Math.PI) / 180);
-            let temp = -(pivotPointWall/20 - yellowBar.y);
-            if (temp < yellowBar.y){
+        givenAngle.value(givenAngle.value().replace(/[^\d.]|(?<=\..*)\./g, ''));
+        if(parseFloat(settings.ropeAwayFromWall) != parseFloat(settings.ropeDistance)){
+            var temp = 0;
+            console.log(givenAngle.value())
+            if(givenAngle.value() < 90){
+                pivotPointWall = parseFloat(settings.ropeDistance) * Math.tan((givenAngle.value() * Math.PI) / 180);
+                console.log(pivotPointWall);
+                temp = -(pivotPointWall/20 - yellowBar.y);
+                console.log(temp);
+            } else {
+                temp = 0
+            }
+
+
+            if (temp < yellowBar.y && temp >= 20){
                 rope.y = temp
                 settings.ropeHeight = parseFloat(pivotPointWall);
+            } else if (temp < 20) {
+                rope.y = 20
+                settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, rope.x, rope.y) * 20 / settings.snapValue) * settings.snapValue;
+                givenAngle.value(parseFloat(calculateAngle(parseFloat(settings.ropeDistance), pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall)),pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeAwayFromWall))).toFixed(2)))
+                console.log(parseFloat(settings.ropeHeight));
             } else {
                 rope.y = yellowBar.y;
                 settings.ropeHeight = 0;
@@ -292,7 +318,7 @@ function setup() {
             settings.ropeDistance = parseFloat(pivotPointBar.value());
         } else if (pivotPointBar.value()/20 < rope.x) {
             rope.end = rope.x;
-            settings.ropeDistance = settings.ropeAwayfromWall;
+            settings.ropeDistance = parseFloat(settings.ropeAwayFromWall);
         } else {
             rope.end = yellowBar.x + yellowBar.width;
             settings.ropeDistance = parseFloat(settings.yellowBarWidth);
@@ -395,9 +421,9 @@ function setup() {
         if (parseFloat(ropeAwayFromWall.value()) <= 0){
             rope.x = yellowBar.x
             settings.ropeAwayFromWall = 0;
-        } else if (parseFloat(ropeAwayFromWall.value()) >= settings.ropeDistance){
+        } else if (parseFloat(ropeAwayFromWall.value()) >= parseFloat(settings.ropeDistance)){
             rope.x = rope.end;
-            settings.ropeAwayFromWall = settings.ropeDistance;
+            settings.ropeAwayFromWall = parseFloat(settings.ropeDistance);
         } else {
             rope.x = (parseFloat(ropeAwayFromWall.value()) / 20) + yellowBar.x;
             settings.ropeAwayFromWall = parseFloat(ropeAwayFromWall.value())
@@ -431,7 +457,7 @@ function changeDrawing() {
     deformationGrey = deformation(ropeForce, ropeLength, crossArea.value(), parseFloat(settings.ropeModulus));
 
     // Modifies the simulation settings (also checks if it is 90 degrees first)
-    if(parseFloat(settings.ropeAwayFromWall) == settings.ropeDistance){
+    if(parseFloat(settings.ropeAwayFromWall) == parseFloat(settings.ropeDistance)){
         rope.change = deformationGrey;
         yellowBar.change = deformationGrey * parseFloat(settings.yellowBarWidth) / parseFloat(settings.ropeDistance)
     } else{
@@ -530,7 +556,7 @@ function updateForces(){
         }
     });
 
-    if (settings.ropeDistance > settings.yellowBarWidth){
+    if (parseFloat(settings.ropeDistance) > parseFloat(settings.yellowBarWidth)){
         rope.end = yellowBar.x + yellowBar.width
         settings.ropeDistance = settings.yellowBarWidth
     }
@@ -786,7 +812,7 @@ function draw() {
                 settings.ropeDistance = Math.round(dist(mouseX, yellowBar.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             } else if(mouseX <= rope.x){
                 rope.end = rope.x;
-                settings.ropeDistance = settings.ropeAwayFromWall
+                settings.ropeDistance = parseFloat(settings.ropeAwayFromWall)
             } else if(mouseX >= yellowBar.x + yellowBar.width){
                 rope.end = yellowBar.x + yellowBar.width;
                 settings.ropeDistance = settings.yellowBarWidth
@@ -847,7 +873,7 @@ function draw() {
                 updateForces();
             } else if(mouseX < rope.end){
                 yellowBar.width = rope.end - yellowBar.x;
-                settings.yellowBarWidth = settings.ropeDistance
+                settings.yellowBarWidth = parseFloat(settings.ropeDistance)
                 updateForces();
             }
         }
@@ -895,7 +921,7 @@ function draw() {
         angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - rope.y, rope.end - rope.x);
         translate(rope.x, rope.y)
         rotate(angular);
-        text(((pythagorean(settings.ropeHeight, settings.ropeDistance - settings.ropeAwayFromWall)) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(rope.x, rope.y, (rope.end),((yellowBar.y)+(rope.change/3*easing(t))))/2, -40);
+        text(((pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall))) + deformationGrey*easing(t)).toFixed(2) + 'mm', dist(rope.x, rope.y, (rope.end),((yellowBar.y)+(rope.change/3*easing(t))))/2, -40);
         strokeWeight(1.5)
         rotate(-90)
         translate(12, 0)
@@ -905,16 +931,16 @@ function draw() {
             strokeWeight(0)
             fill('black')
             textAlign(CENTER)
-            let angle = parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2))
+            let angle = parseFloat(calculateAngle(pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeAwayFromWall)), parseFloat(settings.ropeDistance), pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall))).toFixed(2))
             text(`Angle: ${angle.toFixed(2)}°`, rope.end + 125, yellowBar.y - 50);
             strokeWeight(2)
             fill(255, 0, 0, 0);
-            arc(rope.end, yellowBar.y, 75, 75, 180, 180 + (Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI));
+            arc(rope.end, yellowBar.y, 75, 75, 180, 180 + (Math.atan(parseFloat(settings.ropeHeight)/parseFloat(settings.ropeDistance)) * 180 / Math.PI));
             fill('black')
         }
     }
     // Length or Rope Origin from Wall
-    if((displayData || heightChange || distanceChange) && !keeptoWall && settings.ropeAwayFromWall > 0){
+    if((displayData || heightChange || distanceChange) && !keeptoWall && parseFloat(settings.ropeAwayFromWall) > 0){
         // Grey Bar
         resetMatrix()
         strokeWeight(0)
@@ -922,7 +948,7 @@ function draw() {
         stroke('black')
         textAlign(CENTER)
         translate(yellowBar.x, rope.y)
-        text((settings.ropeAwayFromWall).toFixed(2) + 'mm', (rope.x - yellowBar.x)/2, -25);
+        text((parseFloat(settings.ropeAwayFromWall)).toFixed(2) + 'mm', (rope.x - yellowBar.x)/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
@@ -941,7 +967,7 @@ function draw() {
         strokeWeight(1.5)
         rotate(-180)
         translate(15, 0)
-        curlyBracket(settings.ropeHeight/20)
+        curlyBracket(parseFloat(settings.ropeHeight)/20)
 
 
         resetMatrix()
@@ -957,7 +983,7 @@ function draw() {
         translate(yellowBar.x, yellowBar.y)
         angular = atan2(((yellowBar.y)+(rope.change/3*easing(t))) - yellowBar.y, (rope.end) - yellowBar.x);
         rotate(angular);
-        text((settings.ropeDistance).toFixed(2) + 'mm', settings.ropeDistance/20/2, -25);
+        text((settings.ropeDistance).toFixed(2) + 'mm', parseFloat(settings.ropeDistance)/20/2, -25);
         strokeWeight(1.5)
         rotate(-90)
         translate(0, 0)
@@ -970,15 +996,16 @@ function draw() {
 
 
     // Sets the textboxes to the given values of settings.
-    givenAngle.value(parseFloat((Math.atan(settings.ropeHeight/settings.ropeDistance) * 180 / Math.PI).toFixed(2)));
-    pivotPointBar.value(settings.ropeDistance);
+
+    givenAngle.value(parseFloat(calculateAngle(parseFloat(settings.ropeDistance), pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall)),pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeAwayFromWall))).toFixed(2)))
+    pivotPointBar.value(parseFloat(settings.ropeDistance));
     yellowBarWidth.value(settings.yellowBarWidth);
     forcePoint.value(settings.forceDistance);
     crossArea.value(settings.ropeCrossArea);
     youngsModulus.value(settings.ropeModulus);
     forceMagnitude.value(settings.forceMagnitude);
     snapInput.value(settings.snapValue);
-    ropeAwayFromWall.value(settings.ropeAwayFromWall)
+    ropeAwayFromWall.value(parseFloat(settings.ropeAwayFromWall))
 
 
 }
