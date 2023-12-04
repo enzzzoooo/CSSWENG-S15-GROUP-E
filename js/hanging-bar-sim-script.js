@@ -264,12 +264,12 @@ function setup() {
         givenAngle.value(givenAngle.value().replace(/[^\d.]|(?<=\..*)\./g, ''));
         if(parseFloat(settings.ropeAwayFromWall) != parseFloat(settings.ropeDistance)){
             var temp = 0;
-            console.log(givenAngle.value())
+            //console.log(givenAngle.value())
             if(givenAngle.value() < 90){
                 pivotPointWall = parseFloat(settings.ropeDistance) * Math.tan((givenAngle.value() * Math.PI) / 180);
-                console.log(pivotPointWall);
+                //console.log(pivotPointWall);
                 temp = -(pivotPointWall/20 - yellowBar.y);
-                console.log(temp);
+                //console.log(temp);
             } else {
                 temp = 0
             }
@@ -282,7 +282,7 @@ function setup() {
                 rope.y = 20
                 settings.ropeHeight = Math.round(dist(yellowBar.x, yellowBar.y, rope.x, rope.y) * 20 / settings.snapValue) * settings.snapValue;
                 givenAngle.value(parseFloat(calculateAngle(parseFloat(settings.ropeDistance), pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall)),pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeAwayFromWall))).toFixed(2)))
-                console.log(parseFloat(settings.ropeHeight));
+                //console.log(parseFloat(settings.ropeHeight));
             } else {
                 rope.y = yellowBar.y;
                 settings.ropeHeight = 0;
