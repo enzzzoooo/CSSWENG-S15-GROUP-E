@@ -92,7 +92,6 @@ checkButton.addEventListener('click', () => {
 
   // Checking answer
   if (err1 > 0.015 || err2 > 0.015 || err3 > 0.015) {
-    console.log('wrong');
     wrongCounter++;
     if (err1 > 0.015) {
       document.getElementById('question1-input1').style.backgroundColor = 'lightcoral';
@@ -124,7 +123,6 @@ checkButton.addEventListener('click', () => {
     document.getElementById('question1-input2').style.backgroundColor = 'lightgreen';
     document.getElementById('question1-input3').style.backgroundColor = 'lightgreen';
 
-    console.log('correct');
     checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
 

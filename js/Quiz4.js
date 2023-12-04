@@ -65,7 +65,6 @@ checkButton.addEventListener('click', () => {
 
   // Checking answer
   if (Math.abs(answer1 - expectedAnswer1) > 0.015) {
-    console.log('wrong');
     wrongCounter++;
     if (wrongCounter == 5) {
       hintElement.classList.add('buff');
@@ -88,7 +87,6 @@ checkButton.addEventListener('click', () => {
 
     document.getElementById('question4-input1').style.backgroundColor = 'lightgreen';
 
-    console.log('correct');
     checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
 

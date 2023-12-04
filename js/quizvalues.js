@@ -64,6 +64,7 @@ function generateValues() {
         myData.modulus2 = 200;
         myData.modulus3 = 200;
 
+        /*
         console.log("forceP = " + myData.forceP);
         console.log("x1 = " + myData.x1);
         console.log("x2 = " + myData.x2);
@@ -77,42 +78,46 @@ function generateValues() {
         console.log("modulus1 = " + myData.modulus1);
         console.log("modulus2 = " + myData.modulus2);
         console.log("modulus3 = " + myData.modulus3);
+        */
 
         myData.quiz1_Pad = parseFloat((myData.x4 * myData.forceP / (myData.x3 + myData.x4)).toFixed(5));
         myData.quiz1_Pcf = parseFloat((myData.x3 * myData.forceP / (myData.x3 + myData.x4)).toFixed(5));
         myData.quiz1_Pbg = parseFloat((myData.x3 * myData.forceP / (myData.x1 * sin(myData.angle))).toFixed(5));
 
+        /*
         console.log("quiz1_Pad = " + myData.quiz1_Pad.toFixed(2));
         console.log("quiz1_Pcf = " + myData.quiz1_Pcf.toFixed(2));
         console.log("quiz1_Pbg = " + myData.quiz1_Pbg.toFixed(2));
+        */
 
         myData.quiz2_Dad = parseFloat((myData.quiz1_Pad * myData.y / (myData.area2 * myData.modulus2)).toFixed(5));
         myData.quiz2_Dcf = parseFloat((myData.quiz1_Pcf * myData.y / (myData.area3 * myData.modulus3)).toFixed(5));
         myData.quiz2_Dbg = parseFloat((myData.quiz1_Pbg * myData.x1 / (cos(myData.angle) * myData.area1 * myData.modulus1)).toFixed(5));
-
+/*
         console.log("cos_angle = " + Math.cos(myData.angle));
         console.log("quiz2_Dad = " + (myData.quiz2_Dad * 1000).toFixed(2));
         console.log("quiz2_Dcf = " + (myData.quiz2_Dcf * 1000).toFixed(2));
         console.log("quiz2_Dbg = " + (myData.quiz2_Dbg * 1000).toFixed(2));
-
+*/
         myData.quiz4_Dc = parseFloat(((myData.quiz2_Dbg / sin(myData.angle)) * ((myData.x1 + myData.x2) / myData.x1)).toFixed(5));
 
-        console.log("quiz4_Dc = " + (myData.quiz4_Dc * 1000).toFixed(2));
+        //console.log("quiz4_Dc = " + (myData.quiz4_Dc * 1000).toFixed(2));
 
         myData.quiz6_Dd = myData.quiz2_Dad;
         myData.quiz6_Df = myData.quiz4_Dc + myData.quiz2_Dcf;
 
-        console.log("quiz6_Dd = " + (myData.quiz6_Dd * 1000).toFixed(2));
-        console.log("quiz6_Df = " + (myData.quiz6_Df * 1000).toFixed(2));
+        //console.log("quiz6_Dd = " + (myData.quiz6_Dd * 1000).toFixed(2));
+        //console.log("quiz6_Df = " + (myData.quiz6_Df * 1000).toFixed(2));
 
         myData.quiz7_a = atan(Math.abs(myData.quiz6_Df - myData.quiz6_Dd) * 1000 / (1000 * (myData.x3 + myData.x4)));
 
-        console.log("quiz7_a = " + myData.quiz7_a.toFixed(2));
+        //console.log("quiz7_a = " + myData.quiz7_a.toFixed(2));
 
         window.name = JSON.stringify(myData);
     }
     else {
         myData = JSON.parse(window.name);
+        /*
         console.log("forceP = " + myData.forceP);
         console.log("x1 = " + myData.x1);
         console.log("x2 = " + myData.x2);
@@ -142,6 +147,7 @@ function generateValues() {
         console.log("quiz6_Df = " + (myData.quiz6_Df * 1000).toFixed(2));
 
         console.log("quiz7_a = " + myData.quiz7_a.toFixed(2));
+        */
 
 
 

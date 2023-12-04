@@ -97,7 +97,7 @@ checkButton.addEventListener('click', () => {
   let err2 = Math.abs(answer2 - expectedAnswer2);
   let err3 = Math.abs(answer3 - expectedAnswer3);
 
-  console.log(expectedAnswer1, expectedAnswer2, expectedAnswer3);
+
 
   if (checkButton.textContent == 'Proceed') {
     window.location.href = './Quiz3.html';
@@ -105,7 +105,6 @@ checkButton.addEventListener('click', () => {
 
   // Checking answer
   if (err1 > 0.015 || err2 > 0.015 || err3 > 0.015) {
-    console.log('wrong');
     wrongCounter++;
     if (err1 > 0.015) {
       document.getElementById('question2-input1').style.backgroundColor = 'lightcoral';
@@ -146,7 +145,6 @@ checkButton.addEventListener('click', () => {
     document.getElementById('question2-input2').style.backgroundColor = 'lightgreen';
     document.getElementById('question2-input3').style.backgroundColor = 'lightgreen';
 
-    console.log('correct');
     checkButton.style.backgroundColor = 'lightgreen';
     checkButton.textContent = 'Proceed';
 

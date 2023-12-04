@@ -126,6 +126,4 @@ checkButton.addEventListener('click', () => {
 
 
 
-  console.log(input1);
-  console.log(input2);
 });

@@ -59,7 +59,6 @@ checkButton.addEventListener('click', () => {
     window.location.href = './Quiz6.html';
   }
 
-  console.log(selectedAnswer);
   const explanationWrapper = selectedAnswer.getElementsByClassName('question-choice-explanation-wrapper')[0];
   explanationWrapper.classList.add('buff');
   setTimeout(() => {
