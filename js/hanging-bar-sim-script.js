@@ -182,7 +182,7 @@ function setup() {
 
     // Button for reseting drawing
     let reset = document.getElementById('reset-drawing');
-    reset.addEventListener('click', resetDrawing);
+    reset.classList.add('disabled')
 
     // Button for displaying data on and off
     let toggle = document.getElementById('toggle');
@@ -511,6 +511,11 @@ function changeDrawing() {
     var button = document.getElementById('change-drawing');
     button.removeEventListener('click', changeDrawing);
     button.classList.add('disabled');
+
+    // Enables reset button.
+    var button2 = document.getElementById('reset-drawing');
+    button2.addEventListener('click', resetDrawing);
+    button2.classList.remove('disabled');
 }
 
 // Resets the simulation.
@@ -519,6 +524,11 @@ function resetDrawing() {
     var button = document.getElementById('change-drawing');
     button.addEventListener('click', changeDrawing);
     button.classList.remove('disabled')
+
+    // Disables reset button
+    var button2 = document.getElementById('reset-drawing');
+    button2.removeEventListener('click', changeDrawing);
+    button2.classList.add('disabled');
 
     // Empty results page.
     document.getElementById('forceCable').textContent = "";
@@ -1013,7 +1023,7 @@ function draw() {
 // For Exit button
 const exitButton = document.getElementById('exit-button');
 exitButton.addEventListener('click', () => {
-    window.location.href = "../lesson-picker.html";
+    window.location.href = "./lesson-picker.html";
 });
 
 // Joseph

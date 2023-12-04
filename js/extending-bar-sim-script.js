@@ -152,7 +152,7 @@ function setup() {
     button.addEventListener('click', changeDrawing);
 
     let reset = document.getElementById('reset-drawing');
-    reset.addEventListener('click', resetDrawing);
+    reset.classList.add('disabled');
 
     let toggle = document.getElementById('toggle');
     toggle.addEventListener("click", function () {
@@ -617,12 +617,18 @@ function changeDrawing() {
     var button = document.getElementById('change-drawing');
     button.removeEventListener('click', changeDrawing);
     button.classList.add('disabled');
+    var button2 = document.getElementById('reset-drawing');
+    button2.addEventListener('click', resetDrawing);
+    button2.classList.remove('disabled');
 }
 
 function resetDrawing() {
     var button = document.getElementById('change-drawing');
     button.addEventListener('click', changeDrawing);
     button.classList.remove('disabled');
+    var button2 = document.getElementById('reset-drawing');
+    button2.removeEventListener('click', changeDrawing);
+    button2.classList.add('disabled');
 
     document.getElementById('deformationFirst').textContent = "";
     document.getElementById('deformationSecond').textContent = "";
@@ -1105,7 +1111,7 @@ function draw() {
 // For Exit button
 const exitButton = document.getElementById('exit-button');
 exitButton.addEventListener('click', () => {
-    window.location.href = "../lesson-picker.html";
+    window.location.href = "./lesson-picker.html";
 });
 
 // Joseph

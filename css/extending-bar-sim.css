@@ -283,7 +283,8 @@ canvas {
   cursor: pointer;
 }
 
-#change-drawing.disabled:hover {
+#change-drawing.disabled:hover,
+#reset-drawing.disabled:hover {
   filter: brightness(100%);
   cursor: default;
 }
