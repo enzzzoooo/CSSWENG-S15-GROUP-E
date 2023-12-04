@@ -12,7 +12,7 @@ hamburgerButton.addEventListener('click', () => {
   menuDropdownContainer.style.backgroundColor = "rgba(113, 113, 113, 0.3)";
   menuDropdownContainer.style.alignItems = "flex-start";
   menuDropdownContainer.setAttribute("closable", "");
-  
+
   const onClick = (event) => {
     if (event.target === menuDropdownContainer && menuDropdownContainer.hasAttribute("closable")) {
       menuDropdownContainer.style.display = 'none';
@@ -23,7 +23,7 @@ hamburgerButton.addEventListener('click', () => {
 
 // Event handler for "Simulation"
 simulationButton.addEventListener('click', () => {
-  window.location.href = "hanging-bar-sim.html";
+  window.location.href = "simulation-picker.html";
 });
 
 // Event handler for "Lessons"
