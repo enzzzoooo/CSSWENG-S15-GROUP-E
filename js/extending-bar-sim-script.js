@@ -310,8 +310,8 @@ function setup() {
         var force1MoveToo = (settings.force1Distance == settings.bigBarWidth + settings.smallBarWidth);
         var force2MoveToo = (settings.force2Distance == settings.bigBarWidth + settings.smallBarWidth);
 
-        if(parseFloat(bigBarWidth.value())/settings.distanceScale + bigBar.x > 550){
-            bigBar.width = 550 - bigBar.x;
+        if(parseFloat(bigBarWidth.value())/settings.distanceScale + bigBar.x > 650){
+            bigBar.width = 650 - bigBar.x;
             settings.bigBarWidth = Math.round((550 - bigBar.x) * settings.distanceScale / settings.snapValue) * settings.snapValue;
         }
         else if(parseFloat(bigBarWidth.value()) > 0){
@@ -337,6 +337,12 @@ function setup() {
         if(force2MoveToo){
             forces[1][0].x = bigBar.x + bigBar.width + smallBar.width
             settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
+        }
+
+
+        if(bigBar.width + smallBar.width >= 550){
+            smallBar.width = 550 - bigBar.width;
+            settings.smallBarWidth = Math.round(dist(bigBar.x + bigBar.width, smallBar.y, bigBar.x + bigBar.width + smallBar.width, smallBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;
         }
 
         updateForces();
@@ -419,8 +425,8 @@ function setup() {
         var force1Move = (settings.force1Distance == settings.bigBarWidth + settings.smallBarWidth);
         var force2Move = (settings.force2Distance == settings.bigBarWidth + settings.smallBarWidth);
 
-        if(parseFloat(smallBarWidth.value())/settings.distanceScale > 600){
-            smallBar.width = 600 - bigBar.x - bigBar.width;
+        if(parseFloat(smallBarWidth.value())/settings.distanceScale > 650){
+            smallBar.width = 650 - bigBar.x - bigBar.width;
             settings.smallBarWidth = Math.round(dist(bigBar.x + bigBar.width, smallBar.y, bigBar.x + bigBar.width + smallBar.width, smallBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;
         } else if (parseFloat(smallBarWidth.value()) > 0) {
             smallBar.width = parseFloat(smallBarWidth.value())/ settings.distanceScale;
@@ -930,8 +936,8 @@ function draw() {
             } else if(mouseX < bigBar.x + (settings.bigBarWidth/ settings.distanceScale)){
                 smallBar.width = 10;
                 settings.smallBarWidth = Math.round(dist(bigBar.x + bigBar.width, smallBar.y, bigBar.x + bigBar.width + smallBar.width, smallBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;;
-            } else if(mouseX > 600){
-                smallBar.width = 600 - bigBar.x - bigBar.width;
+            } else if(mouseX > 650){
+                smallBar.width = 650 - bigBar.x - bigBar.width;
                 settings.smallBarWidth = Math.round(dist(bigBar.x + bigBar.width, smallBar.y, bigBar.x + bigBar.width + smallBar.width, smallBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;
             }
 
@@ -978,8 +984,8 @@ function draw() {
 
 
 
-            if(mouseX > 550){
-                bigBar.width = 550 - bigBar.x;
+            if(mouseX > 650){
+                bigBar.width = 650 - bigBar.x;
                 settings.bigBarWidth = Math.round(dist(bigBar.x, bigBar.y, bigBar.x + bigBar.width, bigBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;
             }
             else if(mouseX < bigBar.x + 5){
@@ -1005,6 +1011,11 @@ function draw() {
             if(force2MoveToo){
                 forces[1][0].x = bigBar.x + bigBar.width + smallBar.width
                 settings.force2Distance = settings.bigBarWidth + settings.smallBarWidth
+            }
+
+            if(bigBar.width + smallBar.width >= 550){
+                smallBar.width = 550 - bigBar.width;
+                settings.smallBarWidth = Math.round(dist(bigBar.x + bigBar.width, smallBar.y, bigBar.x + bigBar.width + smallBar.width, smallBar.y) * settings.distanceScale / settings.snapValue) * settings.snapValue;
             }
             updateForces()
         }
