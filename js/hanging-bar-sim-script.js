@@ -765,7 +765,7 @@ function draw() {
             strokeWeight(0);
             fill(255, 200, 90, 255);
             circle(rope.x, rope.y, 24);
-            if(mouseY <= yellowBar.y){
+            if(mouseY <= yellowBar.y && mouseY >= 15){
                 rope.y = mouseY;
                 settings.ropeHeight = Math.round(dist(yellowBar.x, rope.y, yellowBar.x, yellowBar.y) * 20 / settings.snapValue) * settings.snapValue;
             } else if(mouseY < 15) {
@@ -931,7 +931,7 @@ function draw() {
             strokeWeight(0)
             fill('black')
             textAlign(CENTER)
-            let angle = parseFloat(calculateAngle(pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeAwayFromWall)), parseFloat(settings.ropeDistance), pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall))).toFixed(2))
+            let angle = parseFloat(calculateAngle(parseFloat(settings.ropeDistance), pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeDistance) - parseFloat(settings.ropeAwayFromWall)),pythagorean(parseFloat(settings.ropeHeight), parseFloat(settings.ropeAwayFromWall))).toFixed(2))
             text(`Angle: ${angle.toFixed(2)}°`, rope.end + 125, yellowBar.y - 50);
             strokeWeight(2)
             fill(255, 0, 0, 0);
@@ -1013,7 +1013,7 @@ function draw() {
 // For Exit button
 const exitButton = document.getElementById('exit-button');
 exitButton.addEventListener('click', () => {
-    window.location.href = "../index.html";
+    window.location.href = "../lesson-picker.html";
 });
 
 // Joseph

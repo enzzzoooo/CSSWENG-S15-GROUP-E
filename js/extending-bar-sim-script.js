@@ -1105,7 +1105,7 @@ function draw() {
 // For Exit button
 const exitButton = document.getElementById('exit-button');
 exitButton.addEventListener('click', () => {
-    window.location.href = "../index.html";
+    window.location.href = "../lesson-picker.html";
 });
 
 // Joseph
