@@ -1,0 +1,369 @@
+.header-title{
+  line-height: 130%;
+  font-family: var(--font-optima);
+  font-size: 34px;
+  color: var(--color-whitesmoke);
+}
+
+.main-container {
+  margin: 19px auto 0 auto;
+  display: flex;
+  justify-content: center; /* horizontally center the div */
+  align-items: center; /* vertically center the div */
+  min-width: 1080px;
+}
+
+
+#canvas-container {
+  position: relative;
+  width: 822px;
+  height: 534px;
+  border-radius: 10px;
+  margin: 0 19px 0 0;
+  min-width: 841px;
+  min-height: 534px;
+}
+
+canvas {
+  border-radius: 10px;
+}
+
+#materialSelect {
+  background-color: #D4D4D4;
+  position:relative;
+  width: 457px;
+  height: 535px;
+  border: 0px solid #000000;
+  border-radius: 10px;
+  min-width: 457px;
+  min-height: 535px;
+}
+
+#tabSelect {
+  width: 100%;
+  height: 49px;
+  display: flex;
+  padding: 0;
+  background-color: var(--color-lightforestgreen);
+  border: 0px solid #000000;
+  border-radius: 10px 10px 0 0;
+}
+
+.tab-link {
+  width: 89px;
+  height: 49px;
+  padding: 0;
+  border-radius: 10px 10px 0 0;
+  background-color: var(--color-lightforestgreen);
+  border: 0px solid #000000;
+}
+
+.tab-link:hover {
+  cursor: pointer;
+}
+
+.tab-link.active{
+  background-color: var(--color-forestgreen);
+}
+
+.tab {
+  display: none;
+}
+
+#objectTab1 {
+  display: block;
+}
+
+#objectImg {
+  width: 48px;
+  height: 48px;
+  margin: 1px 20px 0 21px;
+}
+
+#snapImg {
+  width: 36px;
+  height: 48px;
+  margin: 6px 26px 5px 27px;
+}
+
+#resultsImg {
+  width: 30px;
+  height: 19.5px;
+  margin: 15px 29px 14.5px 30px;
+}
+
+.label-bar {
+  justify-content: left;
+  height: 42px;
+  background-color: var(--color-forestgreen);
+  display: flex;
+  align-items: center;
+  padding-left: 23px;
+  font-size: 23px;
+  font-family: var(--font-avenir);
+  color: var(--color-white);
+}
+
+/* For the Object Tab */
+
+.material-change-container {
+  width: 100%;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.material, .material2 {
+  width: 62px;
+  height: 62px;
+  filter: brightness(50%);
+}
+
+.material:hover, .material2:hover {
+  filter: brightness(80%);
+  cursor: pointer;
+}
+
+.material.active, .material2.active {
+  filter: brightness(100%);
+  border: 3px solid #000000;
+  border-radius: 43%;
+}
+
+.object-position-container {
+  margin: 15px 0 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  align-content: stretch;
+  flex-wrap: wrap
+}
+
+.attribute {
+  width: 187px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.attribute-input {
+  width: 50px;
+  height: 40px;
+  background-color: #B6B6B6;
+  border: none;
+  border-radius: 10px;
+  margin: 0 12px 0 0;
+  text-align: center;
+}
+
+.attribute-label {
+  font-family: var(--font-avenir);
+  font-size: 20px;
+  color: var(--color-black);
+}
+
+.object-physics-container {
+  height: 116px;
+  display: flex;
+  margin: 15px 0 0 0;
+  justify-content: space-evenly;
+  align-content: stretch;
+  flex-wrap: wrap
+}
+
+/* For the Snap Tab */
+
+.interval-container {
+  margin: 7px 181px 0 89px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.interval-container.active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* For the Results Tab */
+
+.results-wrapper {
+  width: 419px;
+  height: 40px;
+  display: flex;
+  margin: 20px 24px 0 19px;
+  align-items: center;
+}
+
+.result-output {
+  width: 146px;
+  height: 40px;
+  background-color: #B6B6B6;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-avenir);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.result-output-label {
+  width: 258.08px;
+  font-family: var(--font-avenir);
+  font-size: 20px;
+  color: var(--color-black);
+  margin: 0 0 0 13.6px;
+}
+
+/* Help button inside the material select */
+
+#help {
+  width: 31px;
+  height: 32px;
+  position: absolute;
+  top: 490px;
+  left: 416px;
+}
+
+/* Buttons inside the canvas */
+
+#toggle,
+#force,
+#add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  left: 746px;
+  background-color: #b1b1b1;
+  border-radius: 30px;
+  border: none;
+}
+
+#toggle:hover,
+#force:hover,
+#add:hover {
+  background-color: #767676;
+  cursor: pointer;
+}
+
+#toggle {
+  top: 54px;
+}
+
+#force {
+  top: 134px;
+}
+
+#add {
+  top: 214px;
+}
+
+/* Buttons outside canvas */
+
+#button-container {
+  margin: 62px auto 0 auto;
+  width: 410px;
+  height: 100px;
+  top: 840px;
+  left: calc(50% - 205px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#reset-drawing:hover,
+#change-drawing:hover,
+#exit-button:hover {
+  filter: brightness(80%);
+  cursor: pointer;
+}
+
+#change-drawing.disabled:hover,
+#reset-drawing.disabled:hover {
+  filter: brightness(100%);
+  cursor: default;
+}
+
+
+
+
+/* idk what */
+.toggle-buttons {
+display: flex;
+position: absolute;
+bottom: 0;
+}
+
+.toggle-label {
+  font-family: var(--font-avenir);
+}
+
+/* Error Popup */
+
+
+
+#sim-error-popup-wrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-avenir);
+}
+
+#sim-error-popup {
+  width: 465px;
+  height: 265px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+#popup-title-wrapper{
+  position: relative;
+  width: 100%;
+  height: 57px;
+  background-color: var(--color-maroon);
+  border-radius: 10px 10px 0 0 ;
+  font-size: 33px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#close-error-popup {
+  position: absolute;
+  top: 13px;
+  left: 414px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+#popup-text-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 208px;
+}
+
+#popup-text {
+  width: 411px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: #000000;
+  text-align: center;
+}
+

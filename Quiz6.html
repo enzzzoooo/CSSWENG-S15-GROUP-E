@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+  <link rel="stylesheet" href="./css/quiz-general.css"/>
+  <link rel="stylesheet" href="./css/quiz6.css"/>
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Question 6</title>
+</head>
+<body>
+  <header>
+    <img
+      class="hamburger-button"
+      alt=""
+      src="./imgs/image-20230917-225739150-1@2x.png"
+      id="hamburgerButton"
+    />
+    <div class="header-title">
+      Analysis of Axial Deformations in a Structure
+    </div>
+  </header>
+  <div class="quiz-container">
+    <div class="quiz-instructions-container">
+      <div class="quiz-instruction">
+        Consider two rigid bars ABC and DEF which are supported by three
+        cables AD, BG, and CF. A downward load P is applied at point E of DEF.
+      </div>
+    </div>
+    <div class="quiz-information-wrapper">
+      <div class="image-wrapper">
+        <img src="./imgs/quiz/main-body.png" alt="" class="main-body" />
+      </div>
+      <div class="question-settings">
+        <div class="topic">
+          <span class="topic-title">Force</span>
+        </div>
+        <div class="force-info">
+          <div class="info">P = <span id="forceValue">1</span>kN</div>
+        </div>
+        <div class="topic">
+          <span class="topic-title">Dimensions</span>
+        </div>
+        <div class="dimension-info">
+          <div class="x-wrapper">
+            <div class="info">X<sub>1</sub> = <span id="x1Value">1</span> m</div>
+            <div class="info">X<sub>2</sub> = <span id="x2Value">4</span> m</div>
+            <div class="info">X<sub>3</sub> = <span id="x3Value">3</span> m</div>
+            <div class="info">X<sub>4</sub> = <span id="x4Value">2</span> m</div>
+          </div>
+          <div class="y-wrapper">
+            <div class="info">y = <span id="yValue">2</span> m</div>
+            <div class="info">θ = <span id="thetaValue">30</span>°</div>
+          </div>
+        </div>
+        <div class="topic">
+          <span class="topic-title">Young's Modulus</span>
+        </div>
+        <div class="youngs-modulus-info">
+          <div class="a-wrapper">
+            <div class="info">A<sub>1</sub> = <span id="a1Value">10</span> mm<sup>2</sup></div>
+            <div class="info">A<sub>2</sub> = <span id="a2Value">10</span> mm<sup>2</sup></div>
+            <div class="info">A<sub>3</sub> = <span id="a3Value">10</span> mm<sup>2</sup></div>
+          </div>
+          <div class="e-wrapper">
+            <div class="info">E<sub>1</sub> = <span id="e1Value">200</span> GPa</div>
+            <div class="info">E<sub>2</sub> = <span id="e2Value">200</span> GPa</div>
+            <div class="info">E<sub>3</sub> = <span id="e3Value">200</span> GPa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-question-container">
+      <div class="quiz-question">
+        6. What are the deflections of points D and F? (Type your answers in the textboxes. Round to 2 decimal places.)
+      </div>
+    </div>
+    <div class="quiz-answer-container">
+      <div class="image-wrapper">
+        <img src="./imgs/quiz/question6-image.png" alt="" class="question-image"/>
+        <input type="number" class="question6-input1" id="question6-input1">
+        <input type="number" class="question6-input2" id="question6-input2">
+      </div>
+      <div class="quiz-hint" id="quizHint1">
+        <img src="./imgs/hint-icon.png" id="hintIcon">
+
+        <div class="hint-info">
+          <b>Hint!</b> What is the only cable that is connected to point D?
+        </div>
+      </div>
+      <div class="quiz-hint" id="quizHint2">
+        <img src="./imgs/hint-icon.png" id="hintIcon">
+
+        <div class="hint-info">
+          <b>Hint!</b> Will the deflection point of C affect that of point F?
+        </div>
+      </div>
+      <div class="quiz-hint correct" id="correctResult" hidden>
+        <img src="./imgs/quiz/quiz-correct-icon.png" id="hintIcon">
+
+        <div class="hint-info">
+          <b>Correct!</b> The deflection of point D is <span id="expectedAnswer1">0</span> mm and the deflection of point F is <span id="expectedAnswer2">0</span> mm.
+        </div>
+      </div>
+
+      <button id="checkButton">Check</button>
+    </div>
+  </div>
+
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="simulation" id="popupsimulation">Simulations</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <div class="credits" id="popupcredits">Credits</div>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+    </div>
+  </div>
+
+  <script src="./js/hamburger-menu-modal.js"></script>
+  <script src="./js/quizvalues.js"></script>
+  <script src="./js/quiz6.js"></script>
+</body>
+</html>

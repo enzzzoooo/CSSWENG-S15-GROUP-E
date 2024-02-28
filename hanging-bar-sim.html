@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulation</title>
+
+  <!-- css files -->
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+  <link rel="stylesheet" href="./css/hanging-bar-sim.css"/>
+  <link rel="stylesheet" href="./css/toggle-button.css"/>
+  <link rel="stylesheet" href="./css/help-button.css"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+  <header>
+    <img
+      class="hamburger-button"
+      alt=""
+      src="./imgs/image-20230917-225739150-1@2x.png"
+      id="hamburgerButton"
+    />
+    <div class="header-title">
+      Analysis of Axial Deformations in a Structure
+    </div>
+  </header>
+
+  <div class="page-title">Hanging Bar Simulation</div>
+
+  <div class="main-container">
+    <div id="canvas-container">
+      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-hide.png"></button>
+      <button id="force"><img id="forceImg" src="./imgs/force-data-show.png"></button>
+
+    </div>
+
+    <div id="materialSelect">
+      <div id="tabSelect">
+        <button class="tab-link active" onclick="openTabs(event, 'objectTab')"><img id="objectImg" src="imgs/objectTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'snapTab')"><img id="snapImg" src="imgs/snapTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'resultsTab')"><img id="resultsImg" src="imgs/resultsTab-icon.png"></button>
+      </div>
+
+      <div id="objectTab" class="tab">
+        <div class="label-bar">Type</div>
+        <div class="material-change-container">
+          <img class="material" src="imgs/wood.png" id="changeMatToWood" alt="Wood">
+          <img class="material active" src="imgs/steel.png" id="changeMatToSteel" alt="Steel">
+          <img class="material" src="imgs/plastic.png" id="changeMatToNylon" alt="Nylon"> <!-- Should be Plastic -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToBrass" alt="Brass"> <!-- Should be Brass -->
+          <img class="material" src="imgs/aluminum.png" id="changeMatToMetal" alt="Aluminum"> <!-- Should be Aluminum -->
+        </div>
+        <div class="label-bar">Object Position</div>
+        <div class="object-position-container">
+          <div class="attribute">
+            <input class="attribute-input" id="givenAngle" type="text" placeholder="0">
+            <label class="attribute-label" for="givenAngle">Angle (degrees)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="yellowBarWidth" type="text" placeholder="0">
+            <label class="attribute-label" for="yellowBarWidth">Yellow Bar Width (mm)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="pivotPointBar" type="text" placeholder="0">
+            <label class="attribute-label" for="pivotPointBar">Pivot Point on Bar (mm)<label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="ropeDistanceAway" type="text" placeholder="0">
+            <label class="attribute-label" for="ropeDistanceAway">Distance From Wall (kn)</label>
+          </div>
+        </div>
+        <div class="label-bar">Object Physics</div>
+        <div class="object-physics-container">
+          <div class="attribute">
+            <input class="attribute-input" id="crossArea" type="text" placeholder="0">
+            <label class="attribute-label" for="crossArea">CS Area (mm^2)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="youngsModulus" type="text" placeholder="0">
+            <label class="attribute-label" for="youngsModulus">Young's Modulus (GPa)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="forcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="forcePoint">Force Distance (mm)</label>
+          </div>
+
+          <div class="attribute">
+            <input class="attribute-input" id="forceMagnitude" type="text" placeholder="0">
+            <label class="attribute-label" for="forceMagnitude">Force (kn)</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="snapTab" class="tab">
+        <div class="label-bar">Snap</div>
+        <div class="snap-wrapper">
+          <input type="checkbox" name="checkbox" id="snapToggle" checked>
+          <label for="snapToggle" class="switch"></label>
+          <div class="snap-toggle-label">Enable Snap</div>
+        </div>
+        <div class="interval-container active" id="intervalContainer">
+          <div class="attribute">
+            <input class="attribute-input" id="snapInterval" type="text" placeholder="0">
+            <label class="attribute-label" for="snapInterval">Snap Interval (mm)</label>
+          </div>
+        </div>
+        <div class="snap-wrapper">
+          <input type="checkbox" name="checkbox" id="wallToggle" checked>
+          <label for="wallToggle" class="switch"></label>
+          <div class="snap-toggle-label">Keep Rope on Wall</div>
+        </div>
+      </div>
+
+      <div id="resultsTab" class="tab">
+        <div class="label-bar">Results</div>
+        <div class="results-container">
+          <div class="results-wrapper">
+            <div class="result-output" id="forceCable"></div>
+            <div class="result-output-label">Force in the Cable</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deformationCable"></div>
+            <div class="result-output-label">Deformation of the Cable</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionAtPointB"></div>
+            <div class="result-output-label">Deflection at Rope Pivot Point</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionAtPointEnd"></div>
+            <div class="result-output-label">Deflection at End of Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionAtPointForce"></div>
+            <div class="result-output-label">Deflection at Force Point</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="angleBar"></div>
+            <div class="result-output-label">Angle of Bar Movement</div>
+          </div>
+        </div>
+      </div>
+      <img src="./imgs/help.png" id="help" alt="Help">
+      <div id="helpText">
+        <div class="popup-title-wrapper">
+          <div class="popup-title">Instructions</div>
+        </div>
+        <p>Welcome to the Extending Bars Simulation. Here are instructions/a guide to how to use this simulation.</p>
+
+        <p>The left contains a simulation of the type of structure, while the right have different tabs that contain information/actions.</p>
+
+        <p>There are three tabs on the right. The first (identified with a log symbol) refers to the rope and other variables. The second tab contains the Snap tab which will determine what values are generated from dragging the bars, as well as a Keep to Wall feature. The last tab contains the results after pressing play.</p>
+
+        <p>There are two buttons on the rightside of the simulation, the first one (with an eye) shows all the data. This can turned on even when the animation plays. The second one (with the arrow) shows all force data. </p>
+
+        <p>To change the locations of intersections, you can hover over the provided circles then click and drag to your desired location. You can also type in changes to various variables within the provided text boxes.<br>
+        NOTE: You can detach the rope from the wall in the 2nd tab, by disabling the Keep to Wall then dragging it away.<br>
+        To change the length of the bar, you can hover over the end and drag it, or type it in.<br>
+        To change the angle of the rope, you can type it in only to a certain maximum to the bounding box of the simulation. This will only move the rope origin up and down.<br>
+        To change the cross areas of either bar, you can type them in the provided text boxes. NOTE: This will not change the bars in the simulation but it will reflect in calculations.<br>
+        To change the force locations, you can hover over the arrow (not near the arrow end) and drag it to the right location. The forces cannot be placed outside the bars. If a force is at the end of a bar, it will automatically move when you change the length of the bar by dragging (it will not follow if you typed it in instead).<br>
+        To change the force magnitude, you can hover over the end of the arrow and then drag it to the force number you want. It will stop extending after a certain point, but the force magnitude will still change after you drag it further. If you need a much bigger force and dragging isn't enough, you can type it in the textboxes.<br>
+        To change the materials of the bars, you can find the materials on each given tab and just click on any given material. This will change the young's modulus. You can also change the young's modulus manually.</p>
+
+        <p>NOTE: Certain deformation and deflections would normally be impossible due to exceeding the proportional limit of material axial stress however for the purposes of the simulation, it will showcase any calculation. Just keep that in mind</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="button-container">
+    <img src="./imgs/reset-button.png" id="reset-drawing" alt="Reset">
+    <img src="./imgs/play-button.png" id="change-drawing" alt="Play">
+    <img src="./imgs/exit-button.png" id="exit-button" alt="Exit">
+  </div>
+
+  <!-- Error Popup -->
+  <div id="sim-error-popup-wrapper">
+    <div id="sim-error-popup">
+      <div id="popup-title-wrapper">
+        <img src="./imgs/x-button.png" id="close-error-popup">
+        <div id="popup-title">Error</div>
+      </div>
+      <div id="popup-text-wrapper">
+        <div id="popup-text">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Modal -->
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="simulation" id="popupsimulation">Simulations</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <div class="credits" id="popupcredits">Credits</div>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+    </div>
+  </div>
+
+  <script src="./js/hamburger-menu-modal.js"></script>
+  <script src="./js/hanging-bar-sim-script.js"></script>
+  <script src="./js/help-button.js"></script>
+</body>
+</html>

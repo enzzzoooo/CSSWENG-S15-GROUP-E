@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/lesson.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Introduction</title>
+</head>
+<body>
+  <header>
+    <img
+      class="hamburger-button"
+      alt=""
+      src="./imgs/image-20230917-225739150-1@2x.png"
+      id="hamburgerButton"
+    />
+    <div class="header-title">
+      Analysis of Axial Deformations in a Structure
+    </div>
+  </header>
+  <div class="lezzon page-title">Introduction and lesson objectives</div>
+  <div class="lessonBox">
+    <div class="lessonImgBox">
+      <img class="slideButton" src="imgs/inside-canvas-left.png" id="imageLeft">
+      <img class="lessonImg" src="">
+      <img class="slideButton" src="imgs/right.png" id="imageRight">
+    </div>
+    <div class="lessonTxt-container">
+    <div class="lessonTxt">
+      In the previous lesson, we have determined the relationship between stress and strain. Under linear
+  elastic behavior, materials follow Hooke’s law, which in its simplest form is written as σ = Eε. Based
+  on Hooke’s law, we have derived an equation that relates the deformation and the normal force in an
+  axially loaded bar. When such bars in a particular structure deform axially, this results to a change in
+  the positions of both rigid and deformable members in that structure. In this lesson, we will be
+  analyzing how the axial deformations relate to the deflections of certain points in a structure,
+  applying geometric principles.
+    </div>
+    </div>
+  </div>
+
+  <div class="slider">
+    <img class="slideButton l" src="imgs/left.png"><span class="slideNum">1</span><img class="slideButton r" src="imgs/right.png">
+  </div>
+
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="home">Home</button>
+      <button class="simulation" id="popupsimulation">Simulations</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <button class="resources">Resources</button>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+      <div class="line-div"></div>
+    </div>
+  </div>
+  <script src="js/lessonData.js"></script>
+  <script src="js/lesson.js"></script>
+  <script src="js/hamburger-menu-modal.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+/* Lifted from Kenwins lessons.css */
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 78px 0 100% 0;
+  top: 0px;
+  left: 0;
+  right: 0;
+}
+
+.lessons1,
+.simulation,
+.credits {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: var(--font-size-8xl);
+  letter-spacing: 0.01em;
+  line-height: 130%;
+  font-family: var(--font-avenir);
+  color: var(--color-black);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  width: 423px;
+  height: 65px;
+}
+
+.simulation,
+.credits {
+  top: 65px;
+}
+
+.credits {
+  top: 130px;
+}
+
+/* .resources,
+.credits {
+  top: 195px;
+}
+
+.credits {
+  top: 260px;
+} */
+
+.line-div,
+.menu-dropdown-child,
+.menu-dropdown-inner,
+.menu-dropdown-item,
+.credits-line-div {
+  position: absolute;
+  top: 64.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 473px;
+  height: 1px;
+}
+
+.line-div,
+.menu-dropdown-inner,
+.menu-dropdown-item,
+.credits-line-div {
+  top: 129.5px;
+}
+
+.line-div,
+.menu-dropdown-inner,
+.credits-line-div {
+  top: 194.5px;
+}
+
+
+.line-div {
+  top: 324.5px
+}
+
+
+.menu-dropdown {
+  position: relative;
+  background-color: var(--color-white);
+  width: 472px;
+  min-height: 100vh;
+  overflow: hidden;
+  max-width: 90%;
+  max-height: 90%;
+}
+

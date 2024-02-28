@@ -1,0 +1,71 @@
+#question1-input1 {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 125px;
+  left: 179px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question1-input2 {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 385px;
+  left: 155px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question1-input3 {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 385px;
+  left: 582px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question2-input1 {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  top: 125px;
+  left: 409px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question2-input2 {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  top: 440px;
+  left: 151px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question2-input3 {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  top: 440px;
+  left: 581px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}

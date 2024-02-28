@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulation</title>
+
+  <!-- css files -->
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+  <link rel="stylesheet" href="./css/extending-bar-sim.css"/>
+  <link rel="stylesheet" href="./css/toggle-button.css"/>
+  <link rel="stylesheet" href="./css/help-button.css"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+  <header>
+    <img
+      class="hamburger-button"
+      alt=""
+      src="./imgs/image-20230917-225739150-1@2x.png"
+      id="hamburgerButton"
+    />
+    <div class="header-title">
+      Analysis of Axial Deformations in a Structure
+    </div>
+  </header>
+
+  <div class="page-title">Compound Bars Simulation</div>
+
+  <div class="main-container">
+    <div id="canvas-container">
+      <button id="toggle"><img id="toggleImg" src="./imgs/toggle-data-hide.png"></button>
+      <button id="force"><img id="forceImg" src="./imgs/force-data-show.png"></button>
+      <button id="add"><img id="addImg" src="./imgs/force-add-show.png"></button>
+    </div>
+
+    <div id="materialSelect">
+      <div id="tabSelect">
+        <button class="tab-link active" onclick="openTabs(event, 'objectTab1')"><img id="objectImg" src="imgs/objectTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'objectTab2')"><img id="objectImg" src="imgs/objectTab2-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'snapTab')"><img id="snapImg" src="imgs/snapTab-icon.png"></button>
+        <button class="tab-link" onclick="openTabs(event, 'resultsTab')"><img id="resultsImg" src="imgs/resultsTab-icon.png"></button>
+      </div>
+
+      <div id="objectTab1" class="tab">
+        <div class="label-bar">Type</div>
+        <div class="material-change-container">
+          <img class="material" src="imgs/wood.png" id="changeMatToWood1" alt="Wood">
+          <img class="material active" src="imgs/steel.png" id="changeMatToSteel1" alt="Steel">
+          <img class="material" src="imgs/plastic.png" id="changeMatToNylon1" alt="Nylon"> <!-- Should be Plastic -->
+          <img class="material" src="imgs/bronze.png" id="changeMatToBrass1" alt="Brass"> <!-- Should be Brass -->
+          <img class="material" src="imgs/aluminum.png" id="changeMatToMetal1" alt="Aluminum"> <!-- Should be Aluminum -->
+        </div>
+        <div class="label-bar">Object Position</div>
+        <div class="object-position-container">
+
+          <div class="attribute">
+            <input class="attribute-input" id="bigBarWidth" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarWidth">Length (mm)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="bigBarForcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarForcePoint">Force Point (mm)</label>
+          </div>
+        </div>
+        <div class="label-bar">Object Physics</div>
+        <div class="object-physics-container">
+          <div class="attribute">
+            <input class="attribute-input" id="bigBarCrossArea" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarCrossArea">CS Area (mm^2)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="bigBarModulus" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarModulus">Young's Modulus (GPa)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="bigBarForceValue" type="text" placeholder="0">
+            <label class="attribute-label" for="bigBarForceValue">1st Force (kN)</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="objectTab2" class="tab">
+        <div class="label-bar">Type</div>
+        <div class="material-change-container">
+          <img class="material2" src="imgs/wood.png" id="changeMatToWood2" alt="Wood">
+          <img class="material2" src="imgs/steel.png" id="changeMatToSteel2" alt="Steel">
+          <img class="material2" src="imgs/plastic.png" id="changeMatToNylon2" alt="Plastic"> <!-- Should be Plastic -->
+          <img class="material2" src="imgs/bronze.png" id="changeMatToBrass2" alt="Brass"> <!-- Should be Brass -->
+          <img class="material2 active" src="imgs/aluminum.png" id="changeMatToMetal2" alt="Aluminum"> <!-- Should be Aluminum -->
+        </div>
+        <div class="label-bar">Object Position</div>
+        <div class="object-position-container">
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarWidth" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarWidth">Length (mm)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarForcePoint" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarForcePoint">Force Point (mm)</label>
+          </div>
+        </div>
+        <div class="label-bar">Object Physics</div>
+        <div class="object-physics-container">
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarCrossArea" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarCrossArea">CS Area (mm^2)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarModulus" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarModulus">Young's Modulus (GPa)</label>
+          </div>
+          <div class="attribute">
+            <input class="attribute-input" id="smallBarForceValue" type="text" placeholder="0">
+            <label class="attribute-label" for="smallBarForceValue">2nd Force (kN)</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="snapTab" class="tab">
+        <div class="label-bar">Snap</div>
+        <div class="snap-wrapper">
+          <input type="checkbox" name="checkbox" id="snapToggle" checked>
+          <label for="snapToggle" class="switch"></label>
+          <div class="snap-toggle-label">Enable Snap</div>
+        </div>
+        <div class="interval-container active" id="intervalContainer">
+          <div class="attribute">
+            <input class="attribute-input" id="snapInterval" type="text" placeholder="0">
+            <label class="attribute-label" for="snapInterval">Snap Interval</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultsTab" class="tab">
+        <div class="label-bar">Results</div>
+        <div class="results-container">
+          <div class="results-wrapper">
+            <div class="result-output" id="deformationFirst"></div>
+            <div class="result-output-label">Deformation of First Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deformationSecond"></div>
+            <div class="result-output-label">Deformation of Second Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionFirst"></div>
+            <div class="result-output-label">Deflection at End of First Bar</div>
+          </div>
+          <div class="results-wrapper">
+            <div class="result-output" id="deflectionSecond"></div>
+            <div class="result-output-label">Deflection at End of Second Bar</div>
+          </div>
+        </div>
+      </div>
+      <img src="./imgs/help.png" id="help" alt="Help">
+      <div id="helpText">
+            <div class="popup-title-wrapper">
+              <div class="popup-title">Instructions</div>
+            </div>
+        <p>Welcome to the Extending Bars Simulation. Here are instructions/a guide to how to use this simulation.</p>
+
+        <p>The left contains a simulation of the type of structure, while the right have different tabs that contain information/actions.</p>
+
+        <p>There are four tabs on the right. The first two (identified with a log symbol) refers to the two bars, the first tab controls the bigger bar while the second tab controls the smaller one. The third tab contains the Snap tab which will determine what values are generated from dragging the bars. The last tab contains the results after pressing play.</p>
+
+        <p>There are three buttons on the rightside of the simulation, the first one (with an eye) shows all the data. This can turned on even when the animation plays. The second one (with the arrow) shows all force data. The last one (with the plus) adds a second force to the simulation.</p>
+
+        <p>To change the lengths of either bar, you can hover over the ends of the bars then click and drag to your desired length. You can also type it within the provided text boxes.<br>
+        To change the cross areas of either bar, you can type them in the provided text boxes. NOTE: This will not change the bars in the simulation but it will reflect in calculations.<br>
+        To change the force locations, you can hover over the arrow (not near the arrow end) and drag it to the right location. The forces cannot be placed outside the bars. If a force is at the end of a bar, it will automatically move when you change the length of the bar by dragging (it will not follow if you typed it in instead).<br>
+        To change the force magnitude, you can hover over the end of the arrow and then drag it to the force number you want. It will stop extending after a certain point, but the force magnitude will still change after you drag it further. If you need a much bigger force and dragging isn't enough, you can type it in the textboxes.<br>
+        To change the materials of each bar, you can find the materials on each given tab and just click on any given material. This will change the young's modulus. You can also change the young's modulus manually.</p>
+
+        <p>NOTE: Certain deformation and deflections would normally be impossible due to exceeding the proportional limit of material axial stress however for the purposes of the simulation, it will showcase any calculation. Just keep that in mind</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="button-container">
+    <img src="./imgs/reset-button.png" id="reset-drawing" alt="Reset">
+    <img src="./imgs/play-button.png" id="change-drawing" alt="Play">
+    <img src="./imgs/exit-button.png" id="exit-button" alt="Exit">
+  </div>
+
+
+  <!-- Menu Modal -->
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="simulation" id="popupsimulation">Simulations</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <div class="credits" id="popupcredits">Credits</div>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+    </div>
+  </div>
+
+  <script src="./js/hamburger-menu-modal.js"></script>
+  <script src="./js/extending-bar-sim-script.js"></script>
+  <script src="./js/help-button.js"></script>
+</body>
+</html>

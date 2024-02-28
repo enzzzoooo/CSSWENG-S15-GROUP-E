@@ -1,0 +1,41 @@
+
+
+#helpText {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 30px;
+  width: 72.5em;
+  height: fit-content;
+  top: -50px;
+  left: -800px;
+  line-height: 130%;
+  font-family: var(--font-avenir);
+  font-size: 15;
+  color: var(--color-whitesmoke);
+  color: #000000;
+}
+
+p {
+  margin-inline: 2.5em;
+}
+
+#helpText.show {
+  display: block;
+}
+
+.popup-title-wrapper{
+  position: relative;
+  width: 100%;
+  height: 57px;
+  background-color: var(--color-maroon);
+  border-radius: 10px 10px 0 0 ;
+  font-size: var(--font-size-8xl);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

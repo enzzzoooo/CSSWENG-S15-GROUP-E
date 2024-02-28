@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'Avenir';
+    src: url('../fonts/Avenir\ LT\ Std\ 55\ Roman.otf');
+}
+
+@font-face {
+    font-family: 'Optima';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Optima'), url('../fonts/OPTIMA.woff') format('woff');
+}
+
+body {
+    margin: 0;
+    line-height: normal;
+    background-color: #F2F2F2;
+}
+
+header {
+    display: flex;
+    background-color: var(--color-maroon);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 78px;
+}
+
+.hamburger-button {
+    position: absolute;
+    left: 40px;
+    width: 34.67px;
+    height: 26px;
+}
+
+.hamburger-button:hover {
+    cursor: pointer;
+}
+
+.header-title {
+    line-height: 130%;
+    font-family: var(--font-optima);
+    font-size: 34px;
+    color: var(--color-whitesmoke);
+}
+
+.page-title{
+    margin: 19px auto 0 auto;
+    width: 886px;
+    height: 128px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: var(--color-black);
+    font-family: var(--font-optima);
+}
+
+:root {
+    /* fonts */
+    --font-optima: 'Optima';
+    --font-avenir: 'Avenir';
+
+    /* font sizes */
+    --font-size-4xl: 23px;
+    --font-size-8xl: 27px;
+
+    /* Colors */
+    --color-whitesmoke: #f2f2f2;
+    --color-black: #000;
+    --color-maroon: #8a1538;
+    --color-forestgreen: #00573F;
+    --color-white: #fff;
+    --color-dimgray-100: #747474;
+    --color-dimgray-200: #595959;
+    --color-gainsboro: #d9d9d9;
+    --color-gray-100: #868686;
+    --color-orange: #ffb81c;
+    --color-darkgray: #a7a7a7;
+
+    /* border radiuses */
+    --br-6xl: 25px;
+    --br-8xs: 5px;
+}

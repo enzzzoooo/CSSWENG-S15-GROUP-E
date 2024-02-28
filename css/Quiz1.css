@@ -1,0 +1,35 @@
+#question1-input1 {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  top: 125px;
+  left: 238px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question1-input2 {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  top: 385px;
+  left: 154px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}
+
+#question1-input3 {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  top: 385px;
+  left: 586px;
+  border: none;
+  border-radius: 10px;
+  background-color: #B6B6B6;
+  appearance: none; 
+}

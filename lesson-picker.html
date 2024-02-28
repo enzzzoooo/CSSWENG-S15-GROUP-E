@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/hamburger-menu.css" />
+    <link rel="stylesheet" href="./css/lesson-picker.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <header>
+      <img
+        class="hamburger-button"
+        alt="menu"
+        src="./imgs/image-20230917-225739150-1@2x.png"
+        id="hamburgerButton"
+      />
+      <div class="header-title">
+        Analysis of Axial Deformations in a Structure
+      </div>
+    </header>
+    <div class="page-title">Introduction and lesson objectives</div>
+    <div class="intro-layout">
+      <div class="intro-text">
+        In the previous lesson, we have determined the relationship between stress and strain. Under linear
+      elastic behavior, materials follow Hooke’s law, which in its simplest form is written as \(\sigma = E\epsilon\). Based
+      on Hooke’s law, we have derived an equation that relates the deformation and the normal force in an
+      axially loaded bar. When such bars in a particular structure deform axially, this results to a change in
+      the positions of both rigid and deformable members in that structure. In this lesson, we will be
+      analyzing how the axial deformations relate to the deflections of certain points in a structure,
+      applying geometric principles. <br>
+      <br>
+      At the end of this lesson, you should be able to:
+    </div>
+      <ol class="intro-text">
+      <li>Differentiate deformation and deflection; </li>
+      <li>Draw deformation diagrams; and </li>
+      <li>Write geometric equations that relate the axial deformations of members to the deflections of
+      a particular point in a structure.</li>
+      </ol>
+    </div>
+    <div class="lesson-layout">
+      <div class="lesson">
+        <img src="./imgs/compound-bar-lesson.png" id="compoundBar">
+      </div>
+      <div class="lesson">
+        <img src="./imgs/hanging-bar-lesson.png" id="hangingBar">
+      </div>
+    </div>
+
+
+
+
+    <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+      <div class="menu-dropdown">
+        <button class="simulation" id="popupsimulation">Simulations</button>
+        <button class="lessons1" id="popuplessons">Lessons</button>
+        <div class="credits" id="popupcredits">Credits</div>
+        <div class="menu-dropdown-child"></div>
+        <div class="menu-dropdown-item"></div>
+        <div class="menu-dropdown-inner"></div>
+      </div>
+    </div>
+
+    <script src="js/lesson-picker.js"></script>
+    <script src="js/hamburger-menu-modal.js"></script>
+  </body>
+</html>

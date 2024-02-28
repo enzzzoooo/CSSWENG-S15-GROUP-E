@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+  <link rel="stylesheet" href="./css/quiz-general.css"/>
+  <link rel="stylesheet" href="./css/Quiz3.css"/>
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Question 3</title>
+</head>
+<body>
+  <header>
+    <img
+      class="hamburger-button"
+      alt=""
+      src="./imgs/image-20230917-225739150-1@2x.png"
+      id="hamburgerButton"
+    />
+    <div class="header-title">
+      Analysis of Axial Deformations in a Structure
+    </div>
+  </header>
+  <div class="quiz-container">
+    <div class="quiz-instructions-container">
+      <div class="quiz-instruction">
+        Consider two rigid bars ABC and DEF which are supported by three
+        cables AD, BG, and CF. A downward load P is applied at point E of DEF.
+      </div>
+    </div>
+    <div class="quiz-information-wrapper">
+      <div class="image-wrapper">
+        <img src="./imgs/quiz/main-body.png" alt="" class="main-body" />
+      </div>
+      <div class="question-settings">
+        <div class="topic">
+          <span class="topic-title">Force</span>
+        </div>
+        <div class="force-info">
+          <div class="info">P = <span id="forceValue">1</span>kN</div>
+        </div>
+        <div class="topic">
+          <span class="topic-title">Dimensions</span>
+        </div>
+        <div class="dimension-info">
+          <div class="x-wrapper">
+            <div class="info">X<sub>1</sub> = <span id="x1Value">1</span> m</div>
+            <div class="info">X<sub>2</sub> = <span id="x2Value">4</span> m</div>
+            <div class="info">X<sub>3</sub> = <span id="x3Value">3</span> m</div>
+            <div class="info">X<sub>4</sub> = <span id="x4Value">2</span> m</div>
+          </div>
+          <div class="y-wrapper">
+            <div class="info">y = <span id="yValue">2</span> m</div>
+            <div class="info">θ = <span id="thetaValue">30</span>°</div>
+          </div>
+        </div>
+        <div class="topic">
+          <span class="topic-title">Young's Modulus</span>
+        </div>
+        <div class="youngs-modulus-info">
+          <div class="a-wrapper">
+            <div class="info">A<sub>1</sub> = <span id="a1Value">10</span> mm<sup>2</sup></div>
+            <div class="info">A<sub>2</sub> = <span id="a2Value">10</span> mm<sup>2</sup></div>
+            <div class="info">A<sub>3</sub> = <span id="a3Value">10</span> mm<sup>2</sup></div>
+          </div>
+          <div class="e-wrapper">
+            <div class="info">E<sub>1</sub> = <span id="e1Value">200</span> GPa</div>
+            <div class="info">E<sub>2</sub> = <span id="e2Value">200</span> GPa</div>
+            <div class="info">E<sub>3</sub> = <span id="e3Value">200</span> GPa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-question-container">
+      <div class="quiz-question">
+        3. Complete the deformation diagram of ABC.
+      </div>
+    </div>
+    <div class="quiz-answer-container">
+      <div class="question-radiobutton-type">
+        <div class="image-wrapper">
+          <img src="./imgs/quiz/question3-image.png" alt="" class="question-image"/>
+        </div>
+        <div class="question-radiobutton-choices-container">
+          <div class="question-title">1. B to B'</div>
+          <div class="question-choices">
+            <form id="question3-input1">
+
+              <div class="option-wrapper">
+                <input type="radio" name="option" id="option1" value="option1">
+                <label for="option1"><img src="./imgs/quiz/question3-1-1.png"></label>
+              </div>
+              <div class="option-wrapper">
+                <input type="radio" name="option" id="option2" value="option2">
+                <label for="option2"><img src="./imgs/quiz/question3-1-2.png"></label>
+              </div>
+              <div class="option-wrapper">
+                <input type="radio" name="option" id="option3" value="option3">
+                <label for="option3"><img src="./imgs/quiz/question3-1-3.png"></label>
+              </div>
+              <div class="option-wrapper">
+                <input type="radio" name="option" id="option4" value="option4">
+                <label for="option4"><img src="./imgs/quiz/question3-1-4.png"></label>
+              </div>
+              <div class="option-wrapper">
+                <input type="radio" name="option" id="option5" value="option5">
+                <label for="option5"><img src="./imgs/quiz/question3-1-5.png"></label>
+              </div>
+            </form>
+          </div>
+
+          <!-- Explanation for 1st -->
+          <div class="question-radiobutton-type-explanation-wrapper wrong" id="choice1">
+              <img src="./imgs/quiz/quiz-wrong-icon.png" alt="" class="question-choice-explanation-icon"/>
+              <div class="question-radiobutton-type-explanation">
+                <b>Incorrect!</b> Cable BG is not oriented vertically.
+              </div>
+          </div>
+          <div class="question-radiobutton-type-explanation-wrapper wrong" id="choice2">
+            <img src="./imgs/quiz/quiz-wrong-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-radiobutton-type-explanation">
+              <b>Incorrect!</b> Redo your analysis (you may go back to the discussion)
+            </div>
+          </div>
+          <div class="question-radiobutton-type-explanation-wrapper correct" id="choice3">
+            <img src="./imgs/quiz/quiz-correct-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-radiobutton-type-explanation">
+              <b>Correct!</b>
+            </div>
+          </div>
+
+
+          <div class="question-title">2. C to C'</div>
+          <div class="question-choices">
+            <form id="question3-input2">
+
+              <div class="option-wrapper" >
+                <input type="radio" name="option" id="option6" value="option6">
+                <label for="option6"><img src="./imgs/quiz/question3-2-1.png"></label>
+              </div>
+              <div class="option-wrapper" >
+                <input type="radio" name="option" id="option7" value="option7">
+                <label for="option7"><img src="./imgs/quiz/question3-2-2.png"></label>
+              </div>
+              <div class="option-wrapper" id="pleaseplease">
+                <input type="radio" name="option" id="option8" value="option8">
+                <label for="option8"><img src="./imgs/quiz/question3-2-3.png"></label>
+              </div>
+              <div class="option-wrapper" id="finishalready">
+                <input type="radio" name="option" id="option9" value="option9">
+                <label for="option9"><img src="./imgs/quiz/question3-2-4.png"></label>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Explanation for 2nd -->
+          <div class="question-radiobutton-type-explanation-wrapper wrong" id="choice4">
+            <img src="./imgs/quiz/quiz-wrong-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-radiobutton-type-explanation">
+              <b>Incorrect!</b> The deformation of cable CF does not affect the deflection of point C.
+            </div>
+          </div>
+          <div class="question-radiobutton-type-explanation-wrapper wrong" id="choice5">
+            <img src="./imgs/quiz/quiz-wrong-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-radiobutton-type-explanation">
+              <b>Incorrect!</b> The deflections of points B and C do not lie along the same axis.
+            </div>
+          </div>
+          <div class="question-radiobutton-type-explanation-wrapper correct" id="choice6">
+            <img src="./imgs/quiz/quiz-correct-icon.png" alt="" class="question-choice-explanation-icon"/>
+            <div class="question-radiobutton-type-explanation">
+              <b>Correct!</b>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <button id="checkButton">Check</button>
+    </div>
+  </div>
+
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="simulation" id="popupsimulation">Simulations</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <div class="credits" id="popupcredits">Credits</div>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+    </div>
+  </div>
+
+  <script src="./js/hamburger-menu-modal.js"></script>
+  <script src="./js/quizvalues.js"></script>
+  <script src="./js/Quiz3.js"></script>
+</body>
+</html>

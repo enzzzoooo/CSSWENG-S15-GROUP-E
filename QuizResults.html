@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/global.css"/>
+  <link rel="stylesheet" href="./css/hamburger-menu.css"/>
+  <link rel="stylesheet" href="./css/QuizResults.css"/>
+
+  <title>Compound Bar</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+</head>
+<body>
+  <header>
+    <img
+      class="hamburger-button"
+      alt=""
+      src="./imgs/image-20230917-225739150-1@2x.png"
+      id="hamburgerButton"
+    />
+    <div class="header-title">
+      Analysis of Axial Deformations in a Structure
+    </div>
+  </header>
+
+
+  <div class="page-title">Quiz Results</div>
+<div class="resulz">
+  <canvas class="QR" id="qr"></canvas>
+<div class="resultsText">Well done! You have successfully finished
+  this lesson. If you are my student, this QR code is for verifying you actually accomplished the quiz. <br><br>If you have questions or clarifications
+  about the lesson, feel free to send me an email at
+  iegonzaga@up.edu.ph</div>
+</div>
+
+<div class="whatNow">
+  <div class="flex-center m05">
+    <a class="flex-center" href="./Quiz1.html" id="reset">
+      <img src="imgs/again-button.png"><strong class="actionText pad">Do it again!</strong></a>
+  </div>
+  <div class="flex-center m05">
+    <a class="flex-center" href="./lesson-picker.html">
+      <img src="imgs/home-button.png"><strong class="actionText pad">Home</strong></a>
+  </div>
+</div>
+
+  <!-- Menu Modal -->
+  <div id="menuDropdownContainer" class="popup-overlay" style="display: none">
+    <div class="menu-dropdown">
+      <button class="simulation" id="popupsimulation">Simulations</button>
+      <button class="lessons1" id="popuplessons">Lessons</button>
+      <div class="credits" id="popupcredits">Credits</div>
+      <div class="menu-dropdown-child"></div>
+      <div class="menu-dropdown-item"></div>
+      <div class="menu-dropdown-inner"></div>
+    </div>
+  </div>
+
+  <script src="js/QuizResults.js"></script>
+  <script src="js/hamburger-menu-modal.js"></script>
+  <script src="js/qrcodeGenerator.js"></script>
+</body>
+</body>
+</html>
